@@ -1,0 +1,14 @@
+<odoo>
+    <record id="sale_order_template_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.template.form.inherit</field>
+        <field name="model">sale.order.template</field>
+        <field name="inherit_id" ref="sale_management.sale_order_template_view_form"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="document_type" placeholder="e.g. not saleable, etc."/>
+                <field name="is_free_sample"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
