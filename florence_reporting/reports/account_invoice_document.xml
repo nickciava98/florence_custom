@@ -1,0 +1,9 @@
+<odoo>
+    <template id="account_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//span[@t-field='o.name']" position="after">
+            <t t-if="o.document_type">
+                - <span t-field="o.document_type"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>
