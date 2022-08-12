@@ -1,0 +1,30 @@
+<odoo>
+    <record id="account_move_inherit" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_payment_term_id']" position="after">
+                <field name="is_free_sample" invisible="True"/>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_by_group']" position="after">
+                <field name="amount_untaxed_free_sample" string="Untaxed Amount"
+                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
+                <field name="amount_tax_free_sample" string="Taxes"
+                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
+                <field name="free_sample_total" string="Free sample"
+                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
+                <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_by_group']" position="attributes">
+                <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

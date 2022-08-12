@@ -60,10 +60,10 @@ class SaleOrder(models.Model):
                         "uom_id": self.env.ref('uom.product_uom_unit').id,
                         "uom_po_id": self.env.ref('uom.product_uom_unit').id,
                         "product_variant_ids": False,
+                        "taxes_id": False
                     })
 
-            free_sample = self.env["product.product"].search(
-                ['&',('default_code','ilike','free sample'),('name','ilike','free sample')])
+            free_sample = self.env["product.product"].search([('name','ilike','free sample')])
 
             if self.amount_total != 0 or self.free_sample_total >= 0:
                 self.write({
