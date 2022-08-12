@@ -10,6 +10,17 @@
                 <attribute name="widget">integer</attribute>
             </xpath>
 
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']"
+                   position="after">
+                <field name="product_uom" optional="hide"/>
+            </xpath>
+
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='tax_id']"
+                   position="after">
+                <field name="price_reduce_taxinc" string="Unit Price Tax Inc."
+                       optional="hide"/>
+            </xpath>
+
             <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']"
                    position="attributes">
                 <attribute name="digits">[12,2]</attribute>

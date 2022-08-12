@@ -7,12 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <field name="is_free_sample" invisible="True"/>
-            </xpath>
-
-            <xpath expr="//page/field[@name='order_line']/tree/field[@name='tax_id']"
-                   position="after">
-                <field name="price_reduce_taxinc" string="Unit Price Tax Inc."
-                       optional="hide"/>
+                <field name="add_free_sample_rule" invisible="True"/>
             </xpath>
 
             <xpath expr="//field[@name='amount_tax']" position="after">

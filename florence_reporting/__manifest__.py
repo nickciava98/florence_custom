@@ -7,7 +7,7 @@
     'category': 'sales',
     'version': '14.0.3',
     'website': "http://www.nciavarella.me",
-    'depends': ['sale', 'sale_management'],
+    'depends': ['sale', 'sale_management', 'account'],
     'data': ['views/sale_order_form.xml',
              'views/sale_order_template_form.xml',
              'views/account_move_form.xml',

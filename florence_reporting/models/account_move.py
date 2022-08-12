@@ -11,7 +11,8 @@ class AccountMove(models.Model):
         types = []
 
         for line in self.invoice_line_ids:
-            types.append(line.sale_line_ids.order_id.document_type)
+            if line.sale_line_ids.order_id.document_type:
+                types.append(line.sale_line_ids.order_id.document_type)
 
         if len(types) > 0:
             self.document_type = ",".join(types)
