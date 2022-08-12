@@ -11,43 +11,6 @@
                 <field name="document_type"
                        attrs="{'invisible':[('sale_order_template_id','=',False)]}"/>
             </xpath>
-
-            <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field name="is_free_sample" invisible="True"/>
-            </xpath>
-
-            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']"
-                   position="attributes">
-                <attribute name="widget">integer</attribute>
-            </xpath>
-
-            <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']"
-                   position="attributes">
-                <attribute name="digits">[12,2]</attribute>
-            </xpath>
-
-            <xpath expr="//page/field[@name='order_line']/tree/field[@name='tax_id']"
-                   position="after">
-                <field name="price_reduce_taxinc" string="Unit Price Tax Inc."
-                       optional="hide"/>
-            </xpath>
-
-            <xpath expr="//field[@name='amount_tax']" position="after">
-                <field name="amount_untaxed_free_sample" string="Untaxed Amount"
-                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
-                <field name="amount_tax_free_sample" string="Taxes"
-                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
-                <field name="free_sample_total" string="Free sample"
-                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
-            </xpath>
-
-            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
-                <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='amount_tax']" position="attributes">
-                <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
-            </xpath>
         </field>
     </record>
 </odoo>

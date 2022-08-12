@@ -1,0 +1,36 @@
+<odoo>
+    <record id="sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="is_free_sample" invisible="True"/>
+            </xpath>
+
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='tax_id']"
+                   position="after">
+                <field name="price_reduce_taxinc" string="Unit Price Tax Inc."
+                       optional="hide"/>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_tax']" position="after">
+                <field name="amount_untaxed_free_sample" string="Untaxed Amount"
+                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
+                <field name="amount_tax_free_sample" string="Taxes"
+                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
+                <field name="free_sample_total" string="Free sample"
+                       attrs="{'invisible':[('is_free_sample','=',False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
+                <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_tax']" position="attributes">
+                <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

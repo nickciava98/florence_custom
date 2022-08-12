@@ -6,7 +6,7 @@
 
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
-                <field name="document_type" placeholder="e.g. not saleable, etc."/>
+                <field name="is_free_sample"/>
             </xpath>
         </field>
     </record>

@@ -3,12 +3,12 @@ Florence Reporting
 
 Description
 -----------
-Florence customizations for reporting.
+Florence customizations for free samples management.
 
 Usage
 -----
-* Adds the document_type in the sales templates and brings the field 
- back into the sales form.
+* Adds is_free_sample checkbox in sale_order_template.
+* Adds graphical improvements for free samples management
 
 Author
 ------
