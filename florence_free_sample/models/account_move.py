@@ -7,6 +7,11 @@ class AccountMove(models.Model):
         compute = "_compute_is_free_sample"
     )
 
+    is_free_sample_stored = fields.Boolean(
+        related = "is_free_sample",
+        store = True
+    )
+
     amount_untaxed_free_sample = fields.Monetary(
         compute = "_compute_amount_untaxed_free_sample"
     )
@@ -20,11 +25,11 @@ class AccountMove(models.Model):
     )
 
     def _compute_is_free_sample(self):
+        self.is_free_sample = False
+
         for line in self.invoice_line_ids:
             if line.sale_line_ids.order_id.is_free_sample:
                 self.is_free_sample = True
-            else:
-                self.is_free_sample = False
 
     def _compute_amount_untaxed_free_sample(self):
         if self.is_free_sample:
