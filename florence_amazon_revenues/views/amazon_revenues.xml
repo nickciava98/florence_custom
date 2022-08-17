@@ -41,7 +41,7 @@
     </record>
 
     <menuitem name="Amazon Revenues" id="amazon_revenues_base_menu"
-              action="amazon_revenues_action"/>
+              action="amazon_revenues_action" web_icon="florence_amazon_revenues,static/description/app_icon.png"/>
     <menuitem name="Marketplaces" id="amazon_revenues_marketplaces_menu"
               parent="amazon_revenues_base_menu"/>
     <menuitem name="Amazon IT" id="amazon_revenues_amazon_it_menu"
