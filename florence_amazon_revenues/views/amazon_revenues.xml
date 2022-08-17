@@ -1,0 +1,130 @@
+<odoo>
+    <record id="amazon_revenues_action" model="ir.actions.act_window">
+        <field name="name">Amazon Revenues</field>
+        <field name="res_model">amazon.revenues</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="amazon_it_action" model="ir.actions.act_window">
+        <field name="name">Amazon IT</field>
+        <field name="res_model">amazon.revenues</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_amazon_it': 'Amazon IT'}</field>
+    </record>
+
+    <record id="amazon_fr_action" model="ir.actions.act_window">
+        <field name="name">Amazon FR</field>
+        <field name="res_model">amazon.revenues</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_amazon_fr': 'Amazon FR'}</field>
+    </record>
+
+    <record id="amazon_de_action" model="ir.actions.act_window">
+        <field name="name">Amazon DE</field>
+        <field name="res_model">amazon.revenues</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_amazon_de': 'Amazon DE'}</field>
+    </record>
+
+    <record id="amazon_es_action" model="ir.actions.act_window">
+        <field name="name">Amazon ES</field>
+        <field name="res_model">amazon.revenues</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_amazon_es': 'Amazon ES'}</field>
+    </record>
+
+    <record id="amazon_uk_action" model="ir.actions.act_window">
+        <field name="name">Amazon UK</field>
+        <field name="res_model">amazon.revenues</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_amazon_uk': 'Amazon UK'}</field>
+    </record>
+
+    <menuitem name="Amazon Revenues" id="amazon_revenues_base_menu"
+              action="amazon_revenues_action"/>
+    <menuitem name="Marketplaces" id="amazon_revenues_marketplaces_menu"
+              parent="amazon_revenues_base_menu"/>
+    <menuitem name="Amazon IT" id="amazon_revenues_amazon_it_menu"
+              parent="amazon_revenues_marketplaces_menu" sequence="1"
+              action="amazon_it_action"/>
+    <menuitem name="Amazon FR" id="amazon_revenues_amazon_fr_menu"
+              parent="amazon_revenues_marketplaces_menu" sequence="2"
+              action="amazon_fr_action"/>
+    <menuitem name="Amazon DE" id="amazon_revenues_amazon_de_menu"
+              parent="amazon_revenues_marketplaces_menu" sequence="3"
+              action="amazon_de_action"/>
+    <menuitem name="Amazon ES" id="amazon_revenues_amazon_es_menu"
+              parent="amazon_revenues_marketplaces_menu" sequence="4"
+              action="amazon_es_action"/>
+    <menuitem name="Amazon UK" id="amazon_revenues_amazon_uk_menu"
+              parent="amazon_revenues_marketplaces_menu" sequence="5"
+              action="amazon_uk_action"/>
+
+    <record id="amazon_revenues_view_form" model="ir.ui.view">
+        <field name="name">Amazon Revenues Form</field>
+        <field name="model">amazon.revenues</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="product"/>
+
+                        <field name="revenues_line" widget="section_and_note_one2many" string="Incidence"
+                               context="{'default_parent': name, 'default_product': product}">
+                            <tree string="Revenues" editable="bottom">
+                                <field name="amazon_revenues_line_id" invisible="True"/>
+                                <field name="parent" invisible="True"/>
+                                <field name="product" invisible="True"/>
+                                <field name="date"/>
+                                <field name="price_unit" widget="monetary" string="Selling Price"/>
+                                <field name="amazon_fees" widget="monetary"/>
+                                <field name="taxes" widget="monetary" string="VAT"/>
+                                <field name="sku_cost" widget="monetary"/>
+                                <field name="gross_revenues" widget="monetary"/>
+                                <field name="ads_total_cost" widget="monetary"/>
+                                <field name="ads_cost_per_unit" widget="monetary"/>
+                                <field name="pcs_sold"/>
+                                <field name="earned_per_pc"/>
+                                <field name="probable_income" widget="monetary"/>
+                            </tree>
+                        </field>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="amazon_revenues_view_tree" model="ir.ui.view">
+        <field name="name">Amazon Revenues List</field>
+        <field name="model">amazon.revenues</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="amazon_revenues_view_search" model="ir.ui.view">
+        <field name="name">Amazon Revenues Search</field>
+        <field name="model">amazon.revenues</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="product"/>
+
+                <filter string="Amazon IT" name="amazon_it"
+                        domain="[('name','=','IT')]" help="Filter for Amazon IT Marketplace"/>
+                <filter string="Amazon FR" name="amazon_fr"
+                        domain="[('name','=','FR')]" help="Filter for Amazon FR Marketplace"/>
+                <filter string="Amazon DE" name="amazon_de"
+                        domain="[('name','=','DE')]" help="Filter for Amazon DE Marketplace"/>
+                <filter string="Amazon ES" name="amazon_es"
+                        domain="[('name','=','ES')]" help="Filter for Amazon ES Marketplace"/>
+                <filter string="Amazon UK" name="amazon_uk"
+                        domain="[('name','=','UK')]" help="Filter for Amazon IT Marketplace"/>
+            </search>
+        </field>
+    </record>
+</odoo>
