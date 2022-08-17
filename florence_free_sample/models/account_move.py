@@ -35,7 +35,7 @@ class AccountMove(models.Model):
         if self.is_free_sample:
             for line in self.invoice_line_ids:
                 if line.sale_line_ids.order_id.amount_total == 0:
-                    self.amount_untaxed_free_sample += line.sale_line_ids.order_id.amount_untaxed_free_sample
+                    self.amount_untaxed_free_sample = line.sale_line_ids.order_id.amount_untaxed_free_sample
         else:
             self.amount_untaxed_free_sample = False
 
@@ -43,7 +43,7 @@ class AccountMove(models.Model):
         if self.is_free_sample:
             for line in self.invoice_line_ids:
                 if line.sale_line_ids.order_id.amount_total == 0:
-                    self.amount_tax_free_sample += line.sale_line_ids.order_id.amount_tax_free_sample
+                    self.amount_tax_free_sample = line.sale_line_ids.order_id.amount_tax_free_sample
         else:
             self.amount_tax_free_sample = False
 
@@ -51,6 +51,6 @@ class AccountMove(models.Model):
         if self.is_free_sample:
             for line in self.invoice_line_ids:
                 if line.sale_line_ids.order_id.amount_total == 0:
-                    self.free_sample_total += line.sale_line_ids.order_id.free_sample_total
+                    self.free_sample_total = line.sale_line_ids.order_id.free_sample_total
         else:
             self.free_sample_total = False
