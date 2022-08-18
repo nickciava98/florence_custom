@@ -3,6 +3,7 @@
         <field name="name">Amazon Revenues</field>
         <field name="res_model">amazon.revenues</field>
         <field name="view_mode">tree,form,pivot</field>
+        <field name="context">{'group_by': 'name'}</field>
     </record>
 
     <record id="amazon_it_action" model="ir.actions.act_window">
