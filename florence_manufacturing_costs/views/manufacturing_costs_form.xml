@@ -1,0 +1,44 @@
+<odoo>
+    <record id="manufacturing_costs_view_form" model="ir.ui.view">
+        <field name="name">Manufacturing Costs Form</field>
+        <field name="model">manufacturing.costs</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="update_values_action" type="object" string="Update Values"/>
+                </header>
+
+                <group>
+                    <group>
+                        <field name="name" help="Select the product to track"
+                               attrs="{'readonly': [('is_name_set','=',True)]}"/>
+                        <field name="is_name_set" invisible="True"/>
+                        <field name="currency_id" invisible="True"/>
+                        <field name="total_costs" widget="monetary"
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"
+                               help="Sum of finished prices tracked day by day"/>
+                        <field name="start_date" help="Enter the date from which to start tracking"/>
+
+                        <field name="costs_lines" widget="section_and_note_one2many" string="Costs"
+                               context="{'default_product': name, 'default_date': start_date}">
+                            <tree string="Costs" editable="bottom">
+                                <field name="manufacturing_costs_line_id" invisible="True"/>
+                                <field name="product" invisible="True"/>
+                                <field name="currency_id" invisible="True"/>
+                                <field name="date"/>
+                                <field name="manufacturer"/>
+                                <field name="pcs" widget="integer"/>
+                                <field name="price_agreed" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                <field name="price_unit" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                <field name="price_finished" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            </tree>
+                        </field>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+    <record id="manufacturing_costs_action" model="ir.actions.act_window">
+        <field name="name">Manufacturing Costs</field>
+        <field name="res_model">manufacturing.costs</field>
+        <field name="view_mode">tree,form,pivot</field>
+<!--        <field name="context">{'group_by': 'name'}</field>-->
+    </record>
+
+    <record id="monthly_summary_action" model="ir.actions.act_window">
+        <field name="name">Monthly Summary</field>
+        <field name="res_model">manufacturing.costs</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'group_by': 'start_date:month'}</field>
+    </record>
+
+    <record id="yearly_summary_action" model="ir.actions.act_window">
+        <field name="name">Yearly Summary</field>
+        <field name="res_model">manufacturing.costs</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'group_by': 'start_date:year'}</field>
+    </record>
+
+    <record id="pivot_action" model="ir.actions.act_window">
+        <field name="name">Reporting Pivot</field>
+        <field name="res_model">manufacturing.costs</field>
+        <field name="view_mode">pivot</field>
+    </record>
+</odoo>

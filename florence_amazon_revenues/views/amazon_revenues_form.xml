@@ -9,7 +9,7 @@
                         <field name="name" help="Select the Amazon Marketplace"/>
                         <field name="product" help="Select the product to track"/>
                         <field name="product_price" invisible="True"/>
-                        <field name="total_probable_income" help="Sum of probable incomes tracked day by day"/>
+                        <field name="total_probable_income" widget="monetary" help="Sum of probable incomes tracked day by day"/>
                         <field name="start_date" help="Enter the date from which to start tracking"/>
 
                         <field name="revenues_line" widget="section_and_note_one2many" string="Incidence"
