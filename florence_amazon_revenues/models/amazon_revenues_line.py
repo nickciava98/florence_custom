@@ -15,9 +15,7 @@ class AmazonRevenuesLine(models.Model):
 
     #Visible fields
     date = fields.Date()
-    price_unit = fields.Float(
-        compute = "_compute_price_unit"
-    )
+    price_unit = fields.Float()
     amazon_fees = fields.Float()
     taxes = fields.Float(
         compute = "_compute_taxes"
@@ -40,14 +38,6 @@ class AmazonRevenuesLine(models.Model):
         compute = "_compute_probable_income"
     )
 
-    @api.depends("product")
-    def _compute_price_unit(self):
-        for line in self:
-            if line.product.list_price:
-                line.price_unit = line.product.list_price
-            else:
-                line.price_unit = line.product.lst_price
-
     @api.depends("price_unit")
     def _compute_taxes(self):
         for line in self:
@@ -65,7 +55,9 @@ class AmazonRevenuesLine(models.Model):
     @api.depends("product")
     def _compute_sku_cost(self):
         for line in self:
-            for seller in self.product.seller_ids:
+            line.sku_cost = 0
+
+            for seller in line.product.seller_ids:
                 line.sku_cost += seller.price
 
     @api.depends("price_unit", "amazon_fees", "taxes", "sku_cost")

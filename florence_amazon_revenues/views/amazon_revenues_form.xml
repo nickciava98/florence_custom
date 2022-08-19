@@ -1,0 +1,40 @@
+<odoo>
+    <record id="amazon_revenues_view_form" model="ir.ui.view">
+        <field name="name">Amazon Revenues Form</field>
+        <field name="model">amazon.revenues</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name" help="Select the Amazon Marketplace"/>
+                        <field name="product" help="Select the product to track"/>
+                        <field name="product_price" invisible="True"/>
+                        <field name="total_probable_income" help="Sum of probable incomes tracked day by day"/>
+                        <field name="start_date" help="Enter the date from which to start tracking"/>
+
+                        <field name="revenues_line" widget="section_and_note_one2many" string="Incidence"
+                               context="{'default_parent': name, 'default_product': product, 'default_date': start_date,
+                                        'default_price_unit': product_price}">
+                            <tree string="Revenues" editable="bottom">
+                                <field name="amazon_revenues_line_id" invisible="True"/>
+                                <field name="parent" invisible="True"/>
+                                <field name="product" invisible="True"/>
+                                <field name="date"/>
+                                <field name="price_unit" widget="monetary" string="Selling Price"/>
+                                <field name="amazon_fees" widget="monetary"/>
+                                <field name="taxes" widget="monetary" string="VAT"/>
+                                <field name="sku_cost" widget="monetary"/>
+                                <field name="gross_revenues" widget="monetary"/>
+                                <field name="ads_total_cost" widget="monetary"/>
+                                <field name="ads_cost_per_unit" widget="monetary"/>
+                                <field name="pcs_sold"/>
+                                <field name="earned_per_pc"/>
+                                <field name="probable_income" widget="monetary"/>
+                            </tree>
+                        </field>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

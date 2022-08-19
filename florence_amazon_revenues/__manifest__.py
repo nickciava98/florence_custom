@@ -10,7 +10,12 @@
     'depends': ['sale', 'sale_management', 'purchase'],
     'data': [
         'security/ir.model.access.csv',
-        'views/amazon_revenues.xml'
+        'views/amazon_revenues_actions.xml',
+        'views/amazon_revenues_form.xml',
+        'views/amazon_revenues_menus.xml',
+        'views/amazon_revenues_pivot.xml',
+        'views/amazon_revenues_search.xml',
+        'views/amazon_revenues_tree.xml',
     ],
     'application': True,
     'installable': True,
