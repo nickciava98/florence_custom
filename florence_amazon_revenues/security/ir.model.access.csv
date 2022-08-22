@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_amazon_revenues,access_amazon_revenues,model_amazon_revenues,base.group_user,1,1,1,1
-access_amazon_revenues_line,access_amazon_revenues_line,model_amazon_revenues_line,base.group_user,1,1,1,1
