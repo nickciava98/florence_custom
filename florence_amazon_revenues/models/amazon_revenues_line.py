@@ -37,6 +37,9 @@ class AmazonRevenuesLine(models.Model):
     probable_income = fields.Float(
         compute = "_compute_probable_income"
     )
+    currency_id = fields.Many2one(
+        "res.currency"
+    )
 
     @api.depends("price_unit")
     def _compute_taxes(self):

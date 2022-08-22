@@ -4,36 +4,72 @@
         <field name="model">amazon.revenues</field>
         <field name="arch" type="xml">
             <form>
-                <group>
-                    <group>
-                        <field name="name" help="Select the Amazon Marketplace"/>
-                        <field name="product" help="Select the product to track"/>
-                        <field name="product_price" invisible="True"/>
-                        <field name="total_probable_income" widget="monetary" help="Sum of probable incomes tracked day by day"/>
-                        <field name="start_date" help="Enter the date from which to start tracking"/>
+                <sheet>
+                    <label for="name" string="Marketplace"/>
+                    <field name="name" help="Select the Amazon Marketplace"/>
 
-                        <field name="revenues_line" widget="section_and_note_one2many" string="Incidence"
-                               context="{'default_parent': name, 'default_product': product, 'default_date': start_date,
-                                        'default_price_unit': product_price}">
-                            <tree string="Revenues" editable="bottom">
-                                <field name="amazon_revenues_line_id" invisible="True"/>
-                                <field name="parent" invisible="True"/>
-                                <field name="product" invisible="True"/>
-                                <field name="date"/>
-                                <field name="price_unit" widget="monetary" string="Selling Price"/>
-                                <field name="amazon_fees" widget="monetary"/>
-                                <field name="taxes" widget="monetary" string="VAT"/>
-                                <field name="sku_cost" widget="monetary"/>
-                                <field name="gross_revenues" widget="monetary"/>
-                                <field name="ads_total_cost" widget="monetary"/>
-                                <field name="ads_cost_per_unit" widget="monetary"/>
-                                <field name="pcs_sold"/>
-                                <field name="earned_per_pc"/>
-                                <field name="probable_income" widget="monetary"/>
-                            </tree>
-                        </field>
-                    </group>
-                </group>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="product" help="Select the product to track"/>
+                        </h1>
+                    </div>
+
+                    <field name="product_updated_price" invisible="True"/>
+                    <field name="product_updated_sku_cost" invisible="True"/>
+                    <field name="currency_id" invisible="True"/>
+                    <field name="start_date" invisible="True"/>
+
+                    <notebook>
+                        <page string="Incidence" name="incidence">
+                            <field name="revenues_line" widget="section_and_note_one2many" string="Incidence"
+                                   context="{'default_parent': name,
+                                             'default_product': product,
+                                             'default_date': start_date,
+                                             'default_sku_cost': product_updated_sku_cost,
+                                             'default_price_unit': product_updated_price,
+                                             'default_currency_id': currency_id}">
+                                <tree string="Revenues" editable="bottom">
+                                    <field name="amazon_revenues_line_id" invisible="True"/>
+                                    <field name="parent" invisible="True"/>
+                                    <field name="product" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="date"/>
+                                    <field name="price_unit" widget="monetary" string="Selling Price"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amazon_fees" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="taxes" widget="monetary" string="VAT"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="sku_cost" widget="monetary" attrs="{'readonly': [('sku_cost','>','0')]}"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="gross_revenues" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="ads_total_cost" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="ads_cost_per_unit" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="pcs_sold"/>
+                                    <field name="earned_per_pc"/>
+                                    <field name="probable_income" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="total_probable_income">
+                                <field name="total_probable_income" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            </group>
+
+                            <div class="oe_clear"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
         </field>
     </record>
