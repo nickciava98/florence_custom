@@ -3,13 +3,14 @@ from datetime import datetime
 
 class ManufacturingCosts(models.Model):
     _name = "manufacturing.costs"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Manufacturing Costs Model"
 
     name = fields.Many2one(
         "product.product",
-        required = True
+        required = True,
+        tracking = True
     )
-    is_name_set = fields.Boolean()
     total_costs = fields.Float(
         compute = "_compute_total_costs"
     )
@@ -40,8 +41,6 @@ class ManufacturingCosts(models.Model):
         self.costs_lines = False
 
         for line in self:
-            line.is_name_set = True if line.name else False
-
             for seller in line.name.seller_ids:
                 self.write(
                     {'costs_lines':
