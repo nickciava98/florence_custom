@@ -4,9 +4,6 @@
         <field name="model">manufacturing.costs</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <button name="update_values_action" type="object" string="Update Values"/>
-                </header>
                 <sheet>
                     <div class="oe_title">
                         <h1>
@@ -14,17 +11,21 @@
                         </h1>
                     </div>
 
-                    <group>
-                        <group>
-                            <field name="currency_id" invisible="True"/>
-                            <field name="total_costs" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"
-                                   help="Sum of finished prices tracked day by day"/>
-                            <field name="start_date" help="Enter the date from which to start tracking"/>
+                    <field name="currency_id" invisible="True"/>
+                    <field name="start_date" invisible="True"/>
+                    <field name="product_updated_cost" invisible="True"/>
+                    <field name="product_last_manufacturer" invisible="True"/>
+                    <field name="product_updated_qty" invisible="True"/>
 
-                            <field name="costs_lines" widget="section_and_note_one2many" string="Costs"
-                                   context="{'default_product': name, 'default_date': start_date}">
-                                <tree string="Costs" editable="false" create="false" delete="false">
+                    <notebook>
+                        <page string="Costs Tracking" name="costs_tracking">
+                            <field name="costs_lines" widget="section_and_note_one2many"
+                                   context="{'default_product': name, 'default_currency_id': currency_id,
+                                             'default_date': start_date,
+                                             'default_price_unit': product_updated_cost,
+                                             'default_manufacturer': product_last_manufacturer,
+                                             'default_pcs': product_updated_qty}">
+                                <tree string="Costs" editable="bottom" delete="false">
                                     <field name="manufacturing_costs_line_id" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
@@ -39,8 +40,15 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
-                        </group>
-                    </group>
+
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="total_costs">
+                                <field name="total_costs" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            </group>
+
+                            <div class="oe_clear"/>
+                        </page>
+                    </notebook>
                 </sheet>
 
                 <div class="oe_chatter">

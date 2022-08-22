@@ -3,7 +3,15 @@
         <field name="name">Manufacturing Costs</field>
         <field name="res_model">manufacturing.costs</field>
         <field name="view_mode">tree,form,pivot</field>
-<!--        <field name="context">{'group_by': 'name'}</field>-->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+            
+            <p>
+                Start tracking costs on your products manufacturing
+            </p>
+        </field>
     </record>
 
     <record id="monthly_summary_action" model="ir.actions.act_window">

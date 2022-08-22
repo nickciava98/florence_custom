@@ -15,7 +15,7 @@ class ManufacturingCosts(models.Model):
         compute = "_compute_total_costs"
     )
     start_date = fields.Date(
-        default = datetime.today(),
+        compute = "_compute_start_date",
         required = True
     )
     costs_lines = fields.One2many(
@@ -25,6 +25,15 @@ class ManufacturingCosts(models.Model):
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"
+    )
+    product_updated_cost = fields.Float(
+        compute = "_compute_product_updated_cost"
+    )
+    product_last_manufacturer = fields.Char(
+        compute = "_compute_product_last_manufacturer"
+    )
+    product_updated_qty = fields.Float(
+        compute = "_compute_product_updated_qty"
     )
 
     @api.depends("costs_lines")
@@ -36,57 +45,43 @@ class ManufacturingCosts(models.Model):
                 if costs_line.price_finished:
                     line.total_costs += costs_line.price_finished
 
-    @api.onchange("name")
-    def _onchange_product(self):
-        self.costs_lines = False
-
+    def _compute_start_date(self):
         for line in self:
-            for seller in line.name.seller_ids:
-                self.write(
-                    {'costs_lines':
-                         [(0, 0,
-                           {'date': line.start_date,
-                            'manufacturer': seller.name.name,
-                            'pcs': seller.min_qty,
-                            'currency_id': line.name.currency_id.id,
-                            'price_agreed': seller.price,
-                            'price_unit': seller.price,
-                            'price_finished': seller.price * 1.22}
-                           )]
-                     })
+            line.start_date = datetime.now()
 
     def _compute_currency_id(self):
         for line in self:
             line.currency_id = self.env.ref('base.main_company').currency_id
 
-    def write(self, vals):
-        return super(ManufacturingCosts, self).write(vals)
-
-    def update_values_action(self):
-        costs_lines_dates = []
-
+    @api.depends("name")
+    def _compute_product_updated_cost(self):
         for line in self:
-            for costs_line in line.costs_lines:
-                costs_lines_dates.append(costs_line.date)
+            line.product_updated_cost = 0
 
-        self.costs_lines = False
-        costs_lines_updated = []
+            for bom_id in line.name.bom_ids:
+                for bom_line_id in bom_id.bom_line_ids:
+                    for seller_id in bom_line_id.product_id.seller_ids:
+                        line.product_updated_cost += seller_id.price
+                        break
 
-        costs_lines_dates.append(self.start_date)
-
+    @api.depends("name")
+    def _compute_product_last_manufacturer(self):
         for line in self:
-            for seller in line.name.seller_ids:
-                costs_lines_updated.append(
-                    (0, 0,
-                     {'date': line.start_date,
-                      'manufacturer': seller.name.name,
-                      'pcs': seller.min_qty,
-                      'currency_id': line.name.currency_id.id,
-                      'price_agreed': seller.price,
-                      'price_unit': seller.price,
-                      'price_finished': seller.price * 1.22}
-                     ))
+            line.product_last_manufacturer = False
 
-        self.write({
-            "costs_lines": costs_lines_updated
-        })
+            for bom_id in line.name.bom_ids:
+                for bom_line_id in bom_id.bom_line_ids:
+                    for seller_id in bom_line_id.product_id.seller_ids:
+                        line.product_last_manufacturer = seller_id.name.name
+                        break
+
+    @api.depends("name")
+    def _compute_product_updated_qty(self):
+        for line in self:
+            line.product_updated_qty = 0
+
+            for bom_id in line.name.bom_ids:
+                for bom_line_id in bom_id.bom_line_ids:
+                    for seller_id in bom_line_id.product_id.seller_ids:
+                        line.product_updated_qty = seller_id.min_qty
+                        break
