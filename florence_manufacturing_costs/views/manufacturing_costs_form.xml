@@ -13,6 +13,7 @@
 
                     <field name="currency_id" invisible="True"/>
                     <field name="start_date" invisible="True"/>
+                    <field name="is_bom_present" invisible="True"/>
                     <field name="product_updated_cost" invisible="True"/>
                     <field name="product_last_manufacturer" invisible="True"/>
                     <field name="product_updated_qty" invisible="True"/>
@@ -20,6 +21,7 @@
                     <notebook>
                         <page string="Costs Tracking" name="costs_tracking">
                             <field name="costs_lines" widget="section_and_note_one2many"
+                                   attrs="{'readonly': [('is_bom_present','=',False)]}"
                                    context="{'default_product': name, 'default_currency_id': currency_id,
                                              'default_date': start_date,
                                              'default_price_unit': product_updated_cost,

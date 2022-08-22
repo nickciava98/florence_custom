@@ -26,6 +26,9 @@ class ManufacturingCosts(models.Model):
         "res.currency",
         compute = "_compute_currency_id"
     )
+    is_bom_present = fields.Boolean(
+        compute = "_compute_is_bom_present"
+    )
     product_updated_cost = fields.Float(
         compute = "_compute_product_updated_cost"
     )
@@ -52,6 +55,11 @@ class ManufacturingCosts(models.Model):
     def _compute_currency_id(self):
         for line in self:
             line.currency_id = self.env.ref('base.main_company').currency_id
+
+    @api.depends("name")
+    def _compute_is_bom_present(self):
+        for line in self:
+            line.is_bom_present = True if line.name.bom_count >= 1 else False
 
     @api.depends("name")
     def _compute_product_updated_cost(self):
