@@ -16,6 +16,13 @@ class AmazonRevenues(models.Model):
         string = "Marketplace",
         tracking = True
     )
+    marketplace = fields.Selection(
+        [("IT", "Amazon IT"),
+         ("FR", "Amazon FR"),
+         ("DE", "Amazon DE"),
+         ("ES", "Amazon ES"),
+         ("UK", "Amazon UK")]
+    )
     product = fields.Many2one(
         "product.product",
         required = True,
@@ -42,6 +49,14 @@ class AmazonRevenues(models.Model):
     product_updated_sku_cost = fields.Float(
         compute = "_compute_product_updated_sku_cost"
     )
+
+    @api.onchange("marketplace")
+    def _onchange_marketplace(self):
+        for line in self:
+            line.name = False
+            
+            if line.marketplace:
+                line.name = line.marketplace
 
     def _compute_start_date(self):
         for line in self:

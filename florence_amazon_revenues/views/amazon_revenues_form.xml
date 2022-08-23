@@ -14,6 +14,7 @@
                         </h1>
                     </div>
 
+                    <field name="marketplace" invisible="True"/>
                     <field name="product_updated_price" invisible="True"/>
                     <field name="product_updated_sku_cost" invisible="True"/>
                     <field name="currency_id" invisible="True"/>

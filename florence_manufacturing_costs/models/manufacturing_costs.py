@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from datetime import datetime
+import base64
 
 class ManufacturingCosts(models.Model):
     _name = "manufacturing.costs"
@@ -29,8 +30,14 @@ class ManufacturingCosts(models.Model):
     is_bom_present = fields.Boolean(
         compute = "_compute_is_bom_present"
     )
-    product_updated_cost = fields.Float(
-        compute = "_compute_product_updated_cost"
+    last_price_agreed = fields.Float(
+        compute = "_compute_last_price_agreed"
+    )
+    last_price_unit = fields.Float(
+        compute = "_compute_last_price_unit"
+    )
+    last_price_finished = fields.Float(
+        compute = "_compute_last_price_finished"
     )
     product_last_manufacturer = fields.Char(
         compute = "_compute_product_last_manufacturer"
@@ -62,26 +69,48 @@ class ManufacturingCosts(models.Model):
             line.is_bom_present = True if line.name.bom_count >= 1 else False
 
     @api.depends("name")
-    def _compute_product_updated_cost(self):
+    def _compute_last_price_agreed(self):
         for line in self:
-            line.product_updated_cost = 0
+            line.last_price_agreed = 0
+
+            for seller_id in line.name.seller_ids:
+                line.last_price_agreed = seller_id.price
+                break
+
+    @api.depends("name")
+    def _compute_last_price_unit(self):
+        for line in self:
+            line.last_price_unit = 0
 
             for bom_id in line.name.bom_ids:
                 for bom_line_id in bom_id.bom_line_ids:
                     for seller_id in bom_line_id.product_id.seller_ids:
-                        line.product_updated_cost += seller_id.price
+                        line.last_price_unit += seller_id.price
                         break
+
+            for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)]):
+                for invoice_line in bill.invoice_line_ids:
+                    if invoice_line.product_id == line.name:
+                        line.last_price_unit += invoice_line.price_unit
+
+    @api.depends("name")
+    def _compute_last_price_finished(self):
+        for line in self:
+            line.last_price_finished = 0
+
+            if line.name.lst_price:
+                line.last_price_finished = line.name.lst_price
+            else:
+                line.last_price_finished = line.name.list_price
 
     @api.depends("name")
     def _compute_product_last_manufacturer(self):
         for line in self:
             line.product_last_manufacturer = False
 
-            for bom_id in line.name.bom_ids:
-                for bom_line_id in bom_id.bom_line_ids:
-                    for seller_id in bom_line_id.product_id.seller_ids:
-                        line.product_last_manufacturer = seller_id.name.name
-                        break
+            for seller_id in line.name.seller_ids:
+                line.product_last_manufacturer = seller_id.name.name
+                break
 
     @api.depends("name")
     def _compute_product_updated_qty(self):

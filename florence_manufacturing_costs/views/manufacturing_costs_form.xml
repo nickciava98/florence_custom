@@ -14,7 +14,9 @@
                     <field name="currency_id" invisible="True"/>
                     <field name="start_date" invisible="True"/>
                     <field name="is_bom_present" invisible="True"/>
-                    <field name="product_updated_cost" invisible="True"/>
+                    <field name="last_price_agreed" invisible="True"/>
+                    <field name="last_price_unit" invisible="True"/>
+                    <field name="last_price_finished" invisible="True"/>
                     <field name="product_last_manufacturer" invisible="True"/>
                     <field name="product_updated_qty" invisible="True"/>
 
@@ -22,9 +24,11 @@
                         <page string="Costs Tracking" name="costs_tracking">
                             <field name="costs_lines" widget="section_and_note_one2many"
                                    attrs="{'readonly': [('is_bom_present','=',False)]}"
-                                   context="{'default_product': name, 'default_currency_id': currency_id,
+                                   context="{'default_product': name,
                                              'default_date': start_date,
-                                             'default_price_unit': product_updated_cost,
+                                             'default_price_agreed': last_price_agreed,
+                                             'default_price_unit': last_price_unit,
+                                             'default_price_finished': last_price_finished,
                                              'default_manufacturer': product_last_manufacturer,
                                              'default_pcs': product_updated_qty}">
                                 <tree string="Costs" editable="bottom" delete="false">
@@ -34,12 +38,9 @@
                                     <field name="date"/>
                                     <field name="manufacturer"/>
                                     <field name="pcs" widget="integer"/>
-                                    <field name="price_agreed" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="price_unit" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="price_finished" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="price_agreed"/>
+                                    <field name="price_unit"/>
+                                    <field name="price_finished"/>
                                 </tree>
                             </field>
 

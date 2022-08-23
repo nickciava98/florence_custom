@@ -19,35 +19,50 @@
         <field name="name">Amazon IT</field>
         <field name="res_model">amazon.revenues</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_amazon_it': 'Amazon IT'}</field>
+        <field name="context">
+            {'search_default_amazon_it': 'Amazon IT',
+             'default_marketplace': 'IT'}
+        </field>
     </record>
 
     <record id="amazon_fr_action" model="ir.actions.act_window">
         <field name="name">Amazon FR</field>
         <field name="res_model">amazon.revenues</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_amazon_fr': 'Amazon FR'}</field>
+        <field name="context">
+            {'search_default_amazon_fr': 'Amazon FR',
+             'default_marketplace': 'FR'}
+        </field>
     </record>
 
     <record id="amazon_de_action" model="ir.actions.act_window">
         <field name="name">Amazon DE</field>
         <field name="res_model">amazon.revenues</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_amazon_de': 'Amazon DE'}</field>
+        <field name="context">
+            {'search_default_amazon_de': 'Amazon DE',
+             'default_marketplace': 'DE'}
+        </field>
     </record>
 
     <record id="amazon_es_action" model="ir.actions.act_window">
         <field name="name">Amazon ES</field>
         <field name="res_model">amazon.revenues</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_amazon_es': 'Amazon ES'}</field>
+        <field name="context">
+            {'search_default_amazon_es': 'Amazon ES',
+             'default_marketplace': 'ES'}
+        </field>
     </record>
 
     <record id="amazon_uk_action" model="ir.actions.act_window">
         <field name="name">Amazon UK</field>
         <field name="res_model">amazon.revenues</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_amazon_uk': 'Amazon UK'}</field>
+        <field name="context">
+            {'search_default_amazon_uk': 'Amazon UK',
+             'default_marketplace': 'UK'}
+        </field>
     </record>
 
     <record id="monthly_summary_action" model="ir.actions.act_window">
