@@ -83,5 +83,8 @@
         <field name="name">Reporting Pivot</field>
         <field name="res_model">amazon.revenues</field>
         <field name="view_mode">pivot</field>
+        <field name="context">
+            {'group_by': 'product'}
+        </field>
     </record>
 </odoo>

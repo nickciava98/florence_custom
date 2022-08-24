@@ -49,7 +49,7 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="ads_cost_per_unit" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="pcs_sold"/>
+                                    <field name="pcs_sold" widget="integer"/>
                                     <field name="earned_per_pc"/>
                                     <field name="probable_income" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
