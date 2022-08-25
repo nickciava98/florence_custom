@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -24,6 +24,7 @@ class SaleOrder(models.Model):
         compute = "_compute_add_free_sample_rule"
     )
 
+    @api.depends("is_free_sample", "order_line")
     def _compute_amount_untaxed_free_sample(self):
         for line in self:
             line.amount_untaxed_free_sample = 0
@@ -33,6 +34,7 @@ class SaleOrder(models.Model):
                     if order_line.price_subtotal >= 0:
                         line.amount_untaxed_free_sample += order_line.price_subtotal
 
+    @api.depends("is_free_sample", "order_line")
     def _compute_amount_tax_free_sample(self):
         for line in self:
             line.amount_tax_free_sample = 0
@@ -44,6 +46,7 @@ class SaleOrder(models.Model):
                             (order_line.price_reduce_taxinc
                              - order_line.price_unit * (1 - order_line.discount / 100)) * order_line.product_uom_qty
 
+    @api.depends("is_free_sample", "amount_untaxed_free_sample", "amount_tax_free_sample")
     def _compute_free_sample_total(self):
         for line in self:
             line.free_sample_total = 0
@@ -52,6 +55,7 @@ class SaleOrder(models.Model):
                 line.free_sample_total = \
                     -(line.amount_untaxed_free_sample + line.amount_tax_free_sample)
 
+    @api.depends("is_free_sample", "order_line", "free_sample_total")
     def _compute_add_free_sample_rule(self):
         for line in self:
             if line.is_free_sample:
