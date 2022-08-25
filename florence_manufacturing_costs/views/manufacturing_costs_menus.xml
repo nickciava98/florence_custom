@@ -1,16 +1,5 @@
 <odoo>
     <menuitem name="Manufacturing Costs" id="manufacturing_costs_base_menu"
-              action="manufacturing_costs_action" web_icon="florence_manufacturing_costs,static/description/app_icon.png"/>
-
-    <menuitem name="Summary" id="manufacturing_costs_summary_menu"
-              parent="manufacturing_costs_base_menu" sequence="1"/>
-    <menuitem name="General summary" id="manufacturing_costs_general_summary_menu"
-              parent="manufacturing_costs_summary_menu" sequence="1"
-              action="manufacturing_costs_action"/>
-    <menuitem name="Monthly summary" id="manufacturing_costs_monthly_summary_menu"
-              parent="manufacturing_costs_summary_menu" sequence="2"
-              action="monthly_summary_action"/>
-    <menuitem name="Yearly summary" id="manufacturing_costs_yearly_summary_menu"
-              parent="manufacturing_costs_summary_menu" sequence="3"
-              action="yearly_summary_action"/>
+              action="manufacturing_costs_action"
+              web_icon="florence_manufacturing_costs,static/description/app_icon.png"/>
 </odoo>
