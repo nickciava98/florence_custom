@@ -4,12 +4,21 @@
         <field name="model">manufacturing.costs</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button type="object" name="update_values_action" string="Update Values"/>
+                </header>
+
                 <sheet>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="Product" help="Select the product to track"/>
                         </h1>
                     </div>
+
+                    <group>
+                        <field name="year"/>
+                        <field name="month"/>
+                    </group>
 
                     <field name="super_product" invisible="True"/>
                     <field name="currency_id" invisible="True"/>

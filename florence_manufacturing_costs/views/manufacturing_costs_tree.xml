@@ -7,8 +7,10 @@
                 <field name="super_product" string="Product"/>
                 <field name="name" string="Product Variant"/>
                 <field name="currency_id" invisible="True"/>
-                <field name="total_costs" widget="monetary"
+                <field name="total_costs" widget="monetary" string="Manufacturing Cost"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="year"/>
+                <field name="month"/>
             </tree>
         </field>
     </record>

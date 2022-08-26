@@ -4,7 +4,22 @@
         <field name="model">manufacturing.costs</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
+                <field name="super_product" string="Product"/>
+                <field name="name" string="Product Variant"/>
+                <field name="total_costs"/>
+                <field name="year"/>
+                <field name="month"/>
+
+                <group>
+                    <filter string="Product" name="group_by_super_product"
+                        context="{'group_by': 'super_product'}"/>
+                    <filter string="Product Variant" name="group_by_name"
+                        context="{'group_by': 'name'}"/>
+                    <filter string="Year" name="group_by_year"
+                        context="{'group_by': 'year'}"/>
+                    <filter string="Month" name="group_by_month"
+                        context="{'group_by': 'month'}"/>
+                </group>
             </search>
         </field>
     </record>

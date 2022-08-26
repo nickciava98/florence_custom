@@ -15,10 +15,36 @@ class ManufacturingCosts(models.Model):
     super_product = fields.Many2one(
         "product.template",
         tracking = True,
-        compute = "_compute_super_product"
+        compute = "_compute_super_product",
+        store = True
+    )
+    month = fields.Selection(
+        [("1", "January"),
+         ("2", "February"),
+         ("3", "March"),
+         ("4", "April"),
+         ("5", "May"),
+         ("6", "June"),
+         ("7", "July"),
+         ("8", "August"),
+         ("9", "September"),
+         ("10", "October"),
+         ("11", "November"),
+         ("12", "Dicember")],
+        default = str(datetime.now().month),
+        required = True,
+        tracking = True
+    )
+    year = fields.Char(
+        required = True,
+        size = 4,
+        tracking = True,
+        default = str(datetime.now().year)
     )
     total_costs = fields.Float(
-        compute = "_compute_total_costs"
+        compute = "_compute_total_costs",
+        store = True,
+        group_operator = "avg"
     )
     start_date = fields.Date(
         compute = "_compute_start_date",
@@ -70,7 +96,16 @@ class ManufacturingCosts(models.Model):
 
     def _compute_start_date(self):
         for line in self:
-            line.start_date = datetime.now()
+            line.start_date = False
+
+            for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)]):
+                for invoice_line in bill.invoice_line_ids:
+                    if invoice_line.product_id == line.name:
+                        line.start_date = bill.invoice_date
+                        break
+
+                if line.start_date:
+                    break
 
     def _compute_currency_id(self):
         for line in self:
@@ -132,7 +167,7 @@ class ManufacturingCosts(models.Model):
             for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)]):
                 for invoice_line in bill.invoice_line_ids:
                     if invoice_line.product_id == line.name:
-                        line.product_last_manufacturer = invoice_line.partner_id.name
+                        line.product_last_manufacturer = bill.partner_id.name
                         break
 
                 if len(line.product_last_manufacturer) > 0:
@@ -151,3 +186,46 @@ class ManufacturingCosts(models.Model):
 
                 if line.product_updated_qty > 0:
                     break
+
+    def update_values_action(self):
+        for line in self:
+            dates = []
+
+            for costs_line in line.costs_lines:
+                dates.append(costs_line.date)
+
+            if len(dates) > 0:
+                if line.start_date != dates[-1]:
+                    self.write({
+                        'costs_lines': [
+                            (0, 0, {
+                                'manufacturing_costs_line_id': line.id,
+                                'product': line.name.id,
+                                'date': line.start_date,
+                                'manufacturer': line.product_last_manufacturer,
+                                'pcs_invoiced': line.product_updated_qty,
+                                'price_invoiced': line.last_price_invoiced,
+                                'price_packaging': line.last_price_packaging,
+                                'price_total': line.last_price_total,
+                                'price_public': line.last_price_public,
+                                'other_costs': 0,
+                                'currency_id': line.currency_id
+                            })
+                        ]})
+            elif len(dates) == 0:
+                self.write({
+                    'costs_lines': [
+                        (0, 0, {
+                            'manufacturing_costs_line_id': line.id,
+                            'product': line.name.id,
+                            'date': line.start_date,
+                            'manufacturer': line.product_last_manufacturer,
+                            'pcs_invoiced': line.product_updated_qty,
+                            'price_invoiced': line.last_price_invoiced,
+                            'price_packaging': line.last_price_packaging,
+                            'price_total': line.last_price_total,
+                            'price_public': line.last_price_public,
+                            'other_costs': 0,
+                            'currency_id': line.currency_id
+                        })
+                    ]})
