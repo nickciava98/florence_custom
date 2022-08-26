@@ -18,6 +18,12 @@
                     <field name="is_manufacturing_bill"/>
                 </div>
             </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_total']"
+                   position="attributes">
+                <attribute name="groups"/>
+                <attribute name="optional">hide</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>

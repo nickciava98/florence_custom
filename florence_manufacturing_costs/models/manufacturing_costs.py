@@ -140,7 +140,9 @@ class ManufacturingCosts(models.Model):
                     for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)]):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id == bom_line_id.product_id:
-                                line.last_price_packaging = invoice_line.price_unit
+                                line.last_price_packaging = \
+                                    invoice_line.price_unit \
+                                    + ((invoice_line.price_total - invoice_line.price_subtotal) / invoice_line.quantity)
                                 break
 
                         if line.last_price_packaging > 0:
