@@ -11,36 +11,46 @@
                         </h1>
                     </div>
 
+                    <field name="super_product" invisible="True"/>
                     <field name="currency_id" invisible="True"/>
                     <field name="start_date" invisible="True"/>
                     <field name="is_bom_present" invisible="True"/>
-                    <field name="last_price_agreed" invisible="True"/>
-                    <field name="last_price_unit" invisible="True"/>
-                    <field name="last_price_finished" invisible="True"/>
+                    <field name="last_price_invoiced" invisible="True"/>
+                    <field name="last_price_packaging" invisible="True"/>
+                    <field name="last_price_total" invisible="True"/>
+                    <field name="last_price_public" invisible="True"/>
                     <field name="product_last_manufacturer" invisible="True"/>
                     <field name="product_updated_qty" invisible="True"/>
 
                     <notebook>
                         <page string="Costs Tracking" name="costs_tracking">
                             <field name="costs_lines" widget="section_and_note_one2many"
-                                   attrs="{'readonly': [('is_bom_present','=',False)]}"
                                    context="{'default_product': name,
                                              'default_date': start_date,
-                                             'default_price_agreed': last_price_agreed,
-                                             'default_price_unit': last_price_unit,
-                                             'default_price_finished': last_price_finished,
+                                             'default_price_invoiced': last_price_invoiced,
+                                             'default_price_packaging': last_price_packaging,
+                                             'default_price_total': last_price_total,
+                                             'default_price_public': last_price_public,
                                              'default_manufacturer': product_last_manufacturer,
-                                             'default_pcs': product_updated_qty}">
-                                <tree string="Costs" editable="bottom" delete="false">
+                                             'default_pcs_invoiced': product_updated_qty,
+                                             'default_other_costs': 0}">
+                                <tree string="Costs" editable="bottom">
                                     <field name="manufacturing_costs_line_id" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date"/>
                                     <field name="manufacturer"/>
-                                    <field name="pcs" widget="integer"/>
-                                    <field name="price_agreed"/>
-                                    <field name="price_unit"/>
-                                    <field name="price_finished"/>
+                                    <field name="pcs_invoiced" widget="integer"/>
+                                    <field name="price_invoiced" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="price_packaging" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="price_total" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="price_public" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="other_costs" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
 

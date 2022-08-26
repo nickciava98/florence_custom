@@ -12,6 +12,11 @@ class ManufacturingCosts(models.Model):
         required = True,
         tracking = True
     )
+    super_product = fields.Many2one(
+        "product.template",
+        tracking = True,
+        compute = "_compute_super_product"
+    )
     total_costs = fields.Float(
         compute = "_compute_total_costs"
     )
@@ -30,14 +35,17 @@ class ManufacturingCosts(models.Model):
     is_bom_present = fields.Boolean(
         compute = "_compute_is_bom_present"
     )
-    last_price_agreed = fields.Float(
-        compute = "_compute_last_price_agreed"
+    last_price_invoiced = fields.Float(
+        compute = "_compute_last_price_invoiced"
     )
-    last_price_unit = fields.Float(
-        compute = "_compute_last_price_unit"
+    last_price_packaging = fields.Float(
+        compute = "_compute_last_price_packaging"
     )
-    last_price_finished = fields.Float(
-        compute = "_compute_last_price_finished"
+    last_price_total = fields.Float(
+        compute = "_compute_last_price_total"
+    )
+    last_price_public = fields.Float(
+        compute = "_compute_last_price_public"
     )
     product_last_manufacturer = fields.Char(
         compute = "_compute_product_last_manufacturer"
@@ -46,14 +54,19 @@ class ManufacturingCosts(models.Model):
         compute = "_compute_product_updated_qty"
     )
 
+    @api.depends("name")
+    def _compute_super_product(self):
+        for line in self:
+            line.super_product = self.env["product.product"].search([("id", "=", line.name.id)]).product_tmpl_id
+
     @api.depends("costs_lines")
     def _compute_total_costs(self):
         for line in self:
             line.total_costs = 0
 
             for costs_line in line.costs_lines:
-                if costs_line.price_finished:
-                    line.total_costs += costs_line.price_finished
+                if costs_line.price_total:
+                    line.total_costs += costs_line.price_total + costs_line.other_costs
 
     def _compute_start_date(self):
         for line in self:
@@ -69,56 +82,72 @@ class ManufacturingCosts(models.Model):
             line.is_bom_present = True if line.name.bom_count >= 1 else False
 
     @api.depends("name")
-    def _compute_last_price_agreed(self):
+    def _compute_last_price_invoiced(self):
         for line in self:
-            line.last_price_agreed = 0
-
-            for seller_id in line.name.seller_ids:
-                line.last_price_agreed = seller_id.price
-                break
-
-    @api.depends("name")
-    def _compute_last_price_unit(self):
-        for line in self:
-            line.last_price_unit = 0
-
-            for bom_id in line.name.bom_ids:
-                for bom_line_id in bom_id.bom_line_ids:
-                    for seller_id in bom_line_id.product_id.seller_ids:
-                        line.last_price_unit += seller_id.price
-                        break
+            line.last_price_invoiced = 0
 
             for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)]):
                 for invoice_line in bill.invoice_line_ids:
                     if invoice_line.product_id == line.name:
-                        line.last_price_unit += invoice_line.price_unit
+                        line.last_price_invoiced = invoice_line.price_unit
+                        break
+
+                if line.last_price_invoiced > 0:
+                    break
 
     @api.depends("name")
-    def _compute_last_price_finished(self):
+    def _compute_last_price_packaging(self):
         for line in self:
-            line.last_price_finished = 0
+            line.last_price_packaging = 0
 
+            for bom_id in line.name.bom_ids:
+                for bom_line_id in bom_id.bom_line_ids:
+                    for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)]):
+                        for invoice_line in bill.invoice_line_ids:
+                            if invoice_line.product_id == bom_line_id.product_id:
+                                line.last_price_packaging = invoice_line.price_unit
+                                break
+
+                        if line.last_price_packaging > 0:
+                            break
+
+    @api.depends("last_price_invoiced", "last_price_packaging")
+    def _compute_last_price_total(self):
+        for line in self:
+            line.last_price_total = line.last_price_invoiced + line.last_price_packaging
+
+    @api.depends("name")
+    def _compute_last_price_public(self):
+        for line in self:
             if line.name.lst_price:
-                line.last_price_finished = line.name.lst_price
+                line.last_price_public = line.name.lst_price
             else:
-                line.last_price_finished = line.name.list_price
+                line.last_price_public = line.name.list_price
 
     @api.depends("name")
     def _compute_product_last_manufacturer(self):
         for line in self:
-            line.product_last_manufacturer = False
+            line.product_last_manufacturer = ""
 
-            for seller_id in line.name.seller_ids:
-                line.product_last_manufacturer = seller_id.name.name
-                break
+            for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)]):
+                for invoice_line in bill.invoice_line_ids:
+                    if invoice_line.product_id == line.name:
+                        line.product_last_manufacturer = invoice_line.partner_id.name
+                        break
+
+                if len(line.product_last_manufacturer) > 0:
+                    break
 
     @api.depends("name")
     def _compute_product_updated_qty(self):
         for line in self:
             line.product_updated_qty = 0
 
-            for bom_id in line.name.bom_ids:
-                for bom_line_id in bom_id.bom_line_ids:
-                    for seller_id in bom_line_id.product_id.seller_ids:
-                        line.product_updated_qty = seller_id.min_qty
+            for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)]):
+                for invoice_line in bill.invoice_line_ids:
+                    if invoice_line.product_id == line.name:
+                        line.product_updated_qty = invoice_line.quantity
                         break
+
+                if line.product_updated_qty > 0:
+                    break

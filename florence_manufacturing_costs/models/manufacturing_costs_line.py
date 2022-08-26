@@ -12,10 +12,17 @@ class ManufacturingCostsLine(models.Model):
     )
     date = fields.Date()
     manufacturer = fields.Char()
-    pcs = fields.Float()
-    price_agreed = fields.Float()
-    price_unit = fields.Float()
-    price_finished = fields.Float()
+    pcs_invoiced = fields.Float()
+    price_invoiced = fields.Float()
+    price_packaging = fields.Float()
+    price_total = fields.Float()
+    price_public = fields.Float()
+    other_costs = fields.Float()
     currency_id = fields.Many2one(
-        "res.currency"
+        "res.currency",
+        compute = "_compute_currency_id"
     )
+
+    def _compute_currency_id(self):
+        for line in self:
+            line.currency_id = self.env.ref('base.main_company').currency_id
