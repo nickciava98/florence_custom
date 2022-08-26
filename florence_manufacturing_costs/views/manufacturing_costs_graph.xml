@@ -1,0 +1,13 @@
+<odoo>
+    <record id="manufacturing_costs_view_graph" model="ir.ui.view">
+        <field name="name">Manufacturing Costs Graph</field>
+        <field name="model">manufacturing.costs</field>
+
+        <field name="arch" type="xml">
+            <graph string="Manufacturing Costs Analysis">
+                <field name="name" string="Product"/>
+                <field name="total_costs" string="Manufacturing Cost" type="measure"/>
+            </graph>
+        </field>
+    </record>
+</odoo>

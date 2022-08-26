@@ -4,13 +4,13 @@
         <field name="model">manufacturing.costs</field>
         <field name="arch" type="xml">
             <tree expand="True">
-                <field name="super_product" string="Product"/>
+                <field name="super_product" string="Product" invisible="True"/>
                 <field name="name" string="Product Variant"/>
                 <field name="currency_id" invisible="True"/>
-                <field name="total_costs" widget="monetary" string="Manufacturing Cost"
+                <field name="total_costs" widget="monetary" string="Cost Per Unit"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                <field name="year"/>
-                <field name="month"/>
+                <field name="year" invisible="True"/>
+                <field name="month" invisible="True"/>
             </tree>
         </field>
     </record>

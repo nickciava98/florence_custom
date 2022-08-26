@@ -191,43 +191,52 @@ class ManufacturingCosts(models.Model):
 
     def update_values_action(self):
         for line in self:
-            dates = []
+            if len(line.costs_lines) == 0:
+                for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)], order = "invoice_date asc"):
+                    for invoice_line in bill.invoice_line_ids:
+                        if invoice_line.product_id == line.name \
+                                and str(line.month) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").month)\
+                                and str(line.year) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").year):
+                            self.write({
+                                'costs_lines': [
+                                    (0, 0, {
+                                        'manufacturing_costs_line_id': line.id,
+                                        'product': line.name.id,
+                                        'date': bill.invoice_date,
+                                        'manufacturer': bill.partner_id.name,
+                                        'pcs_invoiced': invoice_line.quantity,
+                                        'price_invoiced': invoice_line.price_unit,
+                                        'price_packaging': line.last_price_packaging,
+                                        'price_total': line.last_price_total,
+                                        'price_public': line.last_price_public,
+                                        'other_costs': 0,
+                                        'currency_id': line.currency_id
+                                    })
+                                ]})
+                            break
+            else:
+                dates = []
 
-            for costs_line in line.costs_lines:
-                dates.append(costs_line.date)
+                for costs_line in line.costs_lines:
+                    if str(line.month) == str(datetime.strptime(str(line.start_date), "%Y-%m-%d").month)\
+                            and str(line.year) == str(datetime.strptime(str(line.start_date), "%Y-%m-%d").year):
+                        dates.append(costs_line.date)
 
-            if len(dates) > 0:
-                if line.start_date != dates[-1]:
-                    self.write({
-                        'costs_lines': [
-                            (0, 0, {
-                                'manufacturing_costs_line_id': line.id,
-                                'product': line.name.id,
-                                'date': line.start_date,
-                                'manufacturer': line.product_last_manufacturer,
-                                'pcs_invoiced': line.product_updated_qty,
-                                'price_invoiced': line.last_price_invoiced,
-                                'price_packaging': line.last_price_packaging,
-                                'price_total': line.last_price_total,
-                                'price_public': line.last_price_public,
-                                'other_costs': 0,
-                                'currency_id': line.currency_id
-                            })
-                        ]})
-            elif len(dates) == 0:
-                self.write({
-                    'costs_lines': [
-                        (0, 0, {
-                            'manufacturing_costs_line_id': line.id,
-                            'product': line.name.id,
-                            'date': line.start_date,
-                            'manufacturer': line.product_last_manufacturer,
-                            'pcs_invoiced': line.product_updated_qty,
-                            'price_invoiced': line.last_price_invoiced,
-                            'price_packaging': line.last_price_packaging,
-                            'price_total': line.last_price_total,
-                            'price_public': line.last_price_public,
-                            'other_costs': 0,
-                            'currency_id': line.currency_id
-                        })
-                    ]})
+                if len(dates) > 0:
+                    if line.start_date != dates[-1]:
+                        self.write({
+                            'costs_lines': [
+                                (0, 0, {
+                                    'manufacturing_costs_line_id': line.id,
+                                    'product': line.name.id,
+                                    'date': line.start_date,
+                                    'manufacturer': line.product_last_manufacturer,
+                                    'pcs_invoiced': line.product_updated_qty,
+                                    'price_invoiced': line.last_price_invoiced,
+                                    'price_packaging': line.last_price_packaging,
+                                    'price_total': line.last_price_total,
+                                    'price_public': line.last_price_public,
+                                    'other_costs': 0,
+                                    'currency_id': line.currency_id
+                                })
+                            ]})

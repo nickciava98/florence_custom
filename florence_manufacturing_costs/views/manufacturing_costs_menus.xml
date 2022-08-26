@@ -2,4 +2,13 @@
     <menuitem name="Manufacturing Costs" id="manufacturing_costs_base_menu"
               action="manufacturing_costs_action"
               web_icon="florence_manufacturing_costs,static/description/app_icon.png"/>
+    <menuitem name="Summary" id="manufacturing_costs_summary_menu"
+              action="manufacturing_costs_action" sequence="1"
+              parent="manufacturing_costs_base_menu"/>
+
+    <menuitem name="Reporting" id="manufacturing_costs_reporting_menu"
+              parent="manufacturing_costs_base_menu" sequence="2"/>
+    <menuitem name="Costs Analysis" id="manufacturing_costs_graph_menu"
+              parent="manufacturing_costs_reporting_menu" sequence="1"
+              action="reporting_graph_action"/>
 </odoo>
