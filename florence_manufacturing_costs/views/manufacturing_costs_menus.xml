@@ -11,4 +11,7 @@
     <menuitem name="Costs Analysis" id="manufacturing_costs_graph_menu"
               parent="manufacturing_costs_reporting_menu" sequence="1"
               action="reporting_graph_action"/>
+    <menuitem name="Costs Line Analysis" id="manufacturing_costs_line_graph_menu"
+              parent="manufacturing_costs_reporting_menu" sequence="2"
+              action="costs_line_graph_action"/>
 </odoo>

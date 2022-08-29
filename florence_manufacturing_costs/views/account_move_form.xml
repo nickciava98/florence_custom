@@ -6,15 +6,10 @@
 
         <field name="arch" type="xml">
             <xpath expr="//div[@name='journal_div']" position="after">
-                <label for="is_vendor_bill" string="Vendor Bill" invisible="True"/>
-                <div name="is_vendor_bill_div" class="d-flex" invisible="True">
-                    <field name="is_vendor_bill"/>
-                </div>
-
                 <label for="is_manufacturing_bill" string="Manufacturing Bill"
-                       attrs="{'invisible': [('is_vendor_bill','=',False)]}"/>
+                       invisible="True"/>
                 <div name="is_manufacturing_bill_div" class="d-flex"
-                     attrs="{'invisible': [('is_vendor_bill','=',False)]}">
+                     invisible="True">
                     <field name="is_manufacturing_bill"/>
                 </div>
             </xpath>

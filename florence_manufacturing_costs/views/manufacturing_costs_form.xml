@@ -4,11 +4,14 @@
         <field name="model">manufacturing.costs</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <button type="object" name="update_values_action" string="Update Values"/>
-                </header>
-
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="update_values_action" string="Update Values"
+                                class="oe_stat_button" icon="fa-refresh"/>
+                        <button type="object" name="graph_view_action" string="Costs Analysis"
+                                class="oe_stat_button" icon="fa-bar-chart-o"/>
+                    </div>
+
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="Product" help="Select the product to track"/>
@@ -30,6 +33,7 @@
                     <field name="last_price_public" invisible="True"/>
                     <field name="product_last_manufacturer" invisible="True"/>
                     <field name="product_updated_qty" invisible="True"/>
+                    <field name="last_bill_number" invisible="True"/>
 
                     <notebook>
                         <page string="Costs Tracking" name="costs_tracking">
@@ -42,11 +46,13 @@
                                              'default_price_public': last_price_public,
                                              'default_manufacturer': product_last_manufacturer,
                                              'default_pcs_invoiced': product_updated_qty,
+                                             'default_bill': last_bill_number,
                                              'default_other_costs': 0}">
-                                <tree string="Costs" editable="bottom">
+                                <tree string="Costs" editable="bottom" default_order="date asc">
                                     <field name="manufacturing_costs_line_id" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="bill"/>
                                     <field name="date"/>
                                     <field name="manufacturer"/>
                                     <field name="pcs_invoiced" widget="integer"/>

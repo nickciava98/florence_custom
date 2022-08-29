@@ -17,6 +17,17 @@
         </field>
     </record>
 
+    <record id="costs_line_graph_action" model="ir.actions.act_window">
+        <field name="name">Costs Line Analysis</field>
+        <field name="res_model">manufacturing.costs.line</field>
+        <field name="view_mode">graph</field>
+        <field name="context">
+            {'graph_measure': 'price_total',
+             'graph_mode': 'line',
+             'graph_groupbys': ['product']}
+        </field>
+    </record>
+
     <record id="reporting_graph_action" model="ir.actions.act_window">
         <field name="name">Manufacturing Costs Analysis</field>
         <field name="res_model">manufacturing.costs</field>
