@@ -31,7 +31,7 @@ class ManufacturingCosts(models.Model):
          ("9", "September"),
          ("10", "October"),
          ("11", "November"),
-         ("12", "Dicember")],
+         ("12", "December")],
         default = str(datetime.now().month),
         required = True,
         tracking = True
@@ -80,6 +80,21 @@ class ManufacturingCosts(models.Model):
     last_bill_number = fields.Char(
         compute = "_compute_last_bill_number"
     )
+    product_image = fields.Image(
+        related = "name.image_1920",
+        store = True
+    )
+
+    def model_search(self, model, domain, order):
+        if len(order) > 0:
+            return self.env[model].search(
+                domain,
+                order = order
+            )
+
+        return self.env[model].search(
+            domain
+        )
 
     @api.depends("month", "year", "name")
     def _compute_last_bill_number(self):
@@ -87,11 +102,21 @@ class ManufacturingCosts(models.Model):
             line.last_bill_number = False
 
             if line.name:
-                for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)], order = "name desc"):
+                for bill in line.model_search(
+                        "account.move",
+                        ["&", "&",
+                         ("is_manufacturing_bill", "=", True),
+                         ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
+                         ("invoice_date", "<=",
+                            line.year + "-"
+                            + str(line.month) + "-"
+                            + str(calendar.monthrange(int(line.year), int(line.month))[1])
+                         ),
+                        ],
+                        "name desc"
+                ):
                     for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id == line.name \
-                                and str(line.month) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").month) \
-                                and str(line.year) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").year):
+                        if invoice_line.product_id == line.name:
                             line.last_bill_number = bill.name
                             break
 
@@ -101,7 +126,11 @@ class ManufacturingCosts(models.Model):
     @api.depends("name")
     def _compute_super_product(self):
         for line in self:
-            line.super_product = self.env["product.product"].search([("id", "=", line.name.id)]).product_tmpl_id
+            line.super_product = line.model_search(
+                "product.product",
+                [("id", "=", line.name.id)],
+                ""
+            ).product_tmpl_id
 
     @api.depends("costs_lines")
     def _compute_total_costs(self):
@@ -118,11 +147,21 @@ class ManufacturingCosts(models.Model):
             line.start_date = False
 
             if line.name:
-                for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)], order = "name desc"):
+                for bill in line.model_search(
+                        "account.move",
+                        ["&", "&",
+                         ("is_manufacturing_bill", "=", True),
+                         ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
+                         ("invoice_date", "<=",
+                          line.year + "-"
+                          + str(line.month) + "-"
+                          + str(calendar.monthrange(int(line.year), int(line.month))[1])
+                          ),
+                         ],
+                        "name desc"
+                ):
                     for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id == line.name \
-                                and str(line.month) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").month) \
-                                and str(line.year) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").year):
+                        if invoice_line.product_id == line.name:
                             line.start_date = bill.invoice_date
                             break
 
@@ -139,11 +178,21 @@ class ManufacturingCosts(models.Model):
             line.last_price_invoiced = 0
 
             if line.name:
-                for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)], order = "name desc"):
+                for bill in line.model_search(
+                        "account.move",
+                        ["&", "&",
+                         ("is_manufacturing_bill", "=", True),
+                         ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
+                         ("invoice_date", "<=",
+                          line.year + "-"
+                          + str(line.month) + "-"
+                          + str(calendar.monthrange(int(line.year), int(line.month))[1])
+                          ),
+                         ],
+                        "name desc"
+                ):
                     for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id == line.name \
-                                and str(line.month) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").month) \
-                                and str(line.year) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").year):
+                        if invoice_line.product_id == line.name:
                             line.last_price_invoiced = invoice_line.price_unit
                             break
 
@@ -158,14 +207,14 @@ class ManufacturingCosts(models.Model):
             for bom_id in line.name.bom_ids:
                 for bom_line_id in bom_id.bom_line_ids:
                     previous_price_packaging = line.last_price_packaging
-                    for bill in self.env["account.move"].search(
+                    for bill in line.model_search("account.move",
                             ['&',
                                 ("is_manufacturing_bill", "=", True),
                                 ("invoice_date", "<=",
                                  line.year + "-"
                                     + str(line.month) + "-"
                                     + str(calendar.monthrange(int(line.year), int(line.month))[1]))
-                            ], order = "name desc"):
+                            ], "name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id == bom_line_id.product_id:
                                 line.last_price_packaging += \
@@ -196,11 +245,21 @@ class ManufacturingCosts(models.Model):
             line.product_last_manufacturer = ""
 
             if line.name:
-                for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)], order = "name desc"):
+                for bill in line.model_search(
+                        "account.move",
+                        ["&", "&",
+                         ("is_manufacturing_bill", "=", True),
+                         ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
+                         ("invoice_date", "<=",
+                          line.year + "-"
+                          + str(line.month) + "-"
+                          + str(calendar.monthrange(int(line.year), int(line.month))[1])
+                          ),
+                         ],
+                        "name desc"
+                ):
                     for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id == line.name and \
-                                str(line.month) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").month) \
-                                and str(line.year) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").year):
+                        if invoice_line.product_id == line.name:
                             line.product_last_manufacturer = bill.partner_id.name
                             break
 
@@ -213,11 +272,21 @@ class ManufacturingCosts(models.Model):
             line.product_updated_qty = 0
 
             if line.name:
-                for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)], order = "name desc"):
+                for bill in line.model_search(
+                        "account.move",
+                        ["&", "&",
+                         ("is_manufacturing_bill", "=", True),
+                         ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
+                         ("invoice_date", "<=",
+                          line.year + "-"
+                          + str(line.month) + "-"
+                          + str(calendar.monthrange(int(line.year), int(line.month))[1])
+                          ),
+                         ],
+                        "name desc"
+                ):
                     for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id == line.name \
-                                and str(line.month) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").month) \
-                                and str(line.year) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").year):
+                        if invoice_line.product_id == line.name:
                             line.product_updated_qty = invoice_line.quantity
                             break
 
@@ -232,12 +301,21 @@ class ManufacturingCosts(models.Model):
     def update_values_action(self):
         for line in self:
             if len(line.costs_lines) == 0:
-                for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)],
-                                                            order = "name asc"):
+                for bill in line.model_search(
+                        "account.move",
+                        ["&", "&",
+                         ("is_manufacturing_bill", "=", True),
+                         ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
+                         ("invoice_date", "<=",
+                          line.year + "-"
+                          + str(line.month) + "-"
+                          + str(calendar.monthrange(int(line.year), int(line.month))[1])
+                          ),
+                         ],
+                        "name asc"
+                ):
                     for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id == line.name \
-                                and str(line.month) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").month) \
-                                and str(line.year) == str(datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").year):
+                        if invoice_line.product_id == line.name:
                             self.write({
                                 'costs_lines': [
                                     (0, 0, {
@@ -298,7 +376,8 @@ class ManufacturingCosts(models.Model):
                ('manufacturer', 'ilike', self.product_last_manufacturer),
                ('product', 'ilike', self.name.name),
                ('date', '>=', self.year + "-" + self.month + "-1"),
-               ('date', '<=', self.year + "-" + str(self.month) + "-" + str(calendar.monthrange(int(self.year), int(self.month))[1]))
+               ('date', '<=', self.year + "-" + str(self.month)
+                    + "-" + str(calendar.monthrange(int(self.year), int(self.month))[1]))
             ],
             'context': {
                 'graph_measure': 'price_total',
