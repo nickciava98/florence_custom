@@ -26,7 +26,6 @@
                     <field name="super_product" invisible="True"/>
                     <field name="currency_id" invisible="True"/>
                     <field name="start_date" invisible="True"/>
-                    <field name="is_bom_present" invisible="True"/>
                     <field name="last_price_invoiced" invisible="True"/>
                     <field name="last_price_packaging" invisible="True"/>
                     <field name="last_price_total" invisible="True"/>

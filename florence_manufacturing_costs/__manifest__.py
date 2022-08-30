@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'inventory',
-    'version': '14.2.5',
+    'version': '14.2.6',
     'website': "http://www.nciavarella.me",
     'depends': ['mail', 'sale', 'sale_management',
                 'purchase', 'stock', 'mrp', 'account'],

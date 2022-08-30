@@ -1,6 +1,6 @@
 <odoo>
     <record id="manufacturing_costs_view_pivot" model="ir.ui.view">
-        <field name="name">Manufacturing Costs Pivot</field>
+        <field name="name">Costs Pivot</field>
         <field name="model">manufacturing.costs</field>
 
         <field name="arch" type="xml">

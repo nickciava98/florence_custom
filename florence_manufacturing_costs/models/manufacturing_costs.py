@@ -59,9 +59,6 @@ class ManufacturingCosts(models.Model):
         "res.currency",
         compute = "_compute_currency_id"
     )
-    is_bom_present = fields.Boolean(
-        compute = "_compute_is_bom_present"
-    )
     last_price_invoiced = fields.Float(
         compute = "_compute_last_price_invoiced"
     )
@@ -136,11 +133,6 @@ class ManufacturingCosts(models.Model):
         for line in self:
             line.currency_id = self.env.ref('base.main_company').currency_id
 
-    @api.depends("name")
-    def _compute_is_bom_present(self):
-        for line in self:
-            line.is_bom_present = True if line.name.bom_count >= 1 else False
-
     @api.depends("name", "year", "month")
     def _compute_last_price_invoiced(self):
         for line in self:
@@ -165,17 +157,25 @@ class ManufacturingCosts(models.Model):
 
             for bom_id in line.name.bom_ids:
                 for bom_line_id in bom_id.bom_line_ids:
-                    for bill in self.env["account.move"].search([("is_manufacturing_bill", "=", True)], order = "name desc"):
+                    previous_price_packaging = line.last_price_packaging
+                    for bill in self.env["account.move"].search(
+                            ['&',
+                                ("is_manufacturing_bill", "=", True),
+                                ("invoice_date", "<=",
+                                 line.year + "-"
+                                    + str(line.month) + "-"
+                                    + str(calendar.monthrange(int(line.year), int(line.month))[1]))
+                            ], order = "name desc"):
                         for invoice_line in bill.invoice_line_ids:
-                            if invoice_line.product_id == bom_line_id.product_id \
-                                    and datetime.strptime(str(bill.invoice_date), "%Y-%m-%d").month <= int(line.month):
-                                line.last_price_packaging = \
+                            if invoice_line.product_id == bom_line_id.product_id:
+                                line.last_price_packaging += \
                                     invoice_line.price_unit \
                                     + ((invoice_line.price_total - invoice_line.price_subtotal) / invoice_line.quantity)
                                 break
 
-                        if line.last_price_packaging > 0:
+                        if line.last_price_packaging > previous_price_packaging:
                             break
+                break
 
     @api.depends("last_price_invoiced", "last_price_packaging")
     def _compute_last_price_total(self):
@@ -252,7 +252,7 @@ class ManufacturingCosts(models.Model):
                                         'price_total': line.last_price_total,
                                         'price_public': line.last_price_public,
                                         'other_costs': 0,
-                                        'currency_id': line.currency_id
+                                        'currency_id': line.currency_id,
                                     })
                                 ]})
                             break
@@ -289,7 +289,7 @@ class ManufacturingCosts(models.Model):
 
     def graph_view_action(self):
         return {
-            'name': 'Costs Line Analysis',
+            'name': 'Costs Analysis',
             'view_type': 'graph',
             'view_mode': 'graph',
             'res_model': 'manufacturing.costs.line',
@@ -297,12 +297,12 @@ class ManufacturingCosts(models.Model):
             'domain': ['&','&','&',
                ('manufacturer', 'ilike', self.product_last_manufacturer),
                ('product', 'ilike', self.name.name),
-               ('date','>=',self.year + "-" + self.month + "-1"),
-               ('date','<=',self.year + "-" + str(self.month) + "-" + str(calendar.monthrange(int(self.year), int(self.month))[1]))
+               ('date', '>=', self.year + "-" + self.month + "-1"),
+               ('date', '<=', self.year + "-" + str(self.month) + "-" + str(calendar.monthrange(int(self.year), int(self.month))[1]))
             ],
             'context': {
                 'graph_measure': 'price_total',
                 'graph_mode': 'line',
-                'graph_groupbys': ['date:day', 'product']
+                'graph_groupbys': ['date:day']
             }
         }

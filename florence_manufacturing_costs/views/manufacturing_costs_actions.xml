@@ -18,7 +18,7 @@
     </record>
 
     <record id="costs_line_graph_action" model="ir.actions.act_window">
-        <field name="name">Costs Line Analysis</field>
+        <field name="name">Costs Analysis</field>
         <field name="res_model">manufacturing.costs.line</field>
         <field name="view_mode">graph</field>
         <field name="context">
@@ -29,7 +29,7 @@
     </record>
 
     <record id="reporting_graph_action" model="ir.actions.act_window">
-        <field name="name">Manufacturing Costs Analysis</field>
+        <field name="name">Costs Analysis</field>
         <field name="res_model">manufacturing.costs</field>
         <field name="view_mode">graph</field>
         <field name="context">
@@ -38,4 +38,12 @@
              'graph_groupbys': ['month', 'year']}
         </field>
     </record>
+
+<!--    <record id="update_values_action" model="ir.actions.server">-->
+<!--        <field name="name">Update Values</field>-->
+<!--        <field name="type">ir.actions.server</field>-->
+<!--        <field name="model_id" ref="model_manufacturing_costs"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">model.update_values_action()</field>-->
+<!--    </record>-->
 </odoo>

@@ -8,13 +8,13 @@ class AccountMove(models.Model):
         store = True
     )
 
-    @api.depends("invoice_line_ids")
     def _compute_is_manufacturing_bill(self):
         for line in self:
             line.is_manufacturing_bill = False
 
-            for invoice_line in line.invoice_line_ids:
-                line.is_manufacturing_bill = invoice_line.product_id.categ_id.is_manufacturing_product_category
+            if len(line.invoice_line_ids) > 0:
+                for invoice_line in line.invoice_line_ids:
+                    line.is_manufacturing_bill = invoice_line.product_id.categ_id.is_manufacturing_product_category
 
-                if line.is_manufacturing_bill:
-                    break
+                    if line.is_manufacturing_bill:
+                        break

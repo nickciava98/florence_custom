@@ -7,10 +7,10 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@name='journal_div']" position="after">
                 <label for="is_manufacturing_bill" string="Manufacturing Bill"
-                       invisible="True"/>
+                       attrs="{'invisible': [('is_manufacturing_bill','=',True)]}"/>
                 <div name="is_manufacturing_bill_div" class="d-flex"
-                     invisible="True">
-                    <field name="is_manufacturing_bill"/>
+                     attrs="{'invisible': [('is_manufacturing_bill','=',True)]}">
+                    <field name="is_manufacturing_bill" readonly="False"/>
                 </div>
             </xpath>
 
