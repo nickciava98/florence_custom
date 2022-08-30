@@ -1,0 +1,12 @@
+<odoo>
+    <record id="employees_statistics_view_tree" model="ir.ui.view">
+        <field name="name">Employees Statistics List</field>
+        <field name="model">employees.statistics</field>
+        <field name="arch" type="xml">
+            <tree expand="True">
+                <field name="name" string="Employee"/>
+                <field name="job_position"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,23 @@
+<odoo>
+    <record id="employees_statistics_benchmark_view_form" model="ir.ui.view">
+        <field name="name">Employees Statistics Benchmark Form</field>
+        <field name="model">employees.statistics.benchmark</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" string="Benchmark"/>
+                        <field name="job_position"/>
+                    </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

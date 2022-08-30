@@ -1,0 +1,14 @@
+<odoo>
+    <menuitem name="Employees Statistics" id="employees_statistics_base_menu"
+              action="employees_statistics_action"
+              web_icon="florence_employees_statistics,static/description/app_icon.png"/>
+    <menuitem name="Summary" id="employees_statistics_summary_menu"
+              action="employees_statistics_action" sequence="1"
+              parent="employees_statistics_base_menu"/>
+
+    <menuitem name="Configuration" id="employees_statistics_configuration_menu"
+              sequence="2" parent="employees_statistics_base_menu"/>
+    <menuitem name="Benchmarks" id="employees_statistics_benchmark_menu"
+              sequence="1" parent="employees_statistics_configuration_menu"
+              action="employees_statistics_benchmark_action"/>
+</odoo>

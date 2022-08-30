@@ -1,0 +1,42 @@
+<odoo>
+    <record id="employees_statistics_action" model="ir.actions.act_window">
+        <field name="name">Employees Statistics</field>
+        <field name="res_model">employees.statistics</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+
+            <p>
+                Start tracking statistics of your employees!
+            </p>
+        </field>
+    </record>
+
+    <record id="employees_statistics_benchmark_action" model="ir.actions.act_window">
+        <field name="name">Employees Statistics Benchmark</field>
+        <field name="res_model">employees.statistics.benchmark</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+
+            <p>
+                Start configuring benchmarks for statistics!
+            </p>
+        </field>
+    </record>
+
+    <record id="employees_statistics_line_graph_action" model="ir.actions.act_window">
+        <field name="name">Employee's Statistics</field>
+        <field name="res_model">employees.statistics.line</field>
+        <field name="view_mode">graph</field>
+        <field name="context">
+            {'graph_measure': 'value',
+             'graph_mode': 'line',
+             'graph_groupbys': ['benchmark']}
+        </field>
+    </record>
+</odoo>

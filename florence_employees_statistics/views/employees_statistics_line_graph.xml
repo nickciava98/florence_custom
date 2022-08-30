@@ -1,0 +1,13 @@
+<odoo>
+    <record id="employees_statistics_line_view_graph" model="ir.ui.view">
+        <field name="name">Employee's Statistics Graph</field>
+        <field name="model">employees.statistics.line</field>
+
+        <field name="arch" type="xml">
+            <graph string="Employee's Statistics">
+                <field name="date"/>
+                <field name="value" type="measure"/>
+            </graph>
+        </field>
+    </record>
+</odoo>
