@@ -6,8 +6,17 @@
               action="employees_statistics_action" sequence="1"
               parent="employees_statistics_base_menu"/>
 
-    <menuitem name="Configuration" id="employees_statistics_configuration_menu"
+    <menuitem name="Reporting" id="employees_statistics_reporting_menu"
               sequence="2" parent="employees_statistics_base_menu"/>
+    <menuitem name="Statistics List (per employee)" id="statistics_list_menu"
+              sequence="1" parent="employees_statistics_reporting_menu"
+              action="employees_statistics_line_tree_action"/>
+    <menuitem name="Statistics Chart (per employee)" id="statistics_chart_menu"
+              sequence="2" parent="employees_statistics_reporting_menu"
+              action="employees_statistics_line_graph_action"/>
+
+    <menuitem name="Configuration" id="employees_statistics_configuration_menu"
+              sequence="3" parent="employees_statistics_base_menu"/>
     <menuitem name="Benchmarks" id="employees_statistics_benchmark_menu"
               sequence="1" parent="employees_statistics_configuration_menu"
               action="employees_statistics_benchmark_action"/>

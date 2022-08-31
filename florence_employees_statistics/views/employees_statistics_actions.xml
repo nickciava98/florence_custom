@@ -39,4 +39,11 @@
              'graph_groupbys': ['benchmark']}
         </field>
     </record>
+
+    <record id="employees_statistics_line_tree_action" model="ir.actions.act_window">
+        <field name="name">Employee's Statistics</field>
+        <field name="res_model">employees.statistics.line</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'group_by': ['name', 'week']}</field>
+    </record>
 </odoo>

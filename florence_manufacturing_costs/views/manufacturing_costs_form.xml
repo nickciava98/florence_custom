@@ -58,15 +58,15 @@
                                     <field name="date"/>
                                     <field name="manufacturer"/>
                                     <field name="pcs_invoiced" widget="integer"/>
-                                    <field name="price_invoiced" widget="monetary"
+                                    <field name="price_invoiced" widget="monetary" sum="Price Invoiced"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="price_packaging" widget="monetary"
+                                    <field name="price_packaging" widget="monetary" sum="Price Packaging"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="price_total" widget="monetary"
+                                    <field name="price_total" widget="monetary" sum="Price Total"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="price_public" widget="monetary"
+                                    <field name="price_public" widget="monetary" sum="Price Public"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="other_costs" widget="monetary"
+                                    <field name="other_costs" widget="monetary" sum="Other Costs"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>

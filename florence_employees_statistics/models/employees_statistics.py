@@ -19,10 +19,14 @@ class EmployeesStatistics(models.Model):
     )
     chart_start = fields.Date()
     chart_end = fields.Date()
+    default_benchmark = fields.Many2one(
+        "employees.statistics.benchmark",
+        compute = "_compute_default_benchmark"
+    )
 
     def graph_view_action(self):
         return {
-            'name': 'Employee\'s Statistics',
+            'name': 'Employee\'s Statistics Chart',
             'view_type': 'graph',
             'view_mode': 'graph',
             'res_model': 'employees.statistics.line',
@@ -30,10 +34,40 @@ class EmployeesStatistics(models.Model):
             'context': {
                 'graph_measure': 'value',
                 'graph_mode': 'line',
-                'graph_groupbys': ['date:week']
+                'graph_groupbys': ['week']
             },
-            'domain': ['&',
-                       ('date', '>=', self.chart_start),
-                       ('date', '<=', self.chart_end)
-                      ]
+            'domain': [
+                '&', '&',
+                ('date', '>=', self.chart_start),
+                ('date', '<=', self.chart_end),
+                ('name', 'ilike', self.name.name)
+            ]
         }
+
+    def tree_view_action(self):
+        return {
+            'name': 'Employee\'s Statistics List',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'view_id': False,
+            'res_model': 'employees.statistics.line',
+            'type': 'ir.actions.act_window',
+            'context': {
+                'group_by': 'week'
+            },
+            'domain': [
+                '&', '&',
+                ('date', '>=', self.chart_start),
+                ('date', '<=', self.chart_end),
+                ('name', 'ilike', self.name.name)
+            ],
+            'target': 'current'
+        }
+
+    @api.depends("name")
+    def _compute_default_benchmark(self):
+        for line in self:
+            benchmark = self.env["employees.statistics.benchmark"].search(
+                [("job_position", "=", line.name.job_id.id)]
+            )
+            line.default_benchmark = benchmark if benchmark else False

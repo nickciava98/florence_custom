@@ -1,0 +1,16 @@
+<odoo>
+    <record id="employees_statistics_line_view_tree" model="ir.ui.view">
+        <field name="name">Employees Statistics List</field>
+        <field name="model">employees.statistics.line</field>
+
+        <field name="arch" type="xml">
+            <tree expand="True">
+                <field name="name" string="Employee"/>
+                <field name="date"/>
+                <field name="benchmark"/>
+                <field name="value"/>
+                <field name="week" invisible="True"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
