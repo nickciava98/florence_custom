@@ -24,7 +24,7 @@ class AmazonRevenues(models.Model):
          ("UK", "Amazon UK")]
     )
     product = fields.Many2one(
-        "product.product",
+        "product.template",
         required = True,
         tracking = True
     )
@@ -45,9 +45,6 @@ class AmazonRevenues(models.Model):
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"
-    )
-    product_updated_sku_cost = fields.Float(
-        compute = "_compute_product_updated_sku_cost"
     )
 
     @api.onchange("marketplace")
@@ -85,16 +82,19 @@ class AmazonRevenues(models.Model):
                 if revenues_line.probable_income:
                     line.total_probable_income += revenues_line.probable_income
 
-    @api.depends("product")
-    def _compute_product_updated_sku_cost(self):
-        for line in self:
-            line.product_updated_sku_cost = 0
-
-            if line.product.bom_count >= 1:
-                for bom_id in line.product.bom_ids:
-                    for bom_line_id in bom_id.bom_line_ids:
-                        for seller_id in bom_line_id.product_id.seller_ids:
-                            line.product_updated_sku_cost += seller_id.price
-                            break
-            else:
-                line.product_updated_sku_cost = 0
+    def graph_view_action(self):
+        return {
+            'name': 'Revenues Analysis',
+            'view_type': 'graph',
+            'view_mode': 'graph',
+            'res_model': 'amazon.revenues.line',
+            'type': 'ir.actions.act_window',
+            'domain': [
+                ('product', '=', self.product.id)
+            ],
+            'context': {
+                'graph_measure': 'probable_income',
+                'graph_mode': 'line',
+                'graph_groupbys': ['date:day']
+            }
+        }

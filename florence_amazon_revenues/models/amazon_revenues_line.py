@@ -10,7 +10,7 @@ class AmazonRevenuesLine(models.Model):
     )
     parent = fields.Char()
     product = fields.Many2one(
-        "product.product"
+        "product.template"
     )
 
     #Visible fields
@@ -18,28 +18,39 @@ class AmazonRevenuesLine(models.Model):
     price_unit = fields.Float()
     amazon_fees = fields.Float()
     taxes = fields.Float(
-        compute = "_compute_taxes"
+        compute = "_compute_taxes",
+        store = True
     )
     sku_cost = fields.Float(
-        compute = "_compute_sku_cost"
+        compute = "_compute_sku_cost",
+        store = True
     )
     gross_revenues = fields.Float(
-        compute = "_compute_gross_revenues"
+        compute = "_compute_gross_revenues",
+        store = True
     )
     ads_total_cost = fields.Float()
     ads_cost_per_unit = fields.Float(
-        compute = "_compute_ads_cost_per_unit"
+        compute = "_compute_ads_cost_per_unit",
+        store = True
     )
     pcs_sold = fields.Float()
     earned_per_pc = fields.Float(
-        compute = "_compute_earned_per_pc"
+        compute = "_compute_earned_per_pc",
+        store = True
     )
     probable_income = fields.Float(
-        compute = "_compute_probable_income"
+        compute = "_compute_probable_income",
+        store = True
     )
     currency_id = fields.Many2one(
-        "res.currency"
+        "res.currency",
+        compute = "_compute_currency_id"
     )
+
+    def _compute_currency_id(self):
+        for line in self:
+            line.currency_id = self.env.ref('base.main_company').currency_id
 
     @api.depends("price_unit")
     def _compute_taxes(self):
@@ -58,10 +69,9 @@ class AmazonRevenuesLine(models.Model):
     @api.depends("product")
     def _compute_sku_cost(self):
         for line in self:
-            line.sku_cost = 0
-
-            for seller in line.product.seller_ids:
-                line.sku_cost += seller.price
+            line.sku_cost = self.env["manufacturing.costs"].search(
+                [("super_product", "=", line.product.id)]
+            ).price_total_avg
 
     @api.depends("price_unit", "amazon_fees", "taxes", "sku_cost")
     def _compute_gross_revenues(self):

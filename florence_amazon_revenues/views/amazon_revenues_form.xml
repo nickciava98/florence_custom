@@ -5,6 +5,11 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="graph_view_action" string="Revenues Analysis"
+                                class="oe_stat_button" icon="fa-bar-chart-o"/>
+                    </div>
+
                     <label for="name" string="Marketplace"/>
                     <field name="name" help="Select the Amazon Marketplace"/>
 
@@ -16,7 +21,6 @@
 
                     <field name="marketplace" invisible="True"/>
                     <field name="product_updated_price" invisible="True"/>
-                    <field name="product_updated_sku_cost" invisible="True"/>
                     <field name="currency_id" invisible="True"/>
                     <field name="start_date" invisible="True"/>
 
@@ -26,7 +30,6 @@
                                    context="{'default_parent': name,
                                              'default_product': product,
                                              'default_date': start_date,
-                                             'default_sku_cost': product_updated_sku_cost,
                                              'default_price_unit': product_updated_price,
                                              'default_currency_id': currency_id}">
                                 <tree string="Revenues" editable="bottom">
