@@ -42,11 +42,6 @@ class ManufacturingCosts(models.Model):
         tracking = True,
         default = str(datetime.now().year)
     )
-    total_costs = fields.Float(
-        compute = "_compute_total_costs",
-        store = True,
-        group_operator = "avg"
-    )
     start_date = fields.Date(
         compute = "_compute_start_date",
         required = True
@@ -65,9 +60,6 @@ class ManufacturingCosts(models.Model):
     last_price_packaging = fields.Float(
         compute = "_compute_last_price_packaging"
     )
-    last_price_total = fields.Float(
-        compute = "_compute_last_price_total"
-    )
     last_price_public = fields.Float(
         compute = "_compute_last_price_public"
     )
@@ -80,10 +72,86 @@ class ManufacturingCosts(models.Model):
     last_bill_number = fields.Char(
         compute = "_compute_last_bill_number"
     )
-    product_image = fields.Image(
-        related = "name.image_1920",
+    price_invoiced_avg = fields.Float(
+        compute = "_compute_price_invoiced_avg",
+        group_operator = "avg",
         store = True
     )
+    price_packaging_avg = fields.Float(
+        compute = "_compute_price_packaging_avg",
+        group_operator = "avg",
+        store = True
+    )
+    price_total_avg = fields.Float(
+        compute = "_compute_price_total_avg",
+        group_operator = "avg",
+        store = True
+    )
+    other_costs_avg = fields.Float(
+        compute = "_compute_other_costs_avg",
+        group_operator = "avg",
+        store = True
+    )
+
+    @api.depends("costs_lines")
+    def _compute_price_invoiced_avg(self):
+        for line in self:
+            line.price_invoiced_avg = 0
+
+            if len(line.costs_lines) > 0:
+                price_invoiced_times_pcs_invoiced = 0
+                total_pcs_invoiced = 0
+
+                for costs_line in line.costs_lines:
+                    price_invoiced_times_pcs_invoiced += costs_line.price_invoiced * costs_line.pcs_invoiced
+                    total_pcs_invoiced += costs_line.pcs_invoiced
+
+                line.price_invoiced_avg = price_invoiced_times_pcs_invoiced / total_pcs_invoiced
+
+    @api.depends("costs_lines")
+    def _compute_price_packaging_avg(self):
+        for line in self:
+            line.price_packaging_avg = 0
+
+            if len(line.costs_lines) > 0:
+                price_packaging_times_pcs_invoiced = 0
+                total_pcs_invoiced = 0
+
+                for costs_line in line.costs_lines:
+                    price_packaging_times_pcs_invoiced += costs_line.price_packaging * costs_line.pcs_invoiced
+                    total_pcs_invoiced += costs_line.pcs_invoiced
+
+                line.price_packaging_avg = price_packaging_times_pcs_invoiced / total_pcs_invoiced
+
+    @api.depends("costs_lines")
+    def _compute_price_total_avg(self):
+        for line in self:
+            line.price_total_avg = 0
+
+            if len(line.costs_lines) > 0:
+                price_total_times_pcs_invoiced = 0
+                total_pcs_invoiced = 0
+
+                for costs_line in line.costs_lines:
+                    price_total_times_pcs_invoiced += costs_line.price_total * costs_line.pcs_invoiced
+                    total_pcs_invoiced += costs_line.pcs_invoiced
+
+                line.price_total_avg = price_total_times_pcs_invoiced / total_pcs_invoiced
+
+    @api.depends("costs_lines")
+    def _compute_other_costs_avg(self):
+        for line in self:
+            line.other_costs_avg = 0
+
+            if len(line.costs_lines) > 0:
+                other_costs_times_pcs_invoiced = 0
+                total_pcs_invoiced = 0
+
+                for costs_line in line.costs_lines:
+                    other_costs_times_pcs_invoiced += costs_line.other_costs * costs_line.pcs_invoiced
+                    total_pcs_invoiced += costs_line.pcs_invoiced
+
+                line.other_costs_avg = other_costs_times_pcs_invoiced / total_pcs_invoiced
 
     def model_search(self, model, domain, order):
         if len(order) > 0:
@@ -113,7 +181,7 @@ class ManufacturingCosts(models.Model):
                             + str(calendar.monthrange(int(line.year), int(line.month))[1])
                          ),
                         ],
-                        "name desc"
+                        ""
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -132,15 +200,6 @@ class ManufacturingCosts(models.Model):
                 ""
             ).product_tmpl_id
 
-    @api.depends("costs_lines")
-    def _compute_total_costs(self):
-        for line in self:
-            line.total_costs = 0
-
-            for costs_line in line.costs_lines:
-                if costs_line.price_total:
-                    line.total_costs += costs_line.price_total + costs_line.other_costs
-
     @api.depends("name", "year", "month")
     def _compute_start_date(self):
         for line in self:
@@ -158,7 +217,7 @@ class ManufacturingCosts(models.Model):
                           + str(calendar.monthrange(int(line.year), int(line.month))[1])
                           ),
                          ],
-                        "name desc"
+                        ""
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -189,7 +248,7 @@ class ManufacturingCosts(models.Model):
                           + str(calendar.monthrange(int(line.year), int(line.month))[1])
                           ),
                          ],
-                        "name desc"
+                        ""
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -214,7 +273,7 @@ class ManufacturingCosts(models.Model):
                                  line.year + "-"
                                     + str(line.month) + "-"
                                     + str(calendar.monthrange(int(line.year), int(line.month))[1]))
-                            ], "name desc"):
+                            ], ""):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id == bom_line_id.product_id:
                                 line.last_price_packaging += \
@@ -256,7 +315,7 @@ class ManufacturingCosts(models.Model):
                           + str(calendar.monthrange(int(line.year), int(line.month))[1])
                           ),
                          ],
-                        "name desc"
+                        ""
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -283,7 +342,7 @@ class ManufacturingCosts(models.Model):
                           + str(calendar.monthrange(int(line.year), int(line.month))[1])
                           ),
                          ],
-                        "name desc"
+                        ""
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -319,7 +378,6 @@ class ManufacturingCosts(models.Model):
                             self.write({
                                 'costs_lines': [
                                     (0, 0, {
-                                        'manufacturing_costs_line_id': line.id,
                                         'product': line.name.id,
                                         'bill': bill.name,
                                         'date': bill.invoice_date,
@@ -327,7 +385,6 @@ class ManufacturingCosts(models.Model):
                                         'pcs_invoiced': invoice_line.quantity,
                                         'price_invoiced': invoice_line.price_unit,
                                         'price_packaging': line.last_price_packaging,
-                                        'price_total': line.last_price_total,
                                         'price_public': line.last_price_public,
                                         'other_costs': 0,
                                         'currency_id': line.currency_id,
@@ -350,7 +407,6 @@ class ManufacturingCosts(models.Model):
                         self.write({
                             'costs_lines': [
                                 (0, 0, {
-                                    'manufacturing_costs_line_id': line.id,
                                     'product': line.name.id,
                                     'bill': line.last_bill_number,
                                     'date': line.start_date,
@@ -358,7 +414,6 @@ class ManufacturingCosts(models.Model):
                                     'pcs_invoiced': line.product_updated_qty,
                                     'price_invoiced': line.last_price_invoiced,
                                     'price_packaging': line.last_price_packaging,
-                                    'price_total': line.last_price_total,
                                     'price_public': line.last_price_public,
                                     'other_costs': 0,
                                     'currency_id': line.currency_id
@@ -372,16 +427,15 @@ class ManufacturingCosts(models.Model):
             'view_mode': 'graph',
             'res_model': 'manufacturing.costs.line',
             'type': 'ir.actions.act_window',
-            'domain': ['&','&','&',
-               ('manufacturer', 'ilike', self.product_last_manufacturer),
-               ('product', 'ilike', self.name.name),
-               ('date', '>=', self.year + "-" + self.month + "-1"),
-               ('date', '<=', self.year + "-" + str(self.month)
-                    + "-" + str(calendar.monthrange(int(self.year), int(self.month))[1]))
+            'domain': [
+                '&', '&',
+                ('date', '>=', self.year + "-" + self.month + "-1"),
+                ('date', '<=', self.year + "-" + str(self.month)
+                 + "-" + str(calendar.monthrange(int(self.year), int(self.month))[1])),
+                ('product', '=', self.name.id)
             ],
             'context': {
                 'graph_measure': 'price_total',
                 'graph_mode': 'line',
-                'graph_groupbys': ['date:day']
             }
         }

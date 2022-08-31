@@ -33,7 +33,7 @@
         <field name="res_model">manufacturing.costs</field>
         <field name="view_mode">graph</field>
         <field name="context">
-            {'graph_measure': 'total_costs',
+            {'graph_measure': 'price_total_avg',
              'graph_mode': 'line',
              'graph_groupbys': ['month', 'year']}
         </field>

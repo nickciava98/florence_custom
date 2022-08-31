@@ -5,9 +5,7 @@
 
         <field name="arch" type="xml">
             <graph string="Costs Analysis">
-                <field name="product"/>
-                <field name="date"/>
-                <field name="manufacturer"/>
+                <field name="date" interval="day"/>
                 <field name="price_invoiced" type="measure"/>
                 <field name="price_packaging" type="measure"/>
                 <field name="price_total" type="measure"/>

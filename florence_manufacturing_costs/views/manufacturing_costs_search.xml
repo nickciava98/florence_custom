@@ -6,7 +6,7 @@
             <search>
                 <field name="super_product" string="Product"/>
                 <field name="name" string="Product Variant"/>
-                <field name="total_costs"/>
+                <field name="price_total_avg"/>
                 <field name="year"/>
                 <field name="month"/>
 

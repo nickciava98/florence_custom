@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <pivot string="Manufacturing Costs">
                 <field name="name" string="Product" type="row"/>
-                <field name="total_costs" string="Manufacturing Cost" type="measure"/>
+                <field name="price_total_avg" string="Manufacturing Cost" type="measure"/>
             </pivot>
         </field>
     </record>

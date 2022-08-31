@@ -6,7 +6,13 @@
         <field name="arch" type="xml">
             <graph string="Costs Analysis">
                 <field name="name" string="Product"/>
-                <field name="total_costs" string="Manufacturing Cost"
+                <field name="price_total_avg" string="Manufacturing Cost"
+                       type="measure"/>
+                <field name="price_packaging_avg" string="Packaging Cost"
+                       type="measure"/>
+                <field name="price_invoiced_avg" string="Price Invoiced"
+                       type="measure"/>
+                <field name="other_costs_avg" string="Other Costs"
                        type="measure"/>
             </graph>
         </field>

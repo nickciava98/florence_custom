@@ -1,0 +1,25 @@
+<odoo>
+    <record id="manufacturing_costs_line_view_tree" model="ir.ui.view">
+        <field name="name">Manufacturing Costs Line List</field>
+        <field name="model">manufacturing.costs.line</field>
+
+        <field name="arch" type="xml">
+            <tree expand="True">
+                <field name="bill"/>
+                <field name="date"/>
+                <field name="product"/>
+                <field name="manufacturer"/>
+                <field name="currency_id" invisible="True"/>
+                <field name="pcs_invoiced"/>
+                <field name="price_invoiced" widget="monetary" string="Price Invoiced"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="price_packaging" widget="monetary" string="Price Packaging"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="other_costs" widget="monetary" string="Other Costs"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="price_total" widget="monetary" string="Manufacturing Cost"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

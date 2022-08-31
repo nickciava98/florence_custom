@@ -2,12 +2,19 @@
     <record id="manufacturing_costs_view_tree" model="ir.ui.view">
         <field name="name">Manufacturing Costs List</field>
         <field name="model">manufacturing.costs</field>
+
         <field name="arch" type="xml">
             <tree expand="True">
                 <field name="super_product" string="Product" invisible="True"/>
                 <field name="name" string="Product Variant"/>
                 <field name="currency_id" invisible="True"/>
-                <field name="total_costs" widget="monetary" string="Cost Per Unit"
+                <field name="price_invoiced_avg" widget="monetary" string="Price Invoiced"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="price_packaging_avg" widget="monetary" string="Price Packaging"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="other_costs_avg" widget="monetary" string="Other Costs"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="price_total_avg" widget="monetary" string="Manufacturing Cost"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                 <field name="year" invisible="True"/>
                 <field name="month" invisible="True"/>
