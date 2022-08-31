@@ -98,3 +98,20 @@ class AmazonRevenues(models.Model):
                 'graph_groupbys': ['date:day']
             }
         }
+
+    def tree_view_action(self):
+        return {
+            'name': 'Revenues List',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'view_id': False,
+            'res_model': 'amazon.revenues.line',
+            'type': 'ir.actions.act_window',
+            'context': {
+                'group_by': ['date:year', 'date:month']
+            },
+            'domain': [
+                ('product', '=', self.product.id)
+            ],
+            'target': 'current'
+        }

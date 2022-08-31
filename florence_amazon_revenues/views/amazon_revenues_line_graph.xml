@@ -5,7 +5,7 @@
 
         <field name="arch" type="xml">
             <graph string="Income Analysis">
-                <field name="date" type="row" interval="day"/>
+                <field name="date"/>
                 <field name="price_unit" string="Selling Price" type="measure"/>
                 <field name="amazon_fees" type="measure"/>
                 <field name="taxes" string="VAT" type="measure"/>

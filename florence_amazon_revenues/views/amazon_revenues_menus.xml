@@ -1,9 +1,10 @@
 <odoo>
     <menuitem name="Amazon Revenues" id="amazon_revenues_base_menu"
-              action="amazon_revenues_action" web_icon="florence_amazon_revenues,static/description/app_icon.png"/>
-
+              action="amazon_revenues_action"
+              web_icon="florence_amazon_revenues,static/description/app_icon.png"/>
     <menuitem name="Summary" id="amazon_revenues_summary_menu"
-              parent="amazon_revenues_base_menu" sequence="1"/>
+              parent="amazon_revenues_base_menu" sequence="1"
+              action="amazon_revenues_action"/>
 
     <menuitem name="Marketplaces" id="amazon_revenues_marketplaces_menu"
               parent="amazon_revenues_base_menu" sequence="2"/>
@@ -28,4 +29,7 @@
     <menuitem name="Pivot" id="amazon_revenues_pivot_menu"
               parent="amazon_revenues_reporting_menu" sequence="1"
               action="pivot_action"/>
+    <menuitem name="Chart" id="amazon_revenues_graph_menu"
+              parent="amazon_revenues_reporting_menu" sequence="2"
+              action="graph_action"/>
 </odoo>

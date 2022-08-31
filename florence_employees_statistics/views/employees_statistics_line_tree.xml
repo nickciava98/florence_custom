@@ -4,7 +4,7 @@
         <field name="model">employees.statistics.line</field>
 
         <field name="arch" type="xml">
-            <tree expand="True">
+            <tree expand="True" editable="bottom">
                 <field name="name" string="Employee"/>
                 <field name="date"/>
                 <field name="benchmark"/>

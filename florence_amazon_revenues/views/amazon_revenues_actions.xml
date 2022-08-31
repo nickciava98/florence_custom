@@ -73,4 +73,15 @@
             {'group_by': 'product'}
         </field>
     </record>
+
+    <record id="graph_action" model="ir.actions.act_window">
+        <field name="name">Reporting Chart</field>
+        <field name="res_model">amazon.revenues.line</field>
+        <field name="view_mode">graph</field>
+        <field name="context">
+            {'graph_measure': 'probable_income',
+             'graph_mode': 'line',
+             'graph_groupbys': ['date:day']}
+        </field>
+    </record>
 </odoo>

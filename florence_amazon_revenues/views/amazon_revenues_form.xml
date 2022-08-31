@@ -6,6 +6,8 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
+                        <button type="object" name="tree_view_action" string="Revenues List"
+                                class="oe_stat_button" icon="fa-list-ul"/>
                         <button type="object" name="graph_view_action" string="Revenues Analysis"
                                 class="oe_stat_button" icon="fa-bar-chart-o"/>
                     </div>
@@ -38,33 +40,27 @@
                                     <field name="product" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date"/>
-                                    <field name="price_unit" widget="monetary" string="Selling Price"
+                                    <field name="price_unit" widget="monetary" string="Selling Price" avg="Selling Price"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="amazon_fees" widget="monetary"
+                                    <field name="amazon_fees" widget="monetary" sum="Amazon Fees"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="taxes" widget="monetary" string="VAT"
+                                    <field name="taxes" widget="monetary" string="VAT" sum="VAT"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="sku_cost" widget="monetary" attrs="{'readonly': [('sku_cost','>','0')]}"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"
+                                           sum="Sku Costs"/>
+                                    <field name="gross_revenues" widget="monetary" sum="Gross Revenues"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="gross_revenues" widget="monetary"
+                                    <field name="ads_total_cost" widget="monetary" sum="Ads Total Cost"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="ads_total_cost" widget="monetary"
+                                    <field name="ads_cost_per_unit" widget="monetary" avg="Ads Cost Per Unit"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="ads_cost_per_unit" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="pcs_sold" widget="integer"/>
-                                    <field name="earned_per_pc"/>
-                                    <field name="probable_income" widget="monetary"
+                                    <field name="pcs_sold" widget="integer" sum="Pcs Sold"/>
+                                    <field name="earned_per_pc" avg="Earned Per Pc"/>
+                                    <field name="probable_income" widget="monetary" sum="Probable Income"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
-
-                            <group class="oe_subtotal_footer oe_right" colspan="2" name="total_probable_income">
-                                <field name="total_probable_income" widget="monetary"
-                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                            </group>
-
-                            <div class="oe_clear"/>
                         </page>
                     </notebook>
                 </sheet>
