@@ -1,10 +1,11 @@
 from odoo import models, fields, api
 
+
 class AmazonRevenuesLine(models.Model):
     _name = "amazon.revenues.line"
     _description = "Amazon Revenues Line"
 
-    #Invisible fields
+    # Invisible fields
     amazon_revenues_line_id = fields.Many2one(
         "amazon.revenues"
     )
@@ -13,39 +14,39 @@ class AmazonRevenuesLine(models.Model):
         "product.template"
     )
 
-    #Visible fields
+    # Visible fields
     date = fields.Date()
     price_unit = fields.Float()
     amazon_fees = fields.Float()
     taxes = fields.Float(
-        compute = "_compute_taxes",
-        store = True
+        compute="_compute_taxes",
+        store=True
     )
     sku_cost = fields.Float(
-        compute = "_compute_sku_cost",
-        store = True
+        compute="_compute_sku_cost",
+        store=True
     )
     gross_revenues = fields.Float(
-        compute = "_compute_gross_revenues",
-        store = True
+        compute="_compute_gross_revenues",
+        store=True
     )
     ads_total_cost = fields.Float()
     ads_cost_per_unit = fields.Float(
-        compute = "_compute_ads_cost_per_unit",
-        store = True
+        compute="_compute_ads_cost_per_unit",
+        store=True
     )
     pcs_sold = fields.Float()
     earned_per_pc = fields.Float(
-        compute = "_compute_earned_per_pc",
-        store = True
+        compute="_compute_earned_per_pc",
+        store=True
     )
     probable_income = fields.Float(
-        compute = "_compute_probable_income",
-        store = True
+        compute="_compute_probable_income",
+        store=True
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
 
     def _compute_currency_id(self):
@@ -69,9 +70,12 @@ class AmazonRevenuesLine(models.Model):
     @api.depends("product")
     def _compute_sku_cost(self):
         for line in self:
-            line.sku_cost = self.env["manufacturing.costs"].search(
-                [("super_product", "=", line.product.id)]
-            ).price_total_avg
+            for product in self.env["manufacturing.costs"].search(
+                    [("super_product", "=", line.product.id)]):
+                line.sku_cost = product.price_total_avg
+
+                if line.sku_cost != 0:
+                    break
 
     @api.depends("price_unit", "amazon_fees", "taxes", "sku_cost")
     def _compute_gross_revenues(self):

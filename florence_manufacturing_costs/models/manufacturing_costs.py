@@ -106,7 +106,8 @@ class ManufacturingCosts(models.Model):
                     price_invoiced_times_pcs_invoiced += costs_line.price_invoiced * costs_line.pcs_invoiced
                     total_pcs_invoiced += costs_line.pcs_invoiced
 
-                line.price_invoiced_avg = price_invoiced_times_pcs_invoiced / total_pcs_invoiced
+                if total_pcs_invoiced > 0:
+                    line.price_invoiced_avg = price_invoiced_times_pcs_invoiced / total_pcs_invoiced
 
     @api.depends("costs_lines")
     def _compute_price_packaging_avg(self):
@@ -121,7 +122,8 @@ class ManufacturingCosts(models.Model):
                     price_packaging_times_pcs_invoiced += costs_line.price_packaging * costs_line.pcs_invoiced
                     total_pcs_invoiced += costs_line.pcs_invoiced
 
-                line.price_packaging_avg = price_packaging_times_pcs_invoiced / total_pcs_invoiced
+                if total_pcs_invoiced > 0:
+                    line.price_packaging_avg = price_packaging_times_pcs_invoiced / total_pcs_invoiced
 
     @api.depends("costs_lines")
     def _compute_price_total_avg(self):
@@ -136,7 +138,8 @@ class ManufacturingCosts(models.Model):
                     price_total_times_pcs_invoiced += costs_line.price_total * costs_line.pcs_invoiced
                     total_pcs_invoiced += costs_line.pcs_invoiced
 
-                line.price_total_avg = price_total_times_pcs_invoiced / total_pcs_invoiced
+                if total_pcs_invoiced > 0:
+                    line.price_total_avg = price_total_times_pcs_invoiced / total_pcs_invoiced
 
     @api.depends("costs_lines")
     def _compute_other_costs_avg(self):
@@ -151,7 +154,8 @@ class ManufacturingCosts(models.Model):
                     other_costs_times_pcs_invoiced += costs_line.other_costs * costs_line.pcs_invoiced
                     total_pcs_invoiced += costs_line.pcs_invoiced
 
-                line.other_costs_avg = other_costs_times_pcs_invoiced / total_pcs_invoiced
+                if total_pcs_invoiced > 0:
+                    line.other_costs_avg = other_costs_times_pcs_invoiced / total_pcs_invoiced
 
     def model_search(self, model, domain, order):
         if len(order) > 0:
