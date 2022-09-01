@@ -42,6 +42,10 @@ class AmazonRevenues(models.Model):
         "amazon.revenues.line",
         "amazon_revenues_line_id"
     )
+    revenues_line_test = fields.One2many(
+        "amazon.revenues.line",
+        "amazon_revenues_line_id_test"
+    )
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"
@@ -90,7 +94,9 @@ class AmazonRevenues(models.Model):
             'res_model': 'amazon.revenues.line',
             'type': 'ir.actions.act_window',
             'domain': [
-                ('product', '=', self.product.id)
+                '&',
+                ('product', '=', self.product.id),
+                ('amazon_revenues_line_id_test', '=', False)
             ],
             'context': {
                 'graph_measure': 'probable_income',
@@ -111,7 +117,9 @@ class AmazonRevenues(models.Model):
                 'group_by': ['date:year', 'date:month']
             },
             'domain': [
-                ('product', '=', self.product.id)
+                '&',
+                ('product', '=', self.product.id),
+                ('amazon_revenues_line_id_test', '=', False)
             ],
             'target': 'current'
         }

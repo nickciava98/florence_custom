@@ -11,7 +11,9 @@ class ManufacturingCostsLine(models.Model):
     product = fields.Many2one(
         "product.product"
     )
-    bill = fields.Char()
+    bill = fields.Many2one(
+        "account.move"
+    )
     date = fields.Date()
     manufacturer = fields.Char()
     pcs_invoiced = fields.Float()

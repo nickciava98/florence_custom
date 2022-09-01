@@ -69,7 +69,8 @@ class ManufacturingCosts(models.Model):
     product_updated_qty = fields.Float(
         compute = "_compute_product_updated_qty"
     )
-    last_bill_number = fields.Char(
+    last_bill_number = fields.Many2one(
+        "account.move",
         compute = "_compute_last_bill_number"
     )
     price_invoiced_avg = fields.Float(
@@ -176,8 +177,7 @@ class ManufacturingCosts(models.Model):
             if line.name:
                 for bill in line.model_search(
                         "account.move",
-                        ["&", "&",
-                         ("is_manufacturing_bill", "=", True),
+                        ["&",
                          ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
                          ("invoice_date", "<=",
                             line.year + "-"
@@ -185,11 +185,11 @@ class ManufacturingCosts(models.Model):
                             + str(calendar.monthrange(int(line.year), int(line.month))[1])
                          ),
                         ],
-                        ""
+                        "name desc"
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
-                            line.last_bill_number = bill.name
+                            line.last_bill_number = bill
                             break
 
                     if line.last_bill_number:
@@ -212,8 +212,7 @@ class ManufacturingCosts(models.Model):
             if line.name:
                 for bill in line.model_search(
                         "account.move",
-                        ["&", "&",
-                         ("is_manufacturing_bill", "=", True),
+                        ["&",
                          ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
                          ("invoice_date", "<=",
                           line.year + "-"
@@ -221,7 +220,7 @@ class ManufacturingCosts(models.Model):
                           + str(calendar.monthrange(int(line.year), int(line.month))[1])
                           ),
                          ],
-                        ""
+                        "name desc"
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -243,8 +242,7 @@ class ManufacturingCosts(models.Model):
             if line.name:
                 for bill in line.model_search(
                         "account.move",
-                        ["&", "&",
-                         ("is_manufacturing_bill", "=", True),
+                        ["&",
                          ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
                          ("invoice_date", "<=",
                           line.year + "-"
@@ -252,7 +250,7 @@ class ManufacturingCosts(models.Model):
                           + str(calendar.monthrange(int(line.year), int(line.month))[1])
                           ),
                          ],
-                        ""
+                        "name desc"
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -271,13 +269,11 @@ class ManufacturingCosts(models.Model):
                 for bom_line_id in bom_id.bom_line_ids:
                     previous_price_packaging = line.last_price_packaging
                     for bill in line.model_search("account.move",
-                            ['&',
-                                ("is_manufacturing_bill", "=", True),
-                                ("invoice_date", "<=",
+                            [("invoice_date", "<=",
                                  line.year + "-"
                                     + str(line.month) + "-"
                                     + str(calendar.monthrange(int(line.year), int(line.month))[1]))
-                            ], ""):
+                            ], "name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id == bom_line_id.product_id:
                                 line.last_price_packaging += \
@@ -310,8 +306,7 @@ class ManufacturingCosts(models.Model):
             if line.name:
                 for bill in line.model_search(
                         "account.move",
-                        ["&", "&",
-                         ("is_manufacturing_bill", "=", True),
+                        ["&",
                          ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
                          ("invoice_date", "<=",
                           line.year + "-"
@@ -319,7 +314,7 @@ class ManufacturingCosts(models.Model):
                           + str(calendar.monthrange(int(line.year), int(line.month))[1])
                           ),
                          ],
-                        ""
+                        "name desc"
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -337,8 +332,7 @@ class ManufacturingCosts(models.Model):
             if line.name:
                 for bill in line.model_search(
                         "account.move",
-                        ["&", "&",
-                         ("is_manufacturing_bill", "=", True),
+                        ["&",
                          ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
                          ("invoice_date", "<=",
                           line.year + "-"
@@ -346,7 +340,7 @@ class ManufacturingCosts(models.Model):
                           + str(calendar.monthrange(int(line.year), int(line.month))[1])
                           ),
                          ],
-                        ""
+                        "name desc"
                 ):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.name:
@@ -366,8 +360,7 @@ class ManufacturingCosts(models.Model):
             if len(line.costs_lines) == 0:
                 for bill in line.model_search(
                         "account.move",
-                        ["&", "&",
-                         ("is_manufacturing_bill", "=", True),
+                        ["&",
                          ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
                          ("invoice_date", "<=",
                           line.year + "-"
@@ -383,7 +376,7 @@ class ManufacturingCosts(models.Model):
                                 'costs_lines': [
                                     (0, 0, {
                                         'product': line.name.id,
-                                        'bill': bill.name,
+                                        'bill': bill.id,
                                         'date': bill.invoice_date,
                                         'manufacturer': bill.partner_id.name,
                                         'pcs_invoiced': invoice_line.quantity,
@@ -400,19 +393,18 @@ class ManufacturingCosts(models.Model):
                 bills = []
 
                 for costs_line in line.costs_lines:
-                    if str(line.month) == str(datetime.strptime(str(line.start_date), "%Y-%m-%d").month) \
-                            and str(line.year) == str(datetime.strptime(str(line.start_date), "%Y-%m-%d").year):
+                    if str(line.month) == str(datetime.strptime(str(costs_line.date), "%Y-%m-%d").month) \
+                            and str(line.year) == str(datetime.strptime(str(costs_line.date), "%Y-%m-%d").year):
                         dates.append(costs_line.date)
                         bills.append(costs_line.bill)
 
-                if len(dates) > 0:
-                    if line.start_date != dates[-1] \
-                            or (line.start_date == dates[-1] and line.last_bill_number != bills[-1]):
+                if len(bills) > 0:
+                    if line.last_bill_number != bills[-1]:
                         self.write({
                             'costs_lines': [
                                 (0, 0, {
                                     'product': line.name.id,
-                                    'bill': line.last_bill_number,
+                                    'bill': line.last_bill_number.id,
                                     'date': line.start_date,
                                     'manufacturer': line.product_last_manufacturer,
                                     'pcs_invoiced': line.product_updated_qty,

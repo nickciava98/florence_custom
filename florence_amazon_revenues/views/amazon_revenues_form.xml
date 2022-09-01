@@ -62,6 +62,42 @@
                                 </tree>
                             </field>
                         </page>
+
+                        <page string="Test Area" name="test_area">
+                            <field name="revenues_line_test" widget="section_and_note_one2many" string="Incidence"
+                                   context="{'default_parent': name,
+                                             'default_product': product,
+                                             'default_date': start_date,
+                                             'default_price_unit': product_updated_price,
+                                             'default_currency_id': currency_id}">
+                                <tree string="Revenues" editable="bottom">
+                                    <field name="amazon_revenues_line_id" invisible="True"/>
+                                    <field name="parent" invisible="True"/>
+                                    <field name="product" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="date"/>
+                                    <field name="price_unit" widget="monetary" string="Selling Price" avg="Selling Price"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}" readonly="False"/>
+                                    <field name="amazon_fees" widget="monetary" sum="Amazon Fees" readonly="False"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="taxes" widget="monetary" string="VAT" sum="VAT" readonly="False"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="sku_cost" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"
+                                           sum="Sku Costs" readonly="False"/>
+                                    <field name="gross_revenues" widget="monetary" sum="Gross Revenues" readonly="False"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="ads_total_cost" widget="monetary" sum="Ads Total Cost" readonly="False"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="ads_cost_per_unit" widget="monetary" avg="Ads Cost Per Unit" readonly="False"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="pcs_sold" widget="integer" sum="Pcs Sold" readonly="False"/>
+                                    <field name="earned_per_pc" avg="Earned Per Pc" readonly="False"/>
+                                    <field name="probable_income" widget="monetary" sum="Probable Income" readonly="False"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
 

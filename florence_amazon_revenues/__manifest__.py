@@ -5,9 +5,9 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'sales',
-    'version': '14.2',
+    'version': '14.2.1',
     'website': "http://www.nciavarella.me",
-    'depends': ['florence_manufacturing_costs'],
+    'depends': ['mail', 'stock'],
     'data': [
         'security/ir.model.access.csv',
         'views/amazon_revenues_actions.xml',
