@@ -94,9 +94,10 @@ class AmazonRevenues(models.Model):
             'res_model': 'amazon.revenues.line',
             'type': 'ir.actions.act_window',
             'domain': [
-                '&',
+                '&', '&',
                 ('product', '=', self.product.id),
-                ('amazon_revenues_line_id_test', '=', False)
+                ('amazon_revenues_line_id_test', '=', False),
+                ('parent', '=', self.name)
             ],
             'context': {
                 'graph_measure': 'probable_income',
@@ -117,9 +118,10 @@ class AmazonRevenues(models.Model):
                 'group_by': ['date:year', 'date:month']
             },
             'domain': [
-                '&',
+                '&', '&',
                 ('product', '=', self.product.id),
-                ('amazon_revenues_line_id_test', '=', False)
+                ('amazon_revenues_line_id_test', '=', False),
+                ('parent', '=', self.name)
             ],
             'target': 'current'
         }
