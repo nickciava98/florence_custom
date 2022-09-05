@@ -5,7 +5,8 @@
 
         <field name="arch" type="xml">
             <tree expand="True" editable="bottom">
-                <field name="name" string="Employee"/>
+                <field name="name" invisible="True"/>
+                <field name="job_position" invisible="True"/>
                 <field name="date"/>
                 <field name="benchmark"/>
                 <field name="value"/>

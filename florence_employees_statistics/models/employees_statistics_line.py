@@ -10,10 +10,15 @@ class EmployeesStatisticsLine(models.Model):
     name = fields.Many2one(
         "employees.statistics"
     )
-    date = fields.Date()
-    benchmark = fields.Many2one(
-        "employees.statistics.benchmark"
+    job_position = fields.Many2one(
+        "hr.job",
+        related = "name.job_position"
     )
+    benchmark = fields.Many2one(
+        "employees.statistics.benchmark",
+        domain = "[('job_position', '=', job_position)]"
+    )
+    date = fields.Date()
     value = fields.Float()
     week = fields.Char(
         compute = "_compute_week",
@@ -23,7 +28,6 @@ class EmployeesStatisticsLine(models.Model):
     def _compute_week(self):
         for line in self:
             odoo_locale = self.env["res.users"].search([("id", "=", line.create_uid.id)]).lang
-            print(odoo_locale)
             locale.setlocale(locale.LC_TIME, odoo_locale + ".UTF-8")
             line.week = ""
 

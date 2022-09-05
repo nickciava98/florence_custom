@@ -19,10 +19,6 @@ class EmployeesStatistics(models.Model):
     )
     chart_start = fields.Date()
     chart_end = fields.Date()
-    default_benchmark = fields.Many2one(
-        "employees.statistics.benchmark",
-        compute = "_compute_default_benchmark"
-    )
 
     def graph_view_action(self):
         return {
@@ -63,11 +59,3 @@ class EmployeesStatistics(models.Model):
             ],
             'target': 'current'
         }
-
-    @api.depends("name")
-    def _compute_default_benchmark(self):
-        for line in self:
-            benchmark = self.env["employees.statistics.benchmark"].search(
-                [("job_position", "=", line.name.job_id.id)]
-            )
-            line.default_benchmark = benchmark if benchmark else False

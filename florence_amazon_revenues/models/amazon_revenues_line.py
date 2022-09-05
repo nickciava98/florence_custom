@@ -62,13 +62,13 @@ class AmazonRevenuesLine(models.Model):
             line.taxes = 0
 
             if line.parent == "IT":
-                line.taxes = 0.22 * line.price_unit
+                line.taxes = line.price_unit - (line.price_unit * 100 / 122)
             elif line.parent == "FR" or line.parent == "UK":
-                line.taxes = 0.2 * line.price_unit
+                line.taxes = line.price_unit - (line.price_unit * 100 / 120)
             elif line.parent == "DE":
-                line.taxes = 0.19 * line.price_unit
+                line.taxes = line.price_unit - (line.price_unit * 100 / 119)
             elif line.parent == "ES":
-                line.taxes = 0.21 * line.price_unit
+                line.taxes = line.price_unit - (line.price_unit * 100 / 121)
 
     @api.depends("product")
     def _compute_sku_cost(self):
