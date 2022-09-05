@@ -25,10 +25,7 @@ class AmazonRevenuesLine(models.Model):
         compute = "_compute_taxes",
         store = True
     )
-    sku_cost = fields.Float(
-        compute = "_compute_sku_cost",
-        store = True
-    )
+    sku_cost = fields.Float()
     gross_revenues = fields.Float(
         compute = "_compute_gross_revenues",
         store = True
@@ -62,26 +59,13 @@ class AmazonRevenuesLine(models.Model):
             line.taxes = 0
 
             if line.parent == "IT":
-                line.taxes = line.price_unit - (line.price_unit * 100 / 122)
+                line.taxes = line.price_unit * 0.180327868852459
             elif line.parent == "FR" or line.parent == "UK":
-                line.taxes = line.price_unit - (line.price_unit * 100 / 120)
+                line.taxes = line.price_unit * 0.166666666666667
             elif line.parent == "DE":
-                line.taxes = line.price_unit - (line.price_unit * 100 / 119)
+                line.taxes = line.price_unit * 0.159663865546218
             elif line.parent == "ES":
-                line.taxes = line.price_unit - (line.price_unit * 100 / 121)
-
-    @api.depends("product")
-    def _compute_sku_cost(self):
-        for line in self:
-            line.sku_cost = 0
-
-            if "manufacturing.costs" in self.env:
-                for product in self.env["manufacturing.costs"].search(
-                        [("super_product", "=", line.product.id)]):
-                    line.sku_cost = product.price_total_avg
-
-                    if line.sku_cost != 0:
-                        break
+                line.taxes = line.price_unit * 0.173553719008264
 
     @api.depends("price_unit", "amazon_fees", "taxes", "sku_cost")
     def _compute_gross_revenues(self):

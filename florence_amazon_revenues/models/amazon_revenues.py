@@ -50,6 +50,23 @@ class AmazonRevenues(models.Model):
         "res.currency",
         compute = "_compute_currency_id"
     )
+    product_updated_sku_cost = fields.Float(
+        compute = "_compute_product_updated_sku_cost"
+    )
+
+    @api.depends("product")
+    def _compute_product_updated_sku_cost(self):
+        for line in self:
+            line.product_updated_sku_cost = 0
+
+            if "manufacturing.costs" in self.env:
+                for product in self.env["manufacturing.costs"].search(
+                        [("super_product", "=", line.product.id)]):
+                    print(product.price_total_avg)
+                    line.product_updated_sku_cost = product.price_total_avg
+
+                    if line.product_updated_sku_cost != 0:
+                        break
 
     @api.onchange("marketplace")
     def _onchange_marketplace(self):

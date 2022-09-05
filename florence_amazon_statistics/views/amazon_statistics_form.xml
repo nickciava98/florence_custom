@@ -1,0 +1,111 @@
+<odoo>
+    <record id="amazon_statistics_view_form" model="ir.ui.view">
+        <field name="name">Amazon Statistics</field>
+        <field name="model">amazon.statistics</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="tree_view_action" string="Statistics List"
+                                class="oe_stat_button" icon="fa-list-ul"/>
+                        <button type="object" name="graph_view_action" string="Statistics Analysis"
+                                class="oe_stat_button" icon="fa-bar-chart-o"/>
+                    </div>
+
+                    <label for="name" string="Marketplace"/>
+                    <field name="name" help="Select the Amazon Marketplace"/>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field name="product" help="Select the product to track"/>
+                        </h1>
+                    </div>
+
+                    <field name="marketplace" invisible="True"/>
+                    <field name="start_date" invisible="True"/>
+
+                    <notebook>
+                        <page name="statistics" string="Statistics">
+                            <field name="statistics_lines" widget="section_and_note_one2many" string="Statistics"
+                                   context="{'default_parent': name,
+                                             'default_product': product,
+                                             'default_date': start_date}">
+                                <tree string="Statistics" editable="bottom">
+                                    <field name="name" invisible="True"/>
+                                    <field name="parent" invisible="True"/>
+                                    <field name="product" invisible="True"/>
+                                    <field name="date"/>
+
+                                    <field name="one_vote_ratings_new"/>
+                                    <field name="one_star_ratings"/>
+                                    <field name="one_star_reviews"/>
+                                    <field name="total_one_star_reviews"/>
+                                    <field name="one_star_value"/>
+
+                                    <field name="two_votes_ratings_new"/>
+                                    <field name="two_stars_ratings"/>
+                                    <field name="two_stars_reviews"/>
+                                    <field name="two_stars_reviews_new"/>
+                                    <field name="total_two_stars_reviews"/>
+                                    <field name="two_stars_value"/>
+
+                                    <field name="three_votes_ratings_new"/>
+                                    <field name="three_stars_ratings"/>
+                                    <field name="three_stars_reviews"/>
+                                    <field name="three_stars_reviews_new"/>
+                                    <field name="total_three_stars_reviews"/>
+                                    <field name="three_stars_value"/>
+
+                                    <field name="four_votes_ratings_new"/>
+                                    <field name="four_stars_ratings"/>
+                                    <field name="four_stars_reviews"/>
+                                    <field name="four_stars_reviews_new"/>
+                                    <field name="total_four_stars_reviews"/>
+                                    <field name="four_stars_value"/>
+
+                                    <field name="five_votes_ratings_new"/>
+                                    <field name="five_stars_ratings"/>
+                                    <field name="five_stars_reviews"/>
+                                    <field name="five_stars_reviews_new"/>
+                                    <field name="total_five_stars_reviews"/>
+                                    <field name="five_stars_value"/>
+
+                                    <field name="daily_main_stat"/>
+                                    <field name="weekly_main_stat"/>
+                                    <field name="monthly_main_stat"/>
+
+                                    <field name="five_reviews_perc"/>
+                                    <field name="four_reviews_perc"/>
+                                    <field name="three_reviews_perc"/>
+                                    <field name="two_reviews_perc"/>
+                                    <field name="one_reviews_perc"/>
+
+                                    <field name="da_five_perc"/>
+
+                                    <field name="freshness"/>
+                                    <field name="absorbency"/>
+                                    <field name="quality_price"/>
+                                    <field name="comfort"/>
+                                    <field name="hydration"/>
+                                    <field name="solar_protection"/>
+
+                                    <field name="ncx_rate_perc"/>
+                                    <field name="total_orders"/>
+                                    <field name="returns"/>
+
+                                    <field name="performance_quality_inadequate"/>
+                                    <field name="defective_item_perc"/>
+                                    <field name="damage_item_perc"/>
+                                    <field name="inaccurate_website_description_perc"/>
+                                    <field name="wrong_item_was_sent_perc"/>
+                                    <field name="missing_parts_accessories_perc"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
