@@ -6,7 +6,8 @@ class AmazonStatisticsLine(models.Model):
     _description = "Amazon Statistics Line"
 
     name = fields.Many2one(
-        "amazon.statistics"
+        "amazon.statistics",
+        ondelete = "cascade"
     )
     parent = fields.Char()
     product = fields.Many2one(
@@ -15,87 +16,108 @@ class AmazonStatisticsLine(models.Model):
     date = fields.Date()
 
     one_vote_ratings_new = fields.Float(
-        compute = "_compute_one_vote_ratings_new"
+        compute = "_compute_one_vote_ratings_new",
+        store = True
     )
     one_star_ratings = fields.Float()
     one_star_reviews = fields.Float()
     one_star_reviews_new = fields.Float(
-        compute = "_compute_one_star_reviews_new"
+        compute = "_compute_one_star_reviews_new",
+        store = True
     )
     total_one_star_reviews = fields.Float(
-        compute = "_compute_total_one_star_reviews"
+        compute = "_compute_total_one_star_reviews",
+        store = True
     )
     one_star_value = fields.Float(
-        compute = "_compute_one_star_value"
+        compute = "_compute_one_star_value",
+        store = True
     )
 
     two_votes_ratings_new = fields.Float(
-        compute = "_compute_two_votes_ratings_new"
+        compute = "_compute_two_votes_ratings_new",
+        store = True
     )
     two_stars_ratings = fields.Float()
     two_stars_reviews = fields.Float()
     two_stars_reviews_new = fields.Float(
-        compute = "_compute_two_stars_reviews_new"
+        compute = "_compute_two_stars_reviews_new",
+        store = True
     )
     total_two_stars_reviews = fields.Float(
-        compute = "_compute_total_two_stars_reviews"
+        compute = "_compute_total_two_stars_reviews",
+        store = True
     )
     two_stars_value = fields.Float(
-        compute = "_compute_two_stars_value"
+        compute = "_compute_two_stars_value",
+        store = True
     )
 
     three_votes_ratings_new = fields.Float(
-        compute = "_compute_three_votes_ratings_new"
+        compute = "_compute_three_votes_ratings_new",
+        store = True
     )
     three_stars_ratings = fields.Float()
     three_stars_reviews = fields.Float()
     three_stars_reviews_new = fields.Float(
-        compute = "_compute_three_stars_reviews_new"
+        compute = "_compute_three_stars_reviews_new",
+        store = True
     )
     total_three_stars_reviews = fields.Float(
-        compute = "_compute_total_three_stars_reviews"
+        compute = "_compute_total_three_stars_reviews",
+        store = True
     )
     three_stars_value = fields.Float(
-        compute = "_compute_three_stars_value"
+        compute = "_compute_three_stars_value",
+        store = True
     )
 
     four_votes_ratings_new = fields.Float(
-        compute = "_compute_four_votes_ratings_new"
+        compute = "_compute_four_votes_ratings_new",
+        store = True
     )
     four_stars_ratings = fields.Float()
     four_stars_reviews = fields.Float()
     four_stars_reviews_new = fields.Float(
-        compute = "_compute_four_stars_reviews_new"
+        compute = "_compute_four_stars_reviews_new",
+        store = True
     )
     total_four_stars_reviews = fields.Float(
-        compute = "_compute_total_four_stars_reviews"
+        compute = "_compute_total_four_stars_reviews",
+        store = True
     )
     four_stars_value = fields.Float(
-        compute = "_compute_four_stars_value"
+        compute = "_compute_four_stars_value",
+        store = True
     )
 
     five_votes_ratings_new = fields.Float(
-        compute = "_compute_five_votes_ratings_new"
+        compute = "_compute_five_votes_ratings_new",
+        store = True
     )
     five_stars_ratings = fields.Float()
     five_stars_reviews = fields.Float()
     five_stars_reviews_new = fields.Float(
-        compute = "_compute_five_stars_reviews_new"
+        compute = "_compute_five_stars_reviews_new",
+        store = True
     )
     total_five_stars_reviews = fields.Float(
-        compute = "_compute_total_five_stars_reviews"
+        compute = "_compute_total_five_stars_reviews",
+        store = True
     )
     five_stars_value = fields.Float(
-        compute = "_compute_five_stars_value"
+        compute = "_compute_five_stars_value",
+        store = True
     )
 
     general_reviews_statistics = fields.Float(
-        compute = "_compute_general_reviews_statistics"
+        compute = "_compute_general_reviews_statistics",
+        store = True
     )
 
-    daily_main_stat = fields.Float()
-    weekly_main_stat = fields.Float()
-    monthly_main_stat = fields.Float()
+    main_stat = fields.Float(
+        compute = "_compute_main_stat"
+    )
 
     five_reviews_perc = fields.Float()
     four_reviews_perc = fields.Float()
@@ -296,22 +318,22 @@ class AmazonStatisticsLine(models.Model):
     @api.depends("total_two_stars_reviews")
     def _compute_two_stars_value(self):
         for line in self:
-            line.two_stars_value = 1 * line.total_two_stars_reviews
+            line.two_stars_value = 2 * line.total_two_stars_reviews
 
     @api.depends("total_three_stars_reviews")
     def _compute_three_stars_value(self):
         for line in self:
-            line.three_stars_value = 1 * line.total_three_stars_reviews
+            line.three_stars_value = 3 * line.total_three_stars_reviews
 
     @api.depends("total_four_stars_reviews")
     def _compute_four_stars_value(self):
         for line in self:
-            line.four_stars_value = 1 * line.total_four_stars_reviews
+            line.four_stars_value = 4 * line.total_four_stars_reviews
 
     @api.depends("total_five_stars_reviews")
     def _compute_five_stars_value(self):
         for line in self:
-            line.five_stars_value = 1 * line.total_five_stars_reviews
+            line.five_stars_value = 5 * line.total_five_stars_reviews
 
     @api.depends("one_star_value", "two_stars_value", "three_stars_value",
                  "four_stars_value", "five_stars_value",
@@ -320,10 +342,36 @@ class AmazonStatisticsLine(models.Model):
                  "total_five_stars_reviews")
     def _compute_general_reviews_statistics(self):
         for line in self:
-            line.general_reviews_statistics = \
-                (line.one_star_value + line.two_stars_value
-                 + line.three_stars_value + line.four_stars_value
-                 + line.five_stars_value) / \
-                (line.total_one_star_reviews + line.total_two_stars_reviews
-                 + line.total_three_stars_reviews + line.total_four_stars_reviews
-                 + line.total_five_stars_reviews)
+            line.general_reviews_statistics = 0
+
+            if line.total_one_star_reviews + line.total_two_stars_reviews \
+                 + line.total_three_stars_reviews + line.total_four_stars_reviews \
+                 + line.total_five_stars_reviews != 0:
+                line.general_reviews_statistics = \
+                    (line.one_star_value + line.two_stars_value
+                     + line.three_stars_value + line.four_stars_value
+                     + line.five_stars_value) / \
+                    (line.total_one_star_reviews + line.total_two_stars_reviews
+                     + line.total_three_stars_reviews + line.total_four_stars_reviews
+                     + line.total_five_stars_reviews)
+
+    @api.depends("general_reviews_statistics")
+    def _compute_main_stat(self):
+        lines = []
+        general_reviews_statistics_list = []
+
+        for line in self:
+            line.main_stat = 0
+            lines.append(line)
+            general_reviews_statistics_list.append(
+                line.general_reviews_statistics
+            )
+
+        for index in range(len(lines)):
+            if index > 0:
+                if len(general_reviews_statistics_list[:index]) != 1:
+                    lines[index].main_stat = \
+                        sum(general_reviews_statistics_list[:index]) / \
+                        (len(general_reviews_statistics_list[:index]) - 1)
+                else:
+                    lines[index].main_stat = lines[index].general_reviews_statistics

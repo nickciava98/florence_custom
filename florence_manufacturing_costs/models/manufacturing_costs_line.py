@@ -6,7 +6,8 @@ class ManufacturingCostsLine(models.Model):
     _description = "Manufacturing Costs Line"
 
     manufacturing_costs_line_id = fields.Many2one(
-        "manufacturing.costs"
+        "manufacturing.costs",
+        ondelete = "cascade"
     )
     product = fields.Many2one(
         "product.product"

@@ -74,9 +74,7 @@
 
                                     <field name="general_reviews_statistics"/>
 
-                                    <field name="daily_main_stat"/>
-                                    <field name="weekly_main_stat"/>
-                                    <field name="monthly_main_stat"/>
+                                    <field name="main_stat"/>
 
                                     <field name="five_reviews_perc" widget="percentage"/>
                                     <field name="four_reviews_perc" widget="percentage"/>

@@ -8,7 +8,8 @@ class EmployeesStatisticsLine(models.Model):
     _description = "Employees Statistics Line"
 
     name = fields.Many2one(
-        "employees.statistics"
+        "employees.statistics",
+        ondelete = "cascade"
     )
     job_position = fields.Many2one(
         "hr.job",

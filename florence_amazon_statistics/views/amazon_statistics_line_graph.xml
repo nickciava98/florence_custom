@@ -42,9 +42,7 @@
                 <field name="total_five_stars_reviews" type="measure"/>
                 <field name="five_stars_value" type="measure"/>
 
-                <field name="daily_main_stat" type="measure"/>
-                <field name="weekly_main_stat" type="measure"/>
-                <field name="monthly_main_stat" type="measure"/>
+                <field name="main_stat" type="measure"/>
 
                 <field name="five_reviews_perc" type="measure"/>
                 <field name="four_reviews_perc" type="measure"/>
