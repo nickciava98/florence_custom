@@ -26,16 +26,18 @@ class EmployeesStatisticsLine(models.Model):
         store = True
     )
 
+    @api.depends("date")
     def _compute_week(self):
+        locale.setlocale(locale.LC_TIME, "en_US.UTF-8")
+
         for line in self:
-            odoo_locale = self.env["res.users"].search([("id", "=", line.create_uid.id)]).lang
-            locale.setlocale(locale.LC_TIME, odoo_locale + ".UTF-8")
             line.week = ""
 
-            dt = datetime.strptime(str(line.date), "%Y-%m-%d")
-            start = dt - timedelta(days = dt.weekday())
-            end = start + timedelta(days = 6)
+            if line.date:
+                dt = datetime.strptime(str(line.date), "%Y-%m-%d")
+                start = dt - timedelta(days = dt.weekday())
+                end = start + timedelta(days = 6)
 
-            line.week = datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
-                        + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year) \
-                        + ", " + start.strftime("%d") + "-" + end.strftime("%d")
+                line.week = datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
+                            + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year) \
+                            + ", " + start.strftime("%d") + "-" + end.strftime("%d")

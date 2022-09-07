@@ -1,3 +1,5 @@
+import datetime
+
 from odoo import models, fields, api
 
 class EmployeesStatistics(models.Model):
@@ -19,6 +21,13 @@ class EmployeesStatistics(models.Model):
     )
     chart_start = fields.Date()
     chart_end = fields.Date()
+    start_date = fields.Date(
+        compute = "_compute_start_date"
+    )
+
+    def _compute_start_date(self):
+        for line in self:
+            line.start_date = datetime.datetime.now()
 
     def graph_view_action(self):
         return {
@@ -52,9 +61,6 @@ class EmployeesStatistics(models.Model):
                 'group_by': 'week'
             },
             'domain': [
-                '&', '&',
-                ('date', '>=', self.chart_start),
-                ('date', '<=', self.chart_end),
                 ('name', 'ilike', self.name.name)
             ],
             'target': 'current'
