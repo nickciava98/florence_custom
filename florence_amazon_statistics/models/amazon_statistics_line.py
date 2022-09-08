@@ -114,6 +114,10 @@ class AmazonStatisticsLine(models.Model):
         compute = "_compute_general_reviews_statistics",
         store = True
     )
+    
+    daily_total_reviews = fields.Float(
+        compute = "_compute_daily_total_reviews"
+    )
 
     main_stat = fields.Float(
         compute = "_compute_main_stat"
@@ -144,6 +148,17 @@ class AmazonStatisticsLine(models.Model):
     inaccurate_website_description_perc = fields.Float()
     wrong_item_was_sent_perc = fields.Float()
     missing_parts_accessories_perc = fields.Float()
+
+    @api.depends("total_one_star_reviews", "total_two_stars_reviews",
+                 "total_three_stars_reviews", "total_four_stars_reviews",
+                 "total_five_stars_reviews")
+    def _compute_daily_total_reviews(self):
+        for line in self:
+            line.daily_total_reviews = line.total_one_star_reviews + \
+                                       line.total_two_stars_reviews + \
+                                       line.total_three_stars_reviews + \
+                                       line.total_four_stars_reviews + \
+                                       line.total_five_stars_reviews
 
     @api.depends("one_star_ratings")
     def _compute_one_vote_ratings_new(self):

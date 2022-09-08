@@ -45,6 +45,10 @@
                 <field name="total_five_stars_reviews" widget="integer"/>
                 <field name="five_stars_value" widget="integer"/>
 
+                <field name="general_reviews_statistics"/>
+
+                <field name="daily_total_reviews" widget="integer"/>
+
                 <field name="main_stat"/>
 
                 <field name="five_reviews_perc" widget="percentage"/>
