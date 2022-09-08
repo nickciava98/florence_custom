@@ -25,6 +25,13 @@
                     {'no_create': True}
                 </attribute>
             </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='tax_ids']"
+                   position="attributes">
+                <attribute name="string">
+                    VAT
+                </attribute>
+            </xpath>
         </field>
     </record>
 </odoo>

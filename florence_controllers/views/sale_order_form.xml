@@ -18,6 +18,13 @@
                     {'no_create': True}
                 </attribute>
             </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']"
+                   position="attributes">
+                <attribute name="string">
+                    VAT
+                </attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
