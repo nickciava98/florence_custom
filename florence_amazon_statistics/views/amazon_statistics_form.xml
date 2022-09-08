@@ -78,13 +78,13 @@
 
                                     <field name="main_stat"/>
 
-                                    <field name="five_reviews_perc" widget="percentage"/>
-                                    <field name="four_reviews_perc" widget="percentage"/>
-                                    <field name="three_reviews_perc" widget="percentage"/>
-                                    <field name="two_reviews_perc" widget="percentage"/>
-                                    <field name="one_reviews_perc" widget="percentage"/>
+                                    <field name="five_reviews_perc"/>
+                                    <field name="four_reviews_perc"/>
+                                    <field name="three_reviews_perc"/>
+                                    <field name="two_reviews_perc"/>
+                                    <field name="one_reviews_perc"/>
 
-                                    <field name="da_five_perc" widget="percentage"/>
+                                    <field name="da_five_perc"/>
 
                                     <field name="freshness"/>
                                     <field name="absorbency"/>
@@ -93,16 +93,16 @@
                                     <field name="hydration"/>
                                     <field name="solar_protection"/>
 
-                                    <field name="ncx_rate_perc" widget="percentage"/>
+                                    <field name="ncx_rate_perc"/>
                                     <field name="total_orders"/>
                                     <field name="returns"/>
 
                                     <field name="performance_quality_inadequate"/>
-                                    <field name="defective_item_perc" widget="percentage"/>
-                                    <field name="damage_item_perc" widget="percentage"/>
-                                    <field name="inaccurate_website_description_perc" widget="percentage"/>
-                                    <field name="wrong_item_was_sent_perc" widget="percentage"/>
-                                    <field name="missing_parts_accessories_perc" widget="percentage"/>
+                                    <field name="defective_item_perc"/>
+                                    <field name="damage_item_perc"/>
+                                    <field name="inaccurate_website_description_perc"/>
+                                    <field name="wrong_item_was_sent_perc"/>
+                                    <field name="missing_parts_accessories_perc"/>
                                 </tree>
                             </field>
                         </page>
