@@ -1,6 +1,6 @@
 <odoo>
     <record id="amazon_revenues_view_search" model="ir.ui.view">
-        <field name="name">Amazon Revenues Search</field>
+        <field name="name">Amazon Search</field>
         <field name="model">amazon.revenues</field>
         <field name="arch" type="xml">
             <search>

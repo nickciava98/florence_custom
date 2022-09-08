@@ -1,5 +1,5 @@
 <odoo>
-    <menuitem name="Amazon Revenues" id="amazon_revenues_base_menu"
+    <menuitem name="Amazon" id="amazon_revenues_base_menu"
               action="amazon_revenues_action"
               web_icon="florence_amazon_revenues,static/description/app_icon.png"/>
     <menuitem name="Summary" id="amazon_revenues_summary_menu"

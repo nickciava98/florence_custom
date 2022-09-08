@@ -114,13 +114,15 @@ class AmazonStatisticsLine(models.Model):
         compute = "_compute_general_reviews_statistics",
         store = True
     )
-    
+
     daily_total_reviews = fields.Float(
-        compute = "_compute_daily_total_reviews"
+        compute = "_compute_daily_total_reviews",
+        store = True
     )
 
     main_stat = fields.Float(
-        compute = "_compute_main_stat"
+        compute = "_compute_main_stat",
+        store = True
     )
 
     five_reviews_perc = fields.Float()

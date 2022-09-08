@@ -1,6 +1,6 @@
 <odoo>
     <record id="amazon_statistics_view_form" model="ir.ui.view">
-        <field name="name">Amazon Statistics</field>
+        <field name="name">Reviews Statistics</field>
         <field name="model">amazon.statistics</field>
 
         <field name="arch" type="xml">

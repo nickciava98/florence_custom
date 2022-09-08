@@ -1,6 +1,6 @@
 <odoo>
     <record id="amazon_revenues_view_form" model="ir.ui.view">
-        <field name="name">Amazon Revenues Form</field>
+        <field name="name">Amazon Form</field>
         <field name="model">amazon.revenues</field>
         <field name="arch" type="xml">
             <form>

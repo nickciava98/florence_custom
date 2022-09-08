@@ -1,6 +1,6 @@
 <odoo>
     <record id="amazon_statistics_action" model="ir.actions.act_window">
-        <field name="name">Amazon Statistics</field>
+        <field name="name">Reviews Statistics</field>
         <field name="res_model">amazon.statistics</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{'group_by': 'name'}</field>
@@ -16,7 +16,7 @@
         </field>
     </record>
 
-    <menuitem id="amazon_statistics_menu" name="Statistics"
-              action="amazon_statistics_action"
+    <menuitem id="amazon_statistics_menu" name="Reviews Statistics"
+              action="amazon_statistics_action" sequence="0"
               parent="florence_amazon_revenues.amazon_revenues_reporting_menu"/>
 </odoo>

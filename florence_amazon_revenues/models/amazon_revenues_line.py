@@ -7,10 +7,12 @@ class AmazonRevenuesLine(models.Model):
 
     # Invisible fields
     amazon_revenues_line_id = fields.Many2one(
-        "amazon.revenues"
+        "amazon.revenues",
+        ondelete = "cascade"
     )
     amazon_revenues_line_id_test = fields.Many2one(
-        "amazon.revenues"
+        "amazon.revenues",
+        ondelete = "cascade"
     )
     parent = fields.Char()
     product = fields.Many2one(

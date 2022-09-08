@@ -1,6 +1,6 @@
 <odoo>
     <record id="amazon_revenues_view_pivot" model="ir.ui.view">
-        <field name="name">Amazon Revenues Pivot</field>
+        <field name="name">Amazon Pivot</field>
         <field name="model">amazon.revenues</field>
         <field name="arch" type="xml">
             <pivot string="Probable Income">

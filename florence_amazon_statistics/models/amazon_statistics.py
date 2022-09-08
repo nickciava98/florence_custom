@@ -53,7 +53,7 @@ class AmazonStatistics(models.Model):
                 ('parent', '=', self.name)
             ],
             'context': {
-                'graph_measure': 'da_five_perc',
+                'graph_measure': 'main_stat',
                 'graph_mode': 'line',
                 'graph_groupbys': ['date:day']
             }
