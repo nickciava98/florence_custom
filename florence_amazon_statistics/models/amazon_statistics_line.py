@@ -155,9 +155,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].one_vote_ratings_new = \
-                    lines[index].one_star_ratings \
-                    - lines[index - 1].one_star_ratings
+                if lines[index].one_star_ratings > lines[index - 1].one_star_ratings:
+                    lines[index].one_vote_ratings_new = \
+                        lines[index].one_star_ratings \
+                        - lines[index - 1].one_star_ratings
 
     @api.depends("two_stars_ratings")
     def _compute_two_votes_ratings_new(self):
@@ -169,9 +170,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].two_votes_ratings_new = \
-                    lines[index].two_stars_ratings \
-                    - lines[index - 1].two_stars_ratings
+                if lines[index].two_stars_ratings > lines[index - 1].two_stars_ratings:
+                    lines[index].two_votes_ratings_new = \
+                        lines[index].two_stars_ratings \
+                        - lines[index - 1].two_stars_ratings
 
     @api.depends("three_stars_ratings")
     def _compute_three_votes_ratings_new(self):
@@ -183,9 +185,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].three_votes_ratings_new = \
-                    lines[index].three_stars_ratings \
-                    - lines[index - 1].three_stars_ratings
+                if lines[index].three_stars_ratings > lines[index - 1].three_stars_ratings:
+                    lines[index].three_votes_ratings_new = \
+                        lines[index].three_stars_ratings \
+                        - lines[index - 1].three_stars_ratings
 
     @api.depends("four_stars_ratings")
     def _compute_four_votes_ratings_new(self):
@@ -197,9 +200,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].four_votes_ratings_new = \
-                    lines[index].four_stars_ratings \
-                    - lines[index - 1].four_stars_ratings
+                if lines[index].four_stars_ratings > lines[index - 1].four_stars_ratings:
+                    lines[index].four_votes_ratings_new = \
+                        lines[index].four_stars_ratings \
+                        - lines[index - 1].four_stars_ratings
 
     @api.depends("five_stars_ratings")
     def _compute_five_votes_ratings_new(self):
@@ -211,9 +215,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].five_votes_ratings_new = \
-                    lines[index].five_stars_ratings \
-                    - lines[index - 1].five_stars_ratings
+                if lines[index].five_stars_ratings > lines[index - 1].five_stars_ratings:
+                    lines[index].five_votes_ratings_new = \
+                        lines[index].five_stars_ratings \
+                        - lines[index - 1].five_stars_ratings
 
     @api.depends("one_star_reviews")
     def _compute_one_star_reviews_new(self):
@@ -225,9 +230,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].one_star_reviews_new = \
-                    lines[index].one_star_reviews \
-                    - lines[index - 1].one_star_reviews
+                if lines[index].one_star_reviews > lines[index - 1].one_star_reviews:
+                    lines[index].one_star_reviews_new = \
+                        lines[index].one_star_reviews \
+                        - lines[index - 1].one_star_reviews
 
     @api.depends("two_stars_reviews")
     def _compute_two_stars_reviews_new(self):
@@ -239,9 +245,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].two_stars_reviews_new = \
-                    lines[index].two_stars_reviews \
-                    - lines[index - 1].two_stars_reviews
+                if lines[index].two_stars_reviews > lines[index - 1].two_stars_reviews:
+                    lines[index].two_stars_reviews_new = \
+                        lines[index].two_stars_reviews \
+                        - lines[index - 1].two_stars_reviews
 
     @api.depends("three_stars_reviews")
     def _compute_three_stars_reviews_new(self):
@@ -253,9 +260,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].three_stars_reviews_new = \
-                    lines[index].three_stars_reviews \
-                    - lines[index - 1].three_stars_reviews
+                if lines[index].three_stars_reviews > lines[index - 1].three_stars_reviews:
+                    lines[index].three_stars_reviews_new = \
+                        lines[index].three_stars_reviews \
+                        - lines[index - 1].three_stars_reviews
 
     @api.depends("four_stars_reviews")
     def _compute_four_stars_reviews_new(self):
@@ -267,9 +275,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].four_stars_reviews_new = \
-                    lines[index].four_stars_reviews \
-                    - lines[index - 1].four_stars_reviews
+                if lines[index].four_stars_reviews > lines[index - 1].four_stars_reviews:
+                    lines[index].four_stars_reviews_new = \
+                        lines[index].four_stars_reviews \
+                        - lines[index - 1].four_stars_reviews
 
     @api.depends("five_stars_reviews")
     def _compute_five_stars_reviews_new(self):
@@ -281,9 +290,10 @@ class AmazonStatisticsLine(models.Model):
 
         for index in range(len(lines)):
             if index > 0:
-                lines[index].five_stars_reviews_new = \
-                    lines[index].five_stars_reviews \
-                    - lines[index - 1].five_stars_reviews
+                if lines[index].five_stars_reviews > lines[index - 1].five_stars_reviews:
+                    lines[index].five_stars_reviews_new = \
+                        lines[index].five_stars_reviews \
+                        - lines[index - 1].five_stars_reviews
 
     @api.depends("one_vote_ratings_new", "one_star_reviews_new")
     def _compute_total_one_star_reviews(self):

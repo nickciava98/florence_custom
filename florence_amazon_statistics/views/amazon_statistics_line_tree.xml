@@ -13,6 +13,7 @@
                 <field name="one_vote_ratings_new" widget="integer"/>
                 <field name="one_star_ratings" widget="integer"/>
                 <field name="one_star_reviews" widget="integer"/>
+                <field name="one_star_reviews_new" widget="integer"/>
                 <field name="total_one_star_reviews" widget="integer"/>
                 <field name="one_star_value" widget="integer"/>
 
