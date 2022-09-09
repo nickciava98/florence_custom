@@ -23,16 +23,6 @@ class SaleOrder(models.Model):
     add_free_sample_rule = fields.Boolean(
         compute = "_compute_add_free_sample_rule"
     )
-    amount_by_group_char = fields.Char(
-        compute = "_compute_amount_by_group_char"
-    )
-
-    def _compute_amount_by_group_char(self):
-        for line in self:
-            line.amount_by_group_char = ""
-
-            for amount in line.amount_by_group:
-                line.amount_by_group_char += str(amount) + " "
 
     @api.depends("is_free_sample", "order_line")
     def _compute_amount_untaxed_free_sample(self):

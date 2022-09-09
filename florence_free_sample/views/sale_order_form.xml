@@ -8,7 +8,6 @@
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <field name="is_free_sample" invisible="True"/>
                 <field name="add_free_sample_rule" invisible="True"/>
-                <field name="amount_by_group_char" invisible="0"/>
             </xpath>
 
             <xpath expr="//field[@name='amount_tax']" position="after">
