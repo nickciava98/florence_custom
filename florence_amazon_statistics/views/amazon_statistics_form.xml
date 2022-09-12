@@ -7,10 +7,8 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button type="object" name="tree_view_action" string="Statistics List"
-                                class="oe_stat_button" icon="fa-list-ul"/>
-                        <button type="object" name="graph_view_action" string="Statistics Analysis"
-                                class="oe_stat_button" icon="fa-bar-chart-o"/>
+                        <button type="object" name="update_values_action" string="Sync values between tabs"
+                                class="oe_stat_button" icon="fa-refresh"/>
                     </div>
 
                     <label for="name" string="Marketplace"/>
@@ -27,6 +25,11 @@
 
                     <notebook>
                         <page name="statistics" string="Statistics">
+                            <button type="object" name="tree_view_action" string="Statistics List"
+                                    class="oe_stat_button" icon="fa-list-ul"/>
+                            <button type="object" name="graph_view_action" string="Statistics Analysis"
+                                    class="oe_stat_button" icon="fa-bar-chart-o"/>
+
                             <field name="statistics_lines" widget="section_and_note_one2many" string="Statistics"
                                    context="{'default_parent': name,
                                              'default_product': product,
@@ -106,8 +109,101 @@
                                 </tree>
                             </field>
                         </page>
+
+                        <page name="statistics_test" string="Statistics Test">
+                            <button type="object" name="tree_test_view_action" string="Statistics Test List"
+                                    class="oe_stat_button" icon="fa-list-ul"/>
+                            <button type="object" name="graph_test_view_action" string="Statistics Test Analysis"
+                                    class="oe_stat_button" icon="fa-bar-chart-o"/>
+
+                            <field name="statistics_lines_test" widget="section_and_note_one2many"
+                                   string="Statistics Test" readonly="False"
+                                   context="{'default_parent': name,
+                                             'default_product': product,
+                                             'default_date': start_date}">
+                                <tree string="Statistics Test" editable="bottom">
+                                    <field name="name" invisible="True"/>
+                                    <field name="parent" invisible="True"/>
+                                    <field name="product" invisible="True"/>
+                                    <field name="date"/>
+
+                                    <field name="one_vote_ratings_new" widget="integer"/>
+                                    <field name="one_star_ratings" widget="integer"/>
+                                    <field name="one_star_reviews" widget="integer"/>
+                                    <field name="one_star_reviews_new" widget="integer"/>
+                                    <field name="total_one_star_reviews" widget="integer"/>
+                                    <field name="one_star_value" widget="integer"/>
+
+                                    <field name="two_votes_ratings_new" widget="integer"/>
+                                    <field name="two_stars_ratings" widget="integer"/>
+                                    <field name="two_stars_reviews" widget="integer"/>
+                                    <field name="two_stars_reviews_new" widget="integer"/>
+                                    <field name="total_two_stars_reviews" widget="integer"/>
+                                    <field name="two_stars_value" widget="integer"/>
+
+                                    <field name="three_votes_ratings_new" widget="integer"/>
+                                    <field name="three_stars_ratings" widget="integer"/>
+                                    <field name="three_stars_reviews" widget="integer"/>
+                                    <field name="three_stars_reviews_new" widget="integer"/>
+                                    <field name="total_three_stars_reviews" widget="integer"/>
+                                    <field name="three_stars_value" widget="integer"/>
+
+                                    <field name="four_votes_ratings_new" widget="integer"/>
+                                    <field name="four_stars_ratings" widget="integer"/>
+                                    <field name="four_stars_reviews" widget="integer"/>
+                                    <field name="four_stars_reviews_new" widget="integer"/>
+                                    <field name="total_four_stars_reviews" widget="integer"/>
+                                    <field name="four_stars_value" widget="integer"/>
+
+                                    <field name="five_votes_ratings_new" widget="integer"/>
+                                    <field name="five_stars_ratings" widget="integer"/>
+                                    <field name="five_stars_reviews" widget="integer"/>
+                                    <field name="five_stars_reviews_new" widget="integer"/>
+                                    <field name="total_five_stars_reviews" widget="integer"/>
+                                    <field name="five_stars_value" widget="integer"/>
+
+                                    <field name="general_reviews_statistics"/>
+
+                                    <field name="daily_total_reviews" widget="integer"/>
+
+                                    <field name="main_stat"/>
+
+                                    <field name="five_reviews_perc"/>
+                                    <field name="four_reviews_perc"/>
+                                    <field name="three_reviews_perc"/>
+                                    <field name="two_reviews_perc"/>
+                                    <field name="one_reviews_perc"/>
+
+                                    <field name="da_five_perc"/>
+
+                                    <field name="freshness"/>
+                                    <field name="absorbency"/>
+                                    <field name="quality_price"/>
+                                    <field name="comfort"/>
+                                    <field name="hydration"/>
+                                    <field name="solar_protection"/>
+
+                                    <field name="ncx_rate_perc"/>
+                                    <field name="total_orders"/>
+                                    <field name="returns"/>
+
+                                    <field name="performance_quality_inadequate"/>
+                                    <field name="defective_item_perc"/>
+                                    <field name="damage_item_perc"/>
+                                    <field name="inaccurate_website_description_perc"/>
+                                    <field name="wrong_item_was_sent_perc"/>
+                                    <field name="missing_parts_accessories_perc"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
         </field>
     </record>

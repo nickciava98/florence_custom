@@ -3,7 +3,9 @@
         <field name="name">Reviews Statistics</field>
         <field name="res_model">amazon.statistics</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'group_by': 'name'}</field>
+        <field name="context">
+            {'group_by': 'name'}
+        </field>
 
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

@@ -9,6 +9,10 @@ class AmazonStatisticsLine(models.Model):
         "amazon.statistics",
         ondelete = "cascade"
     )
+    name_test = fields.Many2one(
+        "amazon.statistics",
+        ondelete = "cascade"
+    )
     parent = fields.Char()
     product = fields.Many2one(
         "product.template"
