@@ -116,6 +116,26 @@
             </t>
         </xpath>
 
+        <xpath expr="//tr[hasclass('o_subtotal')]" position="replace">
+            <t t-if="o.is_free_sample">
+                <tr class="border-black o_subtotal" style="">
+                    <td><strong>Subtotal</strong></td>
+                    <td class="text-right">
+                        <span t-field="o.amount_untaxed_free_sample"/>
+                    </td>
+                </tr>
+            </t>
+
+            <t t-else="">
+                <tr class="border-black o_subtotal" style="">
+                    <td><strong>Subtotal</strong></td>
+                    <td class="text-right">
+                        <span t-field="o.amount_untaxed"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+
         <xpath expr="//t[@t-foreach='o.amount_by_group']" position="replace">
             <t t-foreach="o.amount_by_group" t-as="amount_by_group">
                 <tr style="">
@@ -138,26 +158,6 @@
                             </td>
                         </t>
                     </t>
-                </tr>
-            </t>
-        </xpath>
-
-        <xpath expr="//tr[hasclass('o_subtotal')]" position="replace">
-            <t t-if="o.is_free_sample">
-                <tr class="border-black o_subtotal" style="">
-                    <td><strong>Subtotal</strong></td>
-                    <td class="text-right">
-                        <span t-field="o.amount_untaxed_free_sample"/>
-                    </td>
-                </tr>
-            </t>
-
-            <t t-else="">
-                <tr class="border-black o_subtotal" style="">
-                    <td><strong>Subtotal</strong></td>
-                    <td class="text-right">
-                        <span t-field="o.amount_untaxed"/>
-                    </td>
                 </tr>
             </t>
         </xpath>
