@@ -65,6 +65,11 @@
                 <field name="comfort"/>
                 <field name="hydration"/>
                 <field name="solar_protection"/>
+                <field name="softness"/>
+                <field name="easy_to_use"/>
+                <field name="light"/>
+                <field name="style"/>
+                <field name="perfume"/>
 
                 <field name="ncx_rate_perc"/>
                 <field name="total_orders"/>

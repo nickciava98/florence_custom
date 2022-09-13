@@ -143,6 +143,11 @@ class AmazonStatisticsLine(models.Model):
     comfort = fields.Float()
     hydration = fields.Float()
     solar_protection = fields.Float()
+    softness = fields.Float()
+    easy_to_use = fields.Float()
+    light = fields.Float()
+    style = fields.Float()
+    perfume = fields.Float()
 
     ncx_rate_perc = fields.Float()
     total_orders = fields.Float()

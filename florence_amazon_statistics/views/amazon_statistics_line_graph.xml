@@ -63,6 +63,11 @@
                 <field name="comfort" type="measure"/>
                 <field name="hydration" type="measure"/>
                 <field name="solar_protection" type="measure"/>
+                <field name="softness" type="measure"/>
+                <field name="easy_to_use" type="measure"/>
+                <field name="light" type="measure"/>
+                <field name="style" type="measure"/>
+                <field name="perfume" type="measure"/>
 
                 <field name="ncx_rate_perc" type="measure"/>
                 <field name="total_orders" type="measure"/>
