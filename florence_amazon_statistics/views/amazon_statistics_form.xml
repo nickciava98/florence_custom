@@ -25,13 +25,21 @@
 
                     <notebook>
                         <page name="statistics" string="Statistics">
-                            <button type="object" name="tree_view_action" string="Statistics List"
-                                    class="oe_stat_button" icon="fa-list-ul"/>
-                            <button type="object" name="graph_view_action" string="Statistics Analysis"
-                                    class="oe_stat_button" icon="fa-bar-chart-o"/>
-                            <button type="object" name="pivot_view_action" string="Statistics Pivot"
-                                    class="oe_stat_button" icon="fa-table"/>
+                            <group>
+                                <group>
+                                    <button type="object" name="tree_view_action" string="Statistics List"
+                                            class="oe_stat_button" icon="fa-list-ul"/>
+                                    <button type="object" name="graph_view_action" string="Statistics Analysis"
+                                            class="oe_stat_button" icon="fa-bar-chart-o"/>
+                                    <button type="object" name="pivot_view_action" string="Statistics Pivot"
+                                            class="oe_stat_button" icon="fa-table"/>
+                                </group>
 
+                                <group>
+                                    <field name="corrective_factor"/>
+                                    <field name="average"/>
+                                </group>
+                            </group>
 
                             <field name="statistics_lines" widget="section_and_note_one2many" string="Statistics"
                                    context="{'default_parent': name,
@@ -119,10 +127,21 @@
                         </page>
 
                         <page name="statistics_test" string="Statistics Test">
-                            <button type="object" name="tree_test_view_action" string="Statistics Test List"
-                                    class="oe_stat_button" icon="fa-list-ul"/>
-                            <button type="object" name="graph_test_view_action" string="Statistics Test Analysis"
-                                    class="oe_stat_button" icon="fa-bar-chart-o"/>
+                            <group>
+                                <group>
+                                    <button type="object" name="tree_test_view_action" string="Statistics Test List"
+                                            class="oe_stat_button" icon="fa-list-ul"/>
+                                    <button type="object" name="graph_test_view_action" string="Statistics Test Analysis"
+                                            class="oe_stat_button" icon="fa-bar-chart-o"/>
+                                    <button type="object" name="pivot_test_view_action" string="Statistics Test Pivot"
+                                            class="oe_stat_button" icon="fa-table"/>
+                                </group>
+
+                                <group>
+                                    <field name="corrective_factor_test"/>
+                                    <field name="average_test"/>
+                                </group>
+                            </group>
 
                             <field name="statistics_lines_test" widget="section_and_note_one2many"
                                    string="Statistics Test" readonly="False"

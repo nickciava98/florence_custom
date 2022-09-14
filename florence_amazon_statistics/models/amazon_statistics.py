@@ -39,6 +39,66 @@ class AmazonStatistics(models.Model):
     start_date = fields.Date(
         compute = "_compute_start_date"
     )
+    average = fields.Float(
+        compute = "_compute_average"
+    )
+    average_test = fields.Float(
+        compute = "_compute_average_test"
+    )
+    corrective_factor = fields.Float(
+        default = 0
+    )
+    corrective_factor_test = fields.Float(
+        default = 0
+    )
+
+    @api.depends("corrective_factor_test")
+    def _compute_average_test(self):
+        for line in self:
+            line.average_test = 0
+
+            if len(line.statistics_lines_test) > 0:
+                numerator = .0
+                denominator = .0
+
+                for statistics_line in line.statistics_lines_test:
+                    numerator += statistics_line.one_star_value \
+                                 + statistics_line.two_stars_value \
+                                 + statistics_line.three_stars_value \
+                                 + statistics_line.four_stars_value \
+                                 + statistics_line.five_stars_value
+                    denominator += statistics_line.total_one_star_reviews \
+                                   + statistics_line.total_two_stars_reviews \
+                                   + statistics_line.total_three_stars_reviews \
+                                   + statistics_line.total_four_stars_reviews \
+                                   + statistics_line.total_five_stars_reviews
+
+                if denominator != 0:
+                    line.average_test = (numerator / denominator) + line.corrective_factor_test
+
+    @api.depends("corrective_factor")
+    def _compute_average(self):
+        for line in self:
+            line.average = 0
+
+            if len(line.statistics_lines) > 0:
+                numerator = .0
+                denominator = .0
+
+                for statistics_line in line.statistics_lines:
+                    numerator += statistics_line.one_star_value \
+                                 + statistics_line.two_stars_value \
+                                 + statistics_line.three_stars_value \
+                                 + statistics_line.four_stars_value \
+                                 + statistics_line.five_stars_value
+                    denominator += statistics_line.total_one_star_reviews \
+                                   + statistics_line.total_two_stars_reviews \
+                                   + statistics_line.total_three_stars_reviews \
+                                   + statistics_line.total_four_stars_reviews \
+                                   + statistics_line.total_five_stars_reviews
+
+                if denominator != 0:
+                    line.average = (numerator / denominator) + line.corrective_factor
 
     def _compute_start_date(self):
         for line in self:
@@ -125,6 +185,26 @@ class AmazonStatistics(models.Model):
         }
 
     def pivot_view_action(self):
+        return {
+            'name': 'Statistics Dashboard',
+            'view_type': 'pivot',
+            'view_mode': 'pivot',
+            'res_model': 'amazon.statistics.line',
+            'type': 'ir.actions.act_window',
+            'domain': [
+                '&', '&',
+                ('name_test', '=', False),
+                ('product', '=', self.product.id),
+                ('parent', '=', self.name)
+            ],
+            # 'context': {
+            #     'graph_measure': 'main_stat',
+            #     'graph_mode': 'line',
+            #     'graph_groupbys': ['date:day']
+            # }
+        }
+
+    def pivot_test_view_action(self):
         return {
             'name': 'Statistics Dashboard',
             'view_type': 'pivot',
