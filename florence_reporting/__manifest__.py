@@ -13,7 +13,8 @@
              'views/account_move_form.xml',
              'views/sale_order_tree.xml',
              'reports/sale_order_document.xml',
-             'reports/account_invoice_document.xml'],
+             'reports/account_invoice_document.xml',
+             'reports/external_layout_boxed.xml'],
     'application': False,
     'installable': True,
 }

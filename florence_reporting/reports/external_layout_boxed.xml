@@ -1,0 +1,5 @@
+<odoo>
+    <template id="external_layout_boxed_inherit" inherit_id="web.external_layout_boxed">
+        <xpath expr="//li[@t-if='company.vat']" position="replace"/>
+    </template>
+</odoo>
