@@ -124,6 +124,26 @@ class AmazonStatistics(models.Model):
             'target': 'current'
         }
 
+    def pivot_view_action(self):
+        return {
+            'name': 'Statistics Dashboard',
+            'view_type': 'pivot',
+            'view_mode': 'pivot',
+            'res_model': 'amazon.statistics.line',
+            'type': 'ir.actions.act_window',
+            'domain': [
+                '&', '&',
+                ('name', '=', False),
+                ('product', '=', self.product.id),
+                ('parent', '=', self.name)
+            ],
+            # 'context': {
+            #     'graph_measure': 'main_stat',
+            #     'graph_mode': 'line',
+            #     'graph_groupbys': ['date:day']
+            # }
+        }
+
     def update_values_action(self):
         for line in self:
             line.statistics_lines_test = [(5, 0, 0)]

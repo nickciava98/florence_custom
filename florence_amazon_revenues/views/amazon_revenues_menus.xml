@@ -25,11 +25,13 @@
               action="amazon_uk_action"/>
 
     <menuitem name="Reporting" id="amazon_revenues_reporting_menu"
-              parent="amazon_revenues_base_menu" sequence="3"/>
+              parent="amazon_revenues_base_menu" sequence="10"/>
+    <menuitem name="Revenues Statistics" id="amazon_revenues_statistics_menu"
+              parent="amazon_revenues_reporting_menu" sequence="1"/>
     <menuitem name="Pivot" id="amazon_revenues_pivot_menu"
-              parent="amazon_revenues_reporting_menu" sequence="1"
+              parent="amazon_revenues_statistics_menu" sequence="1"
               action="pivot_action"/>
     <menuitem name="Chart" id="amazon_revenues_graph_menu"
-              parent="amazon_revenues_reporting_menu" sequence="2"
+              parent="amazon_revenues_statistics_menu" sequence="2"
               action="graph_action"/>
 </odoo>
