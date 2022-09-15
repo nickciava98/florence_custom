@@ -22,11 +22,11 @@
                     </div>
 
                     <group>
-                        <group>
+                        <group string="Info">
                             <field name="job_position"/>
                         </group>
 
-                        <group>
+                        <group string="Chart manager">
                             <field name="chart_start"/>
                             <field name="chart_end"/>
                             <field name="benchmark" options="{'no_create': True}"/>
