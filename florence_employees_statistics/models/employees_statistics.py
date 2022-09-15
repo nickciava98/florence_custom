@@ -24,6 +24,10 @@ class EmployeesStatistics(models.Model):
     start_date = fields.Date(
         compute = "_compute_start_date"
     )
+    benchmark = fields.Many2one(
+        "employees.statistics.benchmark",
+        domain = "[('job_position', '=', job_position)]"
+    )
 
     def _compute_start_date(self):
         for line in self:
@@ -42,10 +46,11 @@ class EmployeesStatistics(models.Model):
                 'graph_groupbys': ['week']
             },
             'domain': [
-                '&', '&',
+                '&', '&', '&',
                 ('date', '>=', self.chart_start),
                 ('date', '<=', self.chart_end),
-                ('name', 'ilike', self.name.name)
+                ('name', '=', self.name.name),
+                ('benchmark', '=', self.benchmark.id)
             ]
         }
 
@@ -61,7 +66,7 @@ class EmployeesStatistics(models.Model):
                 'group_by': 'week'
             },
             'domain': [
-                ('name', 'ilike', self.name.name)
+                ('name', '=', self.name.name)
             ],
             'target': 'current'
         }

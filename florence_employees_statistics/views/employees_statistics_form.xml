@@ -11,7 +11,8 @@
                                 class="oe_stat_button" icon="fa-list-ul"/>
                         <button type="object" name="graph_view_action" string="Employee's Statistics Chart"
                                 class="oe_stat_button" icon="fa-bar-chart-o" width="150px"
-                                attrs="{'invisible': ['&amp;',('chart_start','=',False),('chart_end','=',False)]}"/>
+                                attrs="{'invisible': ['&amp;','&amp;',
+                                ('chart_start','=',False),('chart_end','=',False),('benchmark','=',False)]}"/>
                     </div>
 
                     <div class="oe_title">
@@ -28,6 +29,7 @@
                         <group>
                             <field name="chart_start"/>
                             <field name="chart_end"/>
+                            <field name="benchmark" options="{'no_create': True}"/>
                         </group>
                     </group>
 
@@ -42,7 +44,7 @@
                                     <field name="name" invisible="True"/>
                                     <field name="job_position" invisible="True"/>
                                     <field name="date"/>
-                                    <field name="benchmark"/>
+                                    <field name="benchmark" options="{'no_create': True}"/>
                                     <field name="value"/>
                                     <field name="week" invisible="True"/>
                                 </tree>
