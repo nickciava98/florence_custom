@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class AccountMove(models.Model):
     _inherit = "account.move"
@@ -24,33 +24,43 @@ class AccountMove(models.Model):
         compute = "_compute_free_sample_total"
     )
 
+    @api.depends("invoice_line_ids")
     def _compute_is_free_sample(self):
-        self.is_free_sample = False
+        for line in self:
+            line.is_free_sample = False
 
-        for line in self.invoice_line_ids:
-            if line.sale_line_ids.order_id.is_free_sample:
-                self.is_free_sample = True
+            for invoice_line in line.invoice_line_ids:
+                if invoice_line.sale_line_ids.order_id.is_free_sample:
+                    line.is_free_sample = True
+                    break
 
+    @api.depends("is_free_sample")
     def _compute_amount_untaxed_free_sample(self):
-        if self.is_free_sample:
-            for line in self.invoice_line_ids:
-                if line.sale_line_ids.order_id.amount_total == 0:
-                    self.amount_untaxed_free_sample = line.sale_line_ids.order_id.amount_untaxed_free_sample
-        else:
-            self.amount_untaxed_free_sample = False
+        for line in self:
+            line.amount_untaxed_free_sample = 0
 
+            if line.is_free_sample:
+                for invoice_line in line.invoice_line_ids:
+                    if invoice_line.sale_line_ids.order_id.amount_total == 0:
+                        line.amount_untaxed_free_sample = invoice_line.sale_line_ids.order_id.amount_untaxed_free_sample
+                        break
+
+    @api.depends("is_free_sample")
     def _compute_amount_tax_free_sample(self):
-        if self.is_free_sample:
-            for line in self.invoice_line_ids:
-                if line.sale_line_ids.order_id.amount_total == 0:
-                    self.amount_tax_free_sample = line.sale_line_ids.order_id.amount_tax_free_sample
-        else:
-            self.amount_tax_free_sample = False
+        for line in self:
+            line.amount_tax_free_sample = 0
 
+            if line.is_free_sample:
+                for invoice_line in line.invoice_line_ids:
+                    if invoice_line.sale_line_ids.order_id.amount_total == 0:
+                        line.amount_tax_free_sample = invoice_line.sale_line_ids.order_id.amount_tax_free_sample
+
+    @api.depends("is_free_sample")
     def _compute_free_sample_total(self):
-        if self.is_free_sample:
-            for line in self.invoice_line_ids:
-                if line.sale_line_ids.order_id.amount_total == 0:
-                    self.free_sample_total = line.sale_line_ids.order_id.free_sample_total
-        else:
-            self.free_sample_total = False
+        for line in self:
+            line.free_sample_total = 0
+
+            if line.is_free_sample:
+                for invoice_line in line.invoice_line_ids:
+                    if invoice_line.sale_line_ids.order_id.amount_total == 0:
+                        line.free_sample_total = invoice_line.sale_line_ids.order_id.free_sample_total
