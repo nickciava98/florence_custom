@@ -1,5 +1,43 @@
 <odoo>
     <template id="account_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//thead" position="replace">
+            <t t-if="o.is_free_sample">
+                <thead>
+                    <tr>
+                        <th name="th_description" class="text-left"><span>Description</span></th>
+                        <th name="th_quantity" class="text-right"><span>Quantity</span></th>
+                        <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
+                        <th name="th_price_unit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                            <span>Disc.%</span>
+                        </th>
+                        <th name="th_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
+                        <th name="th_subtotal" class="text-right">
+                            <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
+                            <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                        </th>
+                    </tr>
+                </thead>
+            </t>
+
+            <t t-else="">
+                <thead>
+                    <tr>
+                        <th name="th_description" class="text-left"><span>Description</span></th>
+                        <th name="th_quantity" class="text-right"><span>Quantity</span></th>
+                        <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
+                        <th name="th_price_unit" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                            <span>Disc.%</span>
+                        </th>
+                        <th name="th_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
+                        <th name="th_subtotal" class="text-right">
+                            <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
+                            <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                        </th>
+                    </tr>
+                </thead>
+            </t>
+        </xpath>
+
         <xpath expr="//tbody[hasclass('invoice_tbody')]" position="replace">
             <t t-if="o.is_free_sample">
                 <tbody class="invoice_tbody">
@@ -21,8 +59,8 @@
                                     <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                         <span class="text-nowrap" t-esc="'%.2f'%(line.price_unit)"/>
                                     </td>
-                                    <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                        <span class="text-nowrap" t-field="line.discount"/>
+                                    <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                        100%
                                     </td>
                                     <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                         <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
