@@ -51,6 +51,10 @@ class AmazonStatistics(models.Model):
     corrective_factor_test = fields.Float(
         default = 0
     )
+    date_from = fields.Date()
+    date_to = fields.Date()
+    date_from_test = fields.Date()
+    date_to_test = fields.Date()
 
     @api.depends("corrective_factor_test")
     def _compute_average_test(self):
@@ -112,10 +116,12 @@ class AmazonStatistics(models.Model):
             'res_model': 'amazon.statistics.line',
             'type': 'ir.actions.act_window',
             'domain': [
-                '&', '&',
+                '&', '&', '&', '&',
                 ('name_test', '=', False),
                 ('product', '=', self.product.id),
-                ('parent', '=', self.name)
+                ('parent', '=', self.name),
+                ('date', '>=', self.date_from),
+                ('date', '<=', self.date_to)
             ],
             'context': {
                 'graph_measure': 'main_stat',
@@ -132,10 +138,12 @@ class AmazonStatistics(models.Model):
             'res_model': 'amazon.statistics.line',
             'type': 'ir.actions.act_window',
             'domain': [
-                '&', '&',
+                '&', '&', '&', '&',
                 ('name', '=', False),
                 ('product', '=', self.product.id),
-                ('parent', '=', self.name)
+                ('parent', '=', self.name),
+                ('date', '>=', self.date_from),
+                ('date', '<=', self.date_to)
             ],
             'context': {
                 'graph_measure': 'main_stat',
@@ -156,10 +164,12 @@ class AmazonStatistics(models.Model):
                 'group_by': ['date:year', 'date:month']
             },
             'domain': [
-                '&', '&',
+                '&', '&', '&', '&',
                 ('name_test', '=', False),
                 ('product', '=', self.product.id),
-                ('parent', '=', self.name)
+                ('parent', '=', self.name),
+                ('date', '>=', self.date_from),
+                ('date', '<=', self.date_to)
             ],
             'target': 'current'
         }
@@ -176,10 +186,12 @@ class AmazonStatistics(models.Model):
                 'group_by': ['date:year', 'date:month']
             },
             'domain': [
-                '&', '&',
+                '&', '&', '&', '&',
                 ('name', '=', False),
                 ('product', '=', self.product.id),
-                ('parent', '=', self.name)
+                ('parent', '=', self.name),
+                ('date', '>=', self.date_from),
+                ('date', '<=', self.date_to)
             ],
             'target': 'current'
         }
@@ -192,10 +204,12 @@ class AmazonStatistics(models.Model):
             'res_model': 'amazon.statistics.line',
             'type': 'ir.actions.act_window',
             'domain': [
-                '&', '&',
+                '&', '&', '&', '&',
                 ('name_test', '=', False),
                 ('product', '=', self.product.id),
-                ('parent', '=', self.name)
+                ('parent', '=', self.name),
+                ('date', '>=', self.date_from),
+                ('date', '<=', self.date_to)
             ],
             # 'context': {
             #     'graph_measure': 'main_stat',
@@ -212,10 +226,12 @@ class AmazonStatistics(models.Model):
             'res_model': 'amazon.statistics.line',
             'type': 'ir.actions.act_window',
             'domain': [
-                '&', '&',
+                '&', '&', '&', '&',
                 ('name', '=', False),
                 ('product', '=', self.product.id),
-                ('parent', '=', self.name)
+                ('parent', '=', self.name),
+                ('date', '>=', self.date_from),
+                ('date', '<=', self.date_to)
             ],
             # 'context': {
             #     'graph_measure': 'main_stat',

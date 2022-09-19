@@ -25,18 +25,44 @@
 
                     <notebook>
                         <page name="statistics" string="Statistics">
-                            <group>
+                            <group string="Pivot and Chart Analysis">
                                 <group>
-                                    <button type="object" name="tree_view_action" string="Statistics List"
-                                            class="oe_stat_button" icon="fa-list-ul"/>
-                                    <button type="object" name="graph_view_action" string="Statistics Analysis"
-                                            class="oe_stat_button" icon="fa-bar-chart-o"/>
-                                    <button type="object" name="pivot_view_action" string="Statistics Pivot"
-                                            class="oe_stat_button" icon="fa-table"/>
+                                    <label for="date_from" string="Filter by date"/>
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <field name="date_from" widget="daterange"
+                                                   options="{'related_end_date': 'date_to'}"/>
+                                            <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon"
+                                               title="Arrow"/>
+                                            <field name="date_to" widget="daterange"
+                                                   options="{'related_start_date': 'date_from'}"/>
+                                        </div>
+                                    </div>
+                                </group>
+
+                                <group attrs="{'invisible': ['|',('date_from','=',False),('date_to','=',False)]}">
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <button type="object" name="tree_view_action"
+                                                    string="Statistics List"
+                                                    class="oe_stat_button" icon="fa-list-ul"/>
+                                            <button type="object" name="graph_view_action"
+                                                    string="Statistics Analysis"
+                                                    class="oe_stat_button" icon="fa-bar-chart-o"/>
+                                            <button type="object" name="pivot_view_action"
+                                                    string="Statistics Pivot"
+                                                    class="oe_stat_button" icon="fa-table"/>
+                                        </div>
+                                    </div>
+                                </group>
+                            </group>
+
+                            <group string="Average Analysis">
+                                <group>
+                                    <field name="corrective_factor"/>
                                 </group>
 
                                 <group>
-                                    <field name="corrective_factor"/>
                                     <field name="average"/>
                                 </group>
                             </group>
@@ -127,18 +153,44 @@
                         </page>
 
                         <page name="statistics_test" string="Statistics Test">
-                            <group>
+                            <group string="Pivot and Chart Analysis">
                                 <group>
-                                    <button type="object" name="tree_test_view_action" string="Statistics Test List"
-                                            class="oe_stat_button" icon="fa-list-ul"/>
-                                    <button type="object" name="graph_test_view_action" string="Statistics Test Analysis"
-                                            class="oe_stat_button" icon="fa-bar-chart-o"/>
-                                    <button type="object" name="pivot_test_view_action" string="Statistics Test Pivot"
-                                            class="oe_stat_button" icon="fa-table"/>
+                                    <label for="date_from" string="Filter by date"/>
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <field name="date_from_test" widget="daterange"
+                                                   options="{'related_end_date': 'date_to_test'}"/>
+                                            <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon"
+                                               title="Arrow"/>
+                                            <field name="date_to_test" widget="daterange"
+                                                   options="{'related_start_date': 'date_from_test'}"/>
+                                        </div>
+                                    </div>
+                                </group>
+
+                                <group attrs="{'invisible': ['|',('date_from_test','=',False),('date_to_test','=',False)]}">
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <button type="object" name="tree_test_view_action"
+                                                    string="Statistics Test List"
+                                                    class="oe_stat_button" icon="fa-list-ul"/>
+                                            <button type="object" name="graph_test_view_action"
+                                                    string="Statistics Test Analysis"
+                                                    class="oe_stat_button" icon="fa-bar-chart-o"/>
+                                            <button type="object" name="pivot_test_view_action"
+                                                    string="Statistics Test Pivot"
+                                                    class="oe_stat_button" icon="fa-table"/>
+                                        </div>
+                                    </div>
+                                </group>
+                            </group>
+
+                            <group string="Average Analysis">
+                                <group>
+                                    <field name="corrective_factor_test"/>
                                 </group>
 
                                 <group>
-                                    <field name="corrective_factor_test"/>
                                     <field name="average_test"/>
                                 </group>
                             </group>
