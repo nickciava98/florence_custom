@@ -1,5 +1,20 @@
 <odoo>
     <template id="account_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//t[@t-set='address']/div[@t-if='o.partner_id.vat']"
+               position="before">
+            <t t-if="o.partner_id.phone">
+                Phone: <span t-field="o.partner_id.phone"/>
+            </t>
+
+            <t t-if="o.partner_id.mobile">
+                <t t-if="o.partner_id.phone">
+                    <br/>
+                </t>
+
+                Mobile: <span t-field="o.partner_id.mobile"/>
+            </t>
+        </xpath>
+
         <xpath expr="//span[@t-field='o.name']" position="after">
             <t t-if="o.document_type">
                 - <span t-field="o.document_type"/>
