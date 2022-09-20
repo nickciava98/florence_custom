@@ -53,6 +53,10 @@ class AmazonRevenues(models.Model):
     product_updated_sku_cost = fields.Float(
         compute = "_compute_product_updated_sku_cost"
     )
+    chart_start = fields.Date()
+    chart_end = fields.Date()
+    chart_start_test = fields.Date()
+    chart_end_test = fields.Date()
 
     @api.depends("product")
     def _compute_product_updated_sku_cost(self):
@@ -62,7 +66,6 @@ class AmazonRevenues(models.Model):
             if "manufacturing.costs" in self.env:
                 for product in self.env["manufacturing.costs"].search(
                         [("super_product", "=", line.product.id)]):
-                    print(product.price_total_avg)
                     line.product_updated_sku_cost = product.price_total_avg
 
                     if line.product_updated_sku_cost != 0:
@@ -104,6 +107,28 @@ class AmazonRevenues(models.Model):
                     line.total_probable_income += revenues_line.probable_income
 
     def graph_view_action(self):
+        if self.chart_start or self.chart_end:
+            return {
+                'name': 'Revenues Analysis',
+                'view_type': 'graph',
+                'view_mode': 'graph',
+                'res_model': 'amazon.revenues.line',
+                'type': 'ir.actions.act_window',
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('product', '=', self.product.id),
+                    ('amazon_revenues_line_id_test', '=', False),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.chart_start),
+                    ('date', '<=', self.chart_end)
+                ],
+                'context': {
+                    'graph_measure': 'probable_income',
+                    'graph_mode': 'line',
+                    'graph_groupbys': ['date:day']
+                }
+            }
+
         return {
             'name': 'Revenues Analysis',
             'view_type': 'graph',
@@ -124,6 +149,28 @@ class AmazonRevenues(models.Model):
         }
 
     def tree_view_action(self):
+        if self.chart_start or self.chart_end:
+            return {
+                'name': 'Revenues List',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'view_id': False,
+                'res_model': 'amazon.revenues.line',
+                'type': 'ir.actions.act_window',
+                'context': {
+                    'group_by': ['date:year', 'date:month']
+                },
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('product', '=', self.product.id),
+                    ('amazon_revenues_line_id_test', '=', False),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.chart_start),
+                    ('date', '<=', self.chart_end)
+                ],
+                'target': 'current'
+            }
+
         return {
             'name': 'Revenues List',
             'view_type': 'form',
@@ -138,6 +185,90 @@ class AmazonRevenues(models.Model):
                 '&', '&',
                 ('product', '=', self.product.id),
                 ('amazon_revenues_line_id_test', '=', False),
+                ('parent', '=', self.name)
+            ],
+            'target': 'current'
+        }
+
+    def graph_test_view_action(self):
+        if self.chart_start or self.chart_end:
+            return {
+                'name': 'Revenues Analysis',
+                'view_type': 'graph',
+                'view_mode': 'graph',
+                'res_model': 'amazon.revenues.line',
+                'type': 'ir.actions.act_window',
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('product', '=', self.product.id),
+                    ('amazon_revenues_line_id', '=', False),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.chart_start),
+                    ('date', '<=', self.chart_end)
+                ],
+                'context': {
+                    'graph_measure': 'probable_income',
+                    'graph_mode': 'line',
+                    'graph_groupbys': ['date:day']
+                }
+            }
+
+        return {
+            'name': 'Revenues Analysis',
+            'view_type': 'graph',
+            'view_mode': 'graph',
+            'res_model': 'amazon.revenues.line',
+            'type': 'ir.actions.act_window',
+            'domain': [
+                '&', '&',
+                ('product', '=', self.product.id),
+                ('amazon_revenues_line_id', '=', False),
+                ('parent', '=', self.name)
+            ],
+            'context': {
+                'graph_measure': 'probable_income',
+                'graph_mode': 'line',
+                'graph_groupbys': ['date:day']
+            }
+        }
+
+    def tree_test_view_action(self):
+        if self.chart_start or self.chart_end:
+            return {
+                'name': 'Revenues List',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'view_id': False,
+                'res_model': 'amazon.revenues.line',
+                'type': 'ir.actions.act_window',
+                'context': {
+                    'group_by': ['date:year', 'date:month']
+                },
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('product', '=', self.product.id),
+                    ('amazon_revenues_line_id', '=', False),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.chart_start),
+                    ('date', '<=', self.chart_end)
+                ],
+                'target': 'current'
+            }
+
+        return {
+            'name': 'Revenues List',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'view_id': False,
+            'res_model': 'amazon.revenues.line',
+            'type': 'ir.actions.act_window',
+            'context': {
+                'group_by': ['date:year', 'date:month']
+            },
+            'domain': [
+                '&', '&',
+                ('product', '=', self.product.id),
+                ('amazon_revenues_line_id', '=', False),
                 ('parent', '=', self.name)
             ],
             'target': 'current'

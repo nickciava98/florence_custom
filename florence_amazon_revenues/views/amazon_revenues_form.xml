@@ -5,13 +5,6 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button type="object" name="tree_view_action" string="Revenues List"
-                                class="oe_stat_button" icon="fa-list-ul"/>
-                        <button type="object" name="graph_view_action" string="Revenues Analysis"
-                                class="oe_stat_button" icon="fa-bar-chart-o"/>
-                    </div>
-
                     <label for="name" string="Marketplace"/>
                     <field name="name" help="Select the Amazon Marketplace"/>
 
@@ -29,6 +22,39 @@
 
                     <notebook>
                         <page string="Incidence" name="incidence">
+                            <group>
+                                <group>
+                                    <label for="chart_start" string="Filter by date"/>
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <field name="chart_start" widget="daterange"
+                                                   options="{'related_end_date': 'chart_end'}"/>
+                                            <i class="fa fa-long-arrow-right mx-2"
+                                               aria-label="Arrow icon"
+                                               title="Arrow"/>
+                                            <field name="chart_end" widget="daterange"
+                                                   options="{'related_start_date': 'chart_start'}"/>
+                                        </div>
+                                    </div>
+                                </group>
+
+                                <group>
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <button type="object" name="graph_view_action"
+                                                    string="Revenues Analysis"
+                                                    class="oe_stat_button"
+                                                    icon="fa-bar-chart-o"/>
+                                            <button type="object"
+                                                    name="tree_view_action"
+                                                    string="Revenues List"
+                                                    class="oe_stat_button"
+                                                    icon="fa-list-ul"/>
+                                        </div>
+                                    </div>
+                                </group>
+                            </group>
+
                             <field name="revenues_line" widget="section_and_note_one2many"
                                    string="Incidence"
                                    context="{'default_parent': name,
@@ -52,7 +78,7 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="sku_cost" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"
-                                           sum="Sku Costs"/>
+                                           avg="Sku Costs"/>
                                     <field name="gross_revenues" widget="monetary" sum="Gross Revenues"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="ads_total_cost" widget="monetary" sum="Ads Total Cost"
@@ -68,6 +94,40 @@
                         </page>
 
                         <page string="Test Area" name="test_area">
+                            <group>
+                                <group>
+                                    <label for="chart_start_test" string="Filter by date"/>
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <field name="chart_start_test" widget="daterange"
+                                                   options="{'related_end_date': 'chart_end_test'}"/>
+                                            <i class="fa fa-long-arrow-right mx-2"
+                                               aria-label="Arrow icon"
+                                               title="Arrow"/>
+                                            <field name="chart_end_test" widget="daterange"
+                                                   options="{'related_start_date': 'chart_start_test'}"/>
+                                        </div>
+                                    </div>
+                                </group>
+
+                                <group>
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <button type="object"
+                                                    name="graph_test_view_action"
+                                                    string="Revenues Analysis"
+                                                    class="oe_stat_button"
+                                                    icon="fa-bar-chart-o"/>
+                                            <button type="object"
+                                                    name="tree_test_view_action"
+                                                    string="Revenues List"
+                                                    class="oe_stat_button"
+                                                    icon="fa-list-ul"/>
+                                        </div>
+                                    </div>
+                                </group>
+                            </group>
+
                             <field name="revenues_line_test" widget="section_and_note_one2many"
                                    string="Incidence"
                                    context="{'default_parent': name,
@@ -94,7 +154,7 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="sku_cost" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"
-                                           sum="Sku Costs" readonly="False"/>
+                                           avg="Sku Costs" readonly="False"/>
                                     <field name="gross_revenues" widget="monetary" sum="Gross Revenues"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="ads_total_cost" widget="monetary" sum="Ads Total Cost"

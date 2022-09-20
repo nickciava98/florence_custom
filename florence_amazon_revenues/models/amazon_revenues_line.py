@@ -21,13 +21,17 @@ class AmazonRevenuesLine(models.Model):
 
     # Visible fields
     date = fields.Date()
-    price_unit = fields.Float()
+    price_unit = fields.Float(
+        group_operator = "avg"
+    )
     amazon_fees = fields.Float()
     taxes = fields.Float(
         compute = "_compute_taxes",
         store = True
     )
-    sku_cost = fields.Float()
+    sku_cost = fields.Float(
+        group_operator = "avg"
+    )
     gross_revenues = fields.Float(
         compute = "_compute_gross_revenues",
         store = True
@@ -35,12 +39,14 @@ class AmazonRevenuesLine(models.Model):
     ads_total_cost = fields.Float()
     ads_cost_per_unit = fields.Float(
         compute = "_compute_ads_cost_per_unit",
-        store = True
+        store = True,
+        group_operator = "avg"
     )
     pcs_sold = fields.Float()
     earned_per_pc = fields.Float(
         compute = "_compute_earned_per_pc",
-        store = True
+        store = True,
+        group_operator = "avg"
     )
     probable_income = fields.Float(
         compute = "_compute_probable_income",
