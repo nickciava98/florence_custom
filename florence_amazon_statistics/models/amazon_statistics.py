@@ -142,8 +142,8 @@ class AmazonStatistics(models.Model):
                 ('name', '=', False),
                 ('product', '=', self.product.id),
                 ('parent', '=', self.name),
-                ('date', '>=', self.date_from),
-                ('date', '<=', self.date_to)
+                ('date', '>=', self.date_from_test),
+                ('date', '<=', self.date_to_test)
             ],
             'context': {
                 'graph_measure': 'main_stat',
@@ -190,8 +190,8 @@ class AmazonStatistics(models.Model):
                 ('name', '=', False),
                 ('product', '=', self.product.id),
                 ('parent', '=', self.name),
-                ('date', '>=', self.date_from),
-                ('date', '<=', self.date_to)
+                ('date', '>=', self.date_from_test),
+                ('date', '<=', self.date_to_test)
             ],
             'target': 'current'
         }
@@ -230,8 +230,8 @@ class AmazonStatistics(models.Model):
                 ('name', '=', False),
                 ('product', '=', self.product.id),
                 ('parent', '=', self.name),
-                ('date', '>=', self.date_from),
-                ('date', '<=', self.date_to)
+                ('date', '>=', self.date_from_test),
+                ('date', '<=', self.date_to_test)
             ],
             # 'context': {
             #     'graph_measure': 'main_stat',
