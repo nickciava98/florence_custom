@@ -1,6 +1,6 @@
+from odoo import models, fields, api
 import datetime
 
-from odoo import models, fields, api
 
 class EmployeesStatistics(models.Model):
     _name = "employees.statistics"
