@@ -1,0 +1,31 @@
+<odoo>
+    <record id="help_wizard_view_form" model="ir.ui.view">
+        <field name="name">Help Guide</field>
+        <field name="model">help.wizard</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="state" invisible="True"/>
+
+                    <h1 attrs="{'invisible':[('state','=','1')]}">
+                        Step <field name="step"/>
+                    </h1>
+
+                    <field name="guide"/>
+                </sheet>
+
+                <footer>
+                    <button name="action_previous"
+                            string="Previous"
+                            type="object"
+                            attrs="{'invisible':[('state','=','1')]}"/>
+                    <button name="action_next"
+                            string="Next"
+                            type="object"
+                            attrs="{'invisible':[('state','=','2')]}"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

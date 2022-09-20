@@ -92,4 +92,11 @@
              'graph_groupbys': ['date:day']}
         </field>
     </record>
+
+    <record id="help_wizard_action" model="ir.actions.act_window">
+        <field name="name">Help Guide</field>
+        <field name="res_model">help.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 </odoo>
