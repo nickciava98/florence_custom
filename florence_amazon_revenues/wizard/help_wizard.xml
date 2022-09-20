@@ -6,10 +6,8 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <field name="state" invisible="True"/>
-
-                    <h1 attrs="{'invisible':[('state','=','1')]}">
-                        Step <field name="step"/>
+                    <h1 attrs="{'invisible':[('state','=','0')]}">
+                        <field name="state" readonly="True"/>
                     </h1>
 
                     <field name="guide"/>
@@ -19,11 +17,14 @@
                     <button name="action_previous"
                             string="Previous"
                             type="object"
-                            attrs="{'invisible':[('state','=','1')]}"/>
+                            attrs="{'invisible':[('state','=','0')]}"/>
                     <button name="action_next"
                             string="Next"
                             type="object"
-                            attrs="{'invisible':[('state','=','2')]}"/>
+                            attrs="{'invisible':[('state','=','3')]}"/>
+                    <button string="Close"
+                            special="cancel"
+                            attrs="{'invisible':[('state','!=','3')]}"/>
                 </footer>
             </form>
         </field>
