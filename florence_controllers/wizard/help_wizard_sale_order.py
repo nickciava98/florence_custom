@@ -42,13 +42,13 @@ class HelpWizardSaleOrder(models.TransientModel):
                              "N.B. questa regola non si applica al prodotto Free Sample"
             elif line.state == "4":
                 line.guide = "Per la corretta gestione dei Free Sample è necessario innanzitutto selezionare un " \
-                             "Quotation Template che contiene la spunta sul campo Is Free Sample. " \
+                             "Quotation Template che contiene la spunta sul campo Is Free Sample.\n\n" \
                              "Dopo aver fatto ciò sarà necessario controllare le righe dell Order Line per assicurarsi " \
-                             "che tutto sia corretto, aggiungendo eventualmente l'aliquota IVA dove mancante. " \
+                             "che tutto sia corretto, aggiungendo eventualmente l'aliquota IVA dove mancante.\n\n" \
                              "Qualora siano state effettuate modifiche ai prodotti prelevati dal template (es. aggiunta di " \
                              "nuove righe, rimozione di altre o modifica del prezzo) sarà necessario cliccare sul cestino " \
                              "situato accanto alla riga relativa al prodotto Free Sample per permettere al sistema di rigenerare " \
-                             "il prodotto Free Sample con prezzo negativo integrando le nuove modifiche. " \
+                             "il prodotto Free Sample con prezzo negativo integrando le nuove modifiche.\n\n" \
                              "Questa operazione è assolutamente necessaria in quanto la non esecuzione della stessa può creare " \
                              "problemi sul calcolo del totale (il quale sarà diverso da zero) con ripercussioni contabili.\n\n" \
                              "N.B. non è necessario inserire lo sconto del 100%, in quanto l'applicazione di uno sconto del 100% " \
