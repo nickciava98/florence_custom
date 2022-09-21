@@ -1,1 +1,1 @@
-from . import help_wizard
+from . import help_wizard_sale_order

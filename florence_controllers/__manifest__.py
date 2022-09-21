@@ -8,9 +8,10 @@
     'version': '14.1.2',
     'website': "http://www.nciavarella.me",
     'depends': ['sale', 'sale_management', 'account', 'florence_free_sample'],
-    'data': ['views/sale_order_form.xml',
+    'data': ['security/ir.model.access.csv',
+             'views/sale_order_form.xml',
              'views/account_move_form.xml',
-             'wizard/help_wizard.xml'],
+             'wizard/help_wizard_sale_order.xml'],
     'application': False,
     'installable': True,
 }
