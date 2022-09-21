@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <h1 attrs="{'invisible':[('state','=','0')]}">
+                    <h1>
                         <field name="state" readonly="True"/>
                     </h1>
 
@@ -21,10 +21,10 @@
                     <button name="action_next"
                             string="Next"
                             type="object"
-                            attrs="{'invisible':[('state','=','3')]}"/>
+                            attrs="{'invisible':[('state','=','4')]}"/>
                     <button string="Close"
                             special="cancel"
-                            attrs="{'invisible':[('state','!=','3')]}"/>
+                            attrs="{'invisible':[('state','!=','4')]}"/>
                 </footer>
             </form>
         </field>

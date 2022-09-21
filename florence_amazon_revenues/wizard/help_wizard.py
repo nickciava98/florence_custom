@@ -6,10 +6,11 @@ class HelpWizard(models.TransientModel):
     _description = "Help Wizard"
 
     state = fields.Selection(
-        [("0", "Step 0"),
-         ("1", "Step 1"),
-         ("2", "Step 2"),
-         ("3", "Step 3")],
+        [("0", "Amazon Revenues"),
+         ("1", "Schermata principale"),
+         ("2", "I due tab Incidence e Test Area"),
+         ("3", "Funzionamento del data entry"),
+         ("4", "Liste e grafici con e senza filtraggio")],
         default = "0"
     )
     guide = fields.Text(
@@ -37,7 +38,7 @@ class HelpWizard(models.TransientModel):
                              "dei dati, con il primo tab visto come ufficiale e il secondo" \
                              "come test per visualizzare una previsione dell'andamento"
             elif line.state == "3":
-                line.guide = "Nel tab incidence i dati vanno inseriti manualmente ad eccezione di:\n" \
+                line.guide = "Nel tab Incidence i dati vanno inseriti manualmente ad eccezione di:\n" \
                              "- VAT: verrà inserito in automatico in base al marketplace selezionato, " \
                              "rispettando le aliquote IVA del paese di riferimento e lo scorporo effettuato da Amazon\n" \
                              "- Sku Cost: verrà inserito in automatico prelevando il valore dal modulo Manufacturing Cost " \
@@ -49,7 +50,19 @@ class HelpWizard(models.TransientModel):
                              "- Earned Per Pc: verrà calcolato in automatico attraverso la seguente formula: " \
                              "Gross Revenues - Ads Cost Per Unit\n" \
                              "- Probable Income: verrà calcolato in automatico attraverso la seguente formula: " \
-                             "Earned Per Pc x Pcs Sold"
+                             "Earned Per Pc x Pcs Sold\n" \
+                             "Il tab Test Area segue le stesse regole del tab precedente"
+            elif line.state == "4":
+                line.guide = "In ognuno dei due tab sono presenti dei campi per il filtraggio:\n" \
+                             "- Filter by date: data inizio e data fine\n" \
+                             "e dei pulsanti che richiamano delle azioni:\n" \
+                             "- Revenues Analysis\n" \
+                             "- Revenues List\n" \
+                             "I primi due campi data servono per stabilire l'intervallo temporale attraverso" \
+                             "cui filtrare i dati presenti nel grafico richiamabile tramite il pulsante" \
+                             "Revenues Analysis e nella lista richiamabile tramite il pulsante Revenues List.\n" \
+                             "Questi due campi possono anche essere vuoti, e se sono vuoti i due pulsanti richiamano" \
+                             "lista e grafico complessivo, visualizzando tutti i dati presenti"
 
     def action_next(self):
         self.write(
