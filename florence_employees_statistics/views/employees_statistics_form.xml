@@ -7,7 +7,14 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button type="object" name="tree_view_action" string="Employee's Statistics List"
+                        <button type="action"
+                                name="%(help_wizard_action)d"
+                                string="Help Guide"
+                                class="oe_stat_button"
+                                icon="fa-info-circle"/>
+                        <button type="object"
+                                name="tree_view_action"
+                                string="Employee's Statistics List"
                                 class="oe_stat_button" icon="fa-list-ul"/>
                     </div>
 

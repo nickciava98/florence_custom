@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_employees_statistics,access_employees_statistics,model_employees_statistics,base.group_user,1,1,1,1
 access_employees_statistics_benchmark,access_employees_statistics_benchmark,model_employees_statistics_benchmark,base.group_user,1,1,1,1
 access_employees_statistics_line,access_employees_statistics_line,model_employees_statistics_line,base.group_user,1,1,1,1
+access_help_wizard_empl_stats,access_help_wizard_empl_stats,model_help_wizard_empl_stats,base.group_user,1,1,1,1

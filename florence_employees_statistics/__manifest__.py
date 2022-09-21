@@ -17,7 +17,8 @@
              'views/employees_statistics_benchmark_form.xml',
              'views/employees_statistics_benchmark_tree.xml',
              'views/employees_statistics_line_graph.xml',
-             'views/employees_statistics_line_tree.xml'],
+             'views/employees_statistics_line_tree.xml',
+             'wizard/help_wizard.xml'],
     'application': True,
     'installable': True,
 }
