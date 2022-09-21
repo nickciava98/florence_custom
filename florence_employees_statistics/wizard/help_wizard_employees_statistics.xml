@@ -1,7 +1,7 @@
 <odoo>
-    <record id="help_wizard_view_form" model="ir.ui.view">
+    <record id="help_wizard_employees_statistics_view_form" model="ir.ui.view">
         <field name="name">Help Guide</field>
-        <field name="model">help.wizard.amz.rev</field>
+        <field name="model">help.wizard.employees.statistics</field>
 
         <field name="arch" type="xml">
             <form>

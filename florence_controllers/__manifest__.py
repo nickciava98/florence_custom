@@ -9,7 +9,8 @@
     'website': "http://www.nciavarella.me",
     'depends': ['sale', 'sale_management', 'account', 'florence_free_sample'],
     'data': ['views/sale_order_form.xml',
-             'views/account_move_form.xml'],
+             'views/account_move_form.xml',
+             'wizard/help_wizard.xml'],
     'application': False,
     'installable': True,
 }

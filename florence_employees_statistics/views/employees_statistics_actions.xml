@@ -47,9 +47,9 @@
         <field name="context">{'group_by': ['name', 'week']}</field>
     </record>
 
-    <record id="help_wizard_action" model="ir.actions.act_window">
+    <record id="help_wizard_employees_statistics_action" model="ir.actions.act_window">
         <field name="name">Help Guide</field>
-        <field name="res_model">help.wizard.empl.stats</field>
+        <field name="res_model">help.wizard.employees.statistics</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
