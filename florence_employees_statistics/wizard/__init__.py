@@ -1,1 +1,1 @@
-from . import help_wizard_employees_statistics
+from . import help_wizard

@@ -1,9 +1,9 @@
 from odoo import models, fields, api
 
 
-class HelpWizardAmazonRevenues(models.TransientModel):
+class HelpWizard(models.TransientModel):
     _name = "help.wizard.amz.rev"
-    _description = "Help Wizard for Amazon Revenues"
+    _description = "Help Wizard"
 
     state = fields.Selection(
         [("0", "Amazon Revenues"),
@@ -24,9 +24,9 @@ class HelpWizardAmazonRevenues(models.TransientModel):
 
             if line.state == "0":
                 line.guide = "" \
-                    "Introduzione alla guida di utilizzo " \
-                    "del modulo Amazon Revenues sviluppato " \
-                    "da Niccolò Ciavarella per Florence Organics Ltd"
+                             "Introduzione alla guida di utilizzo " \
+                             "del modulo Amazon Revenues sviluppato " \
+                             "da Niccolò Ciavarella per Florence Organics Ltd"
             elif line.state == "1":
                 line.guide = "La schermata principale mostra un riepilogo con " \
                              "Marketplace di riferimento e prodotto"

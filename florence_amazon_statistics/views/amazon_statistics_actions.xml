@@ -37,7 +37,7 @@
         <field name="view_mode">pivot</field>
     </record>
 
-    <record id="help_wizard_amazon_statistics_action" model="ir.actions.act_window">
+    <record id="help_wizard_action" model="ir.actions.act_window">
         <field name="name">Help Guide</field>
         <field name="res_model">help.wizard.amz.stats</field>
         <field name="view_mode">form</field>

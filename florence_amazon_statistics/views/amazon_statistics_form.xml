@@ -8,7 +8,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button type="action"
-                                name="%(help_wizard_amazon_statistics_action)d"
+                                name="%(help_wizard_action)d"
                                 string="Help Guide"
                                 class="oe_stat_button"
                                 icon="fa-info-circle"/>

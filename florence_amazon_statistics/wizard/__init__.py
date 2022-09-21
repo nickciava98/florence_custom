@@ -1,1 +1,1 @@
-from . import help_wizard_amazon_statistics
+from . import help_wizard

@@ -3,7 +3,7 @@ from odoo import models, fields, api
 
 class HelpWizard(models.TransientModel):
     _name = "help.wizard.empl.stats"
-    _description = "Help Wizard for Employee's Statistics"
+    _description = "Help Wizard"
 
     state = fields.Selection(
         [("0", "Employees Statistics"),
@@ -24,9 +24,9 @@ class HelpWizard(models.TransientModel):
 
             if line.state == "0":
                 line.guide = "" \
-                    "Introducing help guide " \
-                    "of Employees Statistics module developed " \
-                    "by Niccolò Ciavarella for Florence Organics Ltd"
+                             "Introducing help guide " \
+                             "of Employees Statistics module developed " \
+                             "by Niccolò Ciavarella for Florence Organics Ltd"
             elif line.state == "1":
                 line.guide = "The main screen shows a summary with Employee's name " \
                              "and Job position, and chart manager"

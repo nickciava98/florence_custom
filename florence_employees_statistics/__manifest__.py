@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'Human Resources/Employees',
-    'version': '14.1.2',
+    'version': '14.0.3',
     'website': "http://www.nciavarella.me",
     'depends': ['mail', 'hr'],
     'data': ['security/ir.model.access.csv',
@@ -18,7 +18,7 @@
              'views/employees_statistics_benchmark_tree.xml',
              'views/employees_statistics_line_graph.xml',
              'views/employees_statistics_line_tree.xml',
-             'wizard/help_wizard_employees_statistics.xml'],
+             'wizard/help_wizard.xml'],
     'application': True,
     'installable': True,
 }

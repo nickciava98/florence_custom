@@ -1,9 +1,9 @@
 from odoo import models, fields, api
 
 
-class HelpWizardAmazonStatistics(models.TransientModel):
+class HelpWizard(models.TransientModel):
     _name = "help.wizard.amz.stats"
-    _description = "Help Wizard for Amazon Statistics"
+    _description = "Help Wizard"
 
     state = fields.Selection(
         [("0", "Amazon Statistics"),
@@ -24,9 +24,9 @@ class HelpWizardAmazonStatistics(models.TransientModel):
 
             if line.state == "0":
                 line.guide = "" \
-                    "Introduzione alla guida di utilizzo " \
-                    "del modulo Amazon Statistics sviluppato " \
-                    "da Niccolò Ciavarella per Florence Organics Ltd"
+                             "Introduzione alla guida di utilizzo " \
+                             "del modulo Amazon Statistics sviluppato " \
+                             "da Niccolò Ciavarella per Florence Organics Ltd"
             elif line.state == "1":
                 line.guide = "La schermata principale mostra un riepilogo con " \
                              "Marketplace di riferimento e prodotto"
@@ -76,7 +76,7 @@ class HelpWizardAmazonStatistics(models.TransientModel):
         return {
             'name': 'Help Guide',
             'type': 'ir.actions.act_window',
-            'res_model': 'help.wizard.amz.stats',
+            'res_model': 'help.wizard.amz.rev',
             'view_mode': 'form',
             'view_type': 'form',
             'res_id': self.id,
@@ -92,7 +92,7 @@ class HelpWizardAmazonStatistics(models.TransientModel):
         return {
             'name': 'Help Guide',
             'type': 'ir.actions.act_window',
-            'res_model': 'help.wizard.amz.stats',
+            'res_model': 'help.wizard.amz.rev',
             'view_mode': 'form',
             'view_type': 'form',
             'res_id': self.id,
