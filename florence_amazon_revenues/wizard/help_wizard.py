@@ -35,7 +35,7 @@ class HelpWizard(models.TransientModel):
                              "1 - Incidence\n" \
                              "2 - Test Area\n" \
                              "Ognuno di questi tab mostra un riepilogo generale" \
-                             "dei dati, con il primo tab visto come ufficiale e il secondo" \
+                             "dei dati, con il primo tab visto come ufficiale e il secondo " \
                              "come test per visualizzare una previsione dell'andamento"
             elif line.state == "3":
                 line.guide = "Nel tab Incidence i dati vanno inseriti manualmente ad eccezione di:\n" \

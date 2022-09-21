@@ -15,7 +15,8 @@
         'views/amazon_statistics_tree.xml',
         'views/amazon_statistics_line_tree.xml',
         'views/amazon_statistics_line_graph.xml',
-        'views/amazon_statistics_line_pivot.xml'
+        'views/amazon_statistics_line_pivot.xml',
+        'wizard/help_wizard.xml'
     ],
     'application': False,
     'installable': True,

@@ -7,7 +7,13 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button type="object" name="update_values_action" string="Sync values between tabs"
+                        <button type="action"
+                                name="%(help_wizard_action)d"
+                                string="Help Guide"
+                                class="oe_stat_button"
+                                icon="fa-info-circle"/>
+                        <button type="object" name="update_values_action"
+                                string="Sync values between tabs"
                                 class="oe_stat_button" icon="fa-refresh"/>
                     </div>
 
@@ -155,7 +161,7 @@
                         <page name="statistics_test" string="Statistics Test">
                             <group string="Pivot and Chart Analysis">
                                 <group>
-                                    <label for="date_from" string="Filter by date"/>
+                                    <label for="date_from_test" string="Filter by date"/>
                                     <div class="w-100">
                                         <div class="o_row">
                                             <field name="date_from_test" widget="daterange"
@@ -187,11 +193,12 @@
 
                             <group string="Average Analysis">
                                 <group>
-                                    <field name="corrective_factor_test"/>
+                                    <field name="corrective_factor_test"
+                                           string="Corrective Factor"/>
                                 </group>
 
                                 <group>
-                                    <field name="average_test"/>
+                                    <field name="average_test" string="Average"/>
                                 </group>
                             </group>
 

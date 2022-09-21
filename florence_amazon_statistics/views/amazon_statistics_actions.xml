@@ -37,6 +37,13 @@
         <field name="view_mode">pivot</field>
     </record>
 
+    <record id="help_wizard_action" model="ir.actions.act_window">
+        <field name="name">Help Guide</field>
+        <field name="res_model">help.wizard.amz.stats</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
     <menuitem id="line_graph_menu" name="Graph"
               action="line_graph_view_action" sequence="1"
               parent="amazon_statistics_menu"/>
