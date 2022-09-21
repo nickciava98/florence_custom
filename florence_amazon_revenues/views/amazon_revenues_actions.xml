@@ -95,7 +95,7 @@
 
     <record id="help_wizard_amazon_revenues_action" model="ir.actions.act_window">
         <field name="name">Help Guide</field>
-        <field name="res_model">help.wizard.amazon.revenues</field>
+        <field name="res_model">help.wizard.amz.rev</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>

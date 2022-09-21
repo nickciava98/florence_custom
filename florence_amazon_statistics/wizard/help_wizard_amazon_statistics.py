@@ -2,7 +2,7 @@ from odoo import models, fields, api
 
 
 class HelpWizardAmazonStatistics(models.TransientModel):
-    _name = "help.wizard.amazon.statistics"
+    _name = "help.wizard.amz.stats"
     _description = "Help Wizard for Amazon Statistics"
 
     state = fields.Selection(
@@ -76,7 +76,7 @@ class HelpWizardAmazonStatistics(models.TransientModel):
         return {
             'name': 'Help Guide',
             'type': 'ir.actions.act_window',
-            'res_model': 'help.wizard.amazon.statistics',
+            'res_model': 'help.wizard.amz.stats',
             'view_mode': 'form',
             'view_type': 'form',
             'res_id': self.id,
@@ -92,7 +92,7 @@ class HelpWizardAmazonStatistics(models.TransientModel):
         return {
             'name': 'Help Guide',
             'type': 'ir.actions.act_window',
-            'res_model': 'help.wizard.amazon.statistics',
+            'res_model': 'help.wizard.amz.stats',
             'view_mode': 'form',
             'view_type': 'form',
             'res_id': self.id,

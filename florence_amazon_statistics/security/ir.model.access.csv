@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_amazon_statistics,access_amazon_statistics,model_amazon_statistics,base.group_user,1,1,1,1
 access_amazon_statistics_line,access_amazon_statistics_line,model_amazon_statistics_line,base.group_user,1,1,1,1
-access_help_wizard_amazon_statistics,access_help_wizard_amazon_statistics,model_help_wizard_amazon_statistics,base.group_user,1,1,1,1
+access_help_wizard_amz_stats,access_help_wizard_amz_stats,model_help_wizard_amz_stats,base.group_user,1,1,1,1

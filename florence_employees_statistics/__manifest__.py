@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'Human Resources/Employees',
-    'version': '14.0.3',
+    'version': '14.1.2',
     'website': "http://www.nciavarella.me",
     'depends': ['mail', 'hr'],
     'data': ['security/ir.model.access.csv',
