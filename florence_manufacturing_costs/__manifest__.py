@@ -7,7 +7,7 @@
     'category': 'inventory',
     'version': '14.2.9',
     'website': "http://www.nciavarella.me",
-    'depends': ['mail', 'sale', 'sale_management',
+    'depends': ['base', 'mail', 'sale', 'sale_management',
                 'purchase', 'stock', 'mrp', 'account'],
     'data': ['security/ir.model.access.csv',
              'views/manufacturing_costs_actions.xml',

@@ -7,7 +7,7 @@
     'category': 'Human Resources/Employees',
     'version': '14.0.3',
     'website': "http://www.nciavarella.me",
-    'depends': ['mail', 'hr'],
+    'depends': ['base', 'mail', 'hr'],
     'data': ['security/ir.model.access.csv',
              'views/employees_statistics_actions.xml',
              'views/employees_statistics_form.xml',

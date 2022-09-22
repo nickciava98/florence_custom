@@ -7,7 +7,8 @@
     'category': 'sales',
     'version': '14.2',
     'website': "http://www.nciavarella.me",
-    'depends': ['florence_amazon_revenues', 'board'],
+    'depends': ['base', 'mail', 'stock',
+                'florence_amazon_revenues', 'board'],
     'data': [
         'security/ir.model.access.csv',
         'views/amazon_statistics_actions.xml',

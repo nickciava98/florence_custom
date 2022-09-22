@@ -7,7 +7,7 @@
     'category': 'sales',
     'version': '14.2.3',
     'website': "http://www.nciavarella.me",
-    'depends': ['mail', 'stock'],
+    'depends': ['base', 'mail', 'stock'],
     'data': [
         'security/ir.model.access.csv',
         'views/amazon_revenues_actions.xml',
