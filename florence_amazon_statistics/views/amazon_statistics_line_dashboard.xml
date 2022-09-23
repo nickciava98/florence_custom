@@ -1,0 +1,55 @@
+<odoo>
+    <record id="amazon_statistics_line_view_dashboard" model="ir.ui.view">
+        <field name="name">Statistics Dashboard</field>
+        <field name="model">amazon.statistics.line</field>
+
+        <field name="arch" type="xml">
+            <dashboard>
+                <view ref="florence_amazon_statistics.amazon_statistics_line_view_graph"
+                      type="graph"/>
+
+                <group>
+                    <group col="3" colspan="3" string="Statistics">
+                        <aggregate name="average"
+                                   string="Average"
+                                   group_operator="avg"
+                                   field="average"/>
+                        <aggregate name="general_reviews_statistics"
+                                   string="General Reviews Statistics"
+                                   group_operator="avg"
+                                   field="general_reviews_statistics"/>
+                        <aggregate name="main_stat"
+                                   string="Main Stat"
+                                   group_operator="avg" field="main_stat"/>
+                    </group>
+
+                    <group col="5" colspan="5" string="#Stars Value">
+                        <aggregate name="one_star_value"
+                                   string="One Star Value"
+                                   group_operator="avg"
+                                   field="one_star_value"/>
+                        <aggregate name="two_stars_value"
+                                   string="Two Stars Value"
+                                   group_operator="avg"
+                                   field="two_stars_value"/>
+                        <aggregate name="three_stars_value"
+                                   string="Three Stars Value"
+                                   group_operator="avg"
+                                   field="three_stars_value"/>
+                        <aggregate name="four_stars_value"
+                                   string="Four Stars Value"
+                                   group_operator="avg"
+                                   field="four_stars_value"/>
+                        <aggregate name="five_stars_value"
+                                   string="Five Stars Value"
+                                   group_operator="avg"
+                                   field="five_stars_value"/>
+                    </group>
+                </group>
+
+                <view ref="florence_amazon_statistics.amazon_statistics_line_view_pivot"
+                      type="pivot"/>
+            </dashboard>
+        </field>
+    </record>
+</odoo>

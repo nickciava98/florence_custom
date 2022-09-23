@@ -16,6 +16,12 @@ class HelpWizardSaleOrder(models.TransientModel):
     guide = fields.Text(
         compute = "_compute_guide"
     )
+    info_and_contacts = fields.Text(
+        default = "For more info and questions send a mail to: "
+                  "<a href='mailto:niccolo@florenceorganics.com'>niccolo@florenceorganics.com</a> "
+                  "or call/SMS to: <a href='tel:+393317438243'>(+39) 331 743 8243</a> "
+                  "or WhatsApp to: <a href='https://wa.me/393317438243'>Niccolò Ciavarella</a>"
+    )
 
     @api.depends("state")
     def _compute_guide(self):
@@ -31,29 +37,29 @@ class HelpWizardSaleOrder(models.TransientModel):
                              "Quotation Template, utile per la creazione di PRO-Forma da modello"
             elif line.state == "2":
                 line.guide = "Nel tab Order Lines ci saranno le righe dell'ordine con tutti i prodotti " \
-                             "inseriti o presenti nel template.\n\n" \
+                             "inseriti o presenti nel template.<br/><br/>" \
                              "Per ognuno di essi è necessario inserire una descrizione (che apparirà nel PDF), " \
                              "la quantità e il costo"
             elif line.state == "3":
-                line.guide = "L'inserimento dei dati è immediato e spesso automatico.\n\n" \
+                line.guide = "L'inserimento dei dati è immediato e spesso automatico.<br/><br/>" \
                              "Bisogna fare attenzione al campo VAT, il quale non sarà popolato in automatico, " \
                              "sarà dunque necessario selezionare l'aliquota corrispondente in manuale, altrimenti " \
-                             "verrà mostrato un messaggio di errore.\n\n" \
-                             "N.B. questa regola non si applica al prodotto Free Sample"
+                             "verrà mostrato un messaggio di errore.<br/><br/>" \
+                             "<b>N.B. questa regola non si applica al prodotto Free Sample</b>"
             elif line.state == "4":
                 line.guide = "Per la corretta gestione dei Free Sample è necessario innanzitutto selezionare un " \
-                             "Quotation Template che contiene la spunta sul campo Is Free Sample.\n\n" \
+                             "Quotation Template che contiene la spunta sul campo Is Free Sample.<br/><br/>" \
                              "Dopo aver fatto ciò sarà necessario controllare le righe dell Order Line per assicurarsi " \
-                             "che tutto sia corretto, aggiungendo eventualmente l'aliquota IVA dove mancante.\n\n" \
+                             "che tutto sia corretto, aggiungendo eventualmente l'aliquota IVA dove mancante.<br/><br/>" \
                              "Qualora siano state effettuate modifiche ai prodotti prelevati dal template (es. aggiunta di " \
                              "nuove righe, rimozione di altre o modifica del prezzo) sarà necessario cliccare sul cestino " \
                              "situato accanto alla riga relativa al prodotto Free Sample per permettere al sistema di rigenerare " \
-                             "il prodotto Free Sample con prezzo negativo integrando le nuove modifiche.\n\n" \
+                             "il prodotto Free Sample con prezzo negativo integrando le nuove modifiche.<br/><br/>" \
                              "Questa operazione è assolutamente necessaria in quanto la non esecuzione della stessa può creare " \
-                             "problemi sul calcolo del totale (il quale sarà diverso da zero) con ripercussioni contabili.\n\n" \
-                             "N.B. non è necessario inserire lo sconto del 100%, in quanto l'applicazione di uno sconto del 100% " \
+                             "problemi sul calcolo del totale (il quale sarà diverso da zero) con ripercussioni contabili.<br/><br/>" \
+                             "<b>N.B. non è necessario inserire lo sconto del 100%, in quanto l'applicazione di uno sconto del 100% " \
                              "invaliderebbe tutti i passaggi precedenti e renderebbe l'ordine errato. Tuttavia verrà in automatico " \
-                             "visualizzato uno sconto del 100% nel PDF di stampa in ogni riga dell'order line"
+                             "visualizzato uno sconto del 100% nel PDF di stampa in ogni riga dell'order line</b>"
 
     def action_next(self):
         self.write(

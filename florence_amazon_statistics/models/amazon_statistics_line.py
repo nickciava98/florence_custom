@@ -14,6 +14,14 @@ class AmazonStatisticsLine(models.Model):
         ondelete = "cascade"
     )
     parent = fields.Char()
+    average = fields.Float(
+        compute = "_compute_average",
+        store = True
+    )
+    average_test = fields.Float(
+        compute = "_compute_average_test",
+        store = True
+    )
     product = fields.Many2one(
         "product.template"
     )
@@ -214,6 +222,16 @@ class AmazonStatisticsLine(models.Model):
     missing_parts_accessories_perc = fields.Float(
         group_operator = "avg"
     )
+
+    @api.depends("name")
+    def _compute_average(self):
+        for line in self:
+            line.average = line.name.average
+
+    @api.depends("name_test")
+    def _compute_average_test(self):
+        for line in self:
+            line.average_test = line.name_test.average_test
 
     @api.depends("total_one_star_reviews", "total_two_stars_reviews",
                  "total_three_stars_reviews", "total_four_stars_reviews",

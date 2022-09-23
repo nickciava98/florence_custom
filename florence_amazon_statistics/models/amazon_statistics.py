@@ -78,7 +78,9 @@ class AmazonStatistics(models.Model):
                                    + statistics_line.total_five_stars_reviews
 
                 if denominator != 0:
-                    line.average_test = (numerator / denominator) + line.corrective_factor_test
+                    line.average_test = (numerator / denominator)
+
+            line.average_test += line.corrective_factor_test
 
     @api.depends("corrective_factor")
     def _compute_average(self):
@@ -102,11 +104,35 @@ class AmazonStatistics(models.Model):
                                    + statistics_line.total_five_stars_reviews
 
                 if denominator != 0:
-                    line.average = (numerator / denominator) + line.corrective_factor
+                    line.average = (numerator / denominator)
+
+            line.average += line.corrective_factor
 
     def _compute_start_date(self):
         for line in self:
             line.start_date = datetime.now()
+
+    def dashboard_view_action(self):
+        return {
+            'name': 'Statistics Dashboard',
+            'view_type': 'dashboard',
+            'view_mode': 'dashboard',
+            'res_model': 'amazon.statistics.line',
+            'type': 'ir.actions.act_window',
+            'domain': [
+                '&', '&', '&', '&',
+                ('name_test', '=', False),
+                ('product', '=', self.product.id),
+                ('parent', '=', self.name),
+                ('date', '>=', self.date_from),
+                ('date', '<=', self.date_to)
+            ],
+            'context': {
+                'graph_measure': 'main_stat',
+                'graph_mode': 'line',
+                'graph_groupbys': ['date:day']
+            }
+        }
 
     def graph_view_action(self):
         return {

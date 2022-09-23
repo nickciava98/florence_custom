@@ -58,6 +58,9 @@
                                             <button type="object" name="pivot_view_action"
                                                     string="Statistics Pivot"
                                                     class="oe_stat_button" icon="fa-table"/>
+                                            <button type="object" name="dashboard_view_action"
+                                                    string="Dashboard"
+                                                    class="oe_stat_button"/>
                                         </div>
                                     </div>
                                 </group>
@@ -80,6 +83,7 @@
                                 <tree string="Statistics" editable="bottom">
                                     <field name="name" invisible="True"/>
                                     <field name="parent" invisible="True"/>
+                                    <field name="average" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="date"/>
 
@@ -210,6 +214,7 @@
                                 <tree string="Statistics Test" editable="bottom">
                                     <field name="name" invisible="True"/>
                                     <field name="parent" invisible="True"/>
+                                    <field name="average_test" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="date"/>
 
