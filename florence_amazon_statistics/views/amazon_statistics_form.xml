@@ -29,7 +29,6 @@
                         </h1>
                     </div>
 
-                    <field name="marketplace" invisible="True"/>
                     <field name="start_date" invisible="True"/>
 
                     <notebook>

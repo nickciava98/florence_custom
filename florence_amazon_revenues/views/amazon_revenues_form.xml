@@ -25,7 +25,6 @@
                         </h1>
                     </div>
 
-                    <field name="marketplace" invisible="True"/>
                     <field name="product_updated_price" invisible="True"/>
                     <field name="currency_id" invisible="True"/>
                     <field name="start_date" invisible="True"/>
@@ -151,7 +150,7 @@
                                              'default_currency_id': currency_id,
                                              'default_sku_cost': product_updated_sku_cost}">
                                 <tree string="Revenues" editable="bottom">
-                                    <field name="amazon_revenues_line_id" invisible="True"/>
+                                    <field name="amazon_revenues_line_id_test" invisible="True"/>
                                     <field name="parent" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>

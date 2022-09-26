@@ -16,13 +16,6 @@ class AmazonRevenues(models.Model):
         string = "Marketplace",
         tracking = True
     )
-    marketplace = fields.Selection(
-        [("IT", "Amazon IT"),
-         ("FR", "Amazon FR"),
-         ("DE", "Amazon DE"),
-         ("ES", "Amazon ES"),
-         ("UK", "Amazon UK")]
-    )
     product = fields.Many2one(
         "product.template",
         required = True,
@@ -58,6 +51,26 @@ class AmazonRevenues(models.Model):
     chart_start_test = fields.Date()
     chart_end_test = fields.Date()
 
+    @api.onchange("name")
+    def _onchange_name(self):
+        for line in self:
+            if len(line.revenues_line) > 0:
+                for revenues_line in line.revenues_line:
+                    revenues_line.parent = line.name
+            if len(line.revenues_line_test) > 0:
+                for revenues_line_test in line.revenues_line_test:
+                    revenues_line_test.parent = line.name
+
+    @api.onchange("product")
+    def _onchange_product(self):
+        for line in self:
+            if len(line.revenues_line) > 0:
+                for revenues_line in line.revenues_line:
+                    revenues_line.product = line.product
+            if len(line.revenues_line_test) > 0:
+                for revenues_line_test in line.revenues_line_test:
+                    revenues_line_test.product = line.product
+
     @api.depends("product")
     def _compute_product_updated_sku_cost(self):
         for line in self:
@@ -70,14 +83,6 @@ class AmazonRevenues(models.Model):
 
                     if line.product_updated_sku_cost != 0:
                         break
-
-    @api.onchange("marketplace")
-    def _onchange_marketplace(self):
-        for line in self:
-            line.name = False
-            
-            if line.marketplace:
-                line.name = line.marketplace
 
     def _compute_start_date(self):
         for line in self:

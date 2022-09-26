@@ -16,13 +16,6 @@ class AmazonStatistics(models.Model):
         string = "Marketplace",
         tracking = True
     )
-    marketplace = fields.Selection(
-        [("IT", "Amazon IT"),
-         ("FR", "Amazon FR"),
-         ("DE", "Amazon DE"),
-         ("ES", "Amazon ES"),
-         ("UK", "Amazon UK")]
-    )
     product = fields.Many2one(
         "product.template",
         required = True,
@@ -55,6 +48,26 @@ class AmazonStatistics(models.Model):
     date_to = fields.Date()
     date_from_test = fields.Date()
     date_to_test = fields.Date()
+
+    @api.onchange("name")
+    def _onchange_name(self):
+        for line in self:
+            if len(line.statistics_lines) > 0:
+                for statistics_line in line.statistics_lines:
+                    statistics_line.parent = line.name
+            if len(line.statistics_lines_test) > 0:
+                for statistics_line_test in line.statistics_lines_test:
+                    statistics_line_test.parent = line.name
+
+    @api.onchange("product")
+    def _onchange_product(self):
+        for line in self:
+            if len(line.statistics_lines) > 0:
+                for statistics_line in line.statistics_lines:
+                    statistics_line.product = line.product
+            if len(line.statistics_lines_test) > 0:
+                for statistics_line_test in line.statistics_lines_test:
+                    statistics_line_test.product = line.product
 
     @api.depends("corrective_factor_test")
     def _compute_average_test(self):
