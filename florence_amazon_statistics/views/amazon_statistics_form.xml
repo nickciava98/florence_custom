@@ -18,11 +18,14 @@
                     </div>
 
                     <label for="name" string="Marketplace"/>
-                    <field name="name" help="Select the Amazon Marketplace"/>
+                    <field name="name" help="Select the Amazon Marketplace"
+                           placeholder="Select the Amazon Marketplace"/>
 
                     <div class="oe_title">
                         <h1>
-                            <field name="product" help="Select the product to track"/>
+                            <field name="product" help="Select the product to track"
+                                   placeholder="Select the product to track"
+                                   style="width:100%"/>
                         </h1>
                     </div>
 
