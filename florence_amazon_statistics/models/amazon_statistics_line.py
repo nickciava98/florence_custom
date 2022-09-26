@@ -26,6 +26,7 @@ class AmazonStatisticsLine(models.Model):
         "product.template"
     )
     date = fields.Date()
+    updates = fields.Char()
 
     one_vote_ratings_new = fields.Float(
         compute = "_compute_one_vote_ratings_new",
@@ -471,10 +472,12 @@ class AmazonStatisticsLine(models.Model):
 
         for line in self:
             line.main_stat = 0
-            lines.append(line)
-            general_reviews_statistics_list.append(
-                line.general_reviews_statistics
-            )
+
+            if line.general_reviews_statistics != 0:
+                lines.append(line)
+                general_reviews_statistics_list.append(
+                    line.general_reviews_statistics
+                )
 
         for index in range(len(lines)):
             if index > 0:

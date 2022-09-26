@@ -48,6 +48,16 @@ class AmazonStatistics(models.Model):
     date_to = fields.Date()
     date_from_test = fields.Date()
     date_to_test = fields.Date()
+    group_by = fields.Selection(
+        [("day", "Daily Statistics"),
+         ("week", "Weekly Statistics"),
+         ("month", "Monthly Statistics")]
+    )
+    group_by_test = fields.Selection(
+        [("day", "Daily Statistics"),
+         ("week", "Weekly Statistics"),
+         ("month", "Monthly Statistics")]
+    )
 
     @api.onchange("name")
     def _onchange_name(self):
@@ -143,7 +153,7 @@ class AmazonStatistics(models.Model):
             'context': {
                 'graph_measure': 'main_stat',
                 'graph_mode': 'line',
-                'graph_groupbys': ['date:day']
+                'graph_groupbys': ['date:' + self.group_by]
             }
         }
 
@@ -165,7 +175,7 @@ class AmazonStatistics(models.Model):
             'context': {
                 'graph_measure': 'main_stat',
                 'graph_mode': 'line',
-                'graph_groupbys': ['date:day']
+                'graph_groupbys': ['date:' + self.group_by]
             }
         }
 
@@ -187,7 +197,7 @@ class AmazonStatistics(models.Model):
             'context': {
                 'graph_measure': 'main_stat',
                 'graph_mode': 'line',
-                'graph_groupbys': ['date:day']
+                'graph_groupbys': ['date:' + self.group_by_test]
             }
         }
 
@@ -200,7 +210,7 @@ class AmazonStatistics(models.Model):
             'res_model': 'amazon.statistics.line',
             'type': 'ir.actions.act_window',
             'context': {
-                'group_by': ['date:year', 'date:month']
+                'group_by': ['date:' + self.group_by]
             },
             'domain': [
                 '&', '&', '&', '&',
@@ -222,7 +232,7 @@ class AmazonStatistics(models.Model):
             'res_model': 'amazon.statistics.line',
             'type': 'ir.actions.act_window',
             'context': {
-                'group_by': ['date:year', 'date:month']
+                'group_by': ['date:' + self.group_by_test]
             },
             'domain': [
                 '&', '&', '&', '&',

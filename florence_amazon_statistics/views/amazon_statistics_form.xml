@@ -46,9 +46,17 @@
                                                    options="{'related_start_date': 'date_from'}"/>
                                         </div>
                                     </div>
+
+                                    <label for="group_by" string="Group by"/>
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <field name="group_by"/>
+                                        </div>
+                                    </div>
                                 </group>
 
-                                <group attrs="{'invisible': ['|',('date_from','=',False),('date_to','=',False)]}">
+                                <group attrs="{'invisible':
+                                ['|','|',('date_from','=',False),('date_to','=',False),('group_by','=',False)]}">
                                     <div class="w-100">
                                         <div class="o_row">
                                             <button type="object" name="tree_view_action"
@@ -88,6 +96,7 @@
                                     <field name="average" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="date"/>
+                                    <field name="updates"/>
 
                                     <field name="one_vote_ratings_new" widget="integer"/>
                                     <field name="one_star_ratings" widget="integer"/>
@@ -178,9 +187,17 @@
                                                    options="{'related_start_date': 'date_from_test'}"/>
                                         </div>
                                     </div>
+
+                                    <label for="group_by_test" string="Group by"/>
+                                    <div class="w-100">
+                                        <div class="o_row">
+                                            <field name="group_by_test"/>
+                                        </div>
+                                    </div>
                                 </group>
 
-                                <group attrs="{'invisible': ['|',('date_from_test','=',False),('date_to_test','=',False)]}">
+                                <group attrs="{'invisible':
+                                ['|','|',('date_from_test','=',False),('date_to_test','=',False),('group_by_test','=',False)]}">
                                     <div class="w-100">
                                         <div class="o_row">
                                             <button type="object" name="tree_test_view_action"
