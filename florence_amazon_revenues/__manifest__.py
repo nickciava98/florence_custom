@@ -18,6 +18,7 @@
         'views/amazon_revenues_tree.xml',
         'views/amazon_revenues_line_graph.xml',
         'views/amazon_revenues_line_tree.xml',
+        'views/amazon_revenues_line_dashboard.xml',
         'wizard/help_wizard.xml'
     ],
     'application': True,

@@ -67,6 +67,7 @@ class HelpWizard(models.TransientModel):
                              "e dei pulsanti che richiamano delle azioni, i quali compaiono solo se le due date" \
                              "precedenti sono compilate:\n\n" \
                              "- Statistics List: lista di tutti i dati\n\n" \
+                             "- Statistics Dashboard: dashboard con tutti i valori fondamentali (grafici, pivot e aggregazioni)\n\n" \
                              "- Statistics Analysis: grafico con tutti i dati come misura\n\n" \
                              "- Statistics Pivot: tabella con la panoramica dei dati\n\n" \
                              "Nella sezione successiva è possibile vedere la media che viene calcolata in automatico" \
@@ -82,7 +83,7 @@ class HelpWizard(models.TransientModel):
         return {
             'name': 'Help Guide',
             'type': 'ir.actions.act_window',
-            'res_model': 'help.wizard.amz.rev',
+            'res_model': 'help.wizard.amz.stats',
             'view_mode': 'form',
             'view_type': 'form',
             'res_id': self.id,
@@ -98,7 +99,7 @@ class HelpWizard(models.TransientModel):
         return {
             'name': 'Help Guide',
             'type': 'ir.actions.act_window',
-            'res_model': 'help.wizard.amz.rev',
+            'res_model': 'help.wizard.amz.stats',
             'view_mode': 'form',
             'view_type': 'form',
             'res_id': self.id,

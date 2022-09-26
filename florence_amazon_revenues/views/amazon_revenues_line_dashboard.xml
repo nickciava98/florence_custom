@@ -1,0 +1,66 @@
+<odoo>
+    <record id="amazon_revenues_line_view_dashboard" model="ir.ui.view">
+        <field name="name">Revenues Dashboard</field>
+        <field name="model">amazon.revenues.line</field>
+
+        <field name="arch" type="xml">
+            <dashboard>
+                <view ref="florence_amazon_statistics.amazon_revenues_line_view_graph"
+                      type="graph"/>
+
+                <group string="Statistics">
+                    <aggregate name="selling_price"
+                               string="Avg. Selling Price"
+                               group_operator="avg"
+                               field="price_unit"
+                               widget="monetary"/>
+                    <aggregate name="amazon_fees"
+                               string="Tot. Amazon Fees"
+                               group_operator="sum"
+                               field="amazon_fees"
+                               widget="monetary"/>
+                    <aggregate name="taxes"
+                               string="Tot. VAT"
+                               group_operator="sum"
+                               field="taxes"
+                               widget="monetary"/>
+                    <aggregate name="sku_cost"
+                               string="Avg. SKU Cost"
+                               group_operator="avg"
+                               field="sku_cost"
+                               widget="monetary"/>
+                    <aggregate name="gross_revenues"
+                               string="Tot. Gross Revenues"
+                               group_operator="sum"
+                               field="gross_revenues"
+                               widget="monetary"/>
+                    <aggregate name="ads_total_cost"
+                               string="Ads Total Cost"
+                               group_operator="sum"
+                               field="ads_total_cost"
+                               widget="monetary"/>
+                    <aggregate name="ads_cost_per_unit"
+                               string="Avg. Ads Cost Per Unit"
+                               group_operator="avg"
+                               field="ads_cost_per_unit"
+                               widget="monetary"/>
+                    <aggregate name="pcs_sold"
+                               string="Tot. Pcs Sold"
+                               group_operator="sum"
+                               field="pcs_sold"
+                               widget="integer"/>
+                    <aggregate name="earned_per_pc"
+                               string="Avg. Earned Per Pc"
+                               group_operator="avg"
+                               field="earned_per_pc"
+                               widget="monetary"/>
+                    <aggregate name="probable_income"
+                               string="Tot. Probable Income"
+                               group_operator="sum"
+                               field="probable_income"
+                               widget="monetary"/>
+                </group>
+            </dashboard>
+        </field>
+    </record>
+</odoo>

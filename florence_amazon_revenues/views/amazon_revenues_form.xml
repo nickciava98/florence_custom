@@ -49,15 +49,18 @@
                                 <group>
                                     <div class="w-100">
                                         <div class="o_row">
-                                            <button type="object" name="graph_view_action"
-                                                    string="Revenues Analysis"
-                                                    class="oe_stat_button"
-                                                    icon="fa-bar-chart-o"/>
                                             <button type="object"
                                                     name="tree_view_action"
                                                     string="Revenues List"
                                                     class="oe_stat_button"
                                                     icon="fa-list-ul"/>
+                                            <button type="object" name="dashboard_view_action"
+                                                    string="Revenues Dashboard" icon="fa-dashboard"
+                                                    class="oe_stat_button"/>
+                                            <button type="object" name="graph_view_action"
+                                                    string="Revenues Analysis"
+                                                    class="oe_stat_button"
+                                                    icon="fa-bar-chart-o"/>
                                         </div>
                                     </div>
                                 </group>
@@ -122,15 +125,15 @@
                                     <div class="w-100">
                                         <div class="o_row">
                                             <button type="object"
-                                                    name="graph_test_view_action"
-                                                    string="Revenues Analysis"
-                                                    class="oe_stat_button"
-                                                    icon="fa-bar-chart-o"/>
-                                            <button type="object"
                                                     name="tree_test_view_action"
                                                     string="Revenues List"
                                                     class="oe_stat_button"
                                                     icon="fa-list-ul"/>
+                                            <button type="object"
+                                                    name="graph_test_view_action"
+                                                    string="Revenues Analysis"
+                                                    class="oe_stat_button"
+                                                    icon="fa-bar-chart-o"/>
                                         </div>
                                     </div>
                                 </group>

@@ -106,6 +106,48 @@ class AmazonRevenues(models.Model):
                 if revenues_line.probable_income:
                     line.total_probable_income += revenues_line.probable_income
 
+    def dashboard_view_action(self):
+        if self.chart_start or self.chart_end:
+            return {
+                'name': 'Revenues Dashboard',
+                'view_type': 'dashboard',
+                'view_mode': 'dashboard',
+                'res_model': 'amazon.revenues.line',
+                'type': 'ir.actions.act_window',
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('product', '=', self.product.id),
+                    ('amazon_revenues_line_id_test', '=', False),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.chart_start),
+                    ('date', '<=', self.chart_end)
+                ],
+                'context': {
+                    'graph_measure': 'probable_income',
+                    'graph_mode': 'line',
+                    'graph_groupbys': ['date:day']
+                }
+            }
+
+        return {
+            'name': 'Revenues Dashboard',
+            'view_type': 'dashboard',
+            'view_mode': 'dashboard',
+            'res_model': 'amazon.revenues.line',
+            'type': 'ir.actions.act_window',
+            'domain': [
+                '&', '&',
+                ('product', '=', self.product.id),
+                ('amazon_revenues_line_id_test', '=', False),
+                ('parent', '=', self.name)
+            ],
+            'context': {
+                'graph_measure': 'probable_income',
+                'graph_mode': 'line',
+                'graph_groupbys': ['date:day']
+            }
+        }
+
     def graph_view_action(self):
         if self.chart_start or self.chart_end:
             return {

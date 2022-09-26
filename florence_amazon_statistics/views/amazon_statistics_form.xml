@@ -52,15 +52,15 @@
                                             <button type="object" name="tree_view_action"
                                                     string="Statistics List"
                                                     class="oe_stat_button" icon="fa-list-ul"/>
+                                            <button type="object" name="dashboard_view_action"
+                                                    string="Statistics Dashboard" icon="fa-dashboard"
+                                                    class="oe_stat_button"/>
                                             <button type="object" name="graph_view_action"
                                                     string="Statistics Analysis"
                                                     class="oe_stat_button" icon="fa-bar-chart-o"/>
                                             <button type="object" name="pivot_view_action"
                                                     string="Statistics Pivot"
                                                     class="oe_stat_button" icon="fa-table"/>
-                                            <button type="object" name="dashboard_view_action"
-                                                    string="Dashboard"
-                                                    class="oe_stat_button"/>
                                         </div>
                                     </div>
                                 </group>
@@ -182,13 +182,13 @@
                                     <div class="w-100">
                                         <div class="o_row">
                                             <button type="object" name="tree_test_view_action"
-                                                    string="Statistics Test List"
+                                                    string="Statistics List"
                                                     class="oe_stat_button" icon="fa-list-ul"/>
                                             <button type="object" name="graph_test_view_action"
-                                                    string="Statistics Test Analysis"
+                                                    string="Statistics Analysis"
                                                     class="oe_stat_button" icon="fa-bar-chart-o"/>
                                             <button type="object" name="pivot_test_view_action"
-                                                    string="Statistics Test Pivot"
+                                                    string="Statistics Pivot"
                                                     class="oe_stat_button" icon="fa-table"/>
                                         </div>
                                     </div>
