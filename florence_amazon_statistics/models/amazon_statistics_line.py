@@ -451,6 +451,8 @@ class AmazonStatisticsLine(models.Model):
                  "total_three_stars_reviews", "total_four_stars_reviews",
                  "total_five_stars_reviews")
     def _compute_general_reviews_statistics(self):
+        previous_line = None
+
         for line in self:
             line.general_reviews_statistics = 0
 
@@ -464,6 +466,12 @@ class AmazonStatisticsLine(models.Model):
                     (line.total_one_star_reviews + line.total_two_stars_reviews
                      + line.total_three_stars_reviews + line.total_four_stars_reviews
                      + line.total_five_stars_reviews)
+
+            if line.general_reviews_statistics == 0:
+                if previous_line is not None:
+                    line.general_reviews_statistics = previous_line.general_reviews_statistics
+
+            previous_line = line
 
     @api.depends("general_reviews_statistics")
     def _compute_main_stat(self):
