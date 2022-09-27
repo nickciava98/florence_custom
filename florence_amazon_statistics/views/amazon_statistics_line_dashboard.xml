@@ -8,42 +8,35 @@
                 <view ref="florence_amazon_statistics.amazon_statistics_line_view_graph"
                       type="graph"/>
 
-                <group>
-                    <group col="3" colspan="3" string="Statistics">
+                <group col="2" colspan="2">
+                    <group string="Statistics">
                         <aggregate name="average"
                                    string="Average"
                                    group_operator="avg"
-                                   field="average"/>
-                        <aggregate name="general_reviews_statistics"
-                                   string="General Reviews Statistics"
-                                   group_operator="avg"
                                    field="general_reviews_statistics"/>
-                        <aggregate name="main_stat"
-                                   string="Main Stat"
-                                   group_operator="avg" field="main_stat"/>
                     </group>
 
-                    <group col="5" colspan="5" string="#Stars Value">
+                    <group col="5" colspan="5" string="#Stars Reviews">
                         <aggregate name="one_star_value"
-                                   string="Avg. One Star Value"
-                                   group_operator="avg"
-                                   field="one_star_value"/>
+                                   string="Tot. One Star Reviews"
+                                   group_operator="sum"
+                                   field="total_one_star_reviews"/>
                         <aggregate name="two_stars_value"
-                                   string="Avg. Two Stars Value"
-                                   group_operator="avg"
-                                   field="two_stars_value"/>
+                                   string="Tot. Two Stars Reviews"
+                                   group_operator="sum"
+                                   field="total_two_stars_reviews"/>
                         <aggregate name="three_stars_value"
-                                   string="Avg. Three Stars Value"
-                                   group_operator="avg"
-                                   field="three_stars_value"/>
+                                   string="Tot. Three Stars Reviews"
+                                   group_operator="sum"
+                                   field="total_three_stars_reviews"/>
                         <aggregate name="four_stars_value"
-                                   string="Avg. Four Stars Value"
-                                   group_operator="avg"
-                                   field="four_stars_value"/>
+                                   string="Tot. Four Stars Reviews"
+                                   group_operator="sum"
+                                   field="total_four_stars_reviews"/>
                         <aggregate name="five_stars_value"
-                                   string="Avg. Five Stars Value"
-                                   group_operator="avg"
-                                   field="five_stars_value"/>
+                                   string="Tot. Five Stars Reviews"
+                                   group_operator="sum"
+                                   field="total_five_stars_reviews"/>
                     </group>
                 </group>
 

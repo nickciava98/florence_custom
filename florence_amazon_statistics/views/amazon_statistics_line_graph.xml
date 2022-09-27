@@ -8,47 +8,44 @@
                 <field name="name"/>
                 <field name="date"/>
 
-                <field name="average" type="measure" invisible="True"/>
-                <field name="average_test" type="measure" invisible="True"/>
-
-                <field name="one_vote_ratings_new" type="measure" invisible="True"/>
+                <field name="one_vote_ratings_new" type="measure"/>
                 <field name="one_star_ratings" type="measure" invisible="True"/>
                 <field name="one_star_reviews" type="measure" invisible="True"/>
-                <field name="one_star_reviews_new" type="measure" invisible="True"/>
-                <field name="total_one_star_reviews" type="measure" invisible="True"/>
+                <field name="one_star_reviews_new" type="measure"/>
+                <field name="total_one_star_reviews" type="measure"/>
                 <field name="one_star_value" type="measure" invisible="True"/>
 
-                <field name="two_votes_ratings_new" type="measure" invisible="True"/>
+                <field name="two_votes_ratings_new" type="measure"/>
                 <field name="two_stars_ratings" type="measure" invisible="True"/>
                 <field name="two_stars_reviews" type="measure" invisible="True"/>
-                <field name="two_stars_reviews_new" type="measure" invisible="True"/>
-                <field name="total_two_stars_reviews" type="measure" invisible="True"/>
+                <field name="two_stars_reviews_new" type="measure"/>
+                <field name="total_two_stars_reviews" type="measure"/>
                 <field name="two_stars_value" type="measure" invisible="True"/>
 
-                <field name="three_votes_ratings_new" type="measure" invisible="True"/>
+                <field name="three_votes_ratings_new" type="measure"/>
                 <field name="three_stars_ratings" type="measure" invisible="True"/>
                 <field name="three_stars_reviews" type="measure" invisible="True"/>
-                <field name="three_stars_reviews_new" type="measure" invisible="True"/>
-                <field name="total_three_stars_reviews" type="measure" invisible="True"/>
+                <field name="three_stars_reviews_new" type="measure"/>
+                <field name="total_three_stars_reviews" type="measure"/>
                 <field name="three_stars_value" type="measure" invisible="True"/>
 
-                <field name="four_votes_ratings_new" type="measure" invisible="True"/>
+                <field name="four_votes_ratings_new" type="measure"/>
                 <field name="four_stars_ratings" type="measure" invisible="True"/>
                 <field name="four_stars_reviews" type="measure" invisible="True"/>
-                <field name="four_stars_reviews_new" type="measure" invisible="True"/>
-                <field name="total_four_stars_reviews" type="measure" invisible="True"/>
+                <field name="four_stars_reviews_new" type="measure"/>
+                <field name="total_four_stars_reviews" type="measure"/>
                 <field name="four_stars_value" type="measure" invisible="True"/>
 
-                <field name="five_votes_ratings_new" type="measure" invisible="True"/>
+                <field name="five_votes_ratings_new" type="measure"/>
                 <field name="five_stars_ratings" type="measure" invisible="True"/>
                 <field name="five_stars_reviews" type="measure" invisible="True"/>
-                <field name="five_stars_reviews_new" type="measure" invisible="True"/>
-                <field name="total_five_stars_reviews" type="measure" invisible="True"/>
+                <field name="five_stars_reviews_new" type="measure"/>
+                <field name="total_five_stars_reviews" type="measure"/>
                 <field name="five_stars_value" type="measure" invisible="True"/>
 
-                <field name="general_reviews_statistics" type="measure"/>
+                <field name="general_reviews_statistics" type="measure" invisible="True"/>
 
-                <field name="daily_total_reviews" type="measure"/>
+                <field name="daily_total_reviews" type="measure" invisible="True"/>
 
                 <field name="main_stat" type="measure"/>
 
@@ -72,16 +69,19 @@
                 <field name="style" type="measure" invisible="True"/>
                 <field name="perfume" type="measure" invisible="True"/>
 
-                <field name="ncx_rate_perc" type="measure" invisible="True"/>
+                <field name="ncx_rate_perc" type="measure"/>
                 <field name="total_orders" type="measure" invisible="True"/>
                 <field name="returns" type="measure" invisible="True"/>
 
-                <field name="performance_quality_inadequate" type="measure" invisible="True"/>
-                <field name="defective_item_perc" type="measure" invisible="True"/>
-                <field name="damage_item_perc" type="measure" invisible="True"/>
-                <field name="inaccurate_website_description_perc" type="measure" invisible="True"/>
-                <field name="wrong_item_was_sent_perc" type="measure" invisible="True"/>
-                <field name="missing_parts_accessories_perc" type="measure" invisible="True"/>
+                <field name="performance_quality_inadequate" type="measure"/>
+                <field name="defective_item_perc" type="measure"/>
+                <field name="damage_item_perc" type="measure"/>
+                <field name="inaccurate_website_description_perc" type="measure"/>
+                <field name="wrong_item_was_sent_perc" type="measure"/>
+                <field name="missing_parts_accessories_perc" type="measure"/>
+
+                <field name="freshdesk_buyer_messages" type="measure"/>
+                <field name="amazon_buyer_messages" type="measure"/>
             </graph>
         </field>
     </record>

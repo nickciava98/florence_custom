@@ -9,6 +9,7 @@
                 <field name="parent" invisible="True"/>
                 <field name="product" invisible="True"/>
                 <field name="date"/>
+                <field name="updates" string="Notes"/>
 
                 <field name="one_vote_ratings_new" widget="integer"/>
                 <field name="one_star_ratings" widget="integer"/>
@@ -81,6 +82,9 @@
                 <field name="inaccurate_website_description_perc"/>
                 <field name="wrong_item_was_sent_perc"/>
                 <field name="missing_parts_accessories_perc"/>
+
+                <field name="freshdesk_buyer_messages"/>
+                <field name="amazon_buyer_messages"/>
             </tree>
         </field>
     </record>

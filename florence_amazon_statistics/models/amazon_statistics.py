@@ -33,16 +33,28 @@ class AmazonStatistics(models.Model):
         compute = "_compute_start_date"
     )
     average = fields.Float(
-        compute = "_compute_average"
+        compute = "_compute_average",
+        store = True
     )
     average_test = fields.Float(
-        compute = "_compute_average_test"
+        compute = "_compute_average_test",
+        store = True
     )
-    corrective_factor = fields.Float(
-        default = 0
+    general_reviews_statistics = fields.Float(
+        compute = "_compute_general_reviews_statistics",
+        store = True
     )
-    corrective_factor_test = fields.Float(
-        default = 0
+    general_reviews_statistics_test = fields.Float(
+        compute = "_compute_general_reviews_statistics_test",
+        store = True
+    )
+    main_stat = fields.Float(
+        compute = "_compute_main_stat",
+        store = True
+    )
+    main_stat_test = fields.Float(
+        compute = "_compute_main_stat_test",
+        store = True
     )
     date_from = fields.Date()
     date_to = fields.Date()
@@ -79,57 +91,105 @@ class AmazonStatistics(models.Model):
                 for statistics_line_test in line.statistics_lines_test:
                     statistics_line_test.product = line.product
 
-    @api.depends("corrective_factor_test")
-    def _compute_average_test(self):
+    @api.depends("statistics_lines")
+    def _compute_main_stat(self):
         for line in self:
-            line.average_test = 0
-
-            if len(line.statistics_lines_test) > 0:
-                numerator = .0
-                denominator = .0
-
-                for statistics_line in line.statistics_lines_test:
-                    numerator += statistics_line.one_star_value \
-                                 + statistics_line.two_stars_value \
-                                 + statistics_line.three_stars_value \
-                                 + statistics_line.four_stars_value \
-                                 + statistics_line.five_stars_value
-                    denominator += statistics_line.total_one_star_reviews \
-                                   + statistics_line.total_two_stars_reviews \
-                                   + statistics_line.total_three_stars_reviews \
-                                   + statistics_line.total_four_stars_reviews \
-                                   + statistics_line.total_five_stars_reviews
-
-                if denominator != 0:
-                    line.average_test = (numerator / denominator)
-
-            line.average_test += line.corrective_factor_test
-
-    @api.depends("corrective_factor")
-    def _compute_average(self):
-        for line in self:
-            line.average = 0
+            line.main_stat = 0
+            total_main_stat = 0
 
             if len(line.statistics_lines) > 0:
-                numerator = .0
-                denominator = .0
-
                 for statistics_line in line.statistics_lines:
-                    numerator += statistics_line.one_star_value \
-                                 + statistics_line.two_stars_value \
-                                 + statistics_line.three_stars_value \
-                                 + statistics_line.four_stars_value \
-                                 + statistics_line.five_stars_value
-                    denominator += statistics_line.total_one_star_reviews \
-                                   + statistics_line.total_two_stars_reviews \
-                                   + statistics_line.total_three_stars_reviews \
-                                   + statistics_line.total_four_stars_reviews \
-                                   + statistics_line.total_five_stars_reviews
+                    total_main_stat += statistics_line.main_stat
 
-                if denominator != 0:
-                    line.average = (numerator / denominator)
+                line.main_stat = total_main_stat / len(line.statistics_lines)
 
-            line.average += line.corrective_factor
+    @api.depends("statistics_lines_test")
+    def _compute_main_stat_test(self):
+        for line in self:
+            line.main_stat_test = 0
+            total_main_stat = 0
+
+            if len(line.statistics_lines_test) > 0:
+                for statistics_line in line.statistics_lines_test:
+                    total_main_stat += statistics_line.main_stat
+
+                line.main_stat_test = total_main_stat / len(line.statistics_lines_test)
+
+    @api.depends("statistics_lines")
+    def _compute_general_reviews_statistics(self):
+        for line in self:
+            line.general_reviews_statistics = 0
+            total_general_reviews_statistics = 0
+
+            if len(line.statistics_lines) > 0:
+                for statistics_line in line.statistics_lines:
+                    total_general_reviews_statistics += statistics_line.general_reviews_statistics
+
+                line.general_reviews_statistics = total_general_reviews_statistics / len(line.statistics_lines)
+
+    @api.depends("statistics_lines_test")
+    def _compute_general_reviews_statistics_test(self):
+        for line in self:
+            line.general_reviews_statistics_test = 0
+            total_general_reviews_statistics = 0
+
+            if len(line.statistics_lines_test) > 0:
+                for statistics_line in line.statistics_lines_test:
+                    total_general_reviews_statistics += statistics_line.general_reviews_statistics
+
+                line.general_reviews_statistics_test = total_general_reviews_statistics / len(line.statistics_lines_test)
+
+    @api.depends("main_stat_test", "general_reviews_statistics_test")
+    def _compute_average_test(self):
+        for line in self:
+            line.average_test = .5 * (line.main_stat_test + line.general_reviews_statistics_test)
+
+            # line.average_test = 0
+            #
+            # if len(line.statistics_lines_test) > 0:
+            #     numerator = .0
+            #     denominator = .0
+            #
+            #     for statistics_line in line.statistics_lines_test:
+            #         numerator += statistics_line.one_star_value \
+            #                      + statistics_line.two_stars_value \
+            #                      + statistics_line.three_stars_value \
+            #                      + statistics_line.four_stars_value \
+            #                      + statistics_line.five_stars_value
+            #         denominator += statistics_line.total_one_star_reviews \
+            #                        + statistics_line.total_two_stars_reviews \
+            #                        + statistics_line.total_three_stars_reviews \
+            #                        + statistics_line.total_four_stars_reviews \
+            #                        + statistics_line.total_five_stars_reviews
+            #
+            #     if denominator != 0:
+            #         line.average_test = numerator / denominator
+
+    @api.depends("main_stat", "general_reviews_statistics")
+    def _compute_average(self):
+        for line in self:
+            line.average = .5 * (line.main_stat + line.general_reviews_statistics)
+
+            # line.average = 0
+            #
+            # if len(line.statistics_lines) > 0:
+            #     numerator = .0
+            #     denominator = .0
+            #
+            #     for statistics_line in line.statistics_lines:
+            #         numerator += statistics_line.one_star_value \
+            #                      + statistics_line.two_stars_value \
+            #                      + statistics_line.three_stars_value \
+            #                      + statistics_line.four_stars_value \
+            #                      + statistics_line.five_stars_value
+            #         denominator += statistics_line.total_one_star_reviews \
+            #                        + statistics_line.total_two_stars_reviews \
+            #                        + statistics_line.total_three_stars_reviews \
+            #                        + statistics_line.total_four_stars_reviews \
+            #                        + statistics_line.total_five_stars_reviews
+            #
+            #     if denominator != 0:
+            #         line.average = (numerator / denominator)
 
     def _compute_start_date(self):
         for line in self:

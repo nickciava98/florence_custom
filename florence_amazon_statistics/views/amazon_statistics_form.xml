@@ -78,25 +78,24 @@
 
                             <group string="Average Analysis">
                                 <group>
-                                    <field name="corrective_factor"/>
-                                </group>
-
-                                <group>
-                                    <field name="average"/>
+                                    <field name="main_stat" invisible="True"/>
+                                    <field name="general_reviews_statistics"
+                                           string="Average"/>
+                                    <field name="average" invisible="True"/>
                                 </group>
                             </group>
 
-                            <field name="statistics_lines" widget="section_and_note_one2many" string="Statistics"
+                            <field name="statistics_lines" widget="section_and_note_one2many"
+                                   string="Statistics"
                                    context="{'default_parent': name,
                                              'default_product': product,
                                              'default_date': start_date}">
                                 <tree string="Statistics" editable="bottom">
                                     <field name="name" invisible="True"/>
                                     <field name="parent" invisible="True"/>
-                                    <field name="average" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="date"/>
-                                    <field name="updates"/>
+                                    <field name="updates" string="Notes"/>
 
                                     <field name="one_vote_ratings_new" widget="integer"/>
                                     <field name="one_star_ratings" widget="integer"/>
@@ -169,6 +168,9 @@
                                     <field name="inaccurate_website_description_perc"/>
                                     <field name="wrong_item_was_sent_perc"/>
                                     <field name="missing_parts_accessories_perc"/>
+
+                                    <field name="freshdesk_buyer_messages"/>
+                                    <field name="amazon_buyer_messages"/>
                                 </tree>
                             </field>
                         </page>
@@ -216,12 +218,10 @@
 
                             <group string="Average Analysis">
                                 <group>
-                                    <field name="corrective_factor_test"
-                                           string="Corrective Factor"/>
-                                </group>
-
-                                <group>
-                                    <field name="average_test" string="Average"/>
+                                    <field name="main_stat_test" invisible="True"/>
+                                    <field name="general_reviews_statistics_test"
+                                           string="Average"/>
+                                    <field name="average_test" invisible="True"/>
                                 </group>
                             </group>
 
@@ -233,7 +233,6 @@
                                 <tree string="Statistics Test" editable="bottom">
                                     <field name="name" invisible="True"/>
                                     <field name="parent" invisible="True"/>
-                                    <field name="average_test" invisible="True"/>
                                     <field name="product" invisible="True"/>
                                     <field name="date"/>
 
@@ -303,6 +302,9 @@
                                     <field name="inaccurate_website_description_perc"/>
                                     <field name="wrong_item_was_sent_perc"/>
                                     <field name="missing_parts_accessories_perc"/>
+
+                                    <field name="freshdesk_buyer_messages"/>
+                                    <field name="amazon_buyer_messages"/>
                                 </tree>
                             </field>
                         </page>

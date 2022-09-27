@@ -80,6 +80,9 @@
                 <field name="inaccurate_website_description_perc" type="measure"/>
                 <field name="wrong_item_was_sent_perc" type="measure"/>
                 <field name="missing_parts_accessories_perc" type="measure"/>
+
+                <field name="freshdesk_buyer_messages" type="measure"/>
+                <field name="amazon_buyer_messages" type="measure"/>
             </pivot>
         </field>
     </record>

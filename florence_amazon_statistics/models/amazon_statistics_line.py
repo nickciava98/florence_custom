@@ -14,14 +14,6 @@ class AmazonStatisticsLine(models.Model):
         ondelete = "cascade"
     )
     parent = fields.Char()
-    average = fields.Float(
-        compute = "_compute_average",
-        store = True
-    )
-    average_test = fields.Float(
-        compute = "_compute_average_test",
-        store = True
-    )
     product = fields.Many2one(
         "product.template"
     )
@@ -140,8 +132,6 @@ class AmazonStatisticsLine(models.Model):
     )
 
     main_stat = fields.Float(
-        compute = "_compute_main_stat",
-        store = True,
         group_operator = "avg"
     )
 
@@ -224,15 +214,15 @@ class AmazonStatisticsLine(models.Model):
         group_operator = "avg"
     )
 
-    @api.depends("name")
-    def _compute_average(self):
-        for line in self:
-            line.average = line.name.average
+    freshdesk_buyer_messages = fields.Float()
+    amazon_buyer_messages = fields.Float()
 
-    @api.depends("name_test")
-    def _compute_average_test(self):
-        for line in self:
-            line.average_test = line.name_test.average_test
+    average = fields.Float(
+        related = "name.average"
+    )
+    average_test = fields.Float(
+        related = "name.average_test"
+    )
 
     @api.depends("total_one_star_reviews", "total_two_stars_reviews",
                  "total_three_stars_reviews", "total_four_stars_reviews",
@@ -473,25 +463,35 @@ class AmazonStatisticsLine(models.Model):
 
             previous_line = line
 
-    @api.depends("general_reviews_statistics")
-    def _compute_main_stat(self):
-        lines = []
-        general_reviews_statistics_list = []
+    # @api.depends("general_reviews_statistics")
+    # def _compute_main_stat(self):
+    #     previous_line = None
+    #
+    #     for line in self:
+    #         line.main_stat = line.general_reviews_statistics
+    #
+    #         if previous_line is not None:
+    #             line.main_stat = previous_line.general_reviews_statistics
+    #
+    #         previous_line = line
 
-        for line in self:
-            line.main_stat = 0
-
-            if line.general_reviews_statistics != 0:
-                lines.append(line)
-                general_reviews_statistics_list.append(
-                    line.general_reviews_statistics
-                )
-
-        for index in range(len(lines)):
-            if index > 0:
-                if len(general_reviews_statistics_list[:index]) != 1:
-                    lines[index].main_stat = \
-                        sum(general_reviews_statistics_list[:index]) / \
-                        (len(general_reviews_statistics_list[:index]) - 1)
-                else:
-                    lines[index].main_stat = lines[index].general_reviews_statistics
+    #     lines = []
+    #     general_reviews_statistics_list = []
+    #
+    #     for line in self:
+    #         line.main_stat = 0
+    #
+    #         if line.general_reviews_statistics != 0:
+    #             lines.append(line)
+    #             general_reviews_statistics_list.append(
+    #                 line.general_reviews_statistics
+    #             )
+    #
+    #     for index in range(len(lines)):
+    #         if index > 0:
+    #             if len(general_reviews_statistics_list[:index]) != 1:
+    #                 lines[index].main_stat = \
+    #                     sum(general_reviews_statistics_list[:index]) / \
+    #                     (len(general_reviews_statistics_list[:index]) - 1)
+    #             else:
+    #                 lines[index].main_stat = lines[index].general_reviews_statistics
