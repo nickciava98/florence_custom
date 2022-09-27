@@ -8,35 +8,59 @@
                 <view ref="florence_amazon_statistics.amazon_statistics_line_view_graph"
                       type="graph"/>
 
-                <group col="2" colspan="2">
-                    <group string="Statistics">
+                <group>
+                    <group col="6" colspan="6" string="Statistics">
                         <aggregate name="average"
                                    string="Average"
                                    group_operator="avg"
                                    field="general_reviews_statistics"/>
+                        <formula name="five_stars_reviews"
+                                 string="Five Stars Reviews"
+                                 value="record.five_stars_value / record.total_reviews"
+                                 widget="percentage"/>
+                        <formula name="four_stars_reviews"
+                                 string="Four Stars Reviews"
+                                 value="record.four_stars_value / record.total_reviews"
+                                 widget="percentage"/>
+                        <formula name="three_stars_reviews"
+                                 string="Three Stars Reviews"
+                                 value="record.three_stars_value / record.total_reviews"
+                                 widget="percentage"/>
+                        <formula name="two_stars_reviews"
+                                 string="Two Stars Reviews"
+                                 value="record.two_stars_value / record.total_reviews"
+                                 widget="percentage"/>
+                        <formula name="one_star_reviews"
+                                 string="One Star Reviews"
+                                 value="record.one_star_value / record.total_reviews"
+                                 widget="percentage"/>
                     </group>
 
-                    <group col="5" colspan="5" string="#Stars Reviews">
-                        <aggregate name="one_star_value"
-                                   string="Tot. One Star Reviews"
+                    <group col="6" colspan="6" string="Total Reviews">
+                        <aggregate name="total_reviews"
+                                   string="Tot. Reviews"
                                    group_operator="sum"
-                                   field="total_one_star_reviews"/>
-                        <aggregate name="two_stars_value"
-                                   string="Tot. Two Stars Reviews"
-                                   group_operator="sum"
-                                   field="total_two_stars_reviews"/>
-                        <aggregate name="three_stars_value"
-                                   string="Tot. Three Stars Reviews"
-                                   group_operator="sum"
-                                   field="total_three_stars_reviews"/>
-                        <aggregate name="four_stars_value"
-                                   string="Tot. Four Stars Reviews"
-                                   group_operator="sum"
-                                   field="total_four_stars_reviews"/>
+                                   field="daily_total_reviews"/>
                         <aggregate name="five_stars_value"
                                    string="Tot. Five Stars Reviews"
                                    group_operator="sum"
                                    field="total_five_stars_reviews"/>
+                        <aggregate name="four_stars_value"
+                                   string="Tot. Four Stars Reviews"
+                                   group_operator="sum"
+                                   field="total_four_stars_reviews"/>
+                        <aggregate name="three_stars_value"
+                                   string="Tot. Three Stars Reviews"
+                                   group_operator="sum"
+                                   field="total_three_stars_reviews"/>
+                        <aggregate name="two_stars_value"
+                                   string="Tot. Two Stars Reviews"
+                                   group_operator="sum"
+                                   field="total_two_stars_reviews"/>
+                        <aggregate name="one_star_value"
+                                   string="Tot. One Star Reviews"
+                                   group_operator="sum"
+                                   field="total_one_star_reviews"/>
                     </group>
                 </group>
 
