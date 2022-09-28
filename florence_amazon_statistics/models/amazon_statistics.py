@@ -36,44 +36,28 @@ class AmazonStatistics(models.Model):
         compute = "_compute_average",
         store = True
     )
+    avg_stars = fields.Selection(
+        [("0", "Zero Stars"),
+         ("1", "One Star"),
+         ("2", "Two Stars"),
+         ("3", "Three Stars"),
+         ("4", "Four Stars"),
+         ("5", "Five Stars")],
+        compute = "_compute_avg_stars",
+        store = True
+    )
     average_test = fields.Float(
         compute = "_compute_average_test",
         store = True
     )
-    general_reviews_statistics = fields.Float(
-        compute = "_compute_general_reviews_statistics",
-        store = True
-    )
-    grs_stars = fields.Selection(
+    avg_stars_test = fields.Selection(
         [("0", "Zero Stars"),
          ("1", "One Star"),
          ("2", "Two Stars"),
          ("3", "Three Stars"),
          ("4", "Four Stars"),
          ("5", "Five Stars")],
-        compute = "_compute_grs_stars",
-        store = True
-    )
-    general_reviews_statistics_test = fields.Float(
-        compute = "_compute_general_reviews_statistics_test",
-        store = True
-    )
-    grs_stars_test = fields.Selection(
-        [("0", "Zero Stars"),
-         ("1", "One Star"),
-         ("2", "Two Stars"),
-         ("3", "Three Stars"),
-         ("4", "Four Stars"),
-         ("5", "Five Stars")],
-        compute = "_compute_grs_stars_test",
-        store = True
-    )
-    main_stat = fields.Float(
-        compute = "_compute_main_stat",
-        store = True
-    )
-    main_stat_test = fields.Float(
-        compute = "_compute_main_stat_test",
+        compute = "_compute_avg_stars_test",
         store = True
     )
     date_from = fields.Date()
@@ -91,15 +75,15 @@ class AmazonStatistics(models.Model):
          ("month", "Monthly Statistics")]
     )
 
-    @api.depends("general_reviews_statistics")
-    def _compute_grs_stars(self):
+    @api.depends("average")
+    def _compute_avg_stars(self):
         for line in self:
-            line.grs_stars = str(int(line.general_reviews_statistics))
+            line.avg_stars = str(int(line.average))
 
-    @api.depends("general_reviews_statistics_test")
+    @api.depends("average_test")
     def _compute_grs_stars_test(self):
         for line in self:
-            line.grs_stars_test = str(int(line.general_reviews_statistics_test))
+            line.avg_stars_test = str(int(line.average_test))
 
     @api.onchange("name")
     def _onchange_name(self):
@@ -122,104 +106,26 @@ class AmazonStatistics(models.Model):
                     statistics_line_test.product = line.product
 
     @api.depends("statistics_lines")
-    def _compute_main_stat(self):
-        for line in self:
-            line.main_stat = 0
-            total_main_stat = 0
-
-            if len(line.statistics_lines) > 0:
-                for statistics_line in line.statistics_lines:
-                    total_main_stat += statistics_line.main_stat
-
-                line.main_stat = total_main_stat / len(line.statistics_lines)
-
-    @api.depends("statistics_lines_test")
-    def _compute_main_stat_test(self):
-        for line in self:
-            line.main_stat_test = 0
-            total_main_stat = 0
-
-            if len(line.statistics_lines_test) > 0:
-                for statistics_line in line.statistics_lines_test:
-                    total_main_stat += statistics_line.main_stat
-
-                line.main_stat_test = total_main_stat / len(line.statistics_lines_test)
-
-    @api.depends("statistics_lines")
-    def _compute_general_reviews_statistics(self):
-        for line in self:
-            line.general_reviews_statistics = 0
-            total_general_reviews_statistics = 0
-
-            if len(line.statistics_lines) > 0:
-                for statistics_line in line.statistics_lines:
-                    total_general_reviews_statistics += statistics_line.general_reviews_statistics
-
-                line.general_reviews_statistics = total_general_reviews_statistics / len(line.statistics_lines)
-
-    @api.depends("statistics_lines_test")
-    def _compute_general_reviews_statistics_test(self):
-        for line in self:
-            line.general_reviews_statistics_test = 0
-            total_general_reviews_statistics = 0
-
-            if len(line.statistics_lines_test) > 0:
-                for statistics_line in line.statistics_lines_test:
-                    total_general_reviews_statistics += statistics_line.general_reviews_statistics
-
-                line.general_reviews_statistics_test = total_general_reviews_statistics / len(line.statistics_lines_test)
-
-    @api.depends("main_stat_test", "general_reviews_statistics_test")
-    def _compute_average_test(self):
-        for line in self:
-            line.average_test = .5 * (line.main_stat_test + line.general_reviews_statistics_test)
-
-            # line.average_test = 0
-            #
-            # if len(line.statistics_lines_test) > 0:
-            #     numerator = .0
-            #     denominator = .0
-            #
-            #     for statistics_line in line.statistics_lines_test:
-            #         numerator += statistics_line.one_star_value \
-            #                      + statistics_line.two_stars_value \
-            #                      + statistics_line.three_stars_value \
-            #                      + statistics_line.four_stars_value \
-            #                      + statistics_line.five_stars_value
-            #         denominator += statistics_line.total_one_star_reviews \
-            #                        + statistics_line.total_two_stars_reviews \
-            #                        + statistics_line.total_three_stars_reviews \
-            #                        + statistics_line.total_four_stars_reviews \
-            #                        + statistics_line.total_five_stars_reviews
-            #
-            #     if denominator != 0:
-            #         line.average_test = numerator / denominator
-
-    @api.depends("main_stat", "general_reviews_statistics")
     def _compute_average(self):
         for line in self:
-            line.average = .5 * (line.main_stat + line.general_reviews_statistics)
+            statistics_lines = []
 
-            # line.average = 0
-            #
-            # if len(line.statistics_lines) > 0:
-            #     numerator = .0
-            #     denominator = .0
-            #
-            #     for statistics_line in line.statistics_lines:
-            #         numerator += statistics_line.one_star_value \
-            #                      + statistics_line.two_stars_value \
-            #                      + statistics_line.three_stars_value \
-            #                      + statistics_line.four_stars_value \
-            #                      + statistics_line.five_stars_value
-            #         denominator += statistics_line.total_one_star_reviews \
-            #                        + statistics_line.total_two_stars_reviews \
-            #                        + statistics_line.total_three_stars_reviews \
-            #                        + statistics_line.total_four_stars_reviews \
-            #                        + statistics_line.total_five_stars_reviews
-            #
-            #     if denominator != 0:
-            #         line.average = (numerator / denominator)
+            if len(line.statistics_lines) > 0:
+                for statistics_line in line.statistics_lines:
+                    statistics_lines.append(statistics_line)
+
+                line.average = statistics_lines[-1].main_stat
+
+    @api.depends("statistics_lines_test")
+    def _compute_average_test(self):
+        for line in self:
+            statistics_lines = []
+
+            if len(line.statistics_lines_test) > 0:
+                for statistics_line in line.statistics_lines_test:
+                    statistics_lines.append(statistics_line)
+
+                line.average_test = statistics_lines[-1].main_stat
 
     def _compute_start_date(self):
         for line in self:

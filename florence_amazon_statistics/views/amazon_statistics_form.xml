@@ -77,13 +77,11 @@
                             </group>
 
                             <group string="Average Analysis">
-                                <label for="general_reviews_statistics" string="Average"/>
+                                <label for="average" string="Average"/>
                                 <div class="w-100">
                                     <div class="o_row">
-                                        <field name="main_stat" invisible="True"/>
-                                        <field name="general_reviews_statistics"/>
-                                        <field name="average" invisible="True"/>
-                                        <field name="grs_stars" widget="priority"/>
+                                        <field name="average"/>
+                                        <field name="avg_stars" widget="priority"/>
                                     </div>
                                 </div>
                             </group>
@@ -97,6 +95,7 @@
                                     <field name="name" invisible="True"/>
                                     <field name="parent" invisible="True"/>
                                     <field name="product" invisible="True"/>
+                                    <field name="average" invisible="True"/>
                                     <field name="date"/>
                                     <field name="updates" string="Notes"/>
 
@@ -220,13 +219,11 @@
                             </group>
 
                             <group string="Average Analysis">
-                                <label for="general_reviews_statistics_test" string="Average"/>
+                                <label for="average_test" string="Average"/>
                                 <div class="w-100">
                                     <div class="o_row">
-                                        <field name="main_stat_test" invisible="True"/>
-                                        <field name="general_reviews_statistics_test"/>
-                                        <field name="average_test" invisible="True"/>
-                                        <field name="grs_stars_test" widget="priority"/>
+                                        <field name="average_test"/>
+                                        <field name="avg_stars_test" widget="priority"/>
                                     </div>
                                 </div>
                             </group>
@@ -240,6 +237,7 @@
                                     <field name="name" invisible="True"/>
                                     <field name="parent" invisible="True"/>
                                     <field name="product" invisible="True"/>
+                                    <field name="average_test" invisible="True"/>
                                     <field name="date"/>
 
                                     <field name="one_vote_ratings_new" widget="integer"/>

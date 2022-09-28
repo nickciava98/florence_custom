@@ -218,10 +218,12 @@ class AmazonStatisticsLine(models.Model):
     amazon_buyer_messages = fields.Float()
 
     average = fields.Float(
-        related = "name.average"
+        related = "name.average",
+        store = True
     )
     average_test = fields.Float(
-        related = "name.average_test"
+        related = "name.average_test",
+        store = True
     )
 
     @api.depends("total_one_star_reviews", "total_two_stars_reviews",

@@ -13,7 +13,7 @@
                         <aggregate name="average"
                                    string="Average"
                                    group_operator="avg"
-                                   field="general_reviews_statistics"/>
+                                   field="average"/>
                         <formula name="five_stars_reviews"
                                  string="Five Stars Reviews"
                                  value="record.five_stars_value / record.total_reviews"
