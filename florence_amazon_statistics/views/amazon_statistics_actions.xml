@@ -22,32 +22,10 @@
               sequence="3" action="amazon_statistics_action"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"/>
 
-    <menuitem id="amazon_statistics_menu" name="Reviews Statistics" sequence="0"
-              parent="florence_amazon_revenues.amazon_revenues_reporting_menu"/>
-
-    <record id="line_graph_view_action" model="ir.actions.act_window">
-        <field name="name">Line Graph View Action</field>
-        <field name="res_model">amazon.statistics.line</field>
-        <field name="view_mode">graph</field>
-    </record>
-
-    <record id="line_pivot_view_action" model="ir.actions.act_window">
-        <field name="name">Line Pivot View Action</field>
-        <field name="res_model">amazon.statistics.line</field>
-        <field name="view_mode">pivot</field>
-    </record>
-
     <record id="help_wizard_action" model="ir.actions.act_window">
         <field name="name">Help Guide</field>
         <field name="res_model">help.wizard.amz.stats</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-
-    <menuitem id="line_graph_menu" name="Graph"
-              action="line_graph_view_action" sequence="1"
-              parent="amazon_statistics_menu"/>
-    <menuitem id="line_pivot_menu" name="Pivot"
-              action="line_pivot_view_action" sequence="2"
-              parent="amazon_statistics_menu"/>
 </odoo>
