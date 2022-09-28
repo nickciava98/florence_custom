@@ -12,6 +12,7 @@
     'data': ['security/ir.model.access.csv',
              'views/sale_order_form.xml',
              'views/account_move_form.xml',
+             'views/purchase_order_form.xml',
              'wizard/help_wizard_sale_order.xml'],
     'application': False,
     'installable': True,
