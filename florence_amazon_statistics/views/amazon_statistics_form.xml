@@ -77,12 +77,15 @@
                             </group>
 
                             <group string="Average Analysis">
-                                <group>
-                                    <field name="main_stat" invisible="True"/>
-                                    <field name="general_reviews_statistics"
-                                           string="Average"/>
-                                    <field name="average" invisible="True"/>
-                                </group>
+                                <label for="general_reviews_statistics" string="Average"/>
+                                <div class="w-100">
+                                    <div class="o_row">
+                                        <field name="main_stat" invisible="True"/>
+                                        <field name="general_reviews_statistics"/>
+                                        <field name="average" invisible="True"/>
+                                        <field name="grs_stars" widget="priority"/>
+                                    </div>
+                                </div>
                             </group>
 
                             <field name="statistics_lines" widget="section_and_note_one2many"
@@ -217,12 +220,15 @@
                             </group>
 
                             <group string="Average Analysis">
-                                <group>
-                                    <field name="main_stat_test" invisible="True"/>
-                                    <field name="general_reviews_statistics_test"
-                                           string="Average"/>
-                                    <field name="average_test" invisible="True"/>
-                                </group>
+                                <label for="general_reviews_statistics_test" string="Average"/>
+                                <div class="w-100">
+                                    <div class="o_row">
+                                        <field name="main_stat_test" invisible="True"/>
+                                        <field name="general_reviews_statistics_test"/>
+                                        <field name="average_test" invisible="True"/>
+                                        <field name="grs_stars_test" widget="priority"/>
+                                    </div>
+                                </div>
                             </group>
 
                             <field name="statistics_lines_test" widget="section_and_note_one2many"

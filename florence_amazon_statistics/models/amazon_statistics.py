@@ -44,8 +44,28 @@ class AmazonStatistics(models.Model):
         compute = "_compute_general_reviews_statistics",
         store = True
     )
+    grs_stars = fields.Selection(
+        [("0", "Zero Stars"),
+         ("1", "One Star"),
+         ("2", "Two Stars"),
+         ("3", "Three Stars"),
+         ("4", "Four Stars"),
+         ("5", "Five Stars")],
+        compute = "_compute_grs_stars",
+        store = True
+    )
     general_reviews_statistics_test = fields.Float(
         compute = "_compute_general_reviews_statistics_test",
+        store = True
+    )
+    grs_stars_test = fields.Selection(
+        [("0", "Zero Stars"),
+         ("1", "One Star"),
+         ("2", "Two Stars"),
+         ("3", "Three Stars"),
+         ("4", "Four Stars"),
+         ("5", "Five Stars")],
+        compute = "_compute_grs_stars_test",
         store = True
     )
     main_stat = fields.Float(
@@ -70,6 +90,16 @@ class AmazonStatistics(models.Model):
          ("week", "Weekly Statistics"),
          ("month", "Monthly Statistics")]
     )
+
+    @api.depends("general_reviews_statistics")
+    def _compute_grs_stars(self):
+        for line in self:
+            line.grs_stars = str(int(line.general_reviews_statistics))
+
+    @api.depends("general_reviews_statistics_test")
+    def _compute_grs_stars_test(self):
+        for line in self:
+            line.grs_stars_test = str(int(line.general_reviews_statistics_test))
 
     @api.onchange("name")
     def _onchange_name(self):
