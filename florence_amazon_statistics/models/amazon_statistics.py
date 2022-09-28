@@ -81,7 +81,7 @@ class AmazonStatistics(models.Model):
             line.avg_stars = str(int(line.average))
 
     @api.depends("average_test")
-    def _compute_grs_stars_test(self):
+    def _compute_avg_stars_test(self):
         for line in self:
             line.avg_stars_test = str(int(line.average_test))
 
