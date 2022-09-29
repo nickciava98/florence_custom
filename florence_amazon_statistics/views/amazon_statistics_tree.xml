@@ -6,8 +6,10 @@
         <field name="arch" type="xml">
             <tree expand="True">
                 <field name="product"/>
-                <field name="name"/>
+                <field name="name" invisible="True"/>
                 <field name="average"/>
+                <field name="avg_stars" widget="priority"
+                       string=" "/>
             </tree>
         </field>
     </record>

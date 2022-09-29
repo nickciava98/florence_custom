@@ -142,6 +142,29 @@ class AmazonStatistics(models.Model):
             line.start_date = datetime.now()
 
     def dashboard_view_action(self):
+        context = {}
+
+        if self.group_by == "day":
+            return {
+                'name': 'Statistics Dashboard',
+                'view_type': 'dashboard',
+                'view_mode': 'dashboard',
+                'res_model': 'amazon.statistics.line',
+                'type': 'ir.actions.act_window',
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('name_test', '=', False),
+                    ('product', '=', self.product.id),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.date_from),
+                    ('date', '<=', self.date_to)
+                ],
+                'context': {
+                    'graph_measure': 'main_stat',
+                    'graph_mode': 'line'
+                }
+            }
+
         return {
             'name': 'Statistics Dashboard',
             'view_type': 'dashboard',
@@ -164,6 +187,27 @@ class AmazonStatistics(models.Model):
         }
 
     def graph_view_action(self):
+        if self.group_by == "day":
+            return {
+                'name': 'Statistics Analysis',
+                'view_type': 'graph',
+                'view_mode': 'graph',
+                'res_model': 'amazon.statistics.line',
+                'type': 'ir.actions.act_window',
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('name_test', '=', False),
+                    ('product', '=', self.product.id),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.date_from),
+                    ('date', '<=', self.date_to)
+                ],
+                'context': {
+                    'graph_measure': 'main_stat',
+                    'graph_mode': 'line'
+                }
+            }
+
         return {
             'name': 'Statistics Analysis',
             'view_type': 'graph',
@@ -186,6 +230,27 @@ class AmazonStatistics(models.Model):
         }
 
     def graph_test_view_action(self):
+        if self.group_by_test == "day":
+            return {
+                'name': 'Statistics Test Analysis',
+                'view_type': 'graph',
+                'view_mode': 'graph',
+                'res_model': 'amazon.statistics.line',
+                'type': 'ir.actions.act_window',
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('name', '=', False),
+                    ('product', '=', self.product.id),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.date_from_test),
+                    ('date', '<=', self.date_to_test)
+                ],
+                'context': {
+                    'graph_measure': 'main_stat',
+                    'graph_mode': 'line'
+                }
+            }
+
         return {
             'name': 'Statistics Test Analysis',
             'view_type': 'graph',
@@ -208,6 +273,25 @@ class AmazonStatistics(models.Model):
         }
 
     def tree_view_action(self):
+        if self.group_by == "day":
+            return {
+                'name': 'Statistics List',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'view_id': False,
+                'res_model': 'amazon.statistics.line',
+                'type': 'ir.actions.act_window',
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('name_test', '=', False),
+                    ('product', '=', self.product.id),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.date_from),
+                    ('date', '<=', self.date_to)
+                ],
+                'target': 'current'
+            }
+
         return {
             'name': 'Statistics List',
             'view_type': 'form',
@@ -230,6 +314,25 @@ class AmazonStatistics(models.Model):
         }
 
     def tree_test_view_action(self):
+        if self.group_by_test == "day":
+            return {
+                'name': 'Statistics Test List',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'view_id': False,
+                'res_model': 'amazon.statistics.line',
+                'type': 'ir.actions.act_window',
+                'domain': [
+                    '&', '&', '&', '&',
+                    ('name', '=', False),
+                    ('product', '=', self.product.id),
+                    ('parent', '=', self.name),
+                    ('date', '>=', self.date_from_test),
+                    ('date', '<=', self.date_to_test)
+                ],
+                'target': 'current'
+            }
+
         return {
             'name': 'Statistics Test List',
             'view_type': 'form',

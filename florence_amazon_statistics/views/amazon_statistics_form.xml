@@ -91,7 +91,8 @@
                                    context="{'default_parent': name,
                                              'default_product': product,
                                              'default_date': start_date}">
-                                <tree string="Statistics" editable="bottom">
+                                <tree string="Statistics" editable="bottom"
+                                      default_order="date asc">
                                     <field name="name" invisible="True"/>
                                     <field name="parent" invisible="True"/>
                                     <field name="product" invisible="True"/>
@@ -233,7 +234,8 @@
                                    context="{'default_parent': name,
                                              'default_product': product,
                                              'default_date': start_date}">
-                                <tree string="Statistics Test" editable="bottom">
+                                <tree string="Statistics Test" editable="bottom"
+                                      default_order="date asc">
                                     <field name="name" invisible="True"/>
                                     <field name="parent" invisible="True"/>
                                     <field name="product" invisible="True"/>

@@ -4,7 +4,8 @@
         <field name="model">amazon.statistics.line</field>
 
         <field name="arch" type="xml">
-            <tree expand="True" editable="bottom">
+            <tree expand="True" editable="bottom"
+                  default_order="date asc">
                 <field name="name" invisible="True"/>
                 <field name="parent" invisible="True"/>
                 <field name="product" invisible="True"/>
