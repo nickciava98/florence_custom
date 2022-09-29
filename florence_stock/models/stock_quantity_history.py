@@ -8,7 +8,7 @@ class StockQuantityHistory(models.TransientModel):
     def open_at_date(self):
         tree_view_id = self.env.ref('stock.view_stock_product_tree').id
         form_view_id = self.env.ref('stock.product_form_view_procurement_button').id
-        domain = [('type', '=', 'product')]
+        domain = ['&', ('type', '=', 'product'), ('locations_count', '>', '0')]
         product_id = self.env.context.get('product_id', False)
         product_tmpl_id = self.env.context.get('product_tmpl_id', False)
 
@@ -19,7 +19,7 @@ class StockQuantityHistory(models.TransientModel):
 
         self.env.context = dict(self.env.context)
         self.env.context.update(
-            {'group_by': ['property_stock_inventory_stored', 'product_tmpl_id']}
+            {'group_by': ['locations', 'product_tmpl_id']}
         )
 
         action = {
