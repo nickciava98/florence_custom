@@ -105,25 +105,35 @@ class AmazonStatistics(models.Model):
                 for statistics_line_test in line.statistics_lines_test:
                     statistics_line_test.product = line.product
 
-    @api.depends("statistics_lines")
+    @api.depends("statistics_lines", "date_from", "date_to")
     def _compute_average(self):
         for line in self:
+            line.average = 0
             statistics_lines = []
 
-            if len(line.statistics_lines) > 0:
+            if len(line.statistics_lines) > 0 \
+                    and line.date_from and line.date_to:
                 for statistics_line in line.statistics_lines:
-                    statistics_lines.append(statistics_line)
+                    if statistics_line.date \
+                        and statistics_line.date >= line.date_from \
+                        and statistics_line.date <= line.date_to:
+                        statistics_lines.append(statistics_line)
 
                 line.average = statistics_lines[-1].main_stat
 
-    @api.depends("statistics_lines_test")
+    @api.depends("statistics_lines_test", "date_from_test", "date_to_test")
     def _compute_average_test(self):
         for line in self:
+            line.average_test = 0
             statistics_lines = []
 
-            if len(line.statistics_lines_test) > 0:
+            if len(line.statistics_lines_test) > 0 \
+                and line.date_from_test and line.date_to_test:
                 for statistics_line in line.statistics_lines_test:
-                    statistics_lines.append(statistics_line)
+                    if statistics_line.date \
+                        and statistics_line.date >= line.date_from_test \
+                        and statistics_line.date <= line.date_to_test:
+                        statistics_lines.append(statistics_line)
 
                 line.average_test = statistics_lines[-1].main_stat
 
