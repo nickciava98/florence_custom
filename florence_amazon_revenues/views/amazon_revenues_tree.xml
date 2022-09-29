@@ -5,7 +5,7 @@
         <field name="arch" type="xml">
             <tree expand="True">
                 <field name="product"/>
-                <field name="name"/>
+                <field name="name" invisible="True"/>
                 <field name="currency_id" invisible="True"/>
                 <field name="total_probable_income" widget="monetary"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>

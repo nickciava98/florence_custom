@@ -76,7 +76,8 @@
                                              'default_price_unit': product_updated_price,
                                              'default_currency_id': currency_id,
                                              'default_sku_cost': product_updated_sku_cost}">
-                                <tree string="Revenues" editable="bottom">
+                                <tree string="Revenues" editable="bottom"
+                                      default_order="date asc">
                                     <field name="amazon_revenues_line_id" invisible="True"/>
                                     <field name="parent" invisible="True"/>
                                     <field name="product" invisible="True"/>
@@ -149,7 +150,8 @@
                                              'default_price_unit': product_updated_price,
                                              'default_currency_id': currency_id,
                                              'default_sku_cost': product_updated_sku_cost}">
-                                <tree string="Revenues" editable="bottom">
+                                <tree string="Revenues" editable="bottom"
+                                      default_order="date asc">
                                     <field name="amazon_revenues_line_id_test" invisible="True"/>
                                     <field name="parent" invisible="True"/>
                                     <field name="product" invisible="True"/>

@@ -4,7 +4,8 @@
         <field name="model">amazon.revenues.line</field>
 
         <field name="arch" type="xml">
-            <tree expand="True" editable="bottom">
+            <tree expand="True" editable="bottom"
+                  default_order="date asc">
                 <field name="date"/>
                 <field name="price_unit" string="Selling Price"/>
                 <field name="amazon_fees"/>
