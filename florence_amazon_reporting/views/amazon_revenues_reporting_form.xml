@@ -1,0 +1,64 @@
+<odoo>
+    <record id="amazon_revenues_reporting_view_form" model="ir.ui.view">
+        <field name="name">Revenues Report</field>
+        <field name="model">amazon.revenues.reporting</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+
+                    <group>
+                        <label for="date_start" string="Filter by date"/>
+                        <div class="w-100">
+                            <div class="o_row">
+                                <field name="date_start" widget="daterange"
+                                       options="{'related_end_date': 'date_to'}"/>
+                                <i class="fa fa-long-arrow-right mx-2"
+                                   aria-label="Arrow icon"
+                                   title="Arrow"/>
+                                <field name="date_to" widget="daterange"
+                                       options="{'related_start_date': 'date_start'}"/>
+                            </div>
+                        </div>
+
+                        <label for="group_by" string="Group by"/>
+                        <div class="w-100">
+                            <div class="o_row">
+                                <field name="group_by"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <notebook attrs="{'invisible':
+                    ['|','|',('date_start','=',False),('date_to','=',False),
+                    ('group_by','=',False)]}">
+                        <page string="Report" name="report">
+                            <group>
+                                <group string="Total Revenues Analysis">
+                                    <field name="total_revenues"/>
+                                    <field name="financial_plan_value"/>
+                                </group>
+
+                                <group string="Balance Analysis">
+                                    <field name="delta"/>
+                                    <field name="delta_hint"
+                                           decoration-danger="delta &lt; 0"
+                                           decoration-success="delta &gt; 0 or delta == 0"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

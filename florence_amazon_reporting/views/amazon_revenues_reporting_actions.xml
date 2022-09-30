@@ -1,0 +1,17 @@
+<odoo>
+    <record id="amazon_revenues_reporting_action" model="ir.actions.act_window">
+        <field name="name">Revenues Reporting</field>
+        <field name="res_model">amazon.revenues.reporting</field>
+        <field name="view_mode">tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+
+            <p>
+                Start report revenues for your products from Amazon
+            </p>
+        </field>
+    </record>
+</odoo>

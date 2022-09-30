@@ -1,0 +1,17 @@
+<odoo>
+    <record id="amazon_revenues_reporting_view_tree" model="ir.ui.view">
+        <field name="name">Reporting List</field>
+        <field name="model">amazon.revenues.reporting</field>
+
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="total_revenues" sum="Total Revenues"/>
+                <field name="delta" invisible="True"/>
+                <field name="delta_hint"
+                       decoration-danger="delta &lt; 0"
+                       decoration-success="delta &gt; 0 or delta == 0"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

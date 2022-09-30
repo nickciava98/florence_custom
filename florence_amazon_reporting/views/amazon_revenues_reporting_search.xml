@@ -1,0 +1,12 @@
+<odoo>
+    <record id="amazon_revenues_reporting_view_search" model="ir.ui.view">
+        <field name="name">Reporting Search</field>
+        <field name="model">amazon.revenues.reporting</field>
+
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+</odoo>

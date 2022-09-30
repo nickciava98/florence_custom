@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem name="Revenues Reports" id="amazon_revenues_reports_menu"
+              parent="florence_amazon_revenues.amazon_revenues_reporting_menu"
+              sequence="0"
+              action="amazon_revenues_reporting_action"/>
+</odoo>
