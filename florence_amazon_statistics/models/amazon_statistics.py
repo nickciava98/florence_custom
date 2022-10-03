@@ -121,7 +121,8 @@ class AmazonStatistics(models.Model):
                         and statistics_line.date <= line.date_to:
                         statistics_lines.append(statistics_line)
 
-                line.average = statistics_lines[-1].main_stat
+                if len(statistics_lines) > 0:
+                    line.average = statistics_lines[-1].main_stat
 
     @api.depends("statistics_lines_test", "date_from_test", "date_to_test")
     def _compute_average_test(self):
@@ -137,15 +138,14 @@ class AmazonStatistics(models.Model):
                         and statistics_line.date <= line.date_to_test:
                         statistics_lines.append(statistics_line)
 
-                line.average_test = statistics_lines[-1].main_stat
+                if len(statistics_lines) > 0:
+                    line.average_test = statistics_lines[-1].main_stat
 
     def _compute_start_date(self):
         for line in self:
             line.start_date = datetime.now()
 
     def dashboard_view_action(self):
-        context = {}
-
         if self.group_by == "day":
             return {
                 'name': 'Statistics Dashboard',
@@ -370,12 +370,7 @@ class AmazonStatistics(models.Model):
                 ('parent', '=', self.name),
                 ('date', '>=', self.date_from),
                 ('date', '<=', self.date_to)
-            ],
-            # 'context': {
-            #     'graph_measure': 'main_stat',
-            #     'graph_mode': 'line',
-            #     'graph_groupbys': ['date:day']
-            # }
+            ]
         }
 
     def pivot_test_view_action(self):
@@ -392,12 +387,7 @@ class AmazonStatistics(models.Model):
                 ('parent', '=', self.name),
                 ('date', '>=', self.date_from_test),
                 ('date', '<=', self.date_to_test)
-            ],
-            # 'context': {
-            #     'graph_measure': 'main_stat',
-            #     'graph_mode': 'line',
-            #     'graph_groupbys': ['date:day']
-            # }
+            ]
         }
 
     def update_values_action(self):
