@@ -214,8 +214,8 @@ class AmazonStatisticsLine(models.Model):
         group_operator = "avg"
     )
 
-    freshdesk_buyer_messages = fields.Float()
-    amazon_buyer_messages = fields.Float()
+    freshdesk_buyer_messages = fields.Char()
+    amazon_buyer_messages = fields.Char()
 
     average = fields.Float(
         related = "name.average",
