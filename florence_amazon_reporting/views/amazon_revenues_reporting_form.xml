@@ -6,9 +6,13 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group>
-                        <field name="name"/>
-                    </group>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"
+                                   help="Report Name"
+                                   placeholder="Insert the name of the report"/>
+                        </h1>
+                    </div>
 
                     <group>
                         <label for="date_start" string="Filter by date"/>
@@ -23,27 +27,27 @@
                                        options="{'related_start_date': 'date_start'}"/>
                             </div>
                         </div>
-
-                        <label for="group_by" string="Group by"/>
-                        <div class="w-100">
-                            <div class="o_row">
-                                <field name="group_by"/>
-                            </div>
-                        </div>
                     </group>
 
+                    <field name="currency_id" invisible="True"/>
+
                     <notebook attrs="{'invisible':
-                    ['|','|',('date_start','=',False),('date_to','=',False),
-                    ('group_by','=',False)]}">
+                    ['|',('date_start','=',False),('date_to','=',False)]}">
                         <page string="Report" name="report">
                             <group>
                                 <group string="Total Revenues Analysis">
-                                    <field name="total_revenues"/>
-                                    <field name="financial_plan_value"/>
+                                    <field name="total_revenues"
+                                           widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="financial_plan_value"
+                                           widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </group>
 
                                 <group string="Balance Analysis">
-                                    <field name="delta"/>
+                                    <field name="delta"
+                                           widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="delta_hint"
                                            decoration-danger="delta &lt; 0"
                                            decoration-success="delta &gt; 0 or delta == 0"/>

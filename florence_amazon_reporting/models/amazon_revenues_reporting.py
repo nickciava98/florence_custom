@@ -11,10 +11,9 @@ class AmazonRevenuesReporting(models.Model):
     )
     date_start = fields.Date()
     date_to = fields.Date()
-    group_by = fields.Selection(
-        [("day", "Daily"),
-         ("monthly", "Monthly"),
-         ("yearly", "Yearly")]
+    currency_id = fields.Many2one(
+        "res.currency",
+        compute = "_compute_currency_id"
     )
     total_revenues = fields.Float(
         compute = "_compute_total_revenues",
@@ -29,6 +28,10 @@ class AmazonRevenuesReporting(models.Model):
         compute = "_compute_delta_hint",
         string = "Status"
     )
+
+    def _compute_currency_id(self):
+        for line in self:
+            line.currency_id = self.env.ref('base.main_company').currency_id
 
     @api.depends("date_start", "date_to")
     def _compute_total_revenues(self):
