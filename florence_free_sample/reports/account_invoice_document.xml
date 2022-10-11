@@ -125,8 +125,7 @@
                                     <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
                                 </td>
                                 <td class="text-right o_price_total">
-                                    <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
-                                    <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                    <span class="text-nowrap" t-field="line.total_price" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                 </td>
                             </t>
                             <t t-if="line.display_type == 'line_section'">
@@ -170,7 +169,7 @@
                 <tr class="border-black o_subtotal" style="">
                     <td><strong>Subtotal</strong></td>
                     <td class="text-right">
-                        <span t-field="o.amount_untaxed"/>
+                        <span t-field="o.amount_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                     </td>
                 </tr>
             </t>
@@ -225,6 +224,14 @@
                         </t>
                     </tr>
                 </t>
+
+                <tr>
+                    <td>Total Discount</td>
+                    <td class="text-right">
+                        <span t-field="o.amount_discount"
+                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </td>
+                </tr>
             </t>
         </xpath>
 
