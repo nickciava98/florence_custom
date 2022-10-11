@@ -16,7 +16,7 @@
                 </xpath>
                 <xpath expr="//group[@name='note_group']" position="replace">
                     <group name="note_group" col="6">
-                        <group name="discount" colspan="2">
+                        <group name="discount" colspan="2" invisible="True">
                             <field name="discount_type"/>
                             <field name="discount_rate"/>
                         </group>

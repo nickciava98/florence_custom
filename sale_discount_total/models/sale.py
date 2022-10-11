@@ -60,23 +60,23 @@ class SaleOrder(models.Model):
     amount_discount = fields.Monetary(string='Discount', store=True, readonly=True, compute='_amount_all',
                                       digits=dp.get_precision('Account'), track_visibility='always')
 
-    @api.onchange('discount_type', 'discount_rate', 'order_line')
-    def supply_rate(self):
-
-        for order in self:
-            if order.discount_type == 'percent':
-                for line in order.order_line:
-                    line.discount = order.discount_rate
-            else:
-                total = discount = 0.0
-                for line in order.order_line:
-                    total += round((line.product_uom_qty * line.price_unit))
-                if order.discount_rate != 0:
-                    discount = (order.discount_rate / total) * 100
-                else:
-                    discount = order.discount_rate
-                for line in order.order_line:
-                    line.discount = discount
+    # @api.onchange('discount_type', 'discount_rate', 'order_line')
+    # def supply_rate(self):
+    #
+    #     for order in self:
+    #         if order.discount_type == 'percent':
+    #             for line in order.order_line:
+    #                 line.discount = order.discount_rate
+    #         else:
+    #             total = discount = 0.0
+    #             for line in order.order_line:
+    #                 total += round((line.product_uom_qty * line.price_unit))
+    #             if order.discount_rate != 0:
+    #                 discount = (order.discount_rate / total) * 100
+    #             else:
+    #                 discount = order.discount_rate
+    #             for line in order.order_line:
+    #                 line.discount = discount
 
     def _prepare_invoice(self, ):
         invoice_vals = super(SaleOrder, self)._prepare_invoice()
@@ -88,7 +88,7 @@ class SaleOrder(models.Model):
 
     def button_dummy(self):
 
-        self.supply_rate()
+        #self.supply_rate()
         return True
 
     amount_subtotal = fields.Float(
