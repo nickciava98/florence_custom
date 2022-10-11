@@ -20,4 +20,15 @@
             </search>
         </field>
     </record>
+
+    <record id="amazon_revenues_line_view_search" model="ir.ui.view">
+        <field name="name">Revenues Search</field>
+        <field name="model">amazon.revenues.line</field>
+
+        <field name="arch" type="xml">
+            <search>
+                <filter name="filter_date" date="date"/>
+            </search>
+        </field>
+    </record>
 </odoo>

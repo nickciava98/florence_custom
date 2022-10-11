@@ -99,4 +99,94 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
+
+    <record id="amazon_it_report_action" model="ir.actions.act_window">
+        <field name="name">Amazon IT</field>
+        <field name="res_model">amazon.revenues.line</field>
+        <field name="view_mode">dashboard</field>
+        <field name="domain">
+            ['&amp;',
+                ('parent', '=', 'IT'),
+                ('amazon_revenues_line_id_test', '=', False)]
+        </field>
+        <field name="context">
+            {'graph':
+                {'graph_measure': 'probable_income',
+                 'graph_mode': 'line',
+                 'graph_groupbys': ['date:day', 'product']},
+            'group_by': []}
+        </field>
+    </record>
+
+    <record id="amazon_fr_report_action" model="ir.actions.act_window">
+        <field name="name">Amazon FR</field>
+        <field name="res_model">amazon.revenues.line</field>
+        <field name="view_mode">dashboard</field>
+        <field name="domain">
+            ['&amp;',
+                ('parent', '=', 'FR'),
+                ('amazon_revenues_line_id_test', '=', False)]
+        </field>
+        <field name="context">
+            {'graph':
+                {'graph_measure': 'probable_income',
+                 'graph_mode': 'line',
+                 'graph_groupbys': ['date:day', 'product']},
+            'group_by': []}
+        </field>
+    </record>
+
+    <record id="amazon_de_report_action" model="ir.actions.act_window">
+        <field name="name">Amazon DE</field>
+        <field name="res_model">amazon.revenues.line</field>
+        <field name="view_mode">dashboard</field>
+        <field name="domain">
+            ['&amp;',
+                ('parent', '=', 'DE'),
+                ('amazon_revenues_line_id_test', '=', False)]
+        </field>
+        <field name="context">
+            {'graph':
+                {'graph_measure': 'probable_income',
+                 'graph_mode': 'line',
+                 'graph_groupbys': ['date:day', 'product']},
+            'group_by': []}
+        </field>
+    </record>
+
+    <record id="amazon_es_report_action" model="ir.actions.act_window">
+        <field name="name">Amazon ES</field>
+        <field name="res_model">amazon.revenues.line</field>
+        <field name="view_mode">dashboard</field>
+        <field name="domain">
+            ['&amp;',
+                ('parent', '=', 'ES'),
+                ('amazon_revenues_line_id_test', '=', False)]
+        </field>
+        <field name="context">
+            {'graph':
+                {'graph_measure': 'probable_income',
+                 'graph_mode': 'line',
+                 'graph_groupbys': ['date:day', 'product']},
+            'group_by': []}
+        </field>
+    </record>
+
+    <record id="amazon_uk_report_action" model="ir.actions.act_window">
+        <field name="name">Amazon UK</field>
+        <field name="res_model">amazon.revenues.line</field>
+        <field name="view_mode">dashboard</field>
+        <field name="domain">
+            ['&amp;',
+                ('parent', '=', 'UK'),
+                ('amazon_revenues_line_id_test', '=', False)]
+        </field>
+        <field name="context">
+            {'graph':
+                {'graph_measure': 'probable_income',
+                 'graph_mode': 'line',
+                 'graph_groupbys': ['date:day', 'product']},
+            'group_by': []}
+        </field>
+    </record>
 </odoo>
