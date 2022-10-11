@@ -30,6 +30,10 @@
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_total']" position="after">
                     <field name="total_price"/>
                 </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
             </field>
         </record>
 
