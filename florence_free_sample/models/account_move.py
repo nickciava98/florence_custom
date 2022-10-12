@@ -92,12 +92,6 @@ class AccountMove(models.Model):
             else:
                 sign = -1
 
-            if move.discount_type == 'percent':
-                move.amount_discount = sum(
-                    (line.quantity * line.price_unit * line.discount) / 100 for line in move.invoice_line_ids)
-            else:
-                move.amount_discount = move.discount_rate
-
             currency = len(currencies) == 1 and currencies.pop() or move.company_id.currency_id
 
             new_pmt_state = 'not_paid' if move.move_type != 'entry' else False
