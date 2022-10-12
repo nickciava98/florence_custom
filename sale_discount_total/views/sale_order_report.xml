@@ -3,14 +3,14 @@
     <data>
 
         <template id="report_saleorder_customized" inherit_id="sale.report_saleorder_document">
-            <xpath expr="//span[@t-field='line.discount']" position="replace">
-                 <span t-esc="'%.2f'%(line.discount)"/>
-            </xpath>
-            <xpath expr="//td[@name='td_subtotal']" position="replace">
-                <td name="td_subtotal" class="text-right o_price_total">
-                    <span t-field="line.price_total"/>
-                </td>
-            </xpath>
+<!--            <xpath expr="//span[@t-field='line.discount']" position="replace">-->
+<!--                 <span t-esc="'%.2f'%(line.discount)"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//td[@name='td_subtotal']" position="replace">-->
+<!--                <td name="td_subtotal" class="text-right o_price_total">-->
+<!--                    <span t-field="line.price_total"/>-->
+<!--                </td>-->
+<!--            </xpath>-->
             <xpath expr="//tr[hasclass('border-black')]" position="after">
                 <tr>
                     <td>Total Discount</td>

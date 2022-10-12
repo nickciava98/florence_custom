@@ -3,16 +3,18 @@
     <data>
 
         <template id="report_invoice_customized" inherit_id="account.report_invoice_document">
-            <xpath expr="//span[@t-field='line.discount']" position="replace">
-                 <span t-esc="'%.2f'%(line.discount)"/>
-            </xpath>
+<!--            <xpath expr="//span[@t-field='line.discount']" position="replace">-->
+<!--                 <span t-esc="'%.2f'%(line.discount)"/>-->
+<!--            </xpath>-->
             <xpath expr="//tr[hasclass('border-black')]" position="after">
-                <tr>
-                    <td>Discount</td>
-                    <td class="text-right">
-                        <span t-field="o.amount_discount"/>
-                    </td>
-                </tr>
+                <t t-if="o.amount_discount > 0 and not o.is_free_sample">
+                    <tr>
+                        <td>Discount</td>
+                        <td class="text-right">
+                            <span t-field="o.amount_discount"/>
+                        </td>
+                    </tr>
+                </t>
             </xpath>
         </template>
 

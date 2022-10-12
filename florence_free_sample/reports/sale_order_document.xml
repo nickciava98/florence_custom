@@ -58,16 +58,29 @@
                                         <span t-esc="'%.2f'%(line.price_unit)"/>
                                     </td>
                                     <td class="text-right">
-                                        100%
+                                        <span t-esc="'%.2f'%(line.discount)"/>
                                     </td>
                                     <td name="td_taxes" class="text-right">
                                         <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
                                     </td>
                                     <td name="td_subtotal" class="text-right o_price_total">
-                                        <span t-esc="line.price_subtotal - line.price_subtotal"
-                                              groups="account.group_show_line_subtotals_tax_excluded"/>
-                                        <span t-esc="line.price_total - line.price_total"
-                                              groups="account.group_show_line_subtotals_tax_included"/>
+                                        <t t-if="line.discount == 100">
+                                            <span t-esc="line.price_subtotal - line.price_subtotal"
+                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                                  groups="account.group_show_line_subtotals_tax_excluded"/>
+                                            <span t-esc="line.price_total - line.price_total"
+                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                                  groups="account.group_show_line_subtotals_tax_included"/>
+                                        </t>
+
+                                        <t t-else="">
+                                            <span t-esc="line.price_subtotal"
+                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                                  groups="account.group_show_line_subtotals_tax_excluded"/>
+                                            <span t-esc="line.price_total"
+                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                                  groups="account.group_show_line_subtotals_tax_included"/>
+                                        </t>
                                     </td>
                                 </t>
                                 <t t-if="line.display_type == 'line_section'">
@@ -89,7 +102,8 @@
                             <tr class="is-subtotal text-right">
                                 <td name="td_section_subtotal" colspan="99">
                                     <strong class="mr16">Subtotal</strong>
-                                    <span t-esc="current_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                    <span t-esc="current_subtotal"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
                                 </td>
                             </tr>
                         </t>
@@ -118,7 +132,7 @@
                                     <span t-esc="'%.2f'%(line.price_unit)"/>
                                 </td>
                                 <td t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
-                                    <span t-field="line.discount"/>
+                                    <span t-esc="'%.2f'%(line.discount)"/>
                                 </td>
                                 <td name="td_taxes" class="text-right">
                                     <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
