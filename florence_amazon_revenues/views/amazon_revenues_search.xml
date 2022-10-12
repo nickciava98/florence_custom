@@ -27,6 +27,8 @@
 
         <field name="arch" type="xml">
             <search>
+                <field name="date"/>
+
                 <filter name="filter_date" date="date"/>
             </search>
         </field>
