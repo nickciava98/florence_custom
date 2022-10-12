@@ -55,8 +55,8 @@
                                 <t t-if="not line.display_type" name="account_invoice_line_accountable">
                                     <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
                                     <td class="text-right">
-                                        <span t-field="line.quantity"/>
-                                        <span t-field="line.product_uom_id" groups="uom.group_uom"/>
+                                        <span t-esc="'%.0f'%(line.quantity)"/>
+                                        <span t-field="line.product_uom_id"/>
                                     </td>
                                     <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                         <span class="text-nowrap" t-esc="'%.2f'%(line.price_unit)"/>
@@ -130,8 +130,8 @@
                             <t t-if="not line.display_type" name="account_invoice_line_accountable">
                                 <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
                                 <td class="text-right">
-                                    <span t-field="line.quantity"/>
-                                    <span t-field="line.product_uom_id" groups="uom.group_uom"/>
+                                    <span t-esc="'%.0f'%(line.quantity)"/>
+                                    <span t-field="line.product_uom_id"/>
                                 </td>
                                 <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                     <span class="text-nowrap" t-esc="'%.2f'%(line.price_unit)"/>
@@ -268,6 +268,17 @@
                     <td><strong>Total</strong></td>
                     <td class="text-right">
                         <span class="text-nowrap" t-field="o.amount_total"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+
+        <xpath expr="//tr[hasclass('border-black')]" position="after">
+            <t t-if="o.amount_discount > 0 and not o.is_free_sample">
+                <tr>
+                    <td>Discount</td>
+                    <td class="text-right">
+                        <span t-field="o.amount_discount"/>
                     </td>
                 </tr>
             </t>

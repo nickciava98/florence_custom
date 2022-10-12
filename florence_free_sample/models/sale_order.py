@@ -23,6 +23,35 @@ class SaleOrder(models.Model):
     add_free_sample_rule = fields.Boolean(
         compute = "_compute_add_free_sample_rule"
     )
+    amount_subtotal = fields.Float(
+        compute = "_compute_amount_subtotal",
+        string = "Subtotal",
+        store = True
+    )
+    amount_discount = fields.Monetary(
+        compute = "_compute_amount_discount",
+        store = True
+    )
+
+    @api.depends("order_line.price_total")
+    def _compute_amount_discount(self):
+        for order in self:
+            amount_discount = 0.0
+
+            for line in order.order_line:
+                amount_discount += (line.product_uom_qty * line.price_unit * line.discount) / 100
+
+            order.update({
+                "amount_discount": amount_discount
+            })
+
+    @api.depends("order_line")
+    def _compute_amount_subtotal(self):
+        for line in self:
+            line.amount_subtotal = 0
+
+            for order_line in line.order_line:
+                line.amount_subtotal += order_line.price_total
 
     @api.depends("is_free_sample", "order_line")
     def _compute_amount_untaxed_free_sample(self):

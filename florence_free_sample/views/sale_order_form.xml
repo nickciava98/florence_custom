@@ -10,6 +10,12 @@
                 <field name="add_free_sample_rule" invisible="True"/>
             </xpath>
 
+            <xpath expr="//field[@name='amount_tax']" position="before">
+                <field name="amount_subtotal" widget="monetary"
+                       attrs="{'invisible':[('is_free_sample','=',True)]}"
+                       options="{'currency_field': 'currency_id'}"/>
+            </xpath>
+
             <xpath expr="//field[@name='amount_tax']" position="after">
                 <field name="amount_untaxed_free_sample" string="Untaxed Amount"
                        attrs="{'invisible':[('is_free_sample','=',False)]}"/>
@@ -17,14 +23,31 @@
                        attrs="{'invisible':[('is_free_sample','=',False)]}"/>
                 <field name="free_sample_total" string="Free sample"
                        attrs="{'invisible':[('is_free_sample','=',False)]}"/>
+                <field name="amount_discount" widget='monetary'
+                       attrs="{'invisible':[('is_free_sample','=',True)]}"
+                       options="{'currency_field': 'currency_id'}"/>
             </xpath>
 
             <xpath expr="//field[@name='amount_untaxed']" position="attributes">
-                <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
+                <attribute name="attrs">
+                    {'invisible':['|',('is_free_sample','=',True),('amount_discount','>',0)]}
+                </attribute>
             </xpath>
 
             <xpath expr="//field[@name='amount_tax']" position="attributes">
                 <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="attributes">
+                <attribute name="digits">[16, 2]</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                <field name="price_total"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="optional">hide</attribute>
             </xpath>
         </field>
     </record>

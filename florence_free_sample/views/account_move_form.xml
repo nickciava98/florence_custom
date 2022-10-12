@@ -17,6 +17,13 @@
                 </div>
             </xpath>
 
+            <xpath expr="//field[@name='amount_by_group']" position="before">
+                <field name="amount_subtotal"
+                       widget="monetary"
+                       attrs="{'invisible':[('is_free_sample','=',True)]}"
+                       options="{'currency_field': 'currency_id'}"/>
+            </xpath>
+
             <xpath expr="//field[@name='amount_by_group']" position="after">
                 <field name="amount_untaxed_free_sample" string="Untaxed Amount"
                        attrs="{'invisible':[('is_free_sample','=',False)]}"/>
@@ -24,10 +31,22 @@
                        attrs="{'invisible':[('is_free_sample','=',False)]}"/>
                 <field name="free_sample_total" string="Free sample"
                        attrs="{'invisible':[('is_free_sample','=',False)]}"/>
+                <field name="amount_discount"
+                       attrs="{'invisible':[('is_free_sample','=',True)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='discount']" position="attributes">
+                <attribute name="digits">[16, 2]</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_total']" position="after">
+                <field name="total_price"/>
             </xpath>
 
             <xpath expr="//field[@name='amount_untaxed']" position="attributes">
-                <attribute name="attrs">{'invisible':[('is_free_sample','=',True)]}</attribute>
+                <attribute name="attrs">
+                    {'invisible':['|',('is_free_sample','=',True),('amount_discount','>',0)]}
+                </attribute>
             </xpath>
 
             <xpath expr="//field[@name='amount_by_group']" position="attributes">
