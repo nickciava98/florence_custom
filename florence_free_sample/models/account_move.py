@@ -46,7 +46,7 @@ class AccountMove(models.Model):
         'line_ids.amount_residual_currency',
         'line_ids.payment_id.state',
         'line_ids.full_reconcile_id')
-    def _compute_amount(self):
+    def _compute_amount_discount(self):
         for move in self:
             if move.payment_state == 'invoicing_legacy':
                 move.payment_state = move.payment_state
