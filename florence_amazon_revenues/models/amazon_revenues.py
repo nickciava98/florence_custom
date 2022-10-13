@@ -29,7 +29,13 @@ class AmazonRevenues(models.Model):
     )
     total_probable_income = fields.Float(
         compute = "_compute_total_probable_income",
-        store = True
+        store = True,
+        string = "Total Probable Income (Odoo)"
+    )
+    total_probable_income_amz = fields.Float(
+        compute = "_compute_total_probable_income_amz",
+        store = True,
+        string = "Total Probable Income (Amazon)"
     )
     revenues_line = fields.One2many(
         "amazon.revenues.line",
@@ -120,6 +126,15 @@ class AmazonRevenues(models.Model):
             for revenues_line in line.revenues_line:
                 if revenues_line.probable_income:
                     line.total_probable_income += revenues_line.probable_income
+
+    @api.depends("revenues_line")
+    def _compute_total_probable_income_amz(self):
+        for line in self:
+            line.total_probable_income_amz = 0
+
+            for revenues_line in line.revenues_line:
+                if revenues_line.probable_income_amz:
+                    line.total_probable_income_amz += revenues_line.probable_income_amz
 
     def dashboard_view_action(self):
         if self.group_by == "day":

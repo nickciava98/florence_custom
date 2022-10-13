@@ -29,7 +29,9 @@
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                 <field name="pcs_sold" widget="integer" sum="Pcs Sold"/>
                 <field name="earned_per_pc" avg="Earned Per Pc"/>
-                <field name="probable_income" widget="monetary" sum="Probable Income"
+                <field name="probable_income" widget="monetary" sum="Probable Income (Odoo)"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="probable_income_amz" widget="monetary" sum="Probable Income (Amazon)"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
             </tree>
         </field>

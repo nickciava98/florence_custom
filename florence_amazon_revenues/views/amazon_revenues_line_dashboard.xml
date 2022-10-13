@@ -54,10 +54,15 @@
                                group_operator="avg"
                                field="earned_per_pc"
                                widget="monetary"/>
-                    <aggregate name="probable_income"
-                               string="Tot. Probable Income"
+                    <aggregate name="probable_income_odoo"
+                               string="Tot. Probable Income - Tot. SKU Costs (Odoo)"
                                group_operator="sum"
                                field="probable_income"
+                               widget="monetary"/>
+                    <aggregate name="probable_income_amz"
+                               string="Tot. Probable Income + Tot. SKU Costs (Amazon)"
+                               group_operator="sum"
+                               field="probable_income_amz"
                                widget="monetary"/>
                 </group>
             </dashboard>

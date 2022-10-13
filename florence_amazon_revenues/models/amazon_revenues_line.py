@@ -50,12 +50,26 @@ class AmazonRevenuesLine(models.Model):
     )
     probable_income = fields.Float(
         compute = "_compute_probable_income",
-        store = True
+        store = True,
+        string = "Probable Income (Odoo)"
+    )
+    probable_income_amz = fields.Float(
+        compute = "_compute_probable_income_amz",
+        store = True,
+        string = "Probable Income (Amazon)"
     )
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"
     )
+
+    @api.depends("probable_income", "sku_cost")
+    def _compute_probable_income_amz(self):
+        for line in self:
+            line.probable_income_amz = 0
+
+            if line.probable_income and line.sku_cost:
+                line.probable_income_amz = line.probable_income + line.sku_cost
 
     def _compute_currency_id(self):
         for line in self:
