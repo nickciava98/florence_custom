@@ -69,7 +69,7 @@
                                     <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                         <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
                                     </td>
-                                    <td class="text-right o_price_total">
+                                    <td class="text-right">
                                         <t t-if="line.discount == 100">
                                             <span class="text-nowrap" t-esc="line.price_subtotal - line.price_subtotal"
                                                   t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"
@@ -142,7 +142,7 @@
                                 <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                     <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
                                 </td>
-                                <td class="text-right o_price_total">
+                                <td class="text-right">
                                     <span class="text-nowrap" t-field="line.total_price" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
                                 </td>
                             </t>
@@ -200,7 +200,7 @@
                         <t t-if="amount_by_group[2] >= 0">
                             <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
                                 <td><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
-                                <td class="text-right o_price_total">
+                                <td class="text-right">
                                     <span class="text-nowrap" t-esc="amount_by_group[3]"/>
                                 </td>
                             </t>
@@ -211,7 +211,7 @@
                                         <t t-esc="amount_by_group[4]"/>
                                     </span>
                                 </td>
-                                <td class="text-right o_price_total">
+                                <td class="text-right">
                                     <span class="text-nowrap" t-esc="amount_by_group[3]"/>
                                 </td>
                             </t>
@@ -221,11 +221,19 @@
             </t>
 
             <t t-else="">
+                <tr>
+                    <td>Total Discount</td>
+                    <td class="text-right">
+                        <span t-field="o.amount_discount"
+                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </td>
+                </tr>
+
                 <t t-foreach="o.amount_by_group" t-as="amount_by_group">
                     <tr style="">
                         <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
                             <td><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
-                            <td class="text-right o_price_total">
+                            <td class="text-right">
                                 <span class="text-nowrap" t-esc="amount_by_group[3]"/>
                             </td>
                         </t>
@@ -236,20 +244,12 @@
                                     <t t-esc="amount_by_group[4]"/>
                                 </span>
                             </td>
-                            <td class="text-right o_price_total">
+                            <td class="text-right">
                                 <span class="text-nowrap" t-esc="amount_by_group[3]"/>
                             </td>
                         </t>
                     </tr>
                 </t>
-
-                <tr>
-                    <td>Total Discount</td>
-                    <td class="text-right">
-                        <span t-field="o.amount_discount"
-                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                    </td>
-                </tr>
             </t>
         </xpath>
 

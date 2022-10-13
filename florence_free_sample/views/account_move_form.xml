@@ -6,12 +6,10 @@
 
         <field name="arch" type="xml">
             <xpath expr="//div[@name='journal_div']" position="after">
-                <label for="is_free_sample" string="Is Free Sample" invisible="True"/>
                 <div class="d-flex" invisible="True">
                     <field name="is_free_sample"/>
                 </div>
 
-                <label for="is_free_sample_stored" string="Is Free Sample Stored" invisible="True"/>
                 <div class="d-flex" invisible="True">
                     <field name="is_free_sample_stored"/>
                 </div>

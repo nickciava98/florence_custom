@@ -26,12 +26,10 @@ class SaleOrder(models.Model):
     )
     amount_subtotal = fields.Float(
         compute = "_compute_amount_subtotal",
-        string = "Subtotal",
-        store = True
+        string = "Subtotal"
     )
     amount_discount = fields.Monetary(
-        compute = "_compute_amount_discount",
-        store = True
+        compute = "_compute_amount_discount"
     )
 
     @api.depends("order_line.price_total")
