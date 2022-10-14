@@ -59,10 +59,15 @@
                                group_operator="sum"
                                field="probable_income"
                                widget="monetary"/>
-                    <formula name="probable_income_amz" 
-                             string="Tot. Probable Income + Tot. SKU Costs (Amazon)" 
-                             value="record.probable_income_odoo + record.pcs_sold * record.sku_cost" 
-                             widget="monetary"/>
+                    <aggregate name="probable_income_amz"
+                               string="Tot. Probable Income + Tot. SKU Costs (Amazon)"
+                               group_operator="sum"
+                               field="probable_income_amz"
+                               widget="monetary"/>
+<!--                    <formula name="probable_income_amz" -->
+<!--                             string="Tot. Probable Income + Tot. SKU Costs (Amazon)" -->
+<!--                             value="record.probable_income_odoo + record.pcs_sold * record.sku_cost" -->
+<!--                             widget="monetary"/>-->
                 </group>
             </dashboard>
         </field>

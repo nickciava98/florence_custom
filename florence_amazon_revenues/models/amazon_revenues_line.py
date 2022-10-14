@@ -69,7 +69,7 @@ class AmazonRevenuesLine(models.Model):
             line.probable_income_amz = 0
 
             if line.probable_income and line.sku_cost:
-                line.probable_income_amz = line.probable_income + line.sku_cost
+                line.probable_income_amz = line.probable_income + line.pcs_sold * line.sku_cost
 
     def _compute_currency_id(self):
         for line in self:
