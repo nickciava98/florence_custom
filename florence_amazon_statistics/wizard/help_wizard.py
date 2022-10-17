@@ -63,8 +63,9 @@ class HelpWizard(models.TransientModel):
             elif line.state == "4":
                 line.guide = "In ognuno dei due tab sono presenti dei campi per il filtraggio nella sezione " \
                              "Pivot and Chart Analysis:\n\n" \
-                             "- Filter by date: data inizio e data fine\n\n" \
-                             "e dei pulsanti che richiamano delle azioni, i quali compaiono solo se le due date" \
+                             "- Filter by date: data inizio e data fine\n" \
+                             "- Group by: daily/weekly/monthly statistics, per il raggrupamento dei dati (ad es. nella lista)\n\n" \
+                             "e dei pulsanti che richiamano delle azioni, i quali compaiono solo se group by e le due date " \
                              "precedenti sono compilate:\n\n" \
                              "- Statistics List: lista di tutti i dati\n\n" \
                              "- Statistics Dashboard: dashboard con tutti i valori fondamentali (grafici, pivot e aggregazioni)\n\n" \

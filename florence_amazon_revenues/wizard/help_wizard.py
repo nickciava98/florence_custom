@@ -42,7 +42,7 @@ class HelpWizard(models.TransientModel):
                 line.guide = "In basso è possibile visualizzare due tab:\n\n" \
                              "1 - Incidence\n\n" \
                              "2 - Test Area\n\n" \
-                             "Ognuno di questi tab mostra un riepilogo generale" \
+                             "Ognuno di questi tab mostra un riepilogo generale " \
                              "dei dati, con il primo tab visto come ufficiale e il secondo " \
                              "come test per visualizzare una previsione dell'andamento"
             elif line.state == "3":
@@ -62,14 +62,16 @@ class HelpWizard(models.TransientModel):
                              "Il tab Test Area segue le stesse regole del tab precedente"
             elif line.state == "4":
                 line.guide = "In ognuno dei due tab sono presenti dei campi per il filtraggio:\n\n" \
-                             "- Filter by date: data inizio e data fine\n\n" \
-                             "e dei pulsanti che richiamano delle azioni:\n\n" \
+                             "- Filter by date: data inizio e data fine\n" \
+                             "- Group by: daily/weekly/monthly revenues, per il raggrupamento dei dati (ad es. nella lista)\n\n" \
+                             "e dei pulsanti che richiamano delle azioni, i quali compaiono solo se group by e le due date " \
+                             "precedenti sono compilate:\n\n" \
                              "- Revenues Analysis\n\n" \
                              "- Revenues List\n\n" \
-                             "I primi due campi data servono per stabilire l'intervallo temporale attraverso" \
-                             "cui filtrare i dati presenti nel grafico richiamabile tramite il pulsante" \
+                             "I primi due campi data servono per stabilire l'intervallo temporale attraverso " \
+                             "cui filtrare i dati presenti nel grafico richiamabile tramite il pulsante " \
                              "Revenues Analysis e nella lista richiamabile tramite il pulsante Revenues List.\n\n" \
-                             "Questi due campi possono anche essere vuoti, e se sono vuoti i due pulsanti richiamano" \
+                             "Questi due campi possono anche essere vuoti, e se sono vuoti i due pulsanti richiamano " \
                              "lista e grafico complessivo, visualizzando tutti i dati presenti"
 
     def action_next(self):
