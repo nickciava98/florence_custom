@@ -1,0 +1,12 @@
+<odoo>
+    <record id="amazon_financial_plan_view_search" model="ir.ui.view">
+        <field name="name">Financial Plan Search</field>
+        <field name="model">amazon.financial.plan</field>
+
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+</odoo>
