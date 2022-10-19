@@ -1,6 +1,6 @@
 <odoo>
     <menuitem name="FP" id="amazon_financial_plan_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9"
+              sequence="9" groups="florence_amazon_revenues.group_admin"
               action="amazon_financial_plan_action"/>
 </odoo>

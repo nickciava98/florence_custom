@@ -1,6 +1,7 @@
 <odoo>
     <menuitem name="Amazon" id="amazon_revenues_base_menu"
               action="amazon_revenues_action"
+              groups="group_data_entry"
               web_icon="florence_amazon_revenues,static/description/app_icon.png"/>
     <menuitem name="Summary" id="amazon_revenues_summary_menu"
               parent="amazon_revenues_base_menu" sequence="1"
@@ -25,7 +26,8 @@
               action="amazon_uk_action"/>
 
     <menuitem name="Reporting" id="amazon_revenues_reporting_menu"
-              parent="amazon_revenues_base_menu" sequence="10"/>
+              parent="amazon_revenues_base_menu" sequence="10"
+              groups="group_admin"/>
 
     <menuitem name="Reports per Marketplace" id="amazon_revenues_reports_marketplace_menu"
               parent="amazon_revenues_reporting_menu" sequence="1"/>
@@ -46,4 +48,10 @@
     <menuitem name="Chart" id="amazon_revenues_graph_menu"
               parent="amazon_revenues_reporting_menu" sequence="3"
               action="graph_action"/>
+
+    <record id="florence_amazon_revenues.amazon_revenues_base_menu" model="ir.ui.menu">
+        <field name="groups_id"
+               eval="[(6,0, [ref('florence_amazon_revenues.group_admin'),
+                             ref('florence_amazon_revenues.group_data_entry')])]"/>
+    </record>
 </odoo>

@@ -18,8 +18,13 @@
         </field>
     </record>
 
+    <menuitem name="Amazon" id="amazon_statistics_base_menu"
+              action="amazon_statistics_action"
+              groups="florence_amazon_revenues.group_users"
+              web_icon="florence_amazon_revenues,static/description/app_icon.png"/>
     <menuitem id="amazon_statistics_super_menu" name="Reviews Statistics"
               sequence="3" action="amazon_statistics_action"
+              groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_data_entry"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"/>
 
     <record id="help_wizard_action" model="ir.actions.act_window">

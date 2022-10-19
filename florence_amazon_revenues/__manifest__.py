@@ -10,6 +10,7 @@
     'depends': ['base', 'mail', 'stock'],
     'data': [
         'security/ir.model.access.csv',
+        'security/groups.xml',
         'views/amazon_revenues_actions.xml',
         'views/amazon_revenues_form.xml',
         'views/amazon_revenues_menus.xml',
