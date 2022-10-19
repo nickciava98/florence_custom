@@ -1,0 +1,44 @@
+<odoo>
+    <record id="res_partner_customers_action" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="domain">[('is_influencer','=',False)]</field>
+        <field name="context">{'default_is_influencer': False}</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+
+            <p>
+                Start creating customers!
+            </p>
+        </field>
+    </record>
+
+    <record id="res_partner_influencers_action" model="ir.actions.act_window">
+        <field name="name">Influencers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="domain">[('is_influencer','=',True)]</field>
+        <field name="context">{'default_is_influencer': True}</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+
+            <p>
+                Start creating influencers for free samples!
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Groups" id="res_partner_groups_menu"
+              parent="contacts.menu_contacts" sequence="1"/>
+    <menuitem name="Customers" id="res_partner_customers_menu"
+              parent="res_partner_groups_menu" action="res_partner_customers_action"/>
+    <menuitem name="Influencers" id="res_partner_influencers_menu"
+              parent="res_partner_groups_menu" action="res_partner_influencers_action"/>
+</odoo>

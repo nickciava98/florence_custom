@@ -11,6 +11,8 @@
     'data': ['views/sale_order_form.xml',
              'views/sale_order_template_form.xml',
              'views/account_move_form.xml',
+             'views/res_partner_form.xml',
+             'views/res_partner_menu.xml',
              'reports/sale_order_document.xml',
              'reports/account_invoice_document.xml'],
     'application': False,

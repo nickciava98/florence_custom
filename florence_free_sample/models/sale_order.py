@@ -130,7 +130,7 @@ class SaleOrder(models.Model):
             else:
                 line.add_free_sample_rule = False
 
-    @api.onchange('sale_order_template_id')
+    @api.onchange("sale_order_template_id")
     def onchange_sale_order_template_id(self):
         if not self.sale_order_template_id:
             self.require_signature = self._get_default_require_signature()
@@ -187,3 +187,19 @@ class SaleOrder(models.Model):
 
         if template.note:
             self.note = template.note
+
+    @api.onchange("sale_order_template_id")
+    def _onchange_sale_order_template_id(self):
+        for line in self:
+            res = {}
+
+            if line.sale_order_template_id and line.sale_order_template_id.is_free_sample:
+                res["domain"] = {
+                    'partner_id': [('is_influencer','=',True)]
+                }
+            else:
+                res["domain"] = {
+                    'partner_id': [('is_influencer','=',False)]
+                }
+
+            return res

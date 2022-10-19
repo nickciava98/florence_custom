@@ -48,7 +48,8 @@ class HelpWizardSaleOrder(models.TransientModel):
                              "<b>N.B. questa regola non si applica al prodotto Free Sample</b>"
             elif line.state == "4":
                 line.guide = "Per la corretta gestione dei Free Sample è necessario innanzitutto selezionare un " \
-                             "Quotation Template che contiene la spunta sul campo Is Free Sample.<br/><br/>" \
+                             "Quotation Template che contiene la spunta sul campo Is Free Sample e dopo selezionare il cliente, " \
+                             "in quanto in base al template selezionato verrà applicato un filtro (se influencer o meno).<br/><br/>" \
                              "Dopo aver fatto ciò sarà necessario controllare le righe dell Order Line per assicurarsi " \
                              "che tutto sia corretto, aggiungendo eventualmente l'aliquota IVA dove mancante.<br/><br/>" \
                              "Qualora siano state effettuate modifiche ai prodotti prelevati dal template (es. aggiunta di " \
