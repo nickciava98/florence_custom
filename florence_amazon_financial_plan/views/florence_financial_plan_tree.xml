@@ -1,0 +1,13 @@
+<odoo>
+    <record id="florence_financial_plan_view_tree" model="ir.ui.view">
+        <field name="name">Financial Plannings</field>
+        <field name="model">florence.financial.plan</field>
+
+        <field name="arch" type="xml">
+            <tree default_order="date desc">
+                <field name="name"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

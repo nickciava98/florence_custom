@@ -2,7 +2,7 @@
     <record id="amazon_financial_plan_action" model="ir.actions.act_window">
         <field name="name">Financial Plan</field>
         <field name="res_model">amazon.financial.plan</field>
-        <field name="view_mode">tree,form,pivot,dashboard</field>
+        <field name="view_mode">dashboard,tree,form,pivot</field>
         <field name="context">
             {'pivot': {
                 'pivot_measures': ['value'],
@@ -18,6 +18,22 @@
 
             <p>
                 Start manage financial plans for your products from Amazon
+            </p>
+        </field>
+    </record>
+
+    <record id="florence_financial_plan_action" model="ir.actions.act_window">
+        <field name="name">Financial Planning</field>
+        <field name="res_model">florence.financial.plan</field>
+        <field name="view_mode">tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+
+            <p>
+                Start manage financial plannigs for your products from Amazon
             </p>
         </field>
     </record>

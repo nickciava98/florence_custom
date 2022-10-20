@@ -1,0 +1,227 @@
+<odoo>
+    <record id="florence_financial_plan_view_form" model="ir.ui.view">
+        <field name="name">Financial Planning</field>
+        <field name="model">florence.financial.plan</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"
+                                   help="FP Name"
+                                   placeholder="Insert the name of the FP"/>
+                        </h1>
+                    </div>
+
+                    <field name="currency_id" invisible="True"/>
+
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="gi" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            <field name="vat" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            <field name="cgi" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            <field name="perc" widget="percentage"/>
+                            <field name="disbursment" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </group>
+
+                        <group>
+                            <field name="monthly_total" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            <field name="approved_total" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            <field name="surplus" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            <field name="pending" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Basics" name="basics">
+                            <group>
+                                <field name="basics_condition"/>
+                            </group>
+
+                            <field name="basics" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="basics_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Emergencies" name="emergencies">
+                            <group>
+                                <field name="emergencies_condition"/>
+                            </group>
+
+                            <field name="emergencies" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="emergencies_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV1 - Estabilishment" name="div1">
+                            <group>
+                                <field name="div1_condition"/>
+                            </group>
+
+                            <field name="div1" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="div1_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV2 - Sales" name="div2">
+                            <group>
+                                <field name="div2_condition"/>
+                            </group>
+
+                            <field name="div2" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="div2_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV3 - Treasury" name="div3">
+                            <group>
+                                <field name="div3_condition"/>
+                            </group>
+
+                            <field name="div3" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="div3_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV4 - Production" name="div4">
+                            <group>
+                                <field name="div4_condition"/>
+                            </group>
+
+                            <field name="div4" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="div4_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV5 - Correction" name="div5">
+                            <group>
+                                <field name="div5_condition"/>
+                            </group>
+
+                            <field name="div5" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="div5_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV6 - Expansion" name="div6">
+                            <group>
+                                <field name="div6_condition"/>
+                            </group>
+
+                            <field name="div6" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="div6_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV7 - Executive" name="div7">
+                            <group>
+                                <field name="div7_condition"/>
+                            </group>
+
+                            <field name="div7" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="div7_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>
