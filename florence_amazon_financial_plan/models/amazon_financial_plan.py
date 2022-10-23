@@ -7,34 +7,94 @@ class AmazonFinancialPlan(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Amazon Financial Plan"
 
-    name = fields.Char()
+    name = fields.Char(
+        required = True
+    )
     date = fields.Date(
-        default = datetime.datetime.now()
+        default = datetime.datetime.now(),
+        required = True
     )
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"
     )
-    product_id = fields.Many2one(
-        "product.template"
+    total_value = fields.Float(
+        compute = "_compute_total_value",
+        store = True
     )
-    value = fields.Float()
-    value_used = fields.Boolean()
-    total_used = fields.Float()
-    total_to_use = fields.Float()
+    total_used = fields.Float(
+        compute = "_compute_total_used",
+        store = True
+    )
+    total_to_use = fields.Float(
+        compute = "_compute_total_to_use",
+        store = True
+    )
+    amazon_financial_plan_lines = fields.One2many(
+        "amazon.financial.plan.line",
+        "name"
+    )
 
-    @api.onchange("value_used")
-    def _onchange_value_used(self):
+    @api.depends("amazon_financial_plan_lines")
+    def _compute_total_value(self):
+        for line in self:
+            line.total_value = 0
+
+            for fp in line.amazon_financial_plan_lines:
+                line.total_value += fp.value
+
+    @api.depends("amazon_financial_plan_lines")
+    def _compute_total_used(self):
         for line in self:
             line.total_used = 0
 
-            if line.value_used:
-                line.total_to_use = 0
-                line.total_used = line.value
-            else:
-                line.total_used = 0
-                line.total_to_use = line.value
+            for fp in line.amazon_financial_plan_lines:
+                if fp.value_used:
+                    line.total_used += fp.value
+
+    @api.depends("amazon_financial_plan_lines")
+    def _compute_total_to_use(self):
+        for line in self:
+            line.total_to_use = 0
+
+            for fp in line.amazon_financial_plan_lines:
+                if not fp.value_used:
+                    line.total_to_use += fp.value
 
     def _compute_currency_id(self):
         for line in self:
             line.currency_id = self.env.ref('base.main_company').currency_id
+
+    def fp_by_date_action(self):
+        return {
+            'name': 'FP by date',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'view_id': False,
+            'res_model': 'amazon.financial.plan.line',
+            'type': 'ir.actions.act_window',
+            'context': {
+                'group_by': ['date:day']
+            },
+            'domain': [
+                ('name', '=', self.id)
+            ],
+            'target': 'current'
+        }
+
+    def fp_by_product_action(self):
+        return {
+            'name': 'FP by product',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'view_id': False,
+            'res_model': 'amazon.financial.plan.line',
+            'type': 'ir.actions.act_window',
+            'context': {
+                'group_by': ['date:day', 'product_id']
+            },
+            'domain': [
+                ('name', '=', self.id)
+            ],
+            'target': 'current'
+        }

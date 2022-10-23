@@ -11,11 +11,12 @@
     'data': [
         'security/ir.model.access.csv',
         'views/amazon_financial_plan_actions.xml',
-        'views/amazon_financial_plan_pivot.xml',
-        'views/amazon_financial_plan_dashboard.xml',
+        'views/amazon_financial_plan_form.xml',
+        'views/amazon_financial_plan_tree.xml',
         'views/amazon_financial_plan_menus.xml',
         'views/amazon_financial_plan_search.xml',
         'views/amazon_financial_plan_tree.xml',
+        'views/amazon_financial_plan_line_tree.xml',
         'views/florence_financial_plan_form.xml',
         'views/florence_financial_plan_tree.xml'
     ],

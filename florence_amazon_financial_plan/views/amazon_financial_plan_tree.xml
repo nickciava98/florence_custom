@@ -4,19 +4,16 @@
         <field name="model">amazon.financial.plan</field>
 
         <field name="arch" type="xml">
-            <tree expand="True" default_order="date desc"
-                  editable="bottom" decoration-danger="value_used">
-                <field name="date"/>
-                <field name="name"/>
-                <field name="product_id"/>
-                <field name="value" widget="monetary"
-                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                <field name="value_used" string="Used"/>
-                <field name="total_used" widget="monetary" invisible="True"
-                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                <field name="total_to_use" widget="monetary" invisible="True"
-                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+            <tree expand="True" default_order="date desc">
                 <field name="currency_id" invisible="True"/>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="total_value" widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="total_used" widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="total_to_use" widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
             </tree>
         </field>
     </record>

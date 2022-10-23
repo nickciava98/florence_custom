@@ -2,14 +2,7 @@
     <record id="amazon_financial_plan_action" model="ir.actions.act_window">
         <field name="name">Financial Plan</field>
         <field name="res_model">amazon.financial.plan</field>
-        <field name="view_mode">dashboard,tree,form,pivot</field>
-        <field name="context">
-            {'pivot': {
-                'pivot_measures': ['value'],
-                'pivot_column_groupby': ['product_id'],
-                'pivot_row_groupby': ['date:day']
-                }, 'group_by': ['date:day']}
-        </field>
+        <field name="view_mode">tree,form</field>
 
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
