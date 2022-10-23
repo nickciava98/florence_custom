@@ -16,31 +16,74 @@
 
                     <field name="currency_id" invisible="True"/>
 
-                    <group>
-                        <group>
-                            <field name="date"/>
-                            <field name="gi" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                            <field name="vat" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                            <field name="cgi" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                            <field name="perc" widget="percentage"/>
-                            <field name="disbursment" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    <group col="2" colspan="2">
+                        <group col="1" colspan="1">
+                            <group string="FP Values" col="4" colspan="4">
+                                <group>
+                                    <field name="date"/>
+                                    <field name="gi" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="vat" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="cgi" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="perc"/>
+                                    <field name="disbursment" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </group>
+
+                                <group>
+                                    <field name="monthly_total" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved_total" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="surplus" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="pending" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </group>
+                            </group>
                         </group>
 
-                        <group>
-                            <field name="monthly_total" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                            <field name="approved_total" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                            <field name="surplus" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                            <field name="pending" widget="monetary"
-                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        <group col="1" colspan="1">
+                            <group string="Amazon Values" col="6" colspan="6">
+                                <group string="Marketplaces" col="1" colspan="1">
+                                    <label for="amz_total_it" string="Amazon IT"/>
+                                    <label for="amz_total_fr" string="Amazon FR"/>
+                                    <label for="amz_total_de" string="Amazon DE"/>
+                                    <label for="amz_total_es" string="Amazon ES"/>
+                                    <label for="amz_total_uk" string="Amazon UK"/>
+                                </group>
+
+                                <group string="Total" col="1" colspan="1">
+                                    <field name="amz_total_it" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_total_fr" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_total_de" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_total_es" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_total_uk" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </group>
+
+                                <group string="VAT" col="1" colspan="1">
+                                    <field name="amz_vat_it" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_vat_fr" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_vat_de" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_vat_es" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_vat_uk" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </group>
+                            </group>
                         </group>
                     </group>
+
 
                     <notebook>
                         <page string="Basics" name="basics">
@@ -71,6 +114,25 @@
                                    context="{'default_currency_id': currency_id}">
                                 <tree editable="bottom">
                                     <field name="emergencies_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="monthly" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="approved" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV7 - Executive" name="div7">
+                            <group>
+                                <field name="div7_condition"/>
+                            </group>
+
+                            <field name="div7" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="div7_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="monthly" widget="monetary"
@@ -185,25 +247,6 @@
                                    context="{'default_currency_id': currency_id}">
                                 <tree editable="bottom">
                                     <field name="div6_id" invisible="True"/>
-                                    <field name="currency_id" invisible="True"/>
-                                    <field name="item"/>
-                                    <field name="monthly" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                </tree>
-                            </field>
-                        </page>
-
-                        <page string="DIV7 - Executive" name="div7">
-                            <group>
-                                <field name="div7_condition"/>
-                            </group>
-
-                            <field name="div7" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
-                                <tree editable="bottom">
-                                    <field name="div7_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="monthly" widget="monetary"
