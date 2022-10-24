@@ -14,6 +14,11 @@ class FlorenceFinancialPlan(models.Model):
         default = datetime.datetime.now(),
         required = True
     )
+    date_str = fields.Char(
+        compute = "_compute_date_str",
+        store = True,
+        string = "Date"
+    )
     gi = fields.Float(
         string = "G.I.",
         compute = "_compute_gi"
@@ -186,6 +191,14 @@ class FlorenceFinancialPlan(models.Model):
         store = True,
         string = "Amazon UK Net Income"
     )
+
+    @api.depends("date")
+    def _compute_date_str(self):
+        for line in self:
+            line.date_str = ""
+
+            if line.date:
+                line.date_str = line.date.strftime("%m/%d/%Y")
 
     @api.depends("amz_total_it", "amz_vat_it")
     def _compute_amz_net_it(self):

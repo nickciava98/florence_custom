@@ -15,6 +15,7 @@
                     </div>
 
                     <field name="currency_id" invisible="True"/>
+                    <field name="date_str" invisible="0"/>
 
                     <group col="3" colspan="3">
                         <group col="1" colspan="1">
