@@ -30,4 +30,10 @@
             </p>
         </field>
     </record>
+
+    <record id="florence_fp_chart_action" model="ir.actions.act_window">
+        <field name="name">FPs Chart</field>
+        <field name="res_model">florence.financial.plan</field>
+        <field name="view_mode">graph</field>
+    </record>
 </odoo>

@@ -7,4 +7,10 @@
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
               sequence="9" groups="florence_amazon_revenues.group_admin"
               action="florence_financial_plan_action"/>
+    <menuitem name="FPs" id="florence_fps_menu"
+              parent="florence_financial_plan_menu" sequence="1"
+              action="florence_financial_plan_action"/>
+    <menuitem name="FPs Chart" id="florence_fps_chart_menu"
+              parent="florence_financial_plan_menu"
+              sequence="2" action="florence_fp_chart_action"/>
 </odoo>

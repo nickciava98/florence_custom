@@ -16,9 +16,9 @@
 
                     <field name="currency_id" invisible="True"/>
 
-                    <group col="2" colspan="2">
+                    <group col="3" colspan="3">
                         <group col="1" colspan="1">
-                            <group string="FP Values" col="2" colspan="2">
+                            <group string="FP Values" col="1" colspan="1">
                                 <group>
                                     <field name="date"/>
                                     <field name="gi" widget="monetary"
@@ -34,8 +34,8 @@
                             </group>
                         </group>
 
-                        <group col="1" colspan="1">
-                            <group string="Amazon Values" col="6" colspan="6">
+                        <group col="2" colspan="2">
+                            <group string="Amazon Values" col="4" colspan="4">
                                 <group string="Marketplaces" col="1" colspan="1">
                                     <label for="amz_total_it" string="Amazon IT"/>
                                     <label for="amz_total_fr" string="Amazon FR"/>
@@ -67,6 +67,19 @@
                                     <field name="amz_vat_es" widget="monetary" nolabel="1"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="amz_vat_uk" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </group>
+
+                                <group string="Net Income" col="1" colspan="1">
+                                    <field name="amz_net_it" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_net_fr" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_net_de" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_net_es" widget="monetary" nolabel="1"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="amz_net_uk" widget="monetary" nolabel="1"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </group>
                             </group>

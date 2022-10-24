@@ -1,0 +1,17 @@
+<odoo>
+    <record id="florence_financial_plan_view_graph" model="ir.ui.view">
+        <field name="name">FPs Chart</field>
+        <field name="model">florence.financial.plan</field>
+
+        <field name="arch" type="xml">
+            <graph>
+                <field name="date"/>
+                <field name="amz_net_it" type="measure"/>
+                <field name="amz_net_fr" type="measure"/>
+                <field name="amz_net_de" type="measure"/>
+                <field name="amz_net_es" type="measure"/>
+                <field name="amz_net_uk" type="measure"/>
+            </graph>
+        </field>
+    </record>
+</odoo>

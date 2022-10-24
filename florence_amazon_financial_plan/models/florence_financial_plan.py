@@ -42,70 +42,90 @@ class FlorenceFinancialPlan(models.Model):
     surplus = fields.Float(
         compute = "_compute_surplus"
     )
-    pending = fields.Float()
+    pending = fields.Float(
+        copy = True
+    )
 
     basics = fields.One2many(
         "florence.financial.plan.line",
-        "basics_id"
+        "basics_id",
+        copy = True
     )
     basics_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     emergencies = fields.One2many(
         "florence.financial.plan.line",
-        "emergencies_id"
+        "emergencies_id",
+        copy = True
     )
     emergencies_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     div1 = fields.One2many(
         "florence.financial.plan.line",
-        "div1_id"
+        "div1_id",
+        copy = True
     )
     div1_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     div2 = fields.One2many(
         "florence.financial.plan.line",
-        "div2_id"
+        "div2_id",
+        copy = True
     )
     div2_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     div3 = fields.One2many(
         "florence.financial.plan.line",
-        "div3_id"
+        "div3_id",
+        copy = True
     )
     div3_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     div4 = fields.One2many(
         "florence.financial.plan.line",
-        "div4_id"
+        "div4_id",
+        copy = True
     )
     div4_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     div5 = fields.One2many(
         "florence.financial.plan.line",
-        "div5_id"
+        "div5_id",
+        copy = True
     )
     div5_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     div6 = fields.One2many(
         "florence.financial.plan.line",
-        "div6_id"
+        "div6_id",
+        copy = True
     )
     div6_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     div7 = fields.One2many(
         "florence.financial.plan.line",
-        "div7_id"
+        "div7_id",
+        copy = True
     )
     div7_condition = fields.Char(
-        string = "Condition"
+        string = "Condition",
+        copy = True
     )
     currency_id = fields.Many2one(
         "res.currency",
@@ -117,11 +137,21 @@ class FlorenceFinancialPlan(models.Model):
     amz_vat_it = fields.Float(
         default = 0
     )
+    amz_net_it = fields.Float(
+        compute = "_compute_amz_net_it",
+        store = True,
+        string = "Amazon IT Net Income"
+    )
     amz_total_fr = fields.Float(
         default = 0
     )
     amz_vat_fr = fields.Float(
         default = 0
+    )
+    amz_net_fr = fields.Float(
+        compute = "_compute_amz_net_fr",
+        store = True,
+        string = "Amazon FR Net Income"
     )
     amz_total_de = fields.Float(
         default = 0
@@ -129,11 +159,21 @@ class FlorenceFinancialPlan(models.Model):
     amz_vat_de = fields.Float(
         default = 0
     )
+    amz_net_de = fields.Float(
+        compute = "_compute_amz_net_de",
+        store = True,
+        string = "Amazon DE Net Income"
+    )
     amz_total_es = fields.Float(
         default = 0
     )
     amz_vat_es = fields.Float(
         default = 0
+    )
+    amz_net_es = fields.Float(
+        compute = "_compute_amz_net_es",
+        store = True,
+        string = "Amazon ES Net Income"
     )
     amz_total_uk = fields.Float(
         default = 0
@@ -141,6 +181,36 @@ class FlorenceFinancialPlan(models.Model):
     amz_vat_uk = fields.Float(
         default = 0
     )
+    amz_net_uk = fields.Float(
+        compute = "_compute_amz_net_uk",
+        store = True,
+        string = "Amazon UK Net Income"
+    )
+
+    @api.depends("amz_total_it", "amz_vat_it")
+    def _compute_amz_net_it(self):
+        for line in self:
+            line.amz_net_it = line.amz_total_it - line.amz_vat_it
+
+    @api.depends("amz_total_fr", "amz_vat_fr")
+    def _compute_amz_net_fr(self):
+        for line in self:
+            line.amz_net_fr = line.amz_total_fr - line.amz_vat_fr
+
+    @api.depends("amz_total_de", "amz_vat_de")
+    def _compute_amz_net_de(self):
+        for line in self:
+            line.amz_net_de = line.amz_total_de - line.amz_vat_de
+
+    @api.depends("amz_total_es", "amz_vat_es")
+    def _compute_amz_net_es(self):
+        for line in self:
+            line.amz_net_es = line.amz_total_es - line.amz_vat_es
+
+    @api.depends("amz_total_uk", "amz_vat_uk")
+    def _compute_amz_net_uk(self):
+        for line in self:
+            line.amz_net_uk = line.amz_total_uk - line.amz_vat_uk
 
     @api.depends("amz_total_it", "amz_total_fr",
                  "amz_total_de", "amz_total_es",

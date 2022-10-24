@@ -18,7 +18,8 @@
         'views/amazon_financial_plan_tree.xml',
         'views/amazon_financial_plan_line_tree.xml',
         'views/florence_financial_plan_form.xml',
-        'views/florence_financial_plan_tree.xml'
+        'views/florence_financial_plan_tree.xml',
+        'views/florence_financial_plan_graph.xml'
     ],
     'application': False,
     'installable': True,
