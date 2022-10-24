@@ -19,7 +19,8 @@ class FlorenceFinancialPlan(models.Model):
         compute = "_compute_gi"
     )
     vat = fields.Float(
-        compute = "_compute_vat"
+        compute = "_compute_vat",
+        string = "VAT"
     )
     cgi = fields.Float(
         string = "C.G.I.",

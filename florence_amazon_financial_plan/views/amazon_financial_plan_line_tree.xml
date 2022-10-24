@@ -13,6 +13,10 @@
                 <field name="value" widget="monetary"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                 <field name="value_used"/>
+                <field name="total_used" widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="total_to_use" widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
             </tree>
         </field>
     </record>

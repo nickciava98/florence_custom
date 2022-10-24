@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 import datetime
 
 
@@ -22,6 +22,12 @@ class AmazonFinancialPlanLine(models.Model):
     )
     value = fields.Float()
     value_used = fields.Boolean()
+    total_used = fields.Float(
+        group_operator = "avg"
+    )
+    total_to_use = fields.Float(
+        group_operator = "avg"
+    )
 
     def _compute_currency_id(self):
         for line in self:

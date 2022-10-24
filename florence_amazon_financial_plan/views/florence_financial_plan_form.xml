@@ -18,7 +18,7 @@
 
                     <group col="2" colspan="2">
                         <group col="1" colspan="1">
-                            <group string="FP Values" col="4" colspan="4">
+                            <group string="FP Values" col="2" colspan="2">
                                 <group>
                                     <field name="date"/>
                                     <field name="gi" widget="monetary"
@@ -29,17 +29,6 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="perc"/>
                                     <field name="disbursment" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                </group>
-
-                                <group>
-                                    <field name="monthly_total" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved_total" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="surplus" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="pending" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </group>
                             </group>
@@ -83,7 +72,6 @@
                             </group>
                         </group>
                     </group>
-
 
                     <notebook>
                         <page string="Basics" name="basics">
@@ -257,6 +245,30 @@
                             </field>
                         </page>
                     </notebook>
+
+                    <group string="FP Totals" col="4" colspan="4">
+                        <group string="Monthly Total">
+                            <field name="monthly_total" widget="monetary" nolabel="1"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </group>
+
+                        <group string="Approved Total">
+                            <field name="approved_total" widget="monetary" nolabel="1"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </group>
+
+                        <group string="Surplus">
+                            <field name="surplus" widget="monetary" nolabel="1"
+                                   decoration-success="surplus > 0" decoration-danger="surplus &lt; 0 or surplus == 0"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </group>
+
+                        <group string="Pending">
+                            <field name="pending" widget="monetary" nolabel="1"
+                                   decoration-danger="pending > 0" decoration-success="pending &lt; 0 or pending == 0"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </group>
+                    </group>
                 </sheet>
 
                 <div class="oe_chatter">

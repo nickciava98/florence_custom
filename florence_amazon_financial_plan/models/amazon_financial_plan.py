@@ -66,6 +66,12 @@ class AmazonFinancialPlan(models.Model):
             line.currency_id = self.env.ref('base.main_company').currency_id
 
     def fp_by_date_action(self):
+        for fp in self.env["amazon.financial.plan.line"].search([("name", "=", self.id)]):
+            fp.write({
+                'total_used': self.total_used,
+                'total_to_use': self.total_to_use
+            })
+
         return {
             'name': 'FP by date',
             'view_type': 'form',
@@ -83,6 +89,12 @@ class AmazonFinancialPlan(models.Model):
         }
 
     def fp_by_product_action(self):
+        for fp in self.env["amazon.financial.plan.line"].search([("name", "=", self.id)]):
+            fp.write({
+                'total_used': self.total_used,
+                'total_to_use': self.total_to_use
+            })
+
         return {
             'name': 'FP by product',
             'view_type': 'form',
