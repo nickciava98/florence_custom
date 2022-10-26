@@ -7,12 +7,10 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button type="object" name="fp_by_date_action"
-                                string="FP by date" class="oe_stat_button"
-                                icon="fa-list"/>
-                        <button type="object" name="fp_by_product_action"
-                                string="FP by product" class="oe_stat_button"
-                                icon="fa-list"/>
+                        <button type="object"
+                                name="update_fp_values_action"
+                                string="Update FPs Totals" class="oe_stat_button"
+                                icon="fa-refresh"/>
                     </div>
 
                     <div class="oe_title">
@@ -25,18 +23,27 @@
 
                     <field name="currency_id" invisible="True"/>
 
-                    <group>
-                        <group>
+                    <group col="2" colspan="2">
+                        <group string="FP Values">
+                            <field name="currency_id" invisible="True"/>
                             <field name="date"/>
-                        </group>
-
-                        <group>
                             <field name="total_value" widget="monetary"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                             <field name="total_used" widget="monetary" decoration-danger="True"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                             <field name="total_to_use" widget="monetary"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </group>
+
+                        <group string="FPs Totals">
+                            <field name="amazon_financial_plan_values" widget="one2many" nolabel="1">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="name" invisible="True"/>
+                                    <field name="product_id"/>
+                                    <field name="total_used"/>
+                                    <field name="total_to_use"/>
+                                </tree>
+                            </field>
                         </group>
                     </group>
 

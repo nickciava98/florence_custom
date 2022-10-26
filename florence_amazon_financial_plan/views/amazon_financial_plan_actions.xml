@@ -42,4 +42,12 @@
              'group_by': ['date_str']}
         </field>
     </record>
+
+    <record id="amazon_financial_plan_totals_action" model="ir.actions.act_window">
+        <field name="name">FPs Totals</field>
+        <field name="res_model">amazon.financial.plan.values</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('name','!=',False)]</field>
+        <field name="context">{'group_by':'name'}</field>
+    </record>
 </odoo>

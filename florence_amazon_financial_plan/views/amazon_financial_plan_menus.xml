@@ -1,8 +1,13 @@
 <odoo>
     <menuitem name="FP - Amazon" id="amazon_financial_plan_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9" groups="florence_amazon_revenues.group_admin"
+              sequence="9" groups="florence_amazon_revenues.group_admin"/>
+    <menuitem name="FPs" id="amazon_fps_menu"
+              parent="amazon_financial_plan_menu" sequence="1"
               action="amazon_financial_plan_action"/>
+    <menuitem name="FPs Totals" id="amazon_fps_totals_menu"
+              parent="amazon_financial_plan_menu" sequence="1"
+              action="amazon_financial_plan_totals_action"/>
     <menuitem name="FP - Florence" id="florence_financial_plan_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
               sequence="9" groups="florence_amazon_revenues.group_admin"

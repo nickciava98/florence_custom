@@ -8,7 +8,8 @@ class AmazonFinancialPlanLine(models.Model):
     _description = "Amazon Financial Plan"
 
     name = fields.Many2one(
-        "amazon.financial.plan"
+        "amazon.financial.plan",
+        ondelete = "cascade"
     )
     date = fields.Date(
         default = datetime.datetime.now()

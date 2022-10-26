@@ -1,5 +1,7 @@
 from odoo import models, fields, api
 import datetime
+import itertools
+import operator
 
 
 class AmazonFinancialPlan(models.Model):
@@ -30,10 +32,65 @@ class AmazonFinancialPlan(models.Model):
         compute = "_compute_total_to_use",
         store = True
     )
+    amazon_financial_plan_values = fields.One2many(
+        "amazon.financial.plan.values",
+        "name",
+        readonly = True,
+        ondelete = "cascade"
+    )
     amazon_financial_plan_lines = fields.One2many(
         "amazon.financial.plan.line",
-        "name"
+        "name",
+        ondelete = "cascade"
     )
+
+    def update_fp_values_action(self):
+        for line in self:
+            line.amazon_financial_plan_values = [(6, 0, 0)]
+            products = []
+
+            for fp_line in self.env["amazon.financial.plan.line"].search([]):
+                products.append(
+                    (fp_line.product_id.id,
+                     fp_line.value if fp_line.value_used else 0,
+                     fp_line.value if not fp_line.value_used else 0)
+                )
+
+            products_grouped = []
+            totals_used = []
+            totals_to_use = []
+
+            for product in products:
+                if product[0] not in products_grouped:
+                    products_grouped.append(product[0])
+
+            for pg in products_grouped:
+                total_used = 0
+                total_to_use = 0
+
+                for p in products:
+                    if p[0] == pg:
+                        total_used += p[1]
+                        total_to_use += p[2]
+
+                totals_used.append(total_used)
+                totals_to_use.append(total_to_use)
+
+            res = []
+
+            for product in products_grouped:
+                res.append((
+                    0, 0, {
+                        'name': line.id,
+                        'product_id': product,
+                        'total_used': totals_used[products_grouped.index(product)],
+                        'total_to_use': totals_to_use[products_grouped.index(product)]
+                    }
+                ))
+
+            self.write({
+                'amazon_financial_plan_values': res
+            })
 
     @api.depends("amazon_financial_plan_lines")
     def _compute_total_value(self):
@@ -64,49 +121,3 @@ class AmazonFinancialPlan(models.Model):
     def _compute_currency_id(self):
         for line in self:
             line.currency_id = self.env.ref('base.main_company').currency_id
-
-    def fp_by_date_action(self):
-        for fp in self.env["amazon.financial.plan.line"].search([("name", "=", self.id)]):
-            fp.write({
-                'total_used': self.total_used,
-                'total_to_use': self.total_to_use
-            })
-
-        return {
-            'name': 'FP by date',
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'view_id': False,
-            'res_model': 'amazon.financial.plan.line',
-            'type': 'ir.actions.act_window',
-            'context': {
-                'group_by': ['date:day']
-            },
-            'domain': [
-                ('name', '=', self.id)
-            ],
-            'target': 'current'
-        }
-
-    def fp_by_product_action(self):
-        for fp in self.env["amazon.financial.plan.line"].search([("name", "=", self.id)]):
-            fp.write({
-                'total_used': self.total_used,
-                'total_to_use': self.total_to_use
-            })
-
-        return {
-            'name': 'FP by product',
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'view_id': False,
-            'res_model': 'amazon.financial.plan.line',
-            'type': 'ir.actions.act_window',
-            'context': {
-                'group_by': ['date:day', 'product_id']
-            },
-            'domain': [
-                ('name', '=', self.id)
-            ],
-            'target': 'current'
-        }

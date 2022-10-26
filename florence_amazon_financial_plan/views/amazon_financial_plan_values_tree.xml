@@ -1,0 +1,16 @@
+<odoo>
+    <record id="amazon_financial_plan_values_view_tree" model="ir.ui.view">
+        <field name="name">FPs Totals</field>
+        <field name="model">amazon.financial.plan.values</field>
+
+        <field name="arch" type="xml">
+            <tree editable="bottom" create="false"
+                  delete="false" expand="True">
+                <field name="name" invisible="True"/>
+                <field name="product_id"/>
+                <field name="total_used"/>
+                <field name="total_to_use"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
