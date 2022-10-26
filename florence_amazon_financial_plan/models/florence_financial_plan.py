@@ -12,7 +12,8 @@ class FlorenceFinancialPlan(models.Model):
     )
     date = fields.Date(
         default = datetime.datetime.now(),
-        required = True
+        required = True,
+        string = "Original Date"
     )
     date_str = fields.Char(
         compute = "_compute_date_str",
@@ -54,91 +55,82 @@ class FlorenceFinancialPlan(models.Model):
     basics = fields.One2many(
         "florence.financial.plan.line",
         "basics_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     basics_condition = fields.Char(
-        string = "Condition",
+        string = "Basics - Condition",
         copy = True
     )
     emergencies = fields.One2many(
         "florence.financial.plan.line",
         "emergencies_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     emergencies_condition = fields.Char(
-        string = "Condition",
+        string = "Emergencies - Condition",
         copy = True
     )
     div1 = fields.One2many(
         "florence.financial.plan.line",
         "div1_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     div1_condition = fields.Char(
-        string = "Condition",
+        string = "DIV1 - Condition",
         copy = True
     )
     div2 = fields.One2many(
         "florence.financial.plan.line",
         "div2_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     div2_condition = fields.Char(
-        string = "Condition",
+        string = "DIV2 - Condition",
         copy = True
     )
     div3 = fields.One2many(
         "florence.financial.plan.line",
         "div3_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     div3_condition = fields.Char(
-        string = "Condition",
+        string = "DIV3 - Condition",
         copy = True
     )
     div4 = fields.One2many(
         "florence.financial.plan.line",
         "div4_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     div4_condition = fields.Char(
-        string = "Condition",
+        string = "DIV4 - Condition",
         copy = True
     )
     div5 = fields.One2many(
         "florence.financial.plan.line",
         "div5_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     div5_condition = fields.Char(
-        string = "Condition",
+        string = "DIV5 - Condition",
         copy = True
     )
     div6 = fields.One2many(
         "florence.financial.plan.line",
         "div6_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     div6_condition = fields.Char(
-        string = "Condition",
+        string = "DIV6 - Condition",
         copy = True
     )
     div7 = fields.One2many(
         "florence.financial.plan.line",
         "div7_id",
-        copy = True,
-        ondelete = "cascade"
+        copy = True
     )
     div7_condition = fields.Char(
-        string = "Condition",
+        string = "DIV7 - Condition",
         copy = True
     )
     currency_id = fields.Many2one(

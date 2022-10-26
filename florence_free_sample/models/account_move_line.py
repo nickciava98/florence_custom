@@ -10,7 +10,7 @@ class AccountMoveLine(models.Model):
     )
     total_price = fields.Float(
         compute = "_compute_total_price",
-        string = "Total"
+        string = "Total Price"
     )
 
     @api.depends("price_unit", "tax_ids", "quantity")

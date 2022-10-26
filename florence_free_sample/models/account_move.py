@@ -4,12 +4,14 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     is_free_sample = fields.Boolean(
-        compute = "_compute_is_free_sample"
+        compute = "_compute_is_free_sample",
+        string = "Original Is Free Sample"
     )
 
     is_free_sample_stored = fields.Boolean(
         related = "is_free_sample",
-        store = True
+        store = True,
+        string = "Is Free Sample"
     )
 
     amount_untaxed_free_sample = fields.Monetary(

@@ -35,13 +35,11 @@ class AmazonFinancialPlan(models.Model):
     amazon_financial_plan_values = fields.One2many(
         "amazon.financial.plan.values",
         "name",
-        readonly = True,
-        ondelete = "cascade"
+        readonly = True
     )
     amazon_financial_plan_lines = fields.One2many(
         "amazon.financial.plan.line",
-        "name",
-        ondelete = "cascade"
+        "name"
     )
 
     def update_fp_values_action(self):

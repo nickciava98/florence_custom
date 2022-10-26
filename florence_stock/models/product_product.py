@@ -15,7 +15,8 @@ class ProductProduct(models.Model):
     )
     locations = fields.Char(
         compute = "_compute_locations",
-        store = True
+        store = True,
+        string = "Locations String"
     )
     qty_available = fields.Float(
         store = True
