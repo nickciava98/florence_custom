@@ -15,7 +15,7 @@
                     </div>
 
                     <field name="currency_id" invisible="True"/>
-                    <field name="date_str" invisible="0"/>
+                    <field name="date_str" invisible="True"/>
 
                     <group col="3" colspan="3">
                         <group col="1" colspan="1">
@@ -99,9 +99,9 @@
                                     <field name="basics_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -118,9 +118,9 @@
                                     <field name="emergencies_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -137,9 +137,9 @@
                                     <field name="div7_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -156,9 +156,9 @@
                                     <field name="div1_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -175,9 +175,9 @@
                                     <field name="div2_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -194,9 +194,9 @@
                                     <field name="div3_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -213,9 +213,9 @@
                                     <field name="div4_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -232,9 +232,9 @@
                                     <field name="div5_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -251,9 +251,9 @@
                                     <field name="div6_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
-                                    <field name="monthly" widget="monetary"
+                                    <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="approved" widget="monetary"
+                                    <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>

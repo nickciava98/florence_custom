@@ -22,7 +22,8 @@
         'views/amazon_financial_plan_values_tree.xml',
         'views/florence_financial_plan_form.xml',
         'views/florence_financial_plan_tree.xml',
-        'views/florence_financial_plan_graph.xml'
+        'views/florence_financial_plan_graph.xml',
+        'views/florence_financial_plan_line_form.xml'
     ],
     'application': False,
     'installable': True,

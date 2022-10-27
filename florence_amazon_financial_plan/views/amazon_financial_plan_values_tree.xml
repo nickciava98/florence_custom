@@ -4,12 +4,14 @@
         <field name="model">amazon.financial.plan.values</field>
 
         <field name="arch" type="xml">
-            <tree editable="bottom" create="false"
-                  delete="false" expand="True">
+            <tree editable="bottom" create="false" delete="false" expand="True">
                 <field name="name" invisible="True"/>
+                <field name="currency_id" invisible="True"/>
                 <field name="product_id"/>
-                <field name="total_used"/>
-                <field name="total_to_use"/>
+                <field name="total_used" sum="Total Used" widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="total_to_use" sum="Total To Use" widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
             </tree>
         </field>
     </record>

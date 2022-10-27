@@ -8,11 +8,11 @@
                 <field name="currency_id" invisible="True"/>
                 <field name="name"/>
                 <field name="date"/>
-                <field name="total_value" widget="monetary"
+                <field name="total_value" widget="monetary" sum="Total Value"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                <field name="total_used" widget="monetary"
+                <field name="total_used" widget="monetary" sum="Total Used"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                <field name="total_to_use" widget="monetary"
+                <field name="total_to_use" widget="monetary" sum="Total To Use"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
             </tree>
         </field>

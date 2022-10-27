@@ -1,0 +1,35 @@
+<odoo>
+    <record id="florence_financial_plan_line_view_form" model="ir.ui.view">
+        <field name="name">FP Florence</field>
+        <field name="model">florence.financial.plan.line</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <field name="basics_id" invisible="True"/>
+                <field name="emergencies_id" invisible="True"/>
+                <field name="div1_id" invisible="True"/>
+                <field name="div2_id" invisible="True"/>
+                <field name="div3_id" invisible="True"/>
+                <field name="div4_id" invisible="True"/>
+                <field name="div5_id" invisible="True"/>
+                <field name="div6_id" invisible="True"/>
+                <field name="div7_id" invisible="True"/>
+                <field name="currency_id" invisible="True"/>
+
+                <group string="Item">
+                    <field name="item" nolabel="1"/>
+                </group>
+
+                <group string="Monthly">
+                    <field name="monthly" nolabel="1" widget="monetary"
+                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                </group>
+
+                <group string="Approved">
+                    <field name="approved" nolabel="1" widget="monetary"
+                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>
