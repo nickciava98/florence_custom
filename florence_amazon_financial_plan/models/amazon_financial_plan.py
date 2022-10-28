@@ -39,7 +39,8 @@ class AmazonFinancialPlan(models.Model):
     )
     amazon_financial_plan_lines = fields.One2many(
         "amazon.financial.plan.line",
-        "name"
+        "name",
+        copy = True
     )
 
     def update_fp_values_action(self):

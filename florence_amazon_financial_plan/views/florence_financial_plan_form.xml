@@ -152,7 +152,7 @@
 
                             <field name="div1" widget="one2many"
                                    context="{'default_currency_id': currency_id}">
-                                <tree editable="bottom">
+                                <tree editable="bottom" default_order="item asc">
                                     <field name="div1_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
@@ -209,7 +209,7 @@
 
                             <field name="div4" widget="one2many"
                                    context="{'default_currency_id': currency_id}">
-                                <tree editable="bottom">
+                                <tree editable="bottom" default_order="item asc">
                                     <field name="div4_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
