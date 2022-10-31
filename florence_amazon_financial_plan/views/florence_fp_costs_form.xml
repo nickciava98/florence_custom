@@ -16,13 +16,14 @@
 
                     <field name="currency_id" invisible="True"/>
 
-                    <group>
-                        <field name="date"/>
-                        <field name="total" widget="monetary"
-                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                        <field name="pieces" widget="integer"/>
-                        <field name="price" widget="monetary"
-                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    <group col="2" colspan="2">
+                        <group>
+                            <field name="date"/>
+                        </group>
+
+                        <group>
+                            <field name="pieces" widget="integer"/>
+                        </group>
                     </group>
 
                     <notebook>
@@ -39,6 +40,13 @@
                             </field>
                         </page>
                     </notebook>
+
+                    <group string="Totals">
+                        <field name="total" widget="monetary"
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        <field name="price" widget="monetary"
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    </group>
                 </sheet>
 
                 <div class="oe_chatter">
