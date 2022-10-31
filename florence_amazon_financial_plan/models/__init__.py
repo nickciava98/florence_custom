@@ -3,3 +3,5 @@ from . import amazon_financial_plan_line
 from . import amazon_financial_plan_values
 from . import florence_financial_plan
 from . import florence_financial_plan_line
+from . import florence_fp_costs
+from . import florence_fp_costs_line

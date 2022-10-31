@@ -50,4 +50,10 @@
         <field name="domain">[('name','!=',False)]</field>
         <field name="context">{'group_by':'name'}</field>
     </record>
+
+    <record id="florence_fp_costs_action" model="ir.actions.act_window">
+        <field name="name">FP Costs</field>
+        <field name="res_model">florence.fp.costs</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 </odoo>

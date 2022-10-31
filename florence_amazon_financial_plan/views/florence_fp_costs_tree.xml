@@ -1,14 +1,13 @@
 <odoo>
-    <record id="florence_financial_plan_view_tree" model="ir.ui.view">
-        <field name="name">Financial Plannings</field>
-        <field name="model">florence.financial.plan</field>
+    <record id="florence_fp_costs_view_tree" model="ir.ui.view">
+        <field name="name">Florence FPs Costs</field>
+        <field name="model">florence.fp.costs</field>
 
         <field name="arch" type="xml">
             <tree default_order="date desc">
                 <field name="currency_id" invisible="True"/>
                 <field name="name"/>
-                <field name="date"/>
-                <field name="surplus" sum="Surplus" widget="monetary"
+                <field name="price" widget="monetary"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
             </tree>
         </field>

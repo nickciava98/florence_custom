@@ -1,0 +1,52 @@
+<odoo>
+    <record id="florence_fp_costs_view_form" model="ir.ui.view">
+        <field name="name">Florence FP Costs</field>
+        <field name="model">florence.fp.costs</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" style="width:100%"
+                                   help="Product to track costs"
+                                   placeholder="Insert the name of the Product"/>
+                        </h1>
+                    </div>
+
+                    <field name="currency_id" invisible="True"/>
+
+                    <group>
+                        <field name="date"/>
+                        <field name="total" widget="monetary"
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        <field name="pieces" widget="integer"/>
+                        <field name="price" widget="monetary"
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    </group>
+
+                    <notebook>
+                        <page name="costs" string="Costs">
+                            <field name="fp_costs_lines" widget="one2many"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom">
+                                    <field name="name" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="item"/>
+                                    <field name="cost" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>
