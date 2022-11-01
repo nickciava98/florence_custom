@@ -36,19 +36,24 @@ class FlorenceFpCosts(models.Model):
         copy = True
     )
 
-    @api.depends("fp_costs_lines")
+    @api.depends("price", "pieces")
     def _compute_total(self):
         for line in self:
             line.total = 0
 
-            if len(line.fp_costs_lines) > 0:
-                for fp_cost in line.fp_costs_lines:
-                    line.total += fp_cost.cost
+            if line.pieces != 0:
+                line.total = line.price / line.pieces
 
-    @api.depends("total", "pieces")
+    @api.depends("fp_costs_lines", "pieces")
     def _compute_price(self):
         for line in self:
-            line.price = line.total * line.pieces
+            line.price = 0
+
+            if len(line.fp_costs_lines) > 0:
+                for fp_cost in line.fp_costs_lines:
+                    line.price += fp_cost.cost
+
+            line.price *= line.pieces
 
     def _compute_currency_id(self):
         for line in self:

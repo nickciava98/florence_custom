@@ -7,7 +7,11 @@
             <tree default_order="date desc">
                 <field name="currency_id" invisible="True"/>
                 <field name="name"/>
-                <field name="price" widget="monetary"
+                <field name="date"/>
+                <field name="total" widget="monetary" sum="Total"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="pieces" widget="integer"/>
+                <field name="price" widget="monetary" sum="Total"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
             </tree>
         </field>
