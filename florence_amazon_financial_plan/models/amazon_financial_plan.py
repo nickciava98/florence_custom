@@ -43,6 +43,13 @@ class AmazonFinancialPlan(models.Model):
         copy = True
     )
 
+    @api.onchange("date")
+    def _onchange_date(self):
+        for line in self:
+            if line.date:
+                for fp_line in line.amazon_financial_plan_lines:
+                    fp_line.date = line.date
+
     def update_fp_values_action(self):
         for line in self:
             line.amazon_financial_plan_values = [(6, 0, 0)]
