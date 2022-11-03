@@ -23,7 +23,7 @@
 
                     <field name="currency_id" invisible="True"/>
 
-                    <group col="2" colspan="2">
+                    <group col="3" colspan="3">
                         <group string="FP Values">
                             <field name="currency_id" invisible="True"/>
                             <field name="date"/>
@@ -67,6 +67,17 @@
                             </field>
                         </page>
                     </notebook>
+
+                    <group string="Totals">
+                        <field name="amazon_current_fp_values" widget="one2many" nolabel="1">
+                            <tree editable="bottom" create="false" delete="false">
+                                <field name="name" invisible="True"/>
+                                <field name="product_id"/>
+                                <field name="total_used"/>
+                                <field name="total_to_use"/>
+                            </tree>
+                        </field>
+                    </group>
                 </sheet>
 
                 <div class="oe_chatter">

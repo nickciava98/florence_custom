@@ -10,6 +10,10 @@ class AmazonFinancialPlanValues(models.Model):
         "amazon.financial.plan",
         ondelete = "cascade"
     )
+    current_name = fields.Many2one(
+        "amazon.financial.plan",
+        ondelete = "cascade"
+    )
     product_id = fields.Many2one(
         "product.template"
     )

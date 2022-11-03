@@ -37,6 +37,11 @@ class AmazonFinancialPlan(models.Model):
         "name",
         readonly = True
     )
+    amazon_current_fp_values = fields.One2many(
+        "amazon.financial.plan.values",
+        "current_name",
+        readonly = True
+    )
     amazon_financial_plan_lines = fields.One2many(
         "amazon.financial.plan.line",
         "name",
@@ -52,7 +57,7 @@ class AmazonFinancialPlan(models.Model):
 
     def update_fp_values_action(self):
         for line in self:
-            line.amazon_financial_plan_values = [(6, 0, 0)]
+            line.amazon_financial_plan_values = [(5, 0, 0)]
             products = []
 
             for fp_line in self.env["amazon.financial.plan.line"].search([]):
@@ -96,6 +101,36 @@ class AmazonFinancialPlan(models.Model):
 
             self.write({
                 'amazon_financial_plan_values': res
+            })
+
+            line.amazon_current_fp_values = [(5, 0, 0)]
+            products = []
+            totals_to_use = []
+            totals_used = []
+            res = []
+
+            for fp_line in line.amazon_financial_plan_lines:
+                products.append(fp_line.product_id.id)
+
+                if fp_line.value_used:
+                    totals_used.append(fp_line.value)
+                    totals_to_use.append(0)
+                else:
+                    totals_used.append(0)
+                    totals_to_use.append(fp_line.value)
+
+            for product in products:
+                res.append((
+                    0, 0, {
+                        'name': line.id,
+                        'product_id': product,
+                        'total_used': totals_used[products_grouped.index(product)],
+                        'total_to_use': totals_to_use[products_grouped.index(product)]
+                    }
+                ))
+
+            self.write({
+                'amazon_current_fp_values': res
             })
 
     @api.depends("amazon_financial_plan_lines")
