@@ -8,7 +8,7 @@ class FlorenceFpCosts(models.Model):
     _description = "Florence FP Costs"
 
     name = fields.Many2one(
-        "product.template",
+        "product.product",
         required = True,
         string = "Product"
     )
@@ -35,6 +35,27 @@ class FlorenceFpCosts(models.Model):
         "name",
         copy = True
     )
+
+    @api.onchange("name")
+    def _onchange_name(self):
+        for line in self:
+            if line.name and len(self.env["mrp.bom.line"].search(
+                    [("bom_id", "=", self.env["mrp.bom"].search(
+                        [("product_id", "=", line.name.id)]
+                    )[0].id)])) > 0:
+                for bom_line in self.env["mrp.bom.line"].search(
+                    [("bom_id", "=", self.env["mrp.bom"].search(
+                        [("product_id", "=", line.name.id)]
+                    )[0].id)]):
+                    self.write({
+                        "fp_costs_lines": [(
+                            0, 0, {
+                                "name": line.id,
+                                "component": bom_line.product_id,
+                                "cost": bom_line.cost
+                            }
+                        )]
+                    })
 
     @api.depends("price", "pieces")
     def _compute_total(self):

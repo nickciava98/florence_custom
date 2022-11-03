@@ -43,6 +43,7 @@ class FlorenceFinancialPlanLine(models.Model):
         ondelete = "cascade"
     )
     item = fields.Char()
+    quantity = fields.Float()
     monthly = fields.Float()
     approved = fields.Float()
     currency_id = fields.Many2one(

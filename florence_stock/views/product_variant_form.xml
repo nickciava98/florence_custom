@@ -1,0 +1,17 @@
+<odoo>
+    <record id="product_variant_form_inherit" model="ir.ui.view">
+        <field name="name">product.variant.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_template_attribute_value_ids']"
+                   position="before">
+                <div>
+                    <field name="is_decommissioned"/>
+                    <label for="is_decommissioned" string="Is Decommissioned"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

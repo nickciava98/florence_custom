@@ -99,6 +99,7 @@
                                     <field name="basics_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"
@@ -118,6 +119,7 @@
                                     <field name="emergencies_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"
@@ -137,6 +139,7 @@
                                     <field name="div7_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"
@@ -156,6 +159,7 @@
                                     <field name="div1_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"
@@ -175,6 +179,7 @@
                                     <field name="div2_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"
@@ -194,6 +199,7 @@
                                     <field name="div3_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"
@@ -213,6 +219,7 @@
                                     <field name="div4_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"
@@ -232,6 +239,7 @@
                                     <field name="div5_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"
@@ -251,6 +259,7 @@
                                     <field name="div6_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="approved" widget="monetary" sum="Approved"

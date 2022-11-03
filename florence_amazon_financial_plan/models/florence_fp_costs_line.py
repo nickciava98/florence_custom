@@ -10,7 +10,9 @@ class FlorenceFpCostsLine(models.Model):
         "florence.fp.costs",
         ondelete = "cascade"
     )
-    item = fields.Char()
+    component = fields.Many2one(
+        "product.product"
+    )
     cost = fields.Float()
     currency_id = fields.Many2one(
         "res.currency",

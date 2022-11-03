@@ -4,6 +4,9 @@ from odoo import models, fields, api
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+    is_decommissioned = fields.Boolean(
+        default = False
+    )
     location_ids = fields.Many2many(
         "stock.location",
         string = "Locations",

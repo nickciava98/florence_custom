@@ -5,6 +5,13 @@
         <field name="inherit_id" ref="product.product_normal_form_view"/>
 
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="is_decommissioned"/>
+                    <label for="is_decommissioned" string="Is Decommissioned"/>
+                </div>
+            </xpath>
+            
             <xpath expr="//field[@name='property_stock_inventory']" position="after">
                 <field name="location_ids" widget="many2many_tags"
                        attrs="{'invisible':[('locations_count','=',0)]}"/>

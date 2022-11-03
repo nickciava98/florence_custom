@@ -18,7 +18,8 @@
              'views/manufacturing_costs_search.xml',
              'views/manufacturing_costs_tree.xml',
              'views/manufacturing_costs_line_tree.xml',
-             'views/manufacturing_costs_line_graph.xml'],
+             'views/manufacturing_costs_line_graph.xml',
+             'views/mrp_bom_form.xml'],
     'application': True,
     'installable': True,
 }

@@ -1,0 +1,15 @@
+<odoo>
+    <record id="product_template_search_inherit" model="ir.ui.view">
+        <field name="name">product.template.search.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='consumable']" position="after">
+                <separator/>
+                <filter string="Decommissioned" name="decommissioned"
+                        domain="[('is_decommissioned', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

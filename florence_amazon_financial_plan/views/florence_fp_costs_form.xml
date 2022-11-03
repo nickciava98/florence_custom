@@ -35,7 +35,7 @@
                                 <tree editable="bottom">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
-                                    <field name="item"/>
+                                    <field name="component"/>
                                     <field name="cost" widget="monetary" sum="Total"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
