@@ -22,34 +22,43 @@ class FlorenceFinancialPlan(models.Model):
     )
     gi = fields.Float(
         string = "G.I.",
-        compute = "_compute_gi"
+        compute = "_compute_gi",
+        digits = (12, 4)
     )
     vat = fields.Float(
         compute = "_compute_vat",
-        string = "VAT"
+        string = "VAT",
+        digits = (12, 4)
     )
     cgi = fields.Float(
         string = "C.G.I.",
-        compute = "_compute_cgi"
+        compute = "_compute_cgi",
+        digits = (12, 4)
     )
     perc = fields.Float(
         string = "10% C.G.I.",
-        compute = "_compute_perc"
+        compute = "_compute_perc",
+        digits = (12, 4)
     )
     monthly_total = fields.Float(
-        compute = "_compute_monthly_total"
+        compute = "_compute_monthly_total",
+        digits = (12, 4)
     )
     approved_total = fields.Float(
-        compute = "_compute_approved_total"
+        compute = "_compute_approved_total",
+        digits = (12, 4)
     )
     disbursment = fields.Float(
-        compute = "_compute_disbursment"
+        compute = "_compute_disbursment",
+        digits = (12, 4)
     )
     surplus = fields.Float(
-        compute = "_compute_surplus"
+        compute = "_compute_surplus",
+        digits = (12, 4)
     )
     pending = fields.Float(
-        copy = True
+        copy = True,
+        digits = (12, 4)
     )
 
     basics = fields.One2many(
@@ -138,59 +147,74 @@ class FlorenceFinancialPlan(models.Model):
         compute = "_compute_currency_id"
     )
     amz_total_it = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_vat_it = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_net_it = fields.Float(
         compute = "_compute_amz_net_it",
         store = True,
-        string = "Amazon IT Net Income"
+        string = "Amazon IT Net Income",
+        digits = (12, 4)
     )
     amz_total_fr = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_vat_fr = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_net_fr = fields.Float(
         compute = "_compute_amz_net_fr",
         store = True,
-        string = "Amazon FR Net Income"
+        string = "Amazon FR Net Income",
+        digits = (12, 4)
     )
     amz_total_de = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_vat_de = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_net_de = fields.Float(
         compute = "_compute_amz_net_de",
         store = True,
-        string = "Amazon DE Net Income"
+        string = "Amazon DE Net Income",
+        digits = (12, 4)
     )
     amz_total_es = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_vat_es = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_net_es = fields.Float(
         compute = "_compute_amz_net_es",
         store = True,
-        string = "Amazon ES Net Income"
+        string = "Amazon ES Net Income",
+        digits = (12, 4)
     )
     amz_total_uk = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_vat_uk = fields.Float(
-        default = 0
+        default = 0,
+        digits = (12, 4)
     )
     amz_net_uk = fields.Float(
         compute = "_compute_amz_net_uk",
         store = True,
-        string = "Amazon UK Net Income"
+        string = "Amazon UK Net Income",
+        digits = (12, 4)
     )
 
     @api.depends("date")

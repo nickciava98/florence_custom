@@ -13,7 +13,9 @@ class FlorenceFpCostsLine(models.Model):
     component = fields.Many2one(
         "product.product"
     )
-    cost = fields.Float()
+    cost = fields.Float(
+        digits = (12, 4)
+    )
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"

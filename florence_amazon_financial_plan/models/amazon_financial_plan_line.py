@@ -21,13 +21,17 @@ class AmazonFinancialPlanLine(models.Model):
     product_id = fields.Many2one(
         "product.template"
     )
-    value = fields.Float()
+    value = fields.Float(
+        digits = (12, 4)
+    )
     value_used = fields.Boolean()
     total_used = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     total_to_use = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     def _compute_currency_id(self):

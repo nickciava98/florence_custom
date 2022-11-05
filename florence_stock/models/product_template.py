@@ -23,7 +23,8 @@ class ProductTemplate(models.Model):
         string = "Locations String"
     )
     qty_available = fields.Float(
-        store = True
+        store = True,
+        digits = (12, 4)
     )
 
     def _compute_location_ids(self):

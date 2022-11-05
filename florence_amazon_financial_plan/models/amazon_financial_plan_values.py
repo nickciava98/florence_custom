@@ -17,8 +17,12 @@ class AmazonFinancialPlanValues(models.Model):
     product_id = fields.Many2one(
         "product.template"
     )
-    total_used = fields.Float()
-    total_to_use = fields.Float()
+    total_used = fields.Float(
+        digits = (12, 4)
+    )
+    total_to_use = fields.Float(
+        digits = (12, 4)
+    )
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"

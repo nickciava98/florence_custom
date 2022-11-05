@@ -5,7 +5,8 @@ class MrpBomLine(models.Model):
     _inherit = "mrp.bom.line"
 
     cost = fields.Float(
-        compute = "_compute_cost"
+        compute = "_compute_cost",
+        digits = (12, 4)
     )
     currency_id = fields.Many2one(
         "res.currency",

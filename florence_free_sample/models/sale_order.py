@@ -8,25 +8,22 @@ class SaleOrder(models.Model):
         related = "sale_order_template_id.is_free_sample",
         store = True
     )
-
     amount_untaxed_free_sample = fields.Monetary(
         compute = "_compute_amount_untaxed_free_sample"
     )
-
     amount_tax_free_sample = fields.Monetary(
         compute = "_compute_amount_tax_free_sample"
     )
-
     free_sample_total = fields.Monetary(
         compute = "_compute_free_sample_total"
     )
-
     add_free_sample_rule = fields.Boolean(
         compute = "_compute_add_free_sample_rule"
     )
     amount_subtotal = fields.Float(
         compute = "_compute_amount_subtotal",
-        string = "Subtotal"
+        string = "Subtotal",
+        digits = (12, 4)
     )
     amount_discount = fields.Monetary(
         compute = "_compute_amount_discount"

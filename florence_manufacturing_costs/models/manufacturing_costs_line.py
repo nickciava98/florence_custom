@@ -17,23 +17,30 @@ class ManufacturingCostsLine(models.Model):
     )
     date = fields.Date()
     manufacturer = fields.Char()
-    pcs_invoiced = fields.Float()
+    pcs_invoiced = fields.Float(
+        digits = (12, 4)
+    )
     price_invoiced = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     price_packaging = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     price_total = fields.Float(
         compute = "_compute_price_total",
         store = True,
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     price_public = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     other_costs = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     currency_id = fields.Many2one(
         "res.currency",

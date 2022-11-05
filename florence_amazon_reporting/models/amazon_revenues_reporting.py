@@ -17,12 +17,16 @@ class AmazonRevenuesReporting(models.Model):
     )
     total_revenues = fields.Float(
         compute = "_compute_total_revenues",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
-    financial_plan_value = fields.Float()
+    financial_plan_value = fields.Float(
+        digits = (12, 4)
+    )
     delta = fields.Float(
         compute = "_compute_delta",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     delta_hint = fields.Char(
         compute = "_compute_delta_hint",

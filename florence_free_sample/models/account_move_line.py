@@ -10,7 +10,8 @@ class AccountMoveLine(models.Model):
     )
     total_price = fields.Float(
         compute = "_compute_total_price",
-        string = "Total Price"
+        string = "Total Price",
+        digits = (12, 4)
     )
 
     @api.depends("price_unit", "tax_ids", "quantity")

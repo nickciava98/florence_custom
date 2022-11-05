@@ -10,7 +10,8 @@ class SaleOrderLine(models.Model):
     )
     price_total = fields.Float(
         compute = "_compute_price_total",
-        string = "Total"
+        string = "Total",
+        digits = (12, 4)
     )
 
     @api.depends("price_unit", "product_uom_qty", "tax_id")

@@ -20,7 +20,9 @@ class EmployeesStatisticsLine(models.Model):
         domain = "[('job_position', '=', job_position)]"
     )
     date = fields.Date()
-    value = fields.Float()
+    value = fields.Float(
+        digits = (12, 4)
+    )
     week = fields.Char(
         compute = "_compute_week",
         store = True

@@ -7,21 +7,17 @@ class AccountMove(models.Model):
         compute = "_compute_is_free_sample",
         string = "Original Is Free Sample"
     )
-
     is_free_sample_stored = fields.Boolean(
         related = "is_free_sample",
         store = True,
         string = "Is Free Sample"
     )
-
     amount_untaxed_free_sample = fields.Monetary(
         compute = "_compute_amount_untaxed_free_sample"
     )
-
     amount_tax_free_sample = fields.Monetary(
         compute = "_compute_amount_tax_free_sample"
     )
-
     free_sample_total = fields.Monetary(
         compute = "_compute_free_sample_total"
     )

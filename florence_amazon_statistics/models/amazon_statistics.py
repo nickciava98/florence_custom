@@ -35,7 +35,8 @@ class AmazonStatistics(models.Model):
     average = fields.Float(
         compute = "_compute_average",
         store = True,
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     avg_stars = fields.Selection(
         [("0", "Zero Stars"),
@@ -49,7 +50,8 @@ class AmazonStatistics(models.Model):
     )
     average_test = fields.Float(
         compute = "_compute_average_test",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     avg_stars_test = fields.Selection(
         [("0", "Zero Stars"),

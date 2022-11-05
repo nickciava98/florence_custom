@@ -22,196 +22,267 @@ class AmazonStatisticsLine(models.Model):
 
     one_vote_ratings_new = fields.Float(
         compute = "_compute_one_vote_ratings_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
-    one_star_ratings = fields.Float()
-    one_star_reviews = fields.Float()
+    one_star_ratings = fields.Float(
+        digits = (12, 4)
+    )
+    one_star_reviews = fields.Float(
+        digits = (12, 4)
+    )
     one_star_reviews_new = fields.Float(
         compute = "_compute_one_star_reviews_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     total_one_star_reviews = fields.Float(
         compute = "_compute_total_one_star_reviews",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     one_star_value = fields.Float(
         compute = "_compute_one_star_value",
         store = True,
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     two_votes_ratings_new = fields.Float(
         compute = "_compute_two_votes_ratings_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
-    two_stars_ratings = fields.Float()
-    two_stars_reviews = fields.Float()
+    two_stars_ratings = fields.Float(
+        digits = (12, 4)
+    )
+    two_stars_reviews = fields.Float(
+        digits = (12, 4)
+    )
     two_stars_reviews_new = fields.Float(
         compute = "_compute_two_stars_reviews_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     total_two_stars_reviews = fields.Float(
         compute = "_compute_total_two_stars_reviews",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     two_stars_value = fields.Float(
         compute = "_compute_two_stars_value",
         store = True,
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     three_votes_ratings_new = fields.Float(
         compute = "_compute_three_votes_ratings_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
-    three_stars_ratings = fields.Float()
-    three_stars_reviews = fields.Float()
+    three_stars_ratings = fields.Float(
+        digits = (12, 4)
+    )
+    three_stars_reviews = fields.Float(
+        digits = (12, 4)
+    )
     three_stars_reviews_new = fields.Float(
         compute = "_compute_three_stars_reviews_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     total_three_stars_reviews = fields.Float(
         compute = "_compute_total_three_stars_reviews",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     three_stars_value = fields.Float(
         compute = "_compute_three_stars_value",
         store = True,
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     four_votes_ratings_new = fields.Float(
         compute = "_compute_four_votes_ratings_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
-    four_stars_ratings = fields.Float()
-    four_stars_reviews = fields.Float()
+    four_stars_ratings = fields.Float(
+        digits = (12, 4)
+    )
+    four_stars_reviews = fields.Float(
+        digits = (12, 4)
+    )
     four_stars_reviews_new = fields.Float(
         compute = "_compute_four_stars_reviews_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     total_four_stars_reviews = fields.Float(
         compute = "_compute_total_four_stars_reviews",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     four_stars_value = fields.Float(
         compute = "_compute_four_stars_value",
         store = True,
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     five_votes_ratings_new = fields.Float(
         compute = "_compute_five_votes_ratings_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
-    five_stars_ratings = fields.Float()
-    five_stars_reviews = fields.Float()
+    five_stars_ratings = fields.Float(
+        digits = (12, 4)
+    )
+    five_stars_reviews = fields.Float(
+        digits = (12, 4)
+    )
     five_stars_reviews_new = fields.Float(
         compute = "_compute_five_stars_reviews_new",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     total_five_stars_reviews = fields.Float(
         compute = "_compute_total_five_stars_reviews",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     five_stars_value = fields.Float(
         compute = "_compute_five_stars_value",
         store = True,
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     general_reviews_statistics = fields.Float(
         compute = "_compute_general_reviews_statistics",
         store = True,
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     daily_total_reviews = fields.Float(
         compute = "_compute_daily_total_reviews",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
 
     main_stat = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     five_reviews_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     four_reviews_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     three_reviews_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     two_reviews_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     one_reviews_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     
     da_five_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     
     freshness = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     absorbency = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     quality_price = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     comfort = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     hydration = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     solar_protection = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     softness = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     easy_to_use = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     light = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     style = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     perfume = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     ncx_rate_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
-    total_orders = fields.Float()
-    returns = fields.Float()
+    total_orders = fields.Float(
+        digits = (12, 4)
+    )
+    returns = fields.Float(
+        digits = (12, 4)
+    )
 
     performance_quality_inadequate = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     defective_item_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     damage_item_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     inaccurate_website_description_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     wrong_item_was_sent_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
     missing_parts_accessories_perc = fields.Float(
-        group_operator = "avg"
+        group_operator = "avg",
+        digits = (12, 4)
     )
 
     freshdesk_buyer_messages = fields.Char()
@@ -219,11 +290,13 @@ class AmazonStatisticsLine(models.Model):
 
     average = fields.Float(
         related = "name.average",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     average_test = fields.Float(
         related = "name.average_test",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
 
     @api.depends("total_one_star_reviews", "total_two_stars_reviews",

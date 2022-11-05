@@ -55,19 +55,23 @@ class ManufacturingCosts(models.Model):
         compute = "_compute_currency_id"
     )
     last_price_invoiced = fields.Float(
-        compute = "_compute_last_price_invoiced"
+        compute = "_compute_last_price_invoiced",
+        digits = (12, 4)
     )
     last_price_packaging = fields.Float(
-        compute = "_compute_last_price_packaging"
+        compute = "_compute_last_price_packaging",
+        digits = (12, 4)
     )
     last_price_public = fields.Float(
-        compute = "_compute_last_price_public"
+        compute = "_compute_last_price_public",
+        digits = (12, 4)
     )
     product_last_manufacturer = fields.Char(
         compute = "_compute_product_last_manufacturer"
     )
     product_updated_qty = fields.Float(
-        compute = "_compute_product_updated_qty"
+        compute = "_compute_product_updated_qty",
+        digits = (12, 4)
     )
     last_bill_number = fields.Many2one(
         "account.move",
@@ -76,22 +80,26 @@ class ManufacturingCosts(models.Model):
     price_invoiced_avg = fields.Float(
         compute = "_compute_price_invoiced_avg",
         group_operator = "avg",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     price_packaging_avg = fields.Float(
         compute = "_compute_price_packaging_avg",
         group_operator = "avg",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     price_total_avg = fields.Float(
         compute = "_compute_price_total_avg",
         group_operator = "avg",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     other_costs_avg = fields.Float(
         compute = "_compute_other_costs_avg",
         group_operator = "avg",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
 
     @api.depends("costs_lines")

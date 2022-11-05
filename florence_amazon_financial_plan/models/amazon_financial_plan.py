@@ -22,15 +22,18 @@ class AmazonFinancialPlan(models.Model):
     )
     total_value = fields.Float(
         compute = "_compute_total_value",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     total_used = fields.Float(
         compute = "_compute_total_used",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     total_to_use = fields.Float(
         compute = "_compute_total_to_use",
-        store = True
+        store = True,
+        digits = (12, 4)
     )
     amazon_financial_plan_values = fields.One2many(
         "amazon.financial.plan.values",
