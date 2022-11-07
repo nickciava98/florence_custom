@@ -1,8 +1,8 @@
-from odoo import models, fields, api
+from odoo import models, fields
 
 
-class SaleOrder(models.Model):
-    _inherit = "sale.order"
+class PurchaseOrder(models.Model):
+    _inherit = "purchase.order"
 
     related_invoice = fields.Char(
         compute = "_compute_related_invoice"
@@ -19,11 +19,3 @@ class SaleOrder(models.Model):
                     invoice_numbers.append(invoice.name)
 
                 line.related_invoice = ", ".join(invoice_numbers)
-
-    @api.onchange("sale_order_template_id")
-    def _onchange_sale_order_template_id(self):
-        for line in self:
-            if line.sale_order_template_id:
-                line.fiscal_position_id = line.sale_order_template_id.fiscal_position_id
-
-            line.order_line._compute_tax_id()
