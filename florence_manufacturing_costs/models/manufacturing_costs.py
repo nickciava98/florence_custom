@@ -77,6 +77,9 @@ class ManufacturingCosts(models.Model):
         "account.move",
         compute = "_compute_last_bill_number"
     )
+    last_bill_date = fields.Date(
+        related = "last_bill_number.invoice_date"
+    )
     price_invoiced_avg = fields.Float(
         compute = "_compute_price_invoiced_avg",
         group_operator = "avg",

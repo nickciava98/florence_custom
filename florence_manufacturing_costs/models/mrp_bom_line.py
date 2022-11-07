@@ -12,6 +12,29 @@ class MrpBomLine(models.Model):
         "res.currency",
         compute = "_compute_currency_id"
     )
+    bill = fields.Many2one(
+        "account.move",
+        compute = "_compute_bill"
+    )
+    bill_date = fields.Date(
+        related = "bill.invoice_date"
+    )
+
+    @api.depends("product_id")
+    def _compute_bill(self):
+        for line in self:
+            line.bill = False
+
+            if line.product_id:
+                for bill in self.env["account.move"].search(
+                        [("move_type", "=", "in_invoice")], order = "name desc"):
+                    for invoice_line in bill.invoice_line_ids:
+                        if invoice_line.product_id == line.product_id:
+                            line.bill = bill
+                            break
+
+                    if line.bill:
+                        break
 
     def _compute_currency_id(self):
         for line in self:

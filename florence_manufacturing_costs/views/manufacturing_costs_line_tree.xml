@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree expand="True">
                 <field name="bill"/>
+                <field name="bill_date"/>
                 <field name="date"/>
                 <field name="product"/>
                 <field name="manufacturer"/>

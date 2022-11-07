@@ -9,6 +9,8 @@
                 <field name="currency_id" invisible="True"/>
                 <field name="cost" widget="monetary" optional="show"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="bill"/>
+                <field name="bill_date"/>
             </xpath>
         </field>
     </record>
