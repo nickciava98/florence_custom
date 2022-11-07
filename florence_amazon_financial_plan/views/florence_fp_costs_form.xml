@@ -38,6 +38,8 @@
                                     <field name="component"/>
                                     <field name="cost" widget="monetary" sum="Total"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="bill"/>
+                                    <field name="bill_date"/>
                                 </tree>
                             </field>
                         </page>
