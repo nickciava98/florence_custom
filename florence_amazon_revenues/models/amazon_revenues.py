@@ -22,8 +22,7 @@ class AmazonRevenues(models.Model):
         tracking = True
     )
     product_updated_price = fields.Float(
-        compute = "_compute_product_updated_price",
-        digits = (12, 4)
+        compute = "_compute_product_updated_price"
     )
     start_date = fields.Date(
         compute = "_compute_start_date"
@@ -31,14 +30,12 @@ class AmazonRevenues(models.Model):
     total_probable_income = fields.Float(
         compute = "_compute_total_probable_income",
         store = True,
-        string = "Total Probable Income (Odoo)",
-        digits = (12, 4)
+        string = "Total Probable Income (Odoo)"
     )
     total_probable_income_amz = fields.Float(
         compute = "_compute_total_probable_income_amz",
         store = True,
-        string = "Total Probable Income (Amazon)",
-        digits = (12, 4)
+        string = "Total Probable Income (Amazon)"
     )
     revenues_line = fields.One2many(
         "amazon.revenues.line",
@@ -53,8 +50,7 @@ class AmazonRevenues(models.Model):
         compute = "_compute_currency_id"
     )
     product_updated_sku_cost = fields.Float(
-        compute = "_compute_product_updated_sku_cost",
-        digits = (12, 4)
+        compute = "_compute_product_updated_sku_cost"
     )
     chart_start = fields.Date()
     chart_end = fields.Date()

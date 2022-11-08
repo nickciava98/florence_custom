@@ -22,55 +22,41 @@ class AmazonRevenuesLine(models.Model):
     # Visible fields
     date = fields.Date()
     price_unit = fields.Float(
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator = "avg"
     )
-    amazon_fees = fields.Float(
-        digits = (12, 4)
-    )
+    amazon_fees = fields.Float()
     taxes = fields.Float(
         compute = "_compute_taxes",
-        store = True,
-        digits = (12, 4)
+        store = True
     )
     sku_cost = fields.Float(
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator = "avg"
     )
     gross_revenues = fields.Float(
         compute = "_compute_gross_revenues",
-        store = True,
-        digits = (12, 4)
+        store = True
     )
-    ads_total_cost = fields.Float(
-        digits = (12, 4)
-    )
+    ads_total_cost = fields.Float()
     ads_cost_per_unit = fields.Float(
         compute = "_compute_ads_cost_per_unit",
         store = True,
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator = "avg"
     )
-    pcs_sold = fields.Float(
-        digits = (12, 4)
-    )
+    pcs_sold = fields.Float()
     earned_per_pc = fields.Float(
         compute = "_compute_earned_per_pc",
         store = True,
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator = "avg"
     )
     probable_income = fields.Float(
         compute = "_compute_probable_income",
         store = True,
-        string = "Probable Income (Odoo)",
-        digits = (12, 4)
+        string = "Probable Income (Odoo)"
     )
     probable_income_amz = fields.Float(
         compute = "_compute_probable_income_amz",
         store = True,
-        string = "Probable Income (Amazon)",
-        digits = (12, 4)
+        string = "Probable Income (Amazon)"
     )
     currency_id = fields.Many2one(
         "res.currency",
