@@ -16,7 +16,7 @@
                 <field name="pcs_sold" type="measure"/>
                 <field name="earned_per_pc" type="measure"/>
                 <field name="probable_income" type="measure"/>
-                <field name="probable_income_amz" type="measure"/>
+<!--                <field name="probable_income_amz" type="measure"/>-->
             </graph>
         </field>
     </record>

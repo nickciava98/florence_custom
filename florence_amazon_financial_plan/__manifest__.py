@@ -5,10 +5,9 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'sales',
-    'version': '14.0.4',
+    'version': '14.0.5',
     'website': "http://www.nciavarella.me",
-    'depends': ['base', 'florence_amazon_revenues',
-                'florence_manufacturing_costs'],
+    'depends': ['base', 'florence_manufacturing_costs'],
     'data': [
         'security/ir.model.access.csv',
         'views/amazon_financial_plan_actions.xml',
@@ -26,7 +25,9 @@
         'views/florence_financial_plan_graph.xml',
         'views/florence_financial_plan_line_form.xml',
         'views/florence_fp_costs_form.xml',
-        'views/florence_fp_costs_tree.xml'
+        'views/florence_fp_costs_tree.xml',
+        'views/florence_balance_sheet_form.xml',
+        'views/florence_balance_sheet_tree.xml'
     ],
     'application': False,
     'installable': True,

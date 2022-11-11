@@ -97,7 +97,7 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="taxes" widget="monetary" string="VAT" sum="VAT"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="sku_cost" widget="monetary"
+                                    <field name="sku_cost" widget="monetary" readonly="True"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"
                                            avg="Sku Costs"/>
                                     <field name="gross_revenues" widget="monetary" sum="Gross Revenues"
@@ -111,7 +111,8 @@
                                     <field name="probable_income" widget="monetary" sum="Probable Income (Odoo)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="probable_income_amz" widget="monetary" sum="Probable Income (Amazon)"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"
+                                           invisible="True"/>
                                 </tree>
                             </field>
                         </page>

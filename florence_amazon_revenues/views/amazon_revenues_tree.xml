@@ -10,7 +10,8 @@
                 <field name="total_probable_income" widget="monetary" sum="Total Probable Income (Odoo)"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                 <field name="total_probable_income_amz" widget="monetary" sum="Total Probable Income (Amazon)"
-                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"
+                       invisible="True"/>
             </tree>
         </field>
     </record>

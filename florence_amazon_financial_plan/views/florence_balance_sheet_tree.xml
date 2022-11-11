@@ -1,0 +1,27 @@
+<odoo>
+    <record id="florence_balance_sheet_view_tree" model="ir.ui.view">
+        <field name="name">Balance Sheets</field>
+        <field name="model">florence.balance.sheet</field>
+
+        <field name="arch" type="xml">
+            <tree>
+                <field name="currency_id" invisible="True"/>
+                <field name="name"/>
+                <field name="products_cash" widget="monetary"
+                       string="Products Cash (From FP - Amazon > Total To Use)"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="inventory_value" widget="monetary"
+                       string="Inventory Value (From Invetory Total Values)"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="amazon_products_cash" widget="monetary"
+                       string="Amazon Products Cash (SKU Price Unit From FP - Costs > Total)"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="other_value" widget="monetary"
+                       string="Other Values (From More Values > Sum)"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="total" widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

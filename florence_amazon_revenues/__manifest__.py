@@ -7,7 +7,8 @@
     'category': 'sales',
     'version': '14.2.3',
     'website': "http://www.nciavarella.me",
-    'depends': ['base', 'mail', 'stock'],
+    'depends': ['base', 'mail', 'stock',
+                'florence_amazon_financial_plan'],
     'data': [
         'security/ir.model.access.csv',
         'security/groups.xml',

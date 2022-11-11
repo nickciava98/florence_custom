@@ -92,13 +92,10 @@ class AmazonRevenues(models.Model):
         for line in self:
             line.product_updated_sku_cost = 0
 
-            if "manufacturing.costs" in self.env:
-                for product in self.env["manufacturing.costs"].search(
-                        [("super_product", "=", line.product.id)]):
-                    line.product_updated_sku_cost = product.price_total_avg
-
-                    if line.product_updated_sku_cost != 0:
-                        break
+            for fp_cost in self.env["florence.fp.costs"].search([]):
+                if fp_cost.name.product_tmpl_id == line.product:
+                    line.product_updated_sku_cost = fp_cost.total
+                    break
 
     def _compute_start_date(self):
         for line in self:

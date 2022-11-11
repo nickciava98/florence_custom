@@ -56,4 +56,10 @@
         <field name="res_model">florence.fp.costs</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+    <record id="florence_balance_sheet_action" model="ir.actions.act_window">
+        <field name="name">Balance Sheet</field>
+        <field name="res_model">florence.balance.sheet</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 </odoo>

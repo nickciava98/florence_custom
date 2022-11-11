@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 import datetime
 
 
@@ -25,9 +26,10 @@ class FlorenceFpCosts(models.Model):
         digits = (12, 4)
     )
     pieces = fields.Float(
-        default = 0,
+        default = 1,
         copy = True,
-        digits = (12, 4)
+        digits = (12, 4),
+        required = True
     )
     price = fields.Float(
         compute = "_compute_price",
@@ -38,6 +40,14 @@ class FlorenceFpCosts(models.Model):
         "name",
         copy = True
     )
+
+    @api.constrains("pieces")
+    def _constrains_pieces(self):
+        for line in self:
+            if line.pieces <= 0:
+                raise ValidationError(
+                    "Pieces must be greater than zero!"
+                )
 
     @api.onchange("name")
     def _onchange_name(self):
