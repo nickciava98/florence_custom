@@ -27,7 +27,8 @@
         'views/florence_fp_costs_form.xml',
         'views/florence_fp_costs_tree.xml',
         'views/florence_balance_sheet_form.xml',
-        'views/florence_balance_sheet_tree.xml'
+        'views/florence_balance_sheet_tree.xml',
+        'views/stock_location_form.xml'
     ],
     'application': False,
     'installable': True,

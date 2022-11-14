@@ -8,3 +8,4 @@ from . import florence_fp_costs_line
 from . import florence_balance_sheet
 from . import florence_balance_sheet_line
 from . import florence_balance_sheet_more
+from . import stock_location

@@ -70,7 +70,8 @@ class FlorenceBalanceSheet(models.Model):
         for line in self:
             line.inventory_value = 0
 
-            for quant in self.env["stock.quant"].search([]):
+            for quant in self.env["stock.quant"].search(
+                    [("location_id.is_valuable_stock", "=", True)]):
                 line.inventory_value += quant.value
 
     @api.depends("balance_sheet_lines")

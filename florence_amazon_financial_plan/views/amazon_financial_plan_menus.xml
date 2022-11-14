@@ -22,7 +22,8 @@
 
     <menuitem name="FP - Costs" id="florence_fp_costs_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9" groups="florence_amazon_revenues.group_admin"
+              sequence="9"
+              groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_data_entry"
               action="florence_fp_costs_action"/>
 
     <menuitem name="Balance Sheet" id="florence_balance_sheet_menu"
