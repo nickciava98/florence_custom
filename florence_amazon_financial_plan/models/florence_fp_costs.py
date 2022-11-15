@@ -64,8 +64,7 @@ class FlorenceFpCosts(models.Model):
                         "fp_costs_lines": [(
                             0, 0, {
                                 "name": line.id,
-                                "component": bom_line.product_id,
-                                "cost": bom_line.cost
+                                "component": bom_line.product_id
                             }
                         )]
                     })

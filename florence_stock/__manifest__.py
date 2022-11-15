@@ -7,7 +7,7 @@
     'category': 'stock',
     'version': '14.0.4',
     'website': "http://www.nciavarella.me",
-    'depends': ['base', 'stock'],
+    'depends': ['base', 'stock', 'florence_amazon_financial_plan'],
     'data': ['views/product_template_form.xml',
              'views/product_template_search.xml',
              'views/product_product_form.xml',

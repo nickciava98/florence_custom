@@ -71,7 +71,7 @@
 
                     <notebook attrs="{'invisible':[('notebook_invisible','=',True)]}">
                         <page name="amazon_values" string="Amazon Values">
-                            <field name="balance_sheet_lines" widget="one2many"
+                            <field name="balance_sheet_lines" widget="one2many" options="{'no_open': True}"
                                    context="{'default_currency_id':currency_id}">
                                 <tree editable="bottom">
                                     <field name="name" invisible="True"/>
@@ -86,7 +86,7 @@
                         </page>
 
                         <page name="balance_sheet_more" string="More Values">
-                            <field name="balance_sheet_more_lines" widget="one2many"
+                            <field name="balance_sheet_more_lines" widget="one2many" options="{'no_open': True}"
                                    context="{'default_currency_id':currency_id}">
                                 <tree editable="bottom">
                                     <field name="name" invisible="True"/>

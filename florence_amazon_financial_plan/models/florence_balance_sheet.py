@@ -23,14 +23,16 @@ class FlorenceBalanceSheet(models.Model):
     )
     balance_sheet_lines = fields.One2many(
         "florence.balance.sheet.line",
-        "name"
+        "name",
+        copy = True
     )
     notebook_invisible = fields.Boolean(
         default = False
     )
     balance_sheet_more_lines = fields.One2many(
         "florence.balance.sheet.more",
-        "name"
+        "name",
+        copy = True
     )
     currency_id = fields.Many2one(
         "res.currency",

@@ -14,7 +14,8 @@ class FlorenceFpCostsLine(models.Model):
         "product.product"
     )
     cost = fields.Float(
-        digits = (12, 4)
+        digits = (12, 4),
+        compute = "_compute_cost"
     )
     bill = fields.Many2one(
         "account.move",
@@ -35,13 +36,29 @@ class FlorenceFpCostsLine(models.Model):
 
             if line.component:
                 for bill in self.env["account.move"].search(
-                        [("move_type", "=", "in_invoice")], order="name desc"):
+                        [("move_type", "=", "in_invoice")], order = "name desc"):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.component:
                             line.bill = bill
                             break
 
                     if line.bill:
+                        break
+
+    @api.depends("component", "bill")
+    def _compute_cost(self):
+        for line in self:
+            line.cost = 0
+
+            if line.component:
+                for bill in self.env["account.move"].search(
+                        [("move_type", "=", "in_invoice")], order = "name desc"):
+                    for invoice_line in bill.invoice_line_ids:
+                        if invoice_line.product_id == line.component:
+                            line.cost = invoice_line.price_unit
+                            break
+
+                    if line.cost > 0:
                         break
 
     def _compute_currency_id(self):
