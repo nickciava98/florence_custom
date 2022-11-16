@@ -9,6 +9,16 @@ class StockQuant(models.Model):
         compute = "_compute_value",
         groups = "stock.group_stock_manager"
     )
+    currency_id = fields.Many2one(
+        "res.currency",
+        compute = "_compute_currency_id",
+        groups = "stock.group_stock_manager"
+    )
+
+    @api.depends("company_id")
+    def _compute_currency_id(self):
+        for line in self:
+            line.currency_id = line.company_id.currency_id
 
     @api.depends("product_id", "available_quantity")
     def _compute_value(self):
