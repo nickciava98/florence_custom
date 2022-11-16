@@ -97,7 +97,7 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="taxes" widget="monetary" string="VAT" sum="VAT"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="sku_cost" widget="monetary" readonly="True"
+                                    <field name="sku_cost" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"
                                            avg="Sku Costs"/>
                                     <field name="gross_revenues" widget="monetary" sum="Gross Revenues"
@@ -184,7 +184,7 @@
                                     <field name="taxes" widget="monetary" string="VAT" sum="VAT"
                                            readonly="False"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="sku_cost" widget="monetary"
+                                    <field name="sku_cost"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"
                                            avg="Sku Costs" readonly="False"/>
                                     <field name="gross_revenues" widget="monetary" sum="Gross Revenues"
