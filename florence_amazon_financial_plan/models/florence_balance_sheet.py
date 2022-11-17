@@ -54,6 +54,29 @@ class FlorenceBalanceSheet(models.Model):
         "name",
         copy = True
     )
+
+    def _default_balance_sheet_inventory_lines(self):
+        balance_sheet_inventory_lines = [(5, 0, 0)]
+
+        for item in self.env["stock.quant"].search(
+                [("location_id.is_valuable_stock", "=", True)]):
+            balance_sheet_inventory_lines.append((
+                0, 0, {
+                    "product_id": item.product_id,
+                    "location_id": item.location_id,
+                    "lot_id": item.lot_id,
+                    "available_quantity": item.available_quantity,
+                    "value": item.value
+                }
+            ))
+
+        return balance_sheet_inventory_lines
+
+    balance_sheet_inventory_lines = fields.One2many(
+        "florence.balance.sheet.inventory",
+        "name",
+        default = _default_balance_sheet_inventory_lines
+    )
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"
