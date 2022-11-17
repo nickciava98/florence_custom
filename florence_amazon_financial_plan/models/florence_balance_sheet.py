@@ -9,11 +9,31 @@ class FlorenceBalanceSheet(models.Model):
     name = fields.Char(
         required = True
     )
+
+    def _default_products_cash(self):
+        products_cash = 0
+
+        for fp in self.env["amazon.financial.plan"].search([]):
+            products_cash += fp.total_to_use
+
+        return products_cash
+
+    def _default_inventory_value(self):
+        inventory_value = 0
+
+        for quant in self.env["stock.quant"].search(
+                [("location_id.is_valuable_stock", "=", True)]):
+            inventory_value += quant.value
+
+        return inventory_value
+
     products_cash = fields.Float(
-        compute = "_compute_products_cash"
+        default = _default_products_cash,
+        readonly = True
     )
     inventory_value = fields.Float(
-        compute = "_compute_inventory_value"
+        default = _default_inventory_value,
+        readonly = True
     )
     amazon_products_cash = fields.Float(
         compute = "_compute_amazon_products_cash"
@@ -49,6 +69,7 @@ class FlorenceBalanceSheet(models.Model):
             line.total = line.products_cash + line.inventory_value \
                          + line.amazon_products_cash + line.other_value
 
+    @api.depends("balance_sheet_more_lines")
     def _compute_other_value(self):
         for line in self:
             line.other_value = 0
@@ -60,21 +81,6 @@ class FlorenceBalanceSheet(models.Model):
     def _compute_currency_id(self):
         for line in self:
             line.currency_id = self.env.ref('base.main_company').currency_id
-
-    def _compute_products_cash(self):
-        for line in self:
-            line.products_cash = 0
-
-            for fp in self.env["amazon.financial.plan"].search([]):
-                line.products_cash += fp.total_to_use
-
-    def _compute_inventory_value(self):
-        for line in self:
-            line.inventory_value = 0
-
-            for quant in self.env["stock.quant"].search(
-                    [("location_id.is_valuable_stock", "=", True)]):
-                line.inventory_value += quant.value
 
     @api.depends("balance_sheet_lines")
     def _compute_amazon_products_cash(self):

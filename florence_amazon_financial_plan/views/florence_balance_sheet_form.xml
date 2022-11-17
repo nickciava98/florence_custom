@@ -30,10 +30,10 @@
 
                     <group col="3" colspan="3">
                         <group col="1" colspan="1">
-                            <field name="products_cash" widget="monetary"
+                            <field name="products_cash" widget="monetary" force_save="True"
                                    string="Products Cash (From FP - Amazon > Total To Use)"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                            <field name="inventory_value" widget="monetary"
+                            <field name="inventory_value" widget="monetary" force_save="True"
                                    string="Inventory Value (From Invetory Total Values)"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </group>
