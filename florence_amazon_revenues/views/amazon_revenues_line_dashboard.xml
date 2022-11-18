@@ -5,7 +5,7 @@
 
         <field name="arch" type="xml">
             <dashboard>
-                <view ref="florence_amazon_statistics.amazon_revenues_line_view_graph"
+                <view ref="florence_amazon_revenues.amazon_revenues_line_view_graph"
                       type="graph"/>
 
                 <group string="Statistics">
