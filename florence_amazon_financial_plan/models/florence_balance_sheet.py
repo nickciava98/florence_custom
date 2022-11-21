@@ -18,22 +18,12 @@ class FlorenceBalanceSheet(models.Model):
 
         return products_cash
 
-    def _default_inventory_value(self):
-        inventory_value = 0
-
-        for quant in self.env["stock.quant"].search(
-                [("location_id.is_valuable_stock", "=", True)]):
-            inventory_value += quant.value
-
-        return inventory_value
-
     products_cash = fields.Float(
         default = _default_products_cash,
         readonly = True
     )
     inventory_value = fields.Float(
-        default = _default_inventory_value,
-        readonly = True
+        compute = "_compute_inventory_value"
     )
     amazon_products_cash = fields.Float(
         compute = "_compute_amazon_products_cash"
@@ -84,6 +74,15 @@ class FlorenceBalanceSheet(models.Model):
     total = fields.Float(
         compute = "_compute_total"
     )
+
+    @api.depends("balance_sheet_inventory_lines")
+    def _compute_inventory_value(self):
+        for line in self:
+            line.inventory_value = 0
+
+            if len(line.balance_sheet_inventory_lines) > 0:
+                for bs_inv_line in line.balance_sheet_inventory_lines:
+                    line.inventory_value += bs_inv_line.value
 
     @api.depends("products_cash", "inventory_value",
                  "amazon_products_cash", "other_value")

@@ -108,7 +108,7 @@
                                     <field name="location_id"/>
                                     <field name="lot_id"/>
                                     <field name="available_quantity"/>
-                                    <field name="value" widget="monetary"
+                                    <field name="value" widget="monetary" sum="Value"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
