@@ -23,7 +23,8 @@ class FlorenceBalanceSheet(models.Model):
         readonly = True
     )
     inventory_value = fields.Float(
-        compute = "_compute_inventory_value"
+        compute = "_compute_inventory_value",
+        store = True
     )
     amazon_products_cash = fields.Float(
         compute = "_compute_amazon_products_cash"
