@@ -20,7 +20,7 @@
 
     <menuitem name="Amazon" id="amazon_statistics_base_menu"
               action="amazon_statistics_action" sequence="6"
-              groups="florence_amazon_revenues.group_users"
+              groups="florence_amazon_revenues.group_users,florence_amazon_revenues.group_accountant"
               web_icon="florence_amazon_revenues,static/description/app_icon.png"/>
     <menuitem id="amazon_statistics_super_menu" name="Reviews Statistics"
               sequence="3" action="amazon_statistics_action"

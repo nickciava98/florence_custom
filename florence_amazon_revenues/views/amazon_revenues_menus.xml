@@ -51,7 +51,8 @@
 
     <record id="florence_amazon_revenues.amazon_revenues_base_menu" model="ir.ui.menu">
         <field name="groups_id"
-               eval="[(6,0, [ref('florence_amazon_revenues.group_admin'),
-                             ref('florence_amazon_revenues.group_data_entry')])]"/>
+               eval="[(6,0,[ref('florence_amazon_revenues.group_admin'),
+                            ref('florence_amazon_revenues.group_data_entry')]
+                     )]"/>
     </record>
 </odoo>
