@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'stock',
-    'version': '14.0.4',
+    'version': '14.0.5',
     'website': "http://www.nciavarella.me",
     'depends': ['base', 'stock', 'florence_amazon_financial_plan'],
     'data': ['views/product_template_form.xml',
