@@ -52,10 +52,7 @@ class FlorenceFpCosts(models.Model):
     @api.onchange("name")
     def _onchange_name(self):
         for line in self:
-            if line.name and len(self.env["mrp.bom.line"].search(
-                    [("bom_id", "=", self.env["mrp.bom"].search(
-                        [("product_id", "=", line.name.id)]
-                    )[0].id)])) > 0:
+            if line.name and line.name.bom_count > 0:
                 for bom_line in self.env["mrp.bom.line"].search(
                     [("bom_id", "=", self.env["mrp.bom"].search(
                         [("product_id", "=", line.name.id)]

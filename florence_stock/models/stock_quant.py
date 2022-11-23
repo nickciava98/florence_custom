@@ -14,6 +14,9 @@ class StockQuant(models.Model):
         compute = "_compute_currency_id",
         groups = "stock.group_stock_manager"
     )
+    sale_ok = fields.Boolean(
+        related = "product_id.sale_ok"
+    )
 
     @api.depends("company_id")
     def _compute_currency_id(self):

@@ -25,6 +25,11 @@
               sequence="9"
               groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_data_entry"
               action="florence_fp_costs_action"/>
+    <menuitem name="FP - Costs" id="florence_fp_costs_accountant_menu"
+              parent="florence_amazon_statistics.amazon_statistics_base_menu"
+              sequence="9"
+              groups="florence_amazon_revenues.group_accountant"
+              action="florence_fp_costs_action"/>
 
     <menuitem name="Balance Sheet" id="florence_balance_sheet_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
