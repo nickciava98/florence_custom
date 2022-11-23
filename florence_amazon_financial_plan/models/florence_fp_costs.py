@@ -23,7 +23,8 @@ class FlorenceFpCosts(models.Model):
     )
     total = fields.Float(
         compute = "_compute_total",
-        digits = (12, 4)
+        digits = (12, 4),
+        store = True
     )
     pieces = fields.Float(
         default = 1,
@@ -33,7 +34,8 @@ class FlorenceFpCosts(models.Model):
     )
     price = fields.Float(
         compute = "_compute_price",
-        digits = (12, 4)
+        digits = (12, 4),
+        store = True
     )
     fp_costs_lines = fields.One2many(
         "florence.fp.costs.line",
