@@ -35,15 +35,31 @@
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </group>
 
-                        <group string="FPs Totals">
-                            <field name="amazon_financial_plan_values" widget="one2many" nolabel="1">
-                                <tree editable="bottom" create="false" delete="false">
-                                    <field name="name" invisible="True"/>
-                                    <field name="product_id"/>
-                                    <field name="total_used"/>
-                                    <field name="total_to_use"/>
-                                </tree>
-                            </field>
+                        <group col="2" colspan="2" string="FPs Totals">
+                            <group col="1" colspan="1">
+                                <field name="amazon_financial_plan_values" widget="one2many"
+                                       options="{'no_open': True}" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false"
+                                          decoration-danger="total_to_use == 0">
+                                        <field name="name" invisible="True"/>
+                                        <field name="product_id"/>
+                                        <field name="total_used"/>
+                                        <field name="total_to_use"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                            <group col="1" colspan="1">
+                                <field name="amazon_financial_plan_more_values" widget="one2many" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false"
+                                          decoration-danger="total_to_use == 0">
+                                        <field name="name" invisible="True"/>
+                                        <field name="vendor"/>
+                                        <field name="total_used"/>
+                                        <field name="total_to_use"/>
+                                    </tree>
+                                </field>
+                            </group>
                         </group>
                     </group>
 
@@ -66,17 +82,53 @@
                                 </tree>
                             </field>
                         </page>
+
+                        <page name="additional" string="Additional">
+                            <field name="amazon_financial_plan_more_lines" widget="one2many"
+                                   options="{'no_open': True}"
+                                   context="{'default_date': date, 'default_currency_id': currency_id}">
+                                <tree editable="bottom" default_order="date desc" decoration-danger="value_used">
+                                    <field name="name" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="date"/>
+                                    <field name="vendor"/>
+                                    <field name="notes"/>
+                                    <field name="value" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="value_used"/>
+                                    <field name="total_used" widget="monetary" invisible="True"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="total_to_use" widget="monetary" invisible="True"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
 
-                    <group string="Totals">
-                        <field name="amazon_current_fp_values" widget="one2many" nolabel="1">
-                            <tree editable="bottom" create="false" delete="false">
-                                <field name="name" invisible="True"/>
-                                <field name="product_id"/>
-                                <field name="total_used"/>
-                                <field name="total_to_use"/>
-                            </tree>
-                        </field>
+                    <group string="Totals" col="2" colspan="2">
+                        <group col="1" colspan="1">
+                            <field name="amazon_current_fp_values" widget="one2many"
+                                   nolabel="1" options="{'no_open': True}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="name" invisible="True"/>
+                                    <field name="product_id"/>
+                                    <field name="total_used"/>
+                                    <field name="total_to_use"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group col="1" colspan="1">
+                            <field name="amazon_current_fp_more_values" widget="one2many"
+                                   nolabel="1" options="{'no_open': True}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="name" invisible="True"/>
+                                    <field name="vendor"/>
+                                    <field name="total_used"/>
+                                    <field name="total_to_use"/>
+                                </tree>
+                            </field>
+                        </group>
                     </group>
                 </sheet>
 

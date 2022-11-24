@@ -1,7 +1,5 @@
 from odoo import models, fields, api
 import datetime
-import itertools
-import operator
 
 
 class AmazonFinancialPlan(models.Model):
@@ -40,13 +38,31 @@ class AmazonFinancialPlan(models.Model):
         "name",
         readonly = True
     )
+    updated_fp_values = fields.Boolean(
+        default = False
+    )
     amazon_current_fp_values = fields.One2many(
         "amazon.financial.plan.values",
         "current_name",
         readonly = True
     )
+    amazon_financial_plan_more_values = fields.One2many(
+        "amazon.financial.plan.more.values",
+        "name",
+        readonly = True
+    )
+    amazon_current_fp_more_values = fields.One2many(
+        "amazon.financial.plan.more.values",
+        "current_name",
+        readonly = True
+    )
     amazon_financial_plan_lines = fields.One2many(
         "amazon.financial.plan.line",
+        "name",
+        copy = True
+    )
+    amazon_financial_plan_more_lines = fields.One2many(
+        "amazon.financial.plan.more",
         "name",
         copy = True
     )
@@ -60,6 +76,8 @@ class AmazonFinancialPlan(models.Model):
 
     def update_fp_values_action(self):
         for line in self:
+            ### UPDATE AMZ FP VALUES ###
+
             line.amazon_financial_plan_values = [(5, 0, 0)]
             products = []
 
@@ -90,27 +108,24 @@ class AmazonFinancialPlan(models.Model):
                 totals_used.append(total_used)
                 totals_to_use.append(total_to_use)
 
-            res = []
-
             for product in products_grouped:
-                res.append((
-                    0, 0, {
-                        'name': line.id,
-                        'product_id': product,
-                        'total_used': totals_used[products_grouped.index(product)],
-                        'total_to_use': totals_to_use[products_grouped.index(product)]
-                    }
-                ))
+                self.write({
+                    'amazon_financial_plan_values': [(
+                        0, 0, {
+                            'name': line.id,
+                            'product_id': product,
+                            'total_used': totals_used[products_grouped.index(product)],
+                            'total_to_use': totals_to_use[products_grouped.index(product)]
+                        }
+                    )]
+                })
 
-            self.write({
-                'amazon_financial_plan_values': res
-            })
+            ### UPDATE AMZ CURRENT FP VALUES ###
 
             line.amazon_current_fp_values = [(5, 0, 0)]
             products = []
             totals_to_use = []
             totals_used = []
-            res = []
 
             for fp_line in line.amazon_financial_plan_lines:
                 products.append(fp_line.product_id.id)
@@ -122,19 +137,111 @@ class AmazonFinancialPlan(models.Model):
                     totals_used.append(0)
                     totals_to_use.append(fp_line.value)
 
-            for product in products:
-                res.append((
-                    0, 0, {
-                        'name': line.id,
-                        'product_id': product,
-                        'total_used': totals_used[products_grouped.index(product)],
-                        'total_to_use': totals_to_use[products_grouped.index(product)]
-                    }
-                ))
+            products_grouped = []
 
-            self.write({
-                'amazon_current_fp_values': res
-            })
+            for product in products:
+                if product not in products_grouped:
+                    products_grouped.append(product)
+
+            for product in products_grouped:
+                self.write({
+                    'amazon_current_fp_values': [(
+                        0, 0, {
+                            'name': line.id,
+                            'product_id': product,
+                            'total_used': totals_used[products_grouped.index(product)],
+                            'total_to_use': totals_to_use[products_grouped.index(product)]
+                        }
+                    )]
+                })
+
+            ### UPDATE AMZ FP MORE VALUES (VENDORS) ###
+
+            line.amazon_financial_plan_more_values = [(5, 0, 0)]
+            vendors = []
+
+            for fp_line in self.env["amazon.financial.plan.more"].search([]):
+                vendors.append(
+                    (fp_line.vendor.id,
+                     fp_line.value if fp_line.value_used else 0,
+                     fp_line.value if not fp_line.value_used else 0)
+                )
+
+            vendors_grouped = []
+            totals_used = []
+            totals_to_use = []
+
+            for vendor in vendors:
+                if vendor[0] not in vendors_grouped:
+                    vendors_grouped.append(vendor[0])
+
+            for vg in vendors_grouped:
+                total_used = 0
+                total_to_use = 0
+
+                for v in vendors:
+                    if v[0] == vg:
+                        total_used += v[1]
+                        total_to_use += v[2]
+
+                totals_used.append(total_used)
+                totals_to_use.append(total_to_use)
+
+            for vendor in vendors_grouped:
+                self.write({
+                    "amazon_financial_plan_more_values": [(
+                        0, 0, {
+                            'name': line.id,
+                            'vendor': vendor,
+                            'total_used': totals_used[vendors_grouped.index(vendor)],
+                            'total_to_use': totals_to_use[vendors_grouped.index(vendor)]
+                        }
+                    )]
+                })
+
+            ### UPDATE AMZ CURRENT FP MORE VALUES (VENDORS) ###
+
+            line.amazon_current_fp_more_values = [(5, 0, 0)]
+            vendors = []
+            totals_to_use = []
+            totals_used = []
+
+            for fp_line in line.amazon_financial_plan_more_lines:
+                vendors.append(fp_line.vendor.id)
+
+                if fp_line.value_used:
+                    totals_used.append(fp_line.value)
+                    totals_to_use.append(0)
+                else:
+                    totals_used.append(0)
+                    totals_to_use.append(fp_line.value)
+
+            vendors_grouped = []
+
+            for vendor in vendors:
+                if vendor not in vendors_grouped:
+                    vendors_grouped.append(vendor)
+
+            for vendor in vendors_grouped:
+                self.write({
+                    'amazon_current_fp_more_values': [(
+                        0, 0, {
+                            'name': line.id,
+                            'vendor': vendor,
+                            'total_used': totals_used[vendors_grouped.index(vendor)],
+                            'total_to_use': totals_to_use[vendors_grouped.index(vendor)]
+                        }
+                    )]
+                })
+
+        ### CLEAN DUPLICATES OF FP LINES ###
+
+        for line in self:
+            for fp_value in line.amazon_financial_plan_values[-len(line.amazon_financial_plan_lines):]:
+                fp_value.unlink()
+
+            for fp_more_values in line.amazon_financial_plan_more_values[-len(line.amazon_financial_plan_more_lines):]:
+                fp_more_values.unlink()
 
     @api.depends("amazon_financial_plan_lines")
     def _compute_total_value(self):
