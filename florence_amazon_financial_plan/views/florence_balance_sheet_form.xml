@@ -34,7 +34,7 @@
                                    string="Products Cash (From FP - Amazon > Total To Use)"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                             <field name="inventory_value" widget="monetary" force_save="True"
-                                   string="Inventory Value (From Invetory Total Values)"
+                                   string="Inventory Value (From Inventory Total Values + External Inventories Total Values)"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </group>
 
@@ -109,6 +109,24 @@
                                     <field name="sale_ok"/>
                                     <field name="location_id"/>
                                     <field name="lot_id"/>
+                                    <field name="available_quantity"/>
+                                    <field name="value" widget="monetary" sum="Value"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="external_inventory" string="External Inventories Values">
+                            <field name="balance_sheet_inventory_more_lines" widget="one2many" options="{'no_open': True}"
+                                   context="{'default_currency_id': currency_id}">
+                                <tree editable="bottom" default_order="location_id asc">
+                                    <field name="name" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="product_id"/>
+                                    <field name="can_be_used"/>
+                                    <field name="sale_ok"/>
+                                    <field name="location"/>
+                                    <field name="lot"/>
                                     <field name="available_quantity"/>
                                     <field name="value" widget="monetary" sum="Value"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>

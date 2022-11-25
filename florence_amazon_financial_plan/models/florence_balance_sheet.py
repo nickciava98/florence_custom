@@ -68,6 +68,11 @@ class FlorenceBalanceSheet(models.Model):
         "name",
         default = _default_balance_sheet_inventory_lines
     )
+    balance_sheet_inventory_more_lines = fields.One2many(
+        "florence.balance.sheet.inventory.more",
+        "name",
+        copy = True
+    )
     currency_id = fields.Many2one(
         "res.currency",
         compute = "_compute_currency_id"
@@ -76,13 +81,17 @@ class FlorenceBalanceSheet(models.Model):
         compute = "_compute_total"
     )
 
-    @api.depends("balance_sheet_inventory_lines")
+    @api.depends("balance_sheet_inventory_lines", "balance_sheet_inventory_more_lines")
     def _compute_inventory_value(self):
         for line in self:
             line.inventory_value = 0
 
             if len(line.balance_sheet_inventory_lines) > 0:
                 for bs_inv_line in line.balance_sheet_inventory_lines:
+                    line.inventory_value += bs_inv_line.value
+
+            if len(line.balance_sheet_inventory_more_lines) > 0:
+                for bs_inv_line in line.balance_sheet_inventory_more_lines:
                     line.inventory_value += bs_inv_line.value
 
     @api.depends("products_cash", "inventory_value",
