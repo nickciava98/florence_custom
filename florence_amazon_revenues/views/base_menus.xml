@@ -1,0 +1,8 @@
+<odoo>
+    <record id="base.menu_board_root" model="ir.ui.menu">
+        <field name="groups_id"
+               eval="[(6,0,[ref('florence_amazon_revenues.group_admin'),
+                            ref('florence_amazon_revenues.group_data_entry')]
+                     )]"/>
+    </record>
+</odoo>
