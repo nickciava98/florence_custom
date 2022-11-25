@@ -23,10 +23,10 @@
 
                     <field name="currency_id" invisible="True"/>
 
-                    <group col="3" colspan="3">
-                        <group string="FP Values">
+                    <group col="1" colspan="1" string="FP Values">
+                        <group>
                             <field name="currency_id" invisible="True"/>
-                            <field name="date"/>
+                            <field name="date" style="width:15%;"/>
                             <field name="total_value" widget="monetary"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                             <field name="total_used" widget="monetary" decoration-danger="True"
@@ -34,32 +34,32 @@
                             <field name="total_to_use" widget="monetary"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </group>
+                    </group>
 
-                        <group col="2" colspan="2" string="FPs Totals">
-                            <group col="1" colspan="1">
-                                <field name="amazon_financial_plan_values" widget="one2many"
-                                       options="{'no_open': True}" nolabel="1">
-                                    <tree editable="bottom" create="false" delete="false"
-                                          decoration-danger="total_to_use == 0">
-                                        <field name="name" invisible="True"/>
-                                        <field name="product_id"/>
-                                        <field name="total_used"/>
-                                        <field name="total_to_use"/>
-                                    </tree>
-                                </field>
-                            </group>
+                    <group col="2" colspan="2" string="FPs Totals (From all FPs created)">
+                        <group col="1" colspan="1">
+                            <field name="amazon_financial_plan_values" widget="one2many"
+                                   options="{'no_open': True}" nolabel="1">
+                                <tree editable="bottom" create="false" delete="false"
+                                      decoration-danger="total_to_use == 0">
+                                    <field name="name" invisible="True"/>
+                                    <field name="product_id"/>
+                                    <field name="total_used"/>
+                                    <field name="total_to_use"/>
+                                </tree>
+                            </field>
+                        </group>
 
-                            <group col="1" colspan="1">
-                                <field name="amazon_financial_plan_more_values" widget="one2many" nolabel="1">
-                                    <tree editable="bottom" create="false" delete="false"
-                                          decoration-danger="total_to_use == 0">
-                                        <field name="name" invisible="True"/>
-                                        <field name="vendor"/>
-                                        <field name="total_used"/>
-                                        <field name="total_to_use"/>
-                                    </tree>
-                                </field>
-                            </group>
+                        <group col="1" colspan="1">
+                            <field name="amazon_financial_plan_more_values" widget="one2many" nolabel="1">
+                                <tree editable="bottom" create="false" delete="false"
+                                      decoration-danger="total_to_use == 0">
+                                    <field name="name" invisible="True"/>
+                                    <field name="vendor"/>
+                                    <field name="total_used"/>
+                                    <field name="total_to_use"/>
+                                </tree>
+                            </field>
                         </group>
                     </group>
 
@@ -105,7 +105,7 @@
                         </page>
                     </notebook>
 
-                    <group string="Totals" col="2" colspan="2">
+                    <group string="Totals (From current FP)" col="2" colspan="2">
                         <group col="1" colspan="1">
                             <field name="amazon_current_fp_values" widget="one2many"
                                    nolabel="1" options="{'no_open': True}">

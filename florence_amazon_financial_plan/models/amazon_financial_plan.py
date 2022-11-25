@@ -137,20 +137,14 @@ class AmazonFinancialPlan(models.Model):
                     totals_used.append(0)
                     totals_to_use.append(fp_line.value)
 
-            products_grouped = []
-
             for product in products:
-                if product not in products_grouped:
-                    products_grouped.append(product)
-
-            for product in products_grouped:
                 self.write({
                     'amazon_current_fp_values': [(
                         0, 0, {
-                            'name': line.id,
+                            'current_name': line.id,
                             'product_id': product,
-                            'total_used': totals_used[products_grouped.index(product)],
-                            'total_to_use': totals_to_use[products_grouped.index(product)]
+                            'total_used': totals_used[products.index(product)],
+                            'total_to_use': totals_to_use[products.index(product)]
                         }
                     )]
                 })
@@ -216,32 +210,17 @@ class AmazonFinancialPlan(models.Model):
                     totals_used.append(0)
                     totals_to_use.append(fp_line.value)
 
-            vendors_grouped = []
-
             for vendor in vendors:
-                if vendor not in vendors_grouped:
-                    vendors_grouped.append(vendor)
-
-            for vendor in vendors_grouped:
                 self.write({
                     'amazon_current_fp_more_values': [(
                         0, 0, {
-                            'name': line.id,
+                            'current_name': line.id,
                             'vendor': vendor,
-                            'total_used': totals_used[vendors_grouped.index(vendor)],
-                            'total_to_use': totals_to_use[vendors_grouped.index(vendor)]
+                            'total_used': totals_used[vendors.index(vendor)],
+                            'total_to_use': totals_to_use[vendors.index(vendor)]
                         }
                     )]
                 })
-
-        ### CLEAN DUPLICATES OF FP LINES ###
-
-        for line in self:
-            for fp_value in line.amazon_financial_plan_values[-len(line.amazon_financial_plan_lines):]:
-                fp_value.unlink()
-
-            for fp_more_values in line.amazon_financial_plan_more_values[-len(line.amazon_financial_plan_more_lines):]:
-                fp_more_values.unlink()
 
     @api.depends("amazon_financial_plan_lines")
     def _compute_total_value(self):

@@ -6,6 +6,8 @@
 
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='consumable']" position="after">
+                <filter string="Unusable" name="unusable"
+                        domain="[('can_be_used', '=', False)]"/>
                 <separator/>
                 <filter string="Decommissioned" name="decommissioned"
                         domain="[('is_decommissioned', '=', True)]"/>

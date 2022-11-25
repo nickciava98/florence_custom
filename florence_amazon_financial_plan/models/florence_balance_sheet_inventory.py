@@ -27,6 +27,9 @@ class FlorenceBalanceSheetInventory(models.Model):
     sale_ok = fields.Boolean(
         related = "product_id.sale_ok"
     )
+    can_be_used = fields.Boolean(
+        related = "product_id.can_be_used"
+    )
 
     def _compute_currency_id(self):
         for line in self:

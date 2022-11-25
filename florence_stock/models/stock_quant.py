@@ -17,6 +17,9 @@ class StockQuant(models.Model):
     sale_ok = fields.Boolean(
         related = "product_id.sale_ok"
     )
+    can_be_used = fields.Boolean(
+        related = "product_id.can_be_used"
+    )
 
     @api.depends("company_id")
     def _compute_currency_id(self):

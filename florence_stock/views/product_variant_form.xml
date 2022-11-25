@@ -8,6 +8,11 @@
             <xpath expr="//field[@name='product_template_attribute_value_ids']"
                    position="before">
                 <div>
+                    <field name="can_be_used"/>
+                    <label for="can_be_used" string="Can Be Used"/>
+                </div>
+
+                <div>
                     <field name="is_decommissioned"/>
                     <label for="is_decommissioned" string="Is Decommissioned"/>
                 </div>

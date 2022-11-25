@@ -6,6 +6,9 @@ class ProductProduct(models.Model):
     is_decommissioned = fields.Boolean(
         default = False
     )
+    can_be_used = fields.Boolean(
+        default = True
+    )
     location_ids = fields.Many2many(
         "stock.location",
         string = "Locations",

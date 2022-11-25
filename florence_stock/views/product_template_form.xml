@@ -7,6 +7,11 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@name='options']" position="inside">
                 <div>
+                    <field name="can_be_used"/>
+                    <label for="can_be_used" string="Can Be Used"/>
+                </div>
+
+                <div>
                     <field name="is_decommissioned"/>
                     <label for="is_decommissioned" string="Is Decommissioned"/>
                 </div>

@@ -105,6 +105,7 @@
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="product_id"/>
+                                    <field name="can_be_used"/>
                                     <field name="sale_ok"/>
                                     <field name="location_id"/>
                                     <field name="lot_id"/>
