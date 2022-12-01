@@ -13,6 +13,9 @@ class FlorenceFpCosts(models.Model):
         required = True,
         string = "Product"
     )
+    sku = fields.Many2one(
+        "stock.production.lot"
+    )
     date = fields.Date(
         default = datetime.datetime.now(),
         required = True

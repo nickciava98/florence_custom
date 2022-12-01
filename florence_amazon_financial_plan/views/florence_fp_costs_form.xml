@@ -20,11 +20,11 @@
 
                     <group col="2" colspan="2">
                         <group>
-                            <field name="date"/>
+                            <field name="sku" domain="[('product_id', '=', name)]"/>
                         </group>
 
                         <group>
-
+                            <field name="date"/>
                         </group>
                     </group>
 
