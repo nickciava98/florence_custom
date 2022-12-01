@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields
 
 
 class FlorenceBalanceSheetInventory(models.Model):
@@ -25,11 +25,9 @@ class FlorenceBalanceSheetInventory(models.Model):
         compute = "_compute_currency_id"
     )
     sale_ok = fields.Boolean(
-        related = "product_id.sale_ok"
+        string = "Can Be Sold"
     )
-    can_be_used = fields.Boolean(
-        related = "product_id.can_be_used"
-    )
+    can_be_used = fields.Boolean()
 
     def _compute_currency_id(self):
         for line in self:
@@ -55,11 +53,9 @@ class FlorenceBalanceSheetInventoryMore(models.Model):
         compute = "_compute_currency_id"
     )
     sale_ok = fields.Boolean(
-        related = "product_id.sale_ok"
+        string = "Can Be Sold"
     )
-    can_be_used = fields.Boolean(
-        related = "product_id.can_be_used"
-    )
+    can_be_used = fields.Boolean()
 
     def _compute_currency_id(self):
         for line in self:

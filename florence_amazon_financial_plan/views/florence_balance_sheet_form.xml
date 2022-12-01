@@ -101,7 +101,7 @@
                         <page name="balance_sheet_inventory" string="Inventory Values">
                             <field name="balance_sheet_inventory_lines" widget="one2many" options="{'no_open': True}"
                                    context="{'default_currency_id':currency_id}">
-                                <tree editable="bottom" create="false" delete="false" default_order="location_id asc">
+                                <tree editable="bottom" create="false" default_order="location_id asc">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="product_id"/>

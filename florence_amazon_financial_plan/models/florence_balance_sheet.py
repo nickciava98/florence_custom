@@ -57,7 +57,9 @@ class FlorenceBalanceSheet(models.Model):
                     "location_id": item.location_id,
                     "lot_id": item.lot_id,
                     "available_quantity": item.available_quantity,
-                    "value": item.value
+                    "value": item.value,
+                    "sale_ok": item.sale_ok,
+                    "can_be_used": item.can_be_used
                 }
             ))
 
