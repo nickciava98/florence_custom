@@ -7,7 +7,7 @@
             <tree default_order="date desc">
                 <field name="currency_id" invisible="True"/>
                 <field name="name"/>
-                <field name="sku" context="{'default_product_id': name}"/>
+                <field name="sku_id"/>
                 <field name="date"/>
                 <field name="total" widget="monetary" sum="Total"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>

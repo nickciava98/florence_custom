@@ -20,7 +20,8 @@
 
                     <group col="2" colspan="2">
                         <group>
-                            <field name="sku" domain="[('product_id', '=', name)]"/>
+                            <field name="sku_id" context="{'default_product_id': name}"
+                                   domain="[('product_id', '=', name)]"/>
                         </group>
 
                         <group>

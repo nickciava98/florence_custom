@@ -13,8 +13,8 @@ class FlorenceFpCosts(models.Model):
         required = True,
         string = "Product"
     )
-    sku = fields.Many2one(
-        "stock.production.lot",
+    sku_id = fields.Many2one(
+        "product.sku",
         copy = True
     )
     date = fields.Date(
