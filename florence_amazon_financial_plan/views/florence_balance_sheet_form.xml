@@ -105,8 +105,8 @@
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="product_id" readonly="True"/>
-                                    <field name="can_be_used" readonly="0"/>
-                                    <field name="sale_ok" readonly="0"/>
+                                    <field name="can_be_used" readonly="True"/>
+                                    <field name="sale_ok" readonly="True"/>
                                     <field name="location_id" readonly="True"/>
                                     <field name="lot_id" readonly="True"/>
                                     <field name="available_quantity" readonly="True"/>
@@ -123,8 +123,8 @@
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="product_id" readonly="True"/>
-                                    <field name="can_be_used" readonly="0"/>
-                                    <field name="sale_ok" readonly="0"/>
+                                    <field name="can_be_used" readonly="True"/>
+                                    <field name="sale_ok" readonly="True"/>
                                     <field name="location" readonly="True"/>
                                     <field name="lot" readonly="True"/>
                                     <field name="available_quantity" readonly="True"/>
