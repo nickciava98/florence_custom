@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'sales',
-    'version': '14.0.7',
+    'version': '14.0.8',
     'website': "https://www.nciavarella.me",
     'depends': ['base', 'florence_manufacturing_costs', 'florence_amazon_revenues', 'florence_stock'],
     'data': [
@@ -28,7 +28,8 @@
         'views/florence_fp_costs_tree.xml',
         'views/florence_balance_sheet_form.xml',
         'views/florence_balance_sheet_tree.xml',
-        'views/stock_location_form.xml'
+        'views/stock_location_form.xml',
+        'wizard/fp_costs_update_form.xml'
     ],
     'application': False,
     'installable': True,

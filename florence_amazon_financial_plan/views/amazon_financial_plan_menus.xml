@@ -22,9 +22,13 @@
 
     <menuitem name="FP - Costs" id="florence_fp_costs_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9"
-              groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_data_entry"
-              action="florence_fp_costs_action"/>
+              sequence="9" groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_data_entry"/>
+    <menuitem name="FPs" id="florence_fps_costs_menu"
+              parent="florence_fp_costs_menu" sequence="1" action="florence_fp_costs_action"/>
+    <menuitem name="FP - Costs Update" id="fp_costs_update_menu"
+              parent="florence_fp_costs_menu" sequence="2"
+              action="florence_fp_costs_update_action"/>
+
     <menuitem name="FP - Costs" id="florence_fp_costs_accountant_menu"
               parent="florence_amazon_statistics.amazon_statistics_base_menu"
               sequence="9"
