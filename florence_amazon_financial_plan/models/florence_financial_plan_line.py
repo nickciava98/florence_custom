@@ -43,6 +43,9 @@ class FlorenceFinancialPlanLine(models.Model):
         ondelete = "cascade"
     )
     item = fields.Char()
+    is_deductible = fields.Boolean(
+        default = False
+    )
     quantity = fields.Float(
         digits = (12, 4)
     )

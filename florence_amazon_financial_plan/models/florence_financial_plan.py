@@ -52,6 +52,18 @@ class FlorenceFinancialPlan(models.Model):
         compute = "_compute_disbursment",
         digits = (12, 4)
     )
+    deductible_total = fields.Float(
+        compute = "_compute_deductible_total",
+        digits = (12, 4)
+    )
+    taxable = fields.Float(
+        compute = "_compute_taxable",
+        digits = (12, 4)
+    )
+    taxes = fields.Float(
+        compute = "_compute_taxes",
+        digits = (12, 4)
+    )
     surplus = fields.Float(
         compute = "_compute_surplus",
         digits = (12, 4)
@@ -217,6 +229,59 @@ class FlorenceFinancialPlan(models.Model):
         digits = (12, 4)
     )
 
+    @api.depends("div1", "div2", "div3", "div4", "div5",
+                 "div6", "div7", "basics", "emergencies")
+    def _compute_deductible_total(self):
+        for line in self:
+            line.deductible_total = 0
+
+            if len(line.div1) > 0:
+                for item in line.div1:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+            if len(line.div2) > 0:
+                for item in line.div2:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+            if len(line.div3) > 0:
+                for item in line.div3:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+            if len(line.div4) > 0:
+                for item in line.div4:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+            if len(line.div5) > 0:
+                for item in line.div5:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+            if len(line.div6) > 0:
+                for item in line.div6:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+            if len(line.div7) > 0:
+                for item in line.div7:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+            if len(line.basics) > 0:
+                for item in line.basics:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+            if len(line.emergencies) > 0:
+                for item in line.emergencies:
+                    if item.is_deductible:
+                        line.deductible_total += item.approved
+
+    @api.depends("disbursment", "deductible_total")
+    def _compute_taxable(self):
+        for line in self:
+            line.taxable = line.disbursment - line.deductible_total
+
+    @api.depends("taxable")
+    def _compute_taxes(self):
+        for line in self:
+            line.taxes = 0.2 * line.taxable
+
     @api.depends("date")
     def _compute_date_str(self):
         for line in self:
@@ -364,7 +429,7 @@ class FlorenceFinancialPlan(models.Model):
                 for item in line.div7:
                     line.approved_total += item.approved
 
-    @api.depends("disbursment", "approved_total")
+    @api.depends("disbursment", "approved_total", "taxes")
     def _compute_surplus(self):
         for line in self:
-            line.surplus = line.disbursment - line.approved_total
+            line.surplus = line.disbursment - line.approved_total - line.taxes

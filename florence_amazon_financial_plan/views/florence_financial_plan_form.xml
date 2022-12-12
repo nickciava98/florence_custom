@@ -31,6 +31,12 @@
                                     <field name="perc"/>
                                     <field name="disbursment" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="deductible_total" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="taxable" widget="monetary" string="Taxable (Disbursment - Deductible Total)"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="taxes" widget="monetary" string="20% of Taxable"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </group>
                             </group>
                         </group>
@@ -99,6 +105,7 @@
                                     <field name="basics_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -119,6 +126,7 @@
                                     <field name="emergencies_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -139,6 +147,7 @@
                                     <field name="div7_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -159,6 +168,7 @@
                                     <field name="div1_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -179,6 +189,7 @@
                                     <field name="div2_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -199,6 +210,7 @@
                                     <field name="div3_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -219,6 +231,7 @@
                                     <field name="div4_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -239,6 +252,7 @@
                                     <field name="div5_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -259,6 +273,7 @@
                                     <field name="div6_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
+                                    <field name="is_deductible"/>
                                     <field name="quantity"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
