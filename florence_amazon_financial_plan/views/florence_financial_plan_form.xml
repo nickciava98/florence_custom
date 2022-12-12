@@ -21,21 +21,21 @@
                         <group col="1" colspan="1">
                             <group string="FP Values" col="1" colspan="1">
                                 <group>
-                                    <field name="date"/>
-                                    <field name="gi" widget="monetary"
+                                    <field name="date" string="Date"/>
+                                    <field name="gi" widget="monetary" string="G.I. (i)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="vat" widget="monetary"
+                                    <field name="vat" widget="monetary" string="VAT (ii)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="cgi" widget="monetary"
+                                    <field name="cgi" widget="monetary" string="C.G.I. (iii)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="perc"/>
-                                    <field name="disbursment" widget="monetary"
+                                    <field name="perc" string="10% C.G.I. (iv)"/>
+                                    <field name="disbursment" widget="monetary" string="Disbursment (v)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="deductible_total" widget="monetary"
+                                    <field name="deductible_total" widget="monetary" string="Deductible Total (vi)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="taxable" widget="monetary" string="Taxable (Disbursment - Deductible Total)"
+                                    <field name="taxable" widget="monetary" string="Taxable Income (vii)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="taxes" widget="monetary" string="20% of Taxable"
+                                    <field name="taxes" widget="monetary" string="Taxes (viii)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </group>
                             </group>
@@ -43,7 +43,7 @@
 
                         <group col="2" colspan="2">
                             <group string="Amazon Values" col="4" colspan="4">
-                                <group string="Marketplaces" col="1" colspan="1">
+                                <group string="Marketplace" col="1" colspan="1">
                                     <label for="amz_total_it" string="Amazon IT"/>
                                     <label for="amz_total_fr" string="Amazon FR"/>
                                     <label for="amz_total_de" string="Amazon DE"/>
@@ -96,7 +96,7 @@
                     <notebook>
                         <page string="Basics" name="basics">
                             <group>
-                                <field name="basics_condition"/>
+                                <field name="basics_condition" string="Condition"/>
                             </group>
 
                             <field name="basics" widget="one2many"
@@ -117,7 +117,7 @@
 
                         <page string="Emergencies" name="emergencies">
                             <group>
-                                <field name="emergencies_condition"/>
+                                <field name="emergencies_condition" string="Condition"/>
                             </group>
 
                             <field name="emergencies" widget="one2many"
@@ -138,7 +138,7 @@
 
                         <page string="DIV7 - Executive" name="div7">
                             <group>
-                                <field name="div7_condition"/>
+                                <field name="div7_condition" string="Condition"/>
                             </group>
 
                             <field name="div7" widget="one2many"
@@ -159,7 +159,7 @@
 
                         <page string="DIV1 - Estabilishment" name="div1">
                             <group>
-                                <field name="div1_condition"/>
+                                <field name="div1_condition" string="Condition"/>
                             </group>
 
                             <field name="div1" widget="one2many"
@@ -180,7 +180,7 @@
 
                         <page string="DIV2 - Sales" name="div2">
                             <group>
-                                <field name="div2_condition"/>
+                                <field name="div2_condition" string="Condition"/>
                             </group>
 
                             <field name="div2" widget="one2many"
@@ -201,7 +201,7 @@
 
                         <page string="DIV3 - Treasury" name="div3">
                             <group>
-                                <field name="div3_condition"/>
+                                <field name="div3_condition" string="Condition"/>
                             </group>
 
                             <field name="div3" widget="one2many"
@@ -222,7 +222,7 @@
 
                         <page string="DIV4 - Production" name="div4">
                             <group>
-                                <field name="div4_condition"/>
+                                <field name="div4_condition" string="Condition"/>
                             </group>
 
                             <field name="div4" widget="one2many"
@@ -243,7 +243,7 @@
 
                         <page string="DIV5 - Correction" name="div5">
                             <group>
-                                <field name="div5_condition"/>
+                                <field name="div5_condition" string="Condition"/>
                             </group>
 
                             <field name="div5" widget="one2many"
@@ -264,7 +264,7 @@
 
                         <page string="DIV6 - Expansion" name="div6">
                             <group>
-                                <field name="div6_condition"/>
+                                <field name="div6_condition" string="Condition"/>
                             </group>
 
                             <field name="div6" widget="one2many"
@@ -285,17 +285,17 @@
                     </notebook>
 
                     <group string="FP Totals" col="4" colspan="4">
-                        <group string="Monthly Total">
+                        <group string="Monthly Total (ix)">
                             <field name="monthly_total" widget="monetary" nolabel="1"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </group>
 
-                        <group string="Approved Total">
+                        <group string="Approved Total (x)">
                             <field name="approved_total" widget="monetary" nolabel="1"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </group>
 
-                        <group string="Surplus">
+                        <group string="Surplus (xi)">
                             <field name="surplus" widget="monetary" nolabel="1"
                                    decoration-success="surplus > 0" decoration-danger="surplus &lt; 0 or surplus == 0"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -307,6 +307,22 @@
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </group>
                     </group>
+
+                    <div>
+                        <i>
+                            (i): Sum of all incomes <br/>
+                            (ii): Value added tax <br/>
+                            (iii): Gross Income - VAT <br/>
+                            (iv): 10% of Corrected Gross Income <br/>
+                            (v): Corrected Gross Income - 10% of Corrected Gross Income <br/>
+                            (vi): Sum of Approved Cost column of each tab where Item is deductible <br/>
+                            (vii): Available Net - Deductible Total <br/>
+                            (viii): 20% of Taxable Income <br/>
+                            (ix): Sum of Monthly Cost column of each tab <br/>
+                            (x): Sum of Approved Cost column of each tab <br/>
+                            (xi): Disbursment - Approved Total - Taxes
+                        </i>
+                    </div>
                 </sheet>
 
                 <div class="oe_chatter">

@@ -46,14 +46,12 @@ class FlorenceFinancialPlanLine(models.Model):
     is_deductible = fields.Boolean(
         default = False
     )
-    quantity = fields.Float(
-        digits = (12, 4)
-    )
+    quantity = fields.Float()
     monthly = fields.Float(
-        digits = (12, 4)
+        string = "Monthly Cost"
     )
     approved = fields.Float(
-        digits = (12, 4)
+        string = "Approved Cost"
     )
     currency_id = fields.Many2one(
         "res.currency",

@@ -22,55 +22,43 @@ class FlorenceFinancialPlan(models.Model):
     )
     gi = fields.Float(
         string = "G.I.",
-        compute = "_compute_gi",
-        digits = (12, 4)
+        compute = "_compute_gi"
     )
     vat = fields.Float(
         compute = "_compute_vat",
-        string = "VAT",
-        digits = (12, 4)
+        string = "VAT"
     )
     cgi = fields.Float(
         string = "C.G.I.",
-        compute = "_compute_cgi",
-        digits = (12, 4)
+        compute = "_compute_cgi"
     )
     perc = fields.Float(
         string = "10% C.G.I.",
-        compute = "_compute_perc",
-        digits = (12, 4)
+        compute = "_compute_perc"
     )
     monthly_total = fields.Float(
-        compute = "_compute_monthly_total",
-        digits = (12, 4)
+        compute = "_compute_monthly_total"
     )
     approved_total = fields.Float(
-        compute = "_compute_approved_total",
-        digits = (12, 4)
+        compute = "_compute_approved_total"
     )
     disbursment = fields.Float(
-        compute = "_compute_disbursment",
-        digits = (12, 4)
+        compute = "_compute_disbursment"
     )
     deductible_total = fields.Float(
-        compute = "_compute_deductible_total",
-        digits = (12, 4)
+        compute = "_compute_deductible_total"
     )
     taxable = fields.Float(
-        compute = "_compute_taxable",
-        digits = (12, 4)
+        compute = "_compute_taxable"
     )
     taxes = fields.Float(
-        compute = "_compute_taxes",
-        digits = (12, 4)
+        compute = "_compute_taxes"
     )
     surplus = fields.Float(
-        compute = "_compute_surplus",
-        digits = (12, 4)
+        compute = "_compute_surplus"
     )
     pending = fields.Float(
-        copy = True,
-        digits = (12, 4)
+        copy = True
     )
 
     basics = fields.One2many(
@@ -159,74 +147,59 @@ class FlorenceFinancialPlan(models.Model):
         compute = "_compute_currency_id"
     )
     amz_total_it = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_vat_it = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_net_it = fields.Float(
         compute = "_compute_amz_net_it",
         store = True,
-        string = "Amazon IT Net Income",
-        digits = (12, 4)
+        string = "Amazon IT Net Income"
     )
     amz_total_fr = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_vat_fr = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_net_fr = fields.Float(
         compute = "_compute_amz_net_fr",
         store = True,
-        string = "Amazon FR Net Income",
-        digits = (12, 4)
+        string = "Amazon FR Net Income"
     )
     amz_total_de = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_vat_de = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_net_de = fields.Float(
         compute = "_compute_amz_net_de",
         store = True,
-        string = "Amazon DE Net Income",
-        digits = (12, 4)
+        string = "Amazon DE Net Income"
     )
     amz_total_es = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_vat_es = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_net_es = fields.Float(
         compute = "_compute_amz_net_es",
         store = True,
-        string = "Amazon ES Net Income",
-        digits = (12, 4)
+        string = "Amazon ES Net Income"
     )
     amz_total_uk = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_vat_uk = fields.Float(
-        default = 0,
-        digits = (12, 4)
+        default = 0
     )
     amz_net_uk = fields.Float(
         compute = "_compute_amz_net_uk",
         store = True,
-        string = "Amazon UK Net Income",
-        digits = (12, 4)
+        string = "Amazon UK Net Income"
     )
 
     @api.depends("div1", "div2", "div3", "div4", "div5",

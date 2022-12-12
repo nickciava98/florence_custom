@@ -7,7 +7,7 @@
             <tree default_order="date desc">
                 <field name="currency_id" invisible="True"/>
                 <field name="name"/>
-                <field name="date"/>
+                <field name="date" string="Date"/>
                 <field name="taxes" sum="Taxes" widget="monetary"
                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                 <field name="surplus" sum="Surplus" widget="monetary"
