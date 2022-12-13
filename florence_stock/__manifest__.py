@@ -5,9 +5,13 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'stock',
-    'version': '14.0.8',
+    'version': '14.0.9',
     'website': "http://www.nciavarella.me",
-    'depends': ['base', 'stock', 'stock_account'],
+    'depends': [
+        'base',
+        'stock',
+        'stock_account'
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/product_template_form.xml',

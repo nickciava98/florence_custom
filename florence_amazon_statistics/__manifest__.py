@@ -5,10 +5,15 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'sales',
-    'version': '14.2',
+    'version': '14.2.1',
     'website': "http://www.nciavarella.me",
-    'depends': ['base', 'mail', 'stock',
-                'florence_amazon_revenues', 'board'],
+    'depends': [
+        'base',
+        'mail',
+        'stock',
+        'florence_amazon_revenues',
+        'board'
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/amazon_statistics_actions.xml',
