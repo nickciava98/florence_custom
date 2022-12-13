@@ -29,6 +29,9 @@
                     <field name="currency_id" invisible="True"/>
                     <field name="start_date" invisible="True"/>
                     <field name="product_updated_sku_cost" invisible="True"/>
+                    <field name="last_amazon_fees" invisible="True"/>
+                    <field name="last_ads_total_cost" invisible="True"/>
+                    <field name="last_pcs_sold" invisible="True"/>
 
                     <notebook>
                         <page string="Incidence" name="incidence">
@@ -82,7 +85,10 @@
                                              'default_date': start_date,
                                              'default_price_unit': product_updated_price,
                                              'default_currency_id': currency_id,
-                                             'default_sku_cost': product_updated_sku_cost}">
+                                             'default_sku_cost': product_updated_sku_cost,
+                                             'default_amazon_fees': last_amazon_fees,
+                                             'default_ads_total_cost': last_ads_total_cost,
+                                             'default_pcs_sold': last_pcs_sold}">
                                 <tree string="Revenues" editable="bottom"
                                       default_order="date asc">
                                     <field name="amazon_revenues_line_id" invisible="True"/>
@@ -166,7 +172,10 @@
                                              'default_date': start_date,
                                              'default_price_unit': product_updated_price,
                                              'default_currency_id': currency_id,
-                                             'default_sku_cost': product_updated_sku_cost}">
+                                             'default_sku_cost': product_updated_sku_cost,
+                                             'default_amazon_fees': last_amazon_fees,
+                                             'default_ads_total_cost': last_ads_total_cost,
+                                             'default_pcs_sold': last_pcs_sold}">
                                 <tree string="Revenues" editable="bottom"
                                       default_order="date asc">
                                     <field name="amazon_revenues_line_id_test" invisible="True"/>

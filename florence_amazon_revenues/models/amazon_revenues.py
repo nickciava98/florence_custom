@@ -66,6 +66,39 @@ class AmazonRevenues(models.Model):
          ("week", "Weekly Revenues"),
          ("month", "Monthly Revenues")]
     )
+    last_amazon_fees = fields.Float(
+        compute = "_compute_last_amazon_fees"
+    )
+    last_ads_total_cost = fields.Float(
+        compute = "_compute_last_ads_total_cost"
+    )
+    last_pcs_sold = fields.Float(
+        compute = "_compute_last_pcs_sold"
+    )
+
+    @api.depends("revenues_line")
+    def _compute_last_amazon_fees(self):
+        for line in self:
+            line.last_amazon_fees = 0
+
+            if len(line.revenues_line) > 0:
+                line.last_amazon_fees = line.revenues_line[-1].amazon_fees
+
+    @api.depends("revenues_line")
+    def _compute_last_ads_total_cost(self):
+        for line in self:
+            line.last_ads_total_cost = 0
+
+            if len(line.revenues_line) > 0:
+                line.last_ads_total_cost = line.revenues_line[-1].ads_total_cost
+
+    @api.depends("revenues_line")
+    def _compute_last_pcs_sold(self):
+        for line in self:
+            line.last_pcs_sold = 0
+
+            if len(line.revenues_line) > 0:
+                line.last_pcs_sold = line.revenues_line[-1].pcs_sold
 
     @api.onchange("name")
     def _onchange_name(self):
