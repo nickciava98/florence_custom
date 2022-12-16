@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 import datetime
 
@@ -10,7 +10,7 @@ class FlorenceFpCosts(models.Model):
 
     name = fields.Many2one(
         "product.product",
-        required = True,
+        copy = False,
         string = "Product"
     )
     sku_id = fields.Many2one(
@@ -94,3 +94,15 @@ class FlorenceFpCosts(models.Model):
     def _compute_currency_id(self):
         for line in self:
             line.currency_id = self.env.ref("base.main_company").currency_id
+
+    @api.constrains("name")
+    def _constrains_name(self):
+        for line in self:
+            if not line.name:
+                raise ValidationError(
+                    _("Name must be filled!")
+                )
+
+    _sql_constraint = [
+        ("unique_name", "unique(name)", _("Name must be unique!"))
+    ]

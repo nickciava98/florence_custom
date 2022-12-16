@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class AmazonRevenuesReporting(models.Model):
@@ -7,7 +8,8 @@ class AmazonRevenuesReporting(models.Model):
     _description = "Revenues Report"
 
     name = fields.Char(
-        string = "Report"
+        string = "Report",
+        copy = False
     )
     date_start = fields.Date()
     date_to = fields.Date()
@@ -67,3 +69,14 @@ class AmazonRevenuesReporting(models.Model):
             elif float("%.2f" % line.delta) == 0:
                 line.delta_hint = "Balance is currently tie"
 
+    @api.constrains("name")
+    def _constrains_name(self):
+        for line in self:
+            if not line.name:
+                raise ValidationError(
+                    _("Name must be filled!")
+                )
+
+    _sql_constraint = [
+        ("unique_name", "unique(name)", _("Name must be unique!"))
+    ]

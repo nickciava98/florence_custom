@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 from datetime import datetime
 import calendar
 
@@ -10,7 +11,7 @@ class ManufacturingCosts(models.Model):
 
     name = fields.Many2one(
         "product.product",
-        required = True,
+        copy = False,
         tracking = True
     )
     super_product = fields.Many2one(
@@ -454,3 +455,15 @@ class ManufacturingCosts(models.Model):
                 'graph_mode': 'line',
             }
         }
+
+    @api.constrains("name")
+    def _constrains_name(self):
+        for line in self:
+            if not line.name:
+                raise ValidationError(
+                    _("Name must be filled!")
+                )
+
+    _sql_constraint = [
+        ("unique_name", "unique(name)", _("Name must be unique!"))
+    ]

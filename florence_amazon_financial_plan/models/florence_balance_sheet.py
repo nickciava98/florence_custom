@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class FlorenceBalanceSheet(models.Model):
@@ -7,7 +8,7 @@ class FlorenceBalanceSheet(models.Model):
     _description = "Florence Balance Sheet"
 
     name = fields.Char(
-        required = True
+        copy = False
     )
 
     def _default_products_cash(self):
@@ -133,3 +134,15 @@ class FlorenceBalanceSheet(models.Model):
     def hide_notebook_action(self):
         for line in self:
             line.notebook_invisible = True
+
+    @api.constrains("name")
+    def _constrains_name(self):
+        for line in self:
+            if not line.name:
+                raise ValidationError(
+                    _("Name must be filled!")
+                )
+
+    _sql_constraint = [
+        ("unique_name", "unique(name)", _("Name must be unique!"))
+    ]

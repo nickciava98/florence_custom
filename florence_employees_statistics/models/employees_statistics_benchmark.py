@@ -1,4 +1,6 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
+
 
 class EmployeesStatisticsBenchmark(models.Model):
     _name = "employees.statistics.benchmark"
@@ -6,9 +8,21 @@ class EmployeesStatisticsBenchmark(models.Model):
     _description = "Employees Statistics Benchmark"
 
     name = fields.Char(
-        required = True
+        copy = False
     )
     job_position = fields.Many2one(
         "hr.job",
         required = True
     )
+
+    @api.constrains("name")
+    def _constrains_name(self):
+        for line in self:
+            if not line.name:
+                raise ValidationError(
+                    _("Name must be filled!")
+                )
+
+    _sql_constraint = [
+        ("unique_name", "unique(name)", _("Name must be unique!"))
+    ]

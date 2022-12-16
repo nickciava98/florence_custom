@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 import datetime
 
 
@@ -8,7 +9,7 @@ class FlorenceFinancialPlan(models.Model):
     _description = "Florence Financial Plan"
 
     name = fields.Char(
-        required = True
+        copy = False
     )
     date = fields.Date(
         default = datetime.datetime.now(),
@@ -406,3 +407,15 @@ class FlorenceFinancialPlan(models.Model):
     def _compute_surplus(self):
         for line in self:
             line.surplus = line.disbursment - line.approved_total - line.taxes
+
+    @api.constrains("name")
+    def _constrains_name(self):
+        for line in self:
+            if not line.name:
+                raise ValidationError(
+                    _("Name must be filled!")
+                )
+
+    _sql_constraint = [
+        ("unique_name", "unique(name)", _("Name must be unique!"))
+    ]
