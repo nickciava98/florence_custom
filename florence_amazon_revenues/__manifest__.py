@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'sales',
-    'version': '14.2.5',
+    'version': '14.2.6',
     'website': "http://www.nciavarella.me",
     'depends': [
         'base',
@@ -17,6 +17,7 @@
         'security/ir.model.access.csv',
         'security/groups.xml',
         'views/base_menus.xml',
+        'views/amazon_revenues_line_tree.xml',
         'views/amazon_revenues_actions.xml',
         'views/amazon_revenues_form.xml',
         'views/amazon_revenues_menus.xml',
@@ -24,7 +25,6 @@
         'views/amazon_revenues_search.xml',
         'views/amazon_revenues_tree.xml',
         'views/amazon_revenues_line_graph.xml',
-        'views/amazon_revenues_line_tree.xml',
         'views/amazon_revenues_line_dashboard.xml',
         'wizard/help_wizard.xml'
     ],

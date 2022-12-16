@@ -189,4 +189,17 @@
             'group_by': []}
         </field>
     </record>
+
+    <record id="amazon_revenues_statistics_action" model="ir.actions.act_window">
+        <field name="name">Revenues Statistics</field>
+        <field name="res_model">amazon.revenues.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="florence_amazon_revenues.amazon_revenues_line_view_tree_statistics"/>
+        <field name="domain">
+            [('amazon_revenues_line_id_test', '=', False)]
+        </field>
+        <field name="context">
+            {'group_by': ['week', 'product', 'parent']}
+        </field>
+    </record>
 </odoo>

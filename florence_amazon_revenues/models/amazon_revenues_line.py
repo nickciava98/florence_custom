@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+from datetime import datetime, timedelta
+import locale
 
 
 class AmazonRevenuesLine(models.Model):
@@ -21,6 +23,10 @@ class AmazonRevenuesLine(models.Model):
 
     # Visible fields
     date = fields.Date()
+    week = fields.Char(
+        compute = "_compute_week",
+        store = True
+    )
     price_unit = fields.Float(
         group_operator = "avg"
     )
@@ -62,6 +68,22 @@ class AmazonRevenuesLine(models.Model):
         "res.currency",
         compute = "_compute_currency_id"
     )
+
+    @api.depends("date")
+    def _compute_week(self):
+        locale.setlocale(locale.LC_TIME, "en_US.UTF-8")
+
+        for line in self:
+            line.week = ""
+
+            if line.date:
+                dt = datetime.strptime(str(line.date), "%Y-%m-%d")
+                start = dt - timedelta(days = dt.weekday())
+                end = start + timedelta(days = 6)
+
+                line.week = start.strftime("%d") + "-" + end.strftime("%d") + " " \
+                            + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
+                            + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year)
 
     @api.depends("probable_income", "sku_cost")
     def _compute_probable_income_amz(self):

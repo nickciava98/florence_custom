@@ -28,19 +28,21 @@
     <menuitem name="Reporting" id="amazon_revenues_reporting_menu"
               parent="amazon_revenues_base_menu" sequence="10"
               groups="group_admin"/>
-
+    <menuitem name="Revenues Statistics" id="amazon_revenues_statistics_menu"
+              parent="amazon_revenues_reporting_menu" sequence="1"
+              action="amazon_revenues_statistics_action"/>
     <menuitem name="Reports per Marketplace" id="amazon_revenues_reports_marketplace_menu"
-              parent="amazon_revenues_reporting_menu" sequence="1"/>
+              parent="amazon_revenues_reporting_menu" sequence="2"/>
     <menuitem name="Amazon IT" id="amazon_it_reports_menu" action="amazon_it_report_action"
-              parent="amazon_revenues_reports_marketplace_menu" sequence="1"/>
-    <menuitem name="Amazon FR" id="amazon_fr_reports_menu" action="amazon_fr_report_action"
-              parent="amazon_revenues_reports_marketplace_menu" sequence="2"/>
-    <menuitem name="Amazon DE" id="amazon_de_reports_menu" action="amazon_de_report_action"
               parent="amazon_revenues_reports_marketplace_menu" sequence="3"/>
-    <menuitem name="Amazon ES" id="amazon_es_reports_menu" action="amazon_es_report_action"
+    <menuitem name="Amazon FR" id="amazon_fr_reports_menu" action="amazon_fr_report_action"
               parent="amazon_revenues_reports_marketplace_menu" sequence="4"/>
-    <menuitem name="Amazon UK" id="amazon_uk_reports_menu" action="amazon_uk_report_action"
+    <menuitem name="Amazon DE" id="amazon_de_reports_menu" action="amazon_de_report_action"
               parent="amazon_revenues_reports_marketplace_menu" sequence="5"/>
+    <menuitem name="Amazon ES" id="amazon_es_reports_menu" action="amazon_es_report_action"
+              parent="amazon_revenues_reports_marketplace_menu" sequence="6"/>
+    <menuitem name="Amazon UK" id="amazon_uk_reports_menu" action="amazon_uk_report_action"
+              parent="amazon_revenues_reports_marketplace_menu" sequence="7"/>
 
     <menuitem name="Pivot" id="amazon_revenues_pivot_menu"
               parent="amazon_revenues_reporting_menu" sequence="2"
