@@ -81,8 +81,8 @@ class AmazonRevenuesLine(models.Model):
                 start = dt - timedelta(days = dt.weekday())
                 end = start + timedelta(days = 6)
 
-                line.week = "[" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%m") \
-                            + "-" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%y") + "] " \
+                line.week = "[" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%y") \
+                            + "-" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%m") + "] " \
                             + start.strftime("%d") + "-" + end.strftime("%d") + " " \
                             + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
                             + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year)
