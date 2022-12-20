@@ -43,7 +43,7 @@
         <field name="model">amazon.revenues.line</field>
 
         <field name="arch" type="xml">
-            <tree expand="True" create="false" delete="false" default_order="date asc">
+            <tree expand="True" create="false" delete="false" default_order="week desc">
                 <field name="amazon_revenues_line_id" invisible="True"/>
                 <field name="parent" invisible="True"/>
                 <field name="product" invisible="True"/>
