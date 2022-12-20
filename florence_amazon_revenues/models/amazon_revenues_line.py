@@ -83,8 +83,8 @@ class AmazonRevenuesLine(models.Model):
 
                 if int(start.strftime("%d")) > int(end.strftime("%d")):
                     if int(datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%m")) == 1:
-                        line.week = "[" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%y") \
-                                    + "-12] " + start.strftime("%d") + "-" + end.strftime("%d") + " " \
+                        line.week = "[" + str(int(datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%y")) - 1) \
+                                    + "-13] " + start.strftime("%d") + "-" + end.strftime("%d") + " " \
                                     + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
                                     + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year)
                     else:
