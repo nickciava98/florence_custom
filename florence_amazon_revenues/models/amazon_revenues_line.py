@@ -81,11 +81,24 @@ class AmazonRevenuesLine(models.Model):
                 start = dt - timedelta(days = dt.weekday())
                 end = start + timedelta(days = 6)
 
-                line.week = "[" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%y") \
-                            + "-" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%m") + "] " \
-                            + start.strftime("%d") + "-" + end.strftime("%d") + " " \
-                            + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
-                            + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year)
+                if int(start.strftime("%d")) > int(end.strftime("%d")):
+                    if int(datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%m")) == 1:
+                        line.week = "[" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%y") \
+                                    + "-12] " + start.strftime("%d") + "-" + end.strftime("%d") + " " \
+                                    + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
+                                    + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year)
+                    else:
+                        line.week = "[" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%y") \
+                                    + "-" + str(int(datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%m")) - 1) \
+                                    + "] " + start.strftime("%d") + "-" + end.strftime("%d") + " " \
+                                    + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
+                                    + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year)
+                else:
+                    line.week = "[" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%y") \
+                                + "-" + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%m") + "] " \
+                                + start.strftime("%d") + "-" + end.strftime("%d") + " " \
+                                + datetime.strptime(str(line.date), "%Y-%m-%d").strftime("%B") \
+                                + " " + str(datetime.strptime(str(line.date), "%Y-%m-%d").year)
 
     @api.depends("probable_income", "sku_cost")
     def _compute_probable_income_amz(self):
