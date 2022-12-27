@@ -1,0 +1,33 @@
+<odoo>
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+                <page name="related_bills" string="Related Bills">
+                    <field name="invoice_ids" widget="one2many" options="{'no_open':True}">
+                        <tree editable="bottom" create="false" delete="false">
+                            <field name="name"/>
+                            <field name="invoice_date_due"
+                                   widget="remaining_days"/>
+                            <field name="amount_untaxed" string="Amount Untaxed"/>
+                            <field name="amount_tax" string="VAT"/>
+                            <field name="amount_total" string="Total"/>
+                            <field name="state" widget="badge"
+                                   decoration-info="state == 'draft'"
+                                   decoration-success="state == 'posted'"/>
+                            <field name="payment_state" widget="badge"
+                                   decoration-danger="payment_state == 'not_paid'"
+                                   decoration-warning="payment_state in ('partial', 'in_payment')"
+                                   decoration-success="payment_state in ('paid', 'reversed')"/>
+                            <button type="object" name="get_formview_action"
+                                    string="Open" icon="fa-edit"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

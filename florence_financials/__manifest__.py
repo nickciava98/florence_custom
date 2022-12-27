@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'sales',
-    'version': '14.0.3',
+    'version': '14.0.4',
     'website': "http://www.nciavarella.me",
     'depends': [
         'base',
@@ -16,7 +16,8 @@
         'views/sale_order_template_form.xml',
         'views/sale_order_form.xml',
         'views/sale_order_tree.xml',
-        'views/purchase_order_tree.xml'
+        'views/purchase_order_tree.xml',
+        'views/purchase_order_form.xml'
     ],
     'application': False,
     'installable': True,

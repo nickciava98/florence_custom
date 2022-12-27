@@ -10,7 +10,7 @@
             </xpath>
 
             <xpath expr="//field[@name='partner_id']" position="before">
-                <field name="related_invoice"/>
+                <field name="related_invoice" string="Related Bills"/>
             </xpath>
         </field>
     </record>
