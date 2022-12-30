@@ -16,19 +16,21 @@ class FlorenceFpCostsLine(models.Model):
     cost = fields.Float(
         digits = (12, 4),
         # compute = "_compute_cost",
-        # store = True
+        store = True
     )
     vendor = fields.Many2one(
         "res.partner",
-        related = "bill.partner_id"
+        related = "bill.partner_id",
+        store = True
     )
     bill = fields.Many2one(
         "account.move",
         # compute = "_compute_bill",
-        # store = True
+        store = True
     )
     bill_date = fields.Date(
-        related = "bill.invoice_date"
+        related = "bill.invoice_date",
+        store = True
     )
     currency_id = fields.Many2one(
         "res.currency",

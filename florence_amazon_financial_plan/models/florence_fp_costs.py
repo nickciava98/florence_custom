@@ -71,9 +71,8 @@ class FlorenceFpCosts(models.Model):
                     cost = 0
 
                     for bill in self.env["account.move"].search(
-                        ["&", "&",
+                        ["&",
                          ("move_type", "=", "in_invoice"),
-                         ("invoice_date", ">=", year + "-" + month + "-1"),
                          ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))],
                         order = "name desc"):
                         for invoice_line in bill.invoice_line_ids:
@@ -82,7 +81,7 @@ class FlorenceFpCosts(models.Model):
                                 cost = invoice_line.price_unit
                                 break
 
-                        if bill_id != 0 or cost > 0:
+                        if bill_id != 0 and cost != 0:
                             break
 
                     self.sudo().write({
@@ -126,6 +125,74 @@ class FlorenceFpCosts(models.Model):
                 raise ValidationError(
                     _("Name must be filled!")
                 )
+
+    def update_values_action(self):
+        for line in self:
+            line.fp_costs_lines = [(5, 0, 0)]
+
+            if line.name and line.name.bom_count > 0:
+                year = line.date.strftime("%Y")
+                month = line.date.strftime("%m")
+
+                for bom_line in self.env["mrp.bom.line"].search(
+                    [("bom_id", "=", self.env["mrp.bom"].search(
+                        [("product_id", "=", line.name.id)]
+                    )[0].id)]):
+                    bill_id = 0
+                    cost = 0
+
+                    for bill in self.env["account.move"].search(
+                        ["&",
+                         ("move_type", "=", "in_invoice"),
+                         ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))],
+                        order = "name desc"):
+                        for invoice_line in bill.invoice_line_ids:
+                            if invoice_line.product_id.id == bom_line.product_id.id:
+                                bill_id = bill.id
+                                cost = invoice_line.price_unit
+                                break
+
+                        if bill_id != 0 and cost != 0:
+                            break
+
+                    self.sudo().write({
+                        "fp_costs_lines": [(
+                            0, 0, {
+                                "name": line.id,
+                                "component": bom_line.product_id.id,
+                                "cost": cost,
+                                "bill": bill_id
+                            }
+                        )]
+                    })
+
+                bill_id = 0
+                cost = 0
+
+                for bill in self.env["account.move"].search(
+                    ["&",
+                     ("move_type", "=", "in_invoice"),
+                     ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))],
+                    order = "name desc"):
+                    for invoice_line in bill.invoice_line_ids:
+                        if invoice_line.product_id.id == line.name.id:
+                            bill_id = bill.id
+                            cost = invoice_line.price_unit
+                            break
+
+                    if bill_id != 0 and cost != 0:
+                        break
+
+                self.sudo().write({
+                    "fp_costs_lines": [(
+                        0, 0, {
+                            "name": line.id,
+                            "component": line.name.id,
+                            "cost": cost,
+                            "bill": bill_id,
+                        }
+                    )]
+                })
 
     _sql_constraint = [
         ("unique_name", "unique(name)", _("Name must be unique!"))
