@@ -67,7 +67,7 @@ class FlorenceFpCosts(models.Model):
                     [("bom_id", "=", self.env["mrp.bom"].search(
                         [("product_id", "=", line.name.id)]
                     )[0].id)]):
-                    bill_id = False
+                    bill_id = 0
                     cost = 0
 
                     for bill in self.env["account.move"].search(
@@ -78,20 +78,20 @@ class FlorenceFpCosts(models.Model):
                         order = "name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id.id == bom_line.product_id.id:
-                                bill_id = bill
+                                bill_id = bill.id
                                 cost = invoice_line.price_unit
                                 break
 
-                        if bill_id != False or cost > 0:
+                        if bill_id != 0 or cost > 0:
                             break
 
                     self.sudo().write({
                         "fp_costs_lines": [(
                             0, 0, {
                                 "name": line.id,
-                                "component": bom_line.product_id,
+                                "component": bom_line.product_id.id,
                                 "cost": cost,
-                                "bill": bill_id.id
+                                "bill": bill_id
                             }
                         )]
                     })
