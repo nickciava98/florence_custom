@@ -36,11 +36,12 @@
                                 <tree editable="bottom">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
-                                    <field name="component"/>
-                                    <field name="cost" widget="monetary" sum="Total"
+                                    <field name="component" readonly="True" force_save="1"/>
+                                    <field name="cost" widget="monetary" sum="Total" readonly="True" force_save="1"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="vendor" string="Vendor" readonly="True" force_save="1"/>
                                     <field name="bill"/>
-                                    <field name="bill_date"/>
+                                    <field name="bill_date" string="Bill Date" readonly="True" force_save="1"/>
                                 </tree>
                             </field>
                         </page>
