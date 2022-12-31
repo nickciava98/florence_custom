@@ -35,7 +35,10 @@ class FlorenceBalanceSheetLine(models.Model):
         for line in self:
             line.price_unit = 0
 
-            if line.product_id:
+            if line.product_id \
+                and self.env["florence.fp.costs"].search(
+                    [("name", "=", line.product_id.id)]
+                )[0] != False:
                 line.price_unit = self.env["florence.fp.costs"].search(
                     [("name", "=", line.product_id.id)]
                 )[0].total
