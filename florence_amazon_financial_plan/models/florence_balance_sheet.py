@@ -21,7 +21,8 @@ class FlorenceBalanceSheet(models.Model):
 
     products_cash = fields.Float(
         default = _default_products_cash,
-        readonly = True
+        readonly = True,
+        copy = False
     )
     inventory_value = fields.Float(
         compute = "_compute_inventory_value",
