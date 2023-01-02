@@ -1,0 +1,132 @@
+/*
+---------------
+	FOOTER
+---------------	
+*/
+/* Footer top */
+/* Footer bottom */
+/*
+--------------
+	BARION
+--------------
+*/
+footer.o_colored_level{
+//     background: #2b2847;
+}
+#footer {
+	font-size: 17px;
+	color: white;
+	a {
+		color: white;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	strong {
+		font-weight: 900;
+	}
+	.footer_top {
+		padding: 50px 0;
+		.footer_top_wrap {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.box {
+			h3 {
+				margin-bottom: 30px;
+				font-size: 50px;
+				font-weight: 400;
+				letter-spacing: -3px;
+			}
+			h4 {
+				margin-bottom: 20px;
+				font-size: 13px;
+				letter-spacing: 2px;
+				line-height: 20px;
+			}
+			ul {
+				list-style: none;
+				li {
+					padding-left: 20px;
+					position: relative;
+					cursor: pointer;
+					&:before {
+						width: 8px;
+						height: 8px;
+						left: 0;
+						top: 11px;
+						background: #f47933;
+						position: absolute;
+						content: '';
+						-webkit-border-radius: 50%;
+						-moz-border-radius: 50%;
+						border-radius: 50%;
+					}
+				}
+			}
+		}
+		.box.contact {
+			line-height: 25px;
+			a.logo {
+				margin-bottom: 20px;
+				display: inline-block;
+				img {
+					width: 170px;
+					height: auto;
+					display: block;
+				}
+			}
+		}
+		.box.social_media {
+			line-height: 25px;
+			.text {
+				margin-bottom: 20px;
+			}
+			a {
+				width: 60px;
+				height: 60px;
+				margin-right: 5px;
+				text-decoration: none !important;
+				background-color: #f47933;
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: auto 30px;
+				display: inline-block;
+				&:hover {
+					opacity: 90%;
+				}
+			}
+			a.facebook {
+				background-image: url(/theme_florence/static/src/img/icon_facebook_white.svg);
+			}
+			a.instagram {
+				background-image: url(/theme_florence/static/src/img/icon_instagram_white.svg);
+			}
+			a.youtube {
+				background-image: url(/theme_florence/static/src/img/icon_youtube_white.svg);
+			}
+		}
+	}
+	.footer_bottom {
+		.inner {
+			padding-top: 15px;
+			padding-bottom: 15px;
+			text-align: center;
+			line-height: 20px;
+			border-top: 1px solid #ffffff59;
+		}
+	}
+}
+#barion {
+	padding: 10px 0;
+	background: white;
+	img {
+		max-width: 100%;
+		height: auto;
+		margin: auto;
+		display: block;
+	}
+}
+.sec_font {
+	font-family: 'Caveat', cursive;
+}

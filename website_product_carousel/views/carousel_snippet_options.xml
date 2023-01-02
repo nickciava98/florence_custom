@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Snippet's Options -->
+    <template id="carousel_options" inherit_id="website.snippet_options">
+        <xpath expr="//div[@data-js='Carousel']" position="after">
+            <div data-js='js_get_objects' data-selector=".js_get_objects"/>
+            <div data-js='js_get_objects'
+                 data-selector=".js_get_objects.product_carousel_design">
+                <we-button data-no-preview="true" data-select-class="headline_off"><i class="fa fa-eye-slash"/>Hide
+                    Headline
+                </we-button>
+                <we-button data-no-preview="true" data-select-class="price_off"><i class="fa fa-eye-slash"/>Hide Price
+                </we-button>
+                <we-button data-no-preview="true" data-select-class="rating_off"><i class="fa fa-eye-slash"/>Hide User
+                    Ratings
+                </we-button>
+                <we-button data-no-preview="true" data-select-class="wishlist_off"><i class="fa fa-eye-slash"/>Hide
+                    WishList
+                </we-button>
+                <we-button data-no-preview="true" data-select-class="cart_off"><i class="fa fa-eye-slash"/>Hide Add to
+                    Cart
+                </we-button>
+                <we-button data-no-preview="true" data-select-class="sale_label_off"><i class="fa fa-eye-slash"/>Hide
+                    Sale Label
+                </we-button>
+                <we-button data-no-preview="true" data-select-class="quick_off"><i class="fa fa-eye-slash"/>Hide Product
+                    Quick View
+                </we-button>
+                <we-button data-no-preview="true" data-select-class="compare_off"><i class="fa fa-eye-slash"/>Hide
+                    Compare
+                </we-button>
+                <we-button data-no-preview="true" data-select-class="timer_off"><i class="fa fa-eye-slash"/>Hide Timer
+                </we-button>
+            </div>
+
+            <div data-js='js_get_objects_in_slide' data-selector=".js_get_objects">
+                <we-select string="Desktop Product Limit Per Slide" data-no-preview="true"
+                           data-variable="btn-primary-outline" class="fa fa-folder-open">
+                    <we-button data-objects_in_slide="1">1</we-button>
+                    <we-button data-objects_in_slide="2">2</we-button>
+                    <we-button data-objects_in_slide="3">3</we-button>
+                    <we-button data-objects_in_slide="4">4</we-button>
+                    <we-button data-objects_in_slide="5">5</we-button>
+                </we-select>
+
+            </div>
+            <div data-js='js_get_objects_in_slide_tablet' data-selector=".js_get_objects">
+                <we-select string="Tablet Product Limit Per Slide" data-no-preview="true"
+                           data-variable="btn-primary-outline" class="fa fa-folder-open">
+                    <we-button data-objects_in_slide_tablet="1">1</we-button>
+                    <we-button data-objects_in_slide_tablet="2">2</we-button>
+                    <we-button data-objects_in_slide_tablet="3">3</we-button>
+                    <we-button data-objects_in_slide_tablet="4">4</we-button>
+                    <we-button data-objects_in_slide_tablet="5">5</we-button>
+                </we-select>
+
+
+            </div>
+            <div data-js='js_get_objects_in_slide_mobile' data-selector=".js_get_objects">
+                <we-select string="Mobile Product Limit Per Slide" data-no-preview="true"
+                           data-variable="btn-primary-outline" class="fa fa-folder-open">
+                    <we-button data-objects_in_slide_mobile="1">1</we-button>
+                    <we-button data-objects_in_slide_mobile="2">2</we-button>
+                    <we-button data-objects_in_slide_mobile="3">3</we-button>
+                </we-select>
+
+            </div>
+            <div data-js='js_get_objects_selectFilter' data-selector=".js_get_objects">
+                <we-select string="Choose Filter" data-no-preview="true" data-variable="btn-primary-outline"
+                           class="">
+                    <we-button data-filter_by_filter_id="">No Filter</we-button>
+                    <t t-set="filter_gets"
+                       t-value="request.env['website.product.filter'].search([('website_filter_published','=',True)])"/>
+                    <t t-foreach="filter_gets" t-as="filter_get">
+                        <we-button t-att-data-filter_by_filter_id="filter_get.id">
+                            <t
+                                    t-esc="filter_get.name"/>
+                        </we-button>
+                    </t>
+                </we-select>
+            </div>
+            <div data-js='js_get_objects_limit' data-selector=".js_get_objects">
+                <we-select string="Product Limits" data-no-preview="true"
+                           data-variable="btn-primary-outline" class="fa fa-folder-open">
+                    <we-button data-objects_limit="1">1</we-button>
+                    <we-button data-objects_limit="2">2</we-button>
+                    <we-button data-objects_limit="4">4</we-button>
+                    <we-button data-objects_limit="6">6</we-button>
+                    <we-button data-objects_limit="8">8</we-button>
+                    <we-button data-objects_limit="10">10</we-button>
+                    <we-button data-objects_limit="12">12</we-button>
+                    <we-button data-objects_limit="15">15</we-button>
+                </we-select>
+            </div>
+
+            <div data-js='carousel_objects_in_row' data-selector=".js_get_objects">
+                <we-select string="Product Row" data-no-preview="true"
+                           data-variable="btn-primary-outline" class="fa fa-folder-open">
+                    <we-button data-split_product_object="1">1</we-button>
+                    <we-button data-split_product_object="2">2</we-button>
+                    <we-button data-split_product_object="3">3</we-button>
+                    <we-button data-split_product_object="4">4</we-button>
+                    <we-button data-split_product_object="5">5</we-button>
+                </we-select>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

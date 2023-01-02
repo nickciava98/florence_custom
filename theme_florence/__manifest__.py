@@ -1,0 +1,31 @@
+{
+    'name': 'Florence Theme',
+    'category': 'Theme/eCommerce',
+    'summary': 'Theme Ecommerce',
+    'description': 'Theme Ecommerce',
+    'version': '14.0.1.0.3',
+    'author': 'Tecspek',
+    'data': [
+        'views/assets.xml',
+        'views/header_template.xml',
+        'views/homepage_template.xml',
+        'views/footer_template.xml',
+        'views/faq_template.xml',
+        'views/bio_minosites_template.xml',
+        'views/single_product_template.xml',
+        'views/product_view.xml',
+        'views/snippets_florence_bio_arctonik_250_ml.xml',
+    ],
+    'depends': [
+        # 'product',
+        'website_blog',
+        'website_product_carousel',
+        'website_sale',
+    ],
+    'images': [
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'OPL-1',
+}

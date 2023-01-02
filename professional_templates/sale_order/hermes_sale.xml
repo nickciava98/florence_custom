@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="SO_Hermes_document" name="Hermes">
+            <div class="header" t-attf-style="padding-left:0px; padding-right:0px; color:{{style.text_color}} !important;font-size:{{style.header_font}}px !important;font-family:{{style.font_family}} !important;">
+                <div t-if="style.header">
+                    <table t-attf-style="text-align:center; margin-bottom:5px">
+                        <tr>
+                            <td style="width:50%;" class="float-left">
+                                <div t-if="style.logo"
+                                     style="width:168px; height:130px; margin-top:0px;margin-right 100px;"
+                                     itemprop="image" t-field="style.logo" t-options='{"widget": "image"}'
+                                     t-field-options="{&quot;widget&quot;: &quot;image&quot;}">
+                                </div>
+                                <div t-if="not style.logo and company.logo"
+                                     style="width:100%; text-align:right; margin-right:100px">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                                <div t-if="not style.logo and company.logo"
+                                     style="width:100%; text-align:right;">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                                <div t-if="not style.logo and not company.logo"
+                                     style="width:100%;text-align:right;">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="article page" t-attf-data-oe-model="sale.order" t-attf-data-oe-id="{{doc.id}}"
+                 t-attf-style="color:{{style.text_color}} !important;padding-left:10px; padding-right:10px;font-size:{{style.body_font}}px !important;font-family:{{style.font_family}} !important;">
+            <div class="col-12 row"
+                 t-attf-style="color:{{style.text_color}} !important;padding-left:10px;padding-top:20px; padding-right:10px;font-size:{{style.body_font}}px !important;font-family:{{style.font_family}} !important;">
+            <t t-esc="style.wm_eval(doc, time, user, res_company)"/>
+                </div>
+                <div class="col-5 pull-left"
+                     t-attf-style="color:{{style.text_color}} !important; border:1px solid {{style.text_color}};margin-top:35px;height:40px">
+                    <h4 id="title" style="margin-bottom:10px;font-weight: bolder;margin-top:10px;">
+                        <span t-if="doc.state not in ['draft','sent']">Ordine</span>
+                        <span t-if="doc.state in ['draft','sent']">Preventivo</span>
+                        <span t-field="doc.name"/>
+                    </h4>
+                </div>
+                <div class="col-12 row" style="padding:8px"/>
+                <div class="col-5 pull-right text-left"
+                     t-attf-style="{{style.text_color}};background-color:#efefef!important;height:130px;">
+                    <div t-attf-style="padding-top:5px; padding-bottom:0px;">
+                        <span t-if="doc.partner_shipping_id and doc.partner_shipping_id != doc.partner_id">
+                            <strong>Indirizzo di Fatturazione.</strong>
+                        </span>
+                        <span t-if="doc.partner_shipping_id == doc.partner_id or not doc.partner_shipping_id">
+                            <strong>Fatturazione e Indirizzo di Spedizione</strong>
+                        </span>
+                    </div>
+                    <div t-if="doc.partner_id">
+                        <t t-if="doc.partner_id.parent_id">
+                            <span t-field="doc.partner_id.parent_id"/>,
+                            <span t-if="doc.partner_id.title" t-field="doc.partner_id.title"/>
+                            <span t-field="doc.partner_id.name"/>
+
+                        </t>
+                        <t t-if="not doc.partner_id.parent_id">
+                            <span t-if="doc.partner_id.title" t-field="doc.partner_id.title"/>
+                            <span t-field="doc.partner_id"/>
+                        </t>
+                        <address t-field="doc.partner_id" style="margin-bottom:0px;"
+                                 t-field-options='{"widget": "contact", "fields": ["address", "phone", "mobile", "fax", "email", "website"], "no_marker": false}'/>
+                        <span t-if="doc.partner_id.vat">Partita IVA:
+                            <span t-field="doc.partner_id.vat"/>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 row" style="padding:8px"/>
+                <div class="col-12 row"
+                     t-attf-style="white-space:pre-line;color:#{style.wm_color};left:#{style.leftpadding}mm; top:#{style.toppadding}mm;font-size:#{style.fontsize}px; opacity:#{style.opacity};z-index:-99; -webkit-transform:rotate(-#{style.rotate}deg);position:fixed;">
+                    <t t-esc="style.wm_eval(doc, time, user, res_company)"/>
+                </div>
+
+
+                <table class="table"
+                       t-attf-style="padding-left:0px;padding-right:0px;padding-top:5px;border:1px solid">
+                    <tr t-attf-style="border:1px solid">
+                        <t t-set="div_style"
+                           t-value="'width:auto;max-width:100%;font-size:12px;padding-left:10px;padding-top:5px;padding-right:10px; float:left;margin-left:0px;'.format(int(style.body_font)+1)"/>
+
+                        <td t-if="doc.date_order" t-attf-style="border:1px solid">
+                            <strong t-if="doc.state not in ['draft','sent']"
+                                    >
+                                Data Ordine
+                            </strong>
+                            <strong t-if="doc.state in ['draft','sent']" style="text-align:left;">Data Preventivo
+                            </strong>
+                            <p t-field="doc.date_order"/>
+                        </td>
+                        <!--                        <td t-if="doc.transportation_reason_id"-->
+                        <!--                            t-attf-style="{{div_style}};border:1px solid {{style.text_color}};">-->
+                        <!--                            <strong style="white-space:nowrap;text-align:left;">Causale</strong>-->
+                        <!--                            <p t-field="doc.transportation_reason_id"/>-->
+                        <!--                        </td>-->
+                        <!---->
+                        <td t-if="doc.incoterm" t-attf-style="border:1px solid">
+                            <strong style="white-space:nowrap;text-align:left;">Porto</strong>
+                            <br/>
+                            <span t-field="doc.incoterm"/>
+                        </td>
+
+                        <!--                        <td t-if="doc.ddt_carrier_id"-->
+                        <!--                            t-attf-style="{{div_style}};border:1px solid {{style.text_color}};">-->
+                        <!--                            <strong style="white-space:nowrap;text-align:left;">Vettore</strong>-->
+                        <!--                            <p t-field="doc.ddt_carrier_id"/>-->
+                        <!--                        </td>-->
+                        <td t-if="doc.payment_term_id"
+                            t-attf-style="border:1px solid">
+                            <strong style="white-space:nowrap;text-align:left;">Pagamento</strong>
+                            <p t-field="doc.payment_term_id"/>
+                        </td>
+                        <td t-if="doc.client_order_ref"
+                            t-attf-style="border:1px solid">
+                            <strong style="white-space:nowrap;text-align:left;">Riferimento Cliente</strong>
+                            <p t-field="doc.client_order_ref"/>
+                        </td>
+
+                    </tr>
+
+                </table>
+                <table class="col-12 row" t-if="doc.note"
+                       t-attf-style="padding-left:0px;color:{{style.cust_color}};padding-right:0px;padding-top:5px;border:1px solid{{style.text_color}};">
+                    <tr>
+                        <td t-attf-style="{{div_style}};border:1px solid {{style.text_color}};">
+                            <span style="font-weight:bold;white-space:nowrap;">Note:</span>
+                            <span t-field="doc.note"/>
+                        </td>
+
+                    </tr>
+                </table>
+
+                <div class="col-12 row" style="padding:8px"/>
+                <t t-call="professional_templates.SO_Hermes_lines"/>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer" t-attf-style="font-size:18px;text-align:center!important">
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Pagina: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="stock_delivery_note_fiscal_position_form_inherit">
+            <field name="name">stock.delivery.note.fiscal.position.form.inherit</field>
+            <field name="model">stock.delivery.note</field>
+            <field name="inherit_id" ref="l10n_it_delivery_note.stock_delivery_note_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='delivery_method_id']" position="after">
+                    <field name="fiscal_position_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

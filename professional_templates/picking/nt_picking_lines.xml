@@ -1,0 +1,85 @@
+<odoo>
+    <data>
+        <template id="picking_fashion_dealer_lines">
+            <table class="table table-condensed"
+                   t-attf-style="color:{{style.text_color}};font-family:{{style.font_family}} !important;">
+                <thead t-attf-style="background-color:#3f3f3f; page-break-inside: avoid;color:#ffffff;">
+                    <tr t-attf-style="font-size:{{style.body_font}}px;page-break-inside: avoid !important; border-bottom: 1px solid {{style.text_color}} !important;">
+                        <th>
+                            SKU
+                        </th>
+                        <th>
+                            Size
+                        </th>
+
+                        <th>
+                            Product Type
+                        </th>
+                        <th>
+                            Origin
+                        </th>
+                        <th>
+                            Brand
+                        </th>
+                        <th id="th_qty">
+                            QTY
+                        </th>
+                        <th id="th_origin">
+                            Origin
+                        </th>
+                        <th class="text-center" id="th_barcode">
+                            Barcode / Serial No.
+                        </th>
+
+                        <th id="th_destination">
+                            Destination
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.move_lines.sorted(key=lambda m: m.product_id.id)" t-as="move_line">
+                        <tr>
+                            <td>
+                                <span t-field="move_line.product_id.nt_sku"/>
+                            </td>
+                            <td>
+                                <span t-field="move_line.product_id.nt_size"/>
+                            </td>
+                            <td>
+                                <span t-field="move_line.product_id.nt_product_type"/>
+                            </td>
+                            <td>
+                                <span t-field="move_line.product_id.nt_origin"/>
+                            </td>
+                            <td>
+                                <span t-field="move_line.product_id.product_brand_id.name"/>
+                            </td>
+                            <td class="text-center" id="td_qty">
+                                <span t-esc="'{0:.0f}'.format(move_line.product_qty)"/>
+                                <span t-field="move_line.product_uom_id" groups="product.group_uom"/>
+                            </td>
+                            <td id="td_origin">
+                                <span t-field="move_line.location_id"/>
+                                <!--                                <span t-if="move_line.package_id">:</span>-->
+                                <!--                                <span t-field="move_line.package_id"/>-->
+                            </td>
+                            <td class="text-center" id="td_barcode">
+                                <span t-if="move_line.product_id and move_line.product_id.barcode">
+                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128',
+                                        move_line.product_id.barcode, 600, 100)" style="width:300px;height:50px"/>
+                                </span>
+                            </td>
+                            <t t-foreach="move_line.move_line_ids.sorted(key=lambda ml: ml.location_id.id)" t-as="ml">
+                                <td id="td_destination">
+                                    <span t-field="ml.location_dest_id"/>
+                                    <span t-if="ml.result_package_id">:</span>
+                                    <span t-field="ml.result_package_id"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="faq_page_template" name="FAQ">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+                <section id="container">
+
+                    <div id="content" class="faq inner p_l_20 p_r_20 container mt-5">
+
+                        <h1 class="sec_font">Kérdések és válaszok</h1>
+
+                        <div class="faq_wrap">
+                            <h3>Általános kérdések</h3>
+
+
+                            <div class="main_faq">
+                                <div class="faq_header">Európa egyik legkeresettebb arcszéruma… Ez valami kamu?
+                                </div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>Nem kamu. A C-Vitamin arcszérumunk az Amazon (a világ legnagyobb webáruháza)
+                                        legtöbbet eladott kozmetikuma a “Beauty”, azaz szépség kategóriában
+                                        Olaszországban,
+                                        Franciaországban, Spanyolországban, Németországban és Angliában, azaz az EU
+                                        legnagyobb országaiban. És ez még nem minden: a 2022.02.22. Amazon eladási
+                                        adatok
+                                        alapján 64.314 vásárlói véleményt kaptunk eddig, Európában arcszérum még
+                                        soha
+                                        nem ért el ilyen eredményt! Több tízezer visszatérő vásárlónk van, akik
+                                        hónapról
+                                        hónapra újra és újra megrendelik biokozmetikumainkat, mert elégedettek a
+                                        hatékonyságukkal.
+                                    </p>
+                                    <p>A sok-sok elégedett vásárló mellet, számos ismert újság is írt már rólunk:
+                                        Cosmopolitan, Donna Moderna, Marie Clarie, Elle, Glamour, El País és még
+                                        sorolhatnánk…
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Ezek vegán termékek?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>A Florence
+                                        <span lang="hu">® termékcsalád minden tagja VEGÁN kozmetikum, kivéve a
+                                            csiganyál
+                                            krémet, hiszen a csiganyál állati eredetű organikus összetevő. A
+                                            csiganyálat egy
+                                            Róma melletti éticsigafarmról gyűjtik be kíméletesen. Ez azt jelenti,
+                                            hogy
+                                            hetente egyszer egy spatulával a csiga hasáról lefejtik a csiganyálat,
+                                            ami
+                                            semmilyen fájdalommal vagy sérüléssel nem jár. Ezt követően
+                                            visszaengedik a
+                                            farmra, ahol tovább “legelészik”.
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Hol gyártják a kozmetikumokat?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>A Florence<span lang="hu">®</span> biokozmetikumok fejlesztése és gyártása
+                                        Olaszországban történik.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Komplett arcápolási rutint szeretnék. Mit javasoltok?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>Nem kell különböző terméket összevásárolnod az arcápolási rutinodhoz, hiszen
+                                        a
+                                        Florence<span lang="hu">®</span> biokozmetikumainkkal minden lépésre van
+                                        megoldásunk. Ja, és mindezt organikus hatóanyagokkal, káros összetevőktől
+                                        mentesen
+                                        tesszük, hogy arcbőröd visszanyerje természetes szépségét!
+                                    </p>
+                                    <p>A következetes arcápolási rutin szabályai a következők:</p>
+                                    <p>1. lépés – ARCTISZTÍTÁS, melyhez ajánljuk: Florence BIO arctisztító tej 250
+                                        ml
+                                        <br/>
+                                        2. lépés – TONIZÁLÁS, melyhez ajánljuk: Florence BIO arctonik 250 ml
+                                        <br/>
+                                        3. lépés – ARCSZÉRUM, melyhez ajánljuk: Florence BIO C-vitamin arcszérum 60
+                                        ml
+                                        <br/>
+                                        4. lépés – HIDRATÁLÁS, melyhez ajánljuk: Florence BIO anti-aging hidratáló
+                                        arckrém
+                                        100 ml, vagy Florence BIO csiganyál arckrém 100 ml
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mit jelent a BIO minősítés a Florence kozmetikumok
+                                    esetében?
+                                </div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>A Florence<span lang="hu">®</span> biokozmetikumok megkapták az
+                                        olaszországi <strong>
+                                            AIAB biokozmetikai minősítést</strong>(Associazione Italiana Agricoltura
+                                        Biologica),
+                                        amely igazolja, hogy az organikus összetevői ellenőrzött biogazdálkodásból
+                                        származnak. Ezekben a biogazdálkodásokban tilos a növényvédő szerek
+                                        használata.
+                                    </p>
+                                    <p>
+                                        <img loading="lazy" class="alignnone size-full wp-image-189 img img-fluid"
+                                             src="/theme_florence/static/src/img/AIAB-biokozmetikai-minosites-min-1.jpg"
+                                             alt="AIAB biokozmetikai minősítés-min"/>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Van pénzvisszafizetési garanciátok?</div>
+                                <div class="faq_content">
+                                    <p>Igen van! A weboldalunkról megrendelt Florence® biokozmetikumok minősége és
+                                        hatékonysága mellett maximálisan kiállunk, ezért bátran vállaljuk a 30 napos
+                                        100%
+                                        pénzvisszafizetési garanciát. Semmit sem kérdezünk ha elégedetlen vagy,
+                                        hanem
+                                        azonnal visszautaljuk a pénzed, így nulla rizikóval kipróbálhatod bio
+                                        kozmetikumainkat! A visszaküldés folyamatáról az Általános Szerződési
+                                        Feltételek
+                                        8-as pontjában tájékozódhatsz: https://florence.digitalform.hu/aszf/
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="faq_wrap">
+                            <h3>Arctisztító tejjel kapcsolatos kérdések</h3>
+
+
+                            <div class="main_faq">
+                                <div class="faq_header">Hogyan használjam az arctisztító tejet?</div>
+                                <div class="faq_content">
+                                    <p>Vigye fel reggel és este közvetlenül az arcra kézzel vagy egy vattakorong
+                                        segítségével. Ezután finom körkörös mozdulatokkal masszírozza el a bőrén,
+                                        <br/>
+                                        hogy megkönnyítse a tisztítást, majd öblítse le meleg vízzel.
+                                    </p>
+                                    <p>Figyelmeztetés: Ügyeljen, hogy szembe ne kerüljön. Szemkontúrra használható.
+                                        Tartsa
+                                        távol a közvetlen napfénytől, tárolja hűvös és száraz helyen. Gyermekek elől
+                                        elzárva
+                                        tartandó.
+                                    </p>
+                                    <p>Felhasználható a felnyitástól számított 6 hónapig.</p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mik az arctisztító tej összetevői</div>
+                                <div class="faq_content">
+                                    <p>Aloe Barbadensis leaf juice, Aqua, Caprylic/capric triglyceride, Prunus
+                                        Amygdalus
+                                        Dulcis oil, Methyl Glucose Sesquistearate, Glycerin, Ricinus Communis oil,
+                                        Butyrospermum parkii butter, Glyceryl stearate, Tocopheryl acetate, Sodium
+                                        lactate,
+                                        Oryza sativa extract, Cetearyl glucoside, Sodium Pca, Cetearyl alcohol,
+                                        Sodium
+                                        ascorbyl phosphate, Citric acid, Maris sal, Ascorbyl Palmitate, Hydrolyzed
+                                        hyaluronic acid, Glycine, Ethyl Lauroyl Arginate Hcl, Fructose, Urea
+                                        sulphate,
+                                        Niacinamide, Inositol, Lactic acid, Cinnamic acid, Cera alba
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mire való az arctisztító tej?</div>
+                                <div class="faq_content">
+                                    <p>Bio minősítésű arctisztító tej ami egyszerre kíméletesen tisztít és hidratál,
+                                        visszaadja az arcbőr természetes szépségét. Krémes textúrájú, amely a bőrön
+                                        megolvadva gyengéden távolítja el a szennyeződéseket és sminket anélkül,
+                                        hogy
+                                        károsítaná a bőr védőrétegét. Hialuronsavval, aloe verával, rizskorpa
+                                        <br/>
+                                        kivonattal, édesmandula- és ricinus olajjal, shea vajjal valamint E- és
+                                        C-Vitaminnal
+                                        készül, hogy az arcbőr már a tisztítási fázisban is extra adag
+                                        <br/>
+                                        táplálást kapjon!
+                                    </p>
+                                    <p>Bőrgyógyászatilag tesztelt biokozmetikum, amely minden bőrtípusra alkalmas.
+                                        Biogazdálkodásból származó organikus összetevőkből készült. Parabén, szulfát
+                                        és
+                                        mikroműanyag mentes. Vegán és állatokon nem tesztelték. A hidratáló és
+                                        nyugtató
+                                        hatás érdekében naponta használható.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="faq_wrap">
+                            <h3>Arctonikkal kapcsolatos kérdések</h3>
+
+
+                            <div class="main_faq">
+                                <div class="faq_header">Hogyan használjam az arctonikot?</div>
+                                <div class="faq_content">
+                                    <p>Nedvesítsen meg egy vattakorongot az arctonikkal, majd törölje át vele az
+                                        arcát és a
+                                        nyakát. Használhatja reggel és este, vagy napközben bármikor a bőr
+                                        felfrissítésére
+                                        és tonizálására. Sminkfixálóként is használható.
+                                    </p>
+                                    <p>Figyelmeztetés: Ügyeljen, hogy szembe ne kerüljön. Szemkontúrra használható.
+                                        Tartsa
+                                        távol a közvetlen napfénytől, tárolja hűvös és száraz helyen. Gyermekek elől
+                                        elzárva
+                                        tartandó.
+                                    </p>
+                                    <p>Felhasználható a felnyitástól számított 6 hónapig.</p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mik az arctonik összetevői?</div>
+                                <div class="faq_content">
+                                    <p>Aloe barbadensis leaf juice, Aqua, Rosa Damascena flower water, Rosa canina
+                                        fruit
+                                        extract, Heptapeptide-10, Betaine, Hydrolyzed hyaluronic acid, Parfum,
+                                        Tetrasodium
+                                        glutamate diacetate, Ethylhexylglycerin, Coco-glucoside, Glycerin, Caprylyl
+                                        glycol,
+                                        Glyceryl oleate, Sodium benzonate, Potassium sorbate
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mire való az arctonik?</div>
+                                <div class="faq_content">
+                                    <p>Bio minősítésű arctonik, amely hatékonyan tonizál, kíméletesen távolítja el a
+                                        sminkmaradványokat és szennyeződéseket. Organikus öregedésgátló és hidratáló
+                                        összetevőkkel készül: damaszkuszi rózsavíz, csipkebogyó kivonat, aloe vera,
+                                        betaine,
+                                        alacsony molekulatömegű hialuronsav és egy innovatív bőrkondicionáló peptid.
+                                        Ezek az
+                                        egymással szinergiában működő összetevők gyengéden tisztítják az arcbőrt,
+                                        lifting
+                                        hatást fejtenek ki, látványosan összehúzzák a pórusokat és segítik a bőr
+                                        egészséges
+                                        megjelenését.
+                                    </p>
+                                    <p>Bőrgyógyászatilag tesztelt biokozmetikum, amely minden bőrtípusra alkalmas.
+                                        Biogazdálkodásból származó organikus összetevőkből készül. Parabén, szulfát
+                                        és
+                                        mikroműanyag mentes. Vegán és állatokon nem tesztelték.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="faq_wrap">
+                            <h3>C-Vitamin szérummal kapcsolatos kérdések</h3>
+
+
+                            <div class="main_faq">
+                                <div class="faq_header">A C-Vitamin milyen koncentrációban van jelen a szérumban?
+                                </div>
+                                <div class="faq_content">
+                                    <p>Szérumunk 20%-os koncentrációban tartalmaz C-vitamint
+                                        nátrium-aszkorbil-foszfát
+                                        formájában, ami a C-vitamin egy nagyon stabil formája. Nem irritál, nem okoz
+                                        bőrproblémát, kiválóan hasznosul és pH-ja 5 és 6,5 között van.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">A szérum használata után kimehetek a napra?</div>
+                                <div class="faq_content">
+                                    <p>Igen, nincs ellenjavallat. A Florence C-Vitamin szérum nem fényérzékeny,
+                                        mindennapos, reggel és esti használatra alkalmas, minden évszakban.
+                                    </p>
+                                    <p>Mivel nem tartalmaz fényvédőt, a napsugárzásnak kitett területeken 50+
+                                        védőfaktort
+                                        javasolunk, különösen ha a bőr hajlamos foltosodásra.
+                                    </p>
+                                    <p>A C-vitamin szérumunk esetében tesztjeink nem mutatnak ellenjavallatot a
+                                        napozásra.
+                                        Viszont minden helyzetben célszerű a bőrtípusának és a szabadban töltött
+                                        időnek
+                                        megfelelő védőfaktort alkalmazni. Egyetlen antioxidáns sem képes leküzdeni a
+                                        foltokat, amelyek még plusz közvetlen napfényt kapnak, ezért a hatásos
+                                        kezelésnek
+                                        tartalmaznia kell a megelőző lépéseket is.
+                                    </p>
+                                    <p>A termék csomagoláson az az ajánlás olvasható, hogy a terméket ne tegye ki
+                                        napfénynek
+                                        vagy UV sugárzásnak. Ez nagyon fontos lépés mivel nem tartalmazza a
+                                        klasszikus
+                                        szintetikus stabilizátorokat, ezért tulajdonságainak megőrzése érdekében
+                                        célszerű
+                                        fénytől távol tartani. Ez a részlet néha félreértéshez vezet: ezt a terméket
+                                        lehetőleg sötétben kell tárolni, mint minden kozmetikai terméket, miközben a
+                                        használatnak és a napsugárzásnak nincs ellenjavallata.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Bőrgyógyászatilag tesztelték?</div>
+                                <div class="faq_content">
+                                    <p>
+                                        <span lang="hu">A Florence® C Vitamin szérumot a Modenai Egyetem
+                                            Bőrgyógyászati
+                                            ​​Klinikája tesztelte. A kapott eredmények elemzése alapján
+                                            megállapították,
+                                            hogy a szérum használata nem vált ki semmilyen irritációt, allergiás
+                                            reakciót
+                                            vagy bőrérzékenységet. A Florence® C Vitamin szérum a vizsgálatok
+                                            eredményei
+                                            alapján hipoallergénnek tekinthető.
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <img loading="lazy" class="alignnone size-full wp-image-189 img img-fluid"
+                                             src="/theme_florence/static/src/img/AIAB-biokozmetikai-minosites-min-1.jpg"
+                                             alt="AIAB biokozmetikai minősítés-min"/>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Dermarollerrel lehet használni?</div>
+                                <div class="faq_content">
+                                    <p>Igen, a Florence C-vitamin szérum tökéletes a dermarollerrel való
+                                        használatra. Az
+                                        eredmény a hidratáltság javulását és jobb tapintású bőrtextúrát mutat, a
+                                        tömörség
+                                        észrevehető érzésével. Íme néhány tipp:
+                                    </p>
+                                    <ul>
+                                        <li>Használat előtt és után alaposan fertőtlenítse a dermarollert</li>
+                                        <li>Mossa meg arcát csak meleg vagy hideg vízzel, vagy Florence arctisztító
+                                            tejjel
+                                            és tonikkal átitatott arctisztító vattával
+                                        </li>
+                                        <li>Most már megkezdheti a dermaroller kezelést. A bőrön keletkező
+                                            mikro-apró lyukak
+                                            még jobb hozzáférést tesznek lehetővé a szérum hatóanyagaihoz, mert
+                                            egyenletesebben és mélyebben bejutnak a bőrbe. Enyhe égő érzést
+                                            tapasztalhat, de
+                                            ennek rövid ideig kell tartania.
+                                        </li>
+                                    </ul>
+                                    <p>Azt tanácsoljuk, hogy fokozatosan haladjon: kezdetben legfeljebb 2 percig az
+                                        arcon,
+                                        és hetente legfeljebb 3 alkalommal. Nincs ellenjavallat, még a 0,5 mm-es
+                                        tűvel
+                                        ellátott dermarollerben sem.
+                                    </p>
+                                    <p>A dermarollerrel kezelés után felvitt szérum hatóanyagai sokkal jobban
+                                        hasznosulnak,
+                                        így mindenképp javasoljuk ennek a kozmetikai ezköznek a beszerzését!
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Használható sminkalapnak?</div>
+                                <div class="faq_content">
+                                    <p>Igen, a szérum és a többi Florence termék tökéletes alapot garantál alapozó,
+                                        púder
+                                        felviteléhez, egy egyszerű pirosító felvitelhez vagy akár egy kifinomultabb
+                                        smink
+                                        elkészítéséhez.
+                                    </p>
+                                    <p>Íme a tippjeink:</p>
+                                    <p>Az első lépés egy könnyű és nem agresszív tisztítás, Florence arctisztító
+                                        tejjel és
+                                        Florence arctonikkal; majd vidd fel a szérumot a tiszta és száraz bőrre.
+                                    </p>
+                                    <p>Amint a szérum teljesen beszívódik, ha szükséges vidd fel a Florence
+                                        hidratáló
+                                        arckrémet az arcon és a nyakon körkörös mozdulatokkal, alulról felfelé,
+                                        belülről
+                                        kifelé masszírozásával, hogy tökéletes felszívódása legyen.
+                                    </p>
+                                    <p>Az arcmasszírozás felébreszti a keringést, javítja a szövetek oxigénellátását
+                                        és ez
+                                        egészségesebb megjelenést kölcsönöz a bőrnek.
+                                    </p>
+                                    <p>Ez a 4 lépéses rutin csak egy percig tart, és amint beszívódott a
+                                        hidratálókrém,
+                                        folytathatja a sminkelést. A jól hidratált bőr nem válik fényessé, hanem
+                                        rugalmas és
+                                        tónusos marad, és segít elkerülni azt a száraz és “poros” hatást, ami néha
+                                        akkor
+                                        jelentkezik, ha a smink előtt nem kellően hidratált a bőr.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Használhatom a szérumot a szemem körül?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>Igen, a szérum bőrgyógyászatilag tesztelt és biztonságos a szem körüli
+                                        használatra.
+                                        Mélyen hidratálja ezt a finom és vékony bőrfelületet, és csökkenti a szem
+                                        körül
+                                        kialakuló finom ráncokat.
+                                    </p>
+                                    <p>Íme egy kis betekintés és néhány jótanács:</p>
+                                    <p>A szemkörnyéki terület, vagyis az, amely a szem közvetlen környezetét veszi
+                                        körül,
+                                        sajátos tulajdonságokkal rendelkezik. Valójában nagyon vékony (kb. 3 mm), és
+                                        az
+                                        ilyen vékony bőr különösen kényes kezelést igényel. Azt tanácsoljuk, hogy ne
+                                        dörzsölje és ne érintse meg erősen az ujjaival; ha sminket használ, óvatosan
+                                        mossa
+                                        le a sminket. Valójában a sötét karikák gyakran rosszabbodnak a
+                                        mikrokapillárisok
+                                        retikulumára nehezedő túlzott nyomás miatt. Ne felejtsen el sok vizet inni
+                                        (óránként
+                                        1 pohárral (2dl) így 10 óra alatt könnyedén elérheti a 2 litert), és
+                                        próbáljon
+                                        eleget aludni (8 óra lenne az ideális).
+                                    </p>
+                                    <p>Termékeink szemkörnyéki tolerálhatóságát tesztelték: ez azt jelenti, hogy a
+                                        laboratóriumi vizsgálatok kimutatták, hogy az arc ezen finom része nem mutat
+                                        irritáló reakciókat, és élvezi a hidratálás áldásait.
+                                    </p>
+                                    <p>A szemgolyót eltakaró szemhéjra viszont ne használd a szérumot, nehogy
+                                        véletlenül
+                                        szembe kerüljön. Ha mégis véletlenül szembe kerül, nem vészes, de nem is
+                                        kellemes 🙂
+                                        egyszerűen öblítd le meleg vízzel.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Használhatom a szérumot testre is?</div>
+                                <div class="faq_content">
+                                    <p>Igen, nyugodtan használhatod. A szérum bio összetétele bármilyen bőrtípussal
+                                        kompatibilissé teszi: mivel az arcra – a test legérzékenyebb bőrére –
+                                        készült, nincs
+                                        ellenjavallata a testen való használatnak. Az egyetlen óvintézkedés az, hogy
+                                        biztonságos távolságot tartsunk a szájnyílásoktól és általában a
+                                        nyálkahártyával
+                                        bélelt területektől.
+                                    </p>
+                                    <p>A szérum különösen a nagyon kiszáradt, vagy a súrlódásnak, érintkezésnek
+                                        kitett
+                                        területek javulását segíti elő. Kézre alkalmazva, a hidratáló krém felvitele
+                                        előtt
+                                        elősegíti a tápláló összetevők mély felszívódását, és segít a foltok
+                                        kezelésében.
+                                        Javasoljuk a használatát a nyakon és a dekoltázson: ezek különösen érzékeny
+                                        területek, kiszáradásnak és rugalmasságvesztésnek vannak kitéve. Minél
+                                        nagyobb a
+                                        mell, annál nagyobb lesz a gravitáció hatása az idő múlásával.
+                                    </p>
+                                    <p>Gyakorta jelennek meg sötét napfoltok a tarkón és a vállakon (különösen
+                                        férfiaknál),
+                                        ha sokat tartózkodnak félmeztelenül a napon. A C-Vitamin szérum ezekre a
+                                        bőrhibákra
+                                        is kiváló megoldást nyújt, hiszen rendszeres használatával látványosan
+                                        halványulnak
+                                        a napkárosodott bőrhibák.
+                                    </p>
+                                    <p>Általánosságban elmondható, hogy a bőr ápolása mellett fontos a megfelelő
+                                        testhidratálás, a változatos táplálkozás, a súlyingadozás korlátozása és az
+                                        izomzat
+                                        erősítése, amelyek együttesen támogatják a bőrfelület szerkezetét.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Hatékony a bőrfoltokra?</div>
+                                <div class="faq_content">
+                                    <p>Igen, a C-vitamin szérum erős antioxidáns hatással büszkélkedhet, amely
+                                        kiváló
+                                        eredményeket produkál a bőrfoltok csökkentésében.
+                                    </p>
+                                    <p>Kezdjük az összetétellel: a C-vitamin fontos antioxidáns értéke ellensúlyozza
+                                        a
+                                        szabad gyökök felgyülemlése okozta öregedést, melynek elkerülhetetlenül ki
+                                        vagyunk
+                                        téve a stressz, a nap, a környezetszennyezés és a különféle környezeti
+                                        hatások
+                                        miatt. A hialuronsavval együtt fokozza a bőr hidratáltságát, feszességének,
+                                        állagának és arcszínének javítását.
+                                    </p>
+                                    <p>A várható hatás a feszesség növekedése, az öregedés jeleinek és a sötét
+                                        bőrfoltok
+                                        halványulása. A ráncok nem tűnnek el, viszont a belső hidratáltság
+                                        növelésével a bőr
+                                        nyúlik és ezért kevésbé lesz látható a mélységük, belülről feltöltve a
+                                        mögöttes
+                                        struktúrákat. Az eredmények titka az állandóságban, valamint a járulékos
+                                        tényezők
+                                        (pl. rossz belső hidratáltság) megelőzésében vagy megszakításában rejlik.
+                                        Fontos
+                                        hogy kellő fényvédelem nélkül ne tedd ki bőrödet a nap sugarainak.
+                                    </p>
+                                    <p>Ha hajlamos foltosodni a bőröd, már reggel kend be a C-vitamin szérumot, a
+                                        hidratálót, majd a fényvédőt. A C-vitamin nagyon erős antioxidáns, de
+                                        egyetlen
+                                        termék sem tud versenyezni a nap energiájával!
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Hogyan használjam a szérumot?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>Mossa meg és törölje szárazra a kezelni kívánt bőrfelületet. Használat előtt
+                                        rázza
+                                        fel az üveget. A pipetta segítségével vigyen fel pár csepp szérumot az
+                                        arcra, nyakra
+                                        és dekoltázsra. Finom masszírozza be, amíg teljesen be nem szívódik, majd
+                                        vigye fel <a
+                                                href="https://florence.digitalform.hu/termek/bio-anti-aging-hidratalo-arckrem/">
+                                            bio hidratáló krémünket.
+                                        </a> A szérum felvitele előtt
+                                        <br/>
+                                        javasoljuk a <a href="https://florence.digitalform.hu/termek/bio-arctonik/">
+                                            bio
+                                            arctonikunk
+                                        </a> használatát!
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Kell-e arckrém a szérum használata után?</div>
+                                <div class="faq_content">
+                                    <p>Néha elegendő a szérum, különösen akkor, ha a bőr vegyes vagy zsíros, vagy ha
+                                        a bőr
+                                        általános hidratációs állapota jó. De honnan tudhatjuk, hogy a bőrnek ennél
+                                        többre
+                                        van szüksége? Általában a bőr megadja a választ. Ha a szérum alkalmazása
+                                        után a bőr
+                                        feszülését érzed, ez annak a jele, hogy a mélyrétegekben történő felszívódás
+                                        „duzzasztja” az újonnan hidratált szöveteket, ezért a bőrfelületen feszülést
+                                        érzel.
+                                        Ezen a ponton mindenképpen javasolt extra hidratálás krémmel a szérum
+                                        használata
+                                        után. Javasoljuk a Florence BIO anti-aging hidratáló arckrémünk, vagy a
+                                        Florence BIO
+                                        csiganyál arckrémünk használatát a C-Vitain szérum felvitele után.
+                                    </p>
+                                    <p>A bőrápoláson túl ügyeljünk az általános hidratálásra: igyunk meg naponta
+                                        legalább 2
+                                        liter vizet, együnk sok gyümölcsöt és zöldséget és a szobákat diffúzorral
+                                        hidratáljuk.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Miért kell szérumot használni az arcbőrön?</div>
+                                <div class="faq_content">
+                                    <p>Az arc bőre mindig ki van téve a napfénynek és légköri hatásoknak; vékonyabb
+                                        és
+                                        finomabb is, mint a test többi része. És mintha ez nem lenne elég, mimikánk
+                                        folyamatos munkának veti alá. Emiatt kiszárad és megsérül, etért különleges
+                                        gondozást igényel.
+                                    </p>
+                                    <p>Az arcszérumok az aktív hatóanyagokat koncentrált formában tartalmazzák, a
+                                        tápanyagokat pedig a bőr mélyebb rétegeibe juttatják. Míg a krémek csupán a
+                                        felszínt
+                                        kezelik és hidratálják, a szérumok sejtszinten is kifejtik hatásukat.
+                                    </p>
+                                    <p>Még a speciális bőrfiatalító krémekben is sokkal kevesebb az aktív összetevő,
+                                        mint a
+                                        szérumokban, ráadásul az utóbbiak molekulaméretei sokkal kisebbek, és nem
+                                        tartalmaznak térfogatnövelőket, így könnyebben behatolnak a bőrbe és ott
+                                        jobban
+                                        hasznosulnak.
+                                    </p>
+                                    <p>Az arctisztítás után, még a krém felvitele előtt, kevés is elegendő a
+                                        bőrtípusuknak
+                                        megfelelő szérumból, melynek fő célja a regenerálás, bár hidratáló
+                                        alapanyagokat is
+                                        tartalmaz. A szérumok más technológiával készülnek, mint a krémek, de pont
+                                        ezért jól
+                                        kiegészítik egymást. Míg a szérum általában egy bőrproblémára koncentrál, az
+                                        arckrém
+                                        hidratálással igyekszik javítani a teljes bőrképen.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mik a szérum összetevői?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>ALOE BARBADENSIS LEAF JUICE*, AQUA, GLYCERIN, SODIUM ASCORBYL PHOSPHATE,
+                                        CITRUS
+                                        AURANTIUM AMARA FLOWER EXTRACT, SODIUM HYALURONATE, HYDROLYZED HYALURONIC
+                                        ACID,
+                                        HAMAMELIS VIRGINIANA EXTRACT, SODIUM LACTATE, POLYGLYCERYL-4 CAPRATE, SODIUM
+                                        PCA,
+                                        TETRASODIUM GLUTAMATE DIACETATE, CENTELLA ASIATICA EXTRACT, TARAXACUM
+                                        OFFICINALE
+                                        EXTRACT, SODIUM LEVULINATE, CITRUS AURANTIUM AMARA OIL, POTASSIUM SORBATE,
+                                        CITRIC
+                                        ACID, TOCOPHERYL ACETATE, GLYCINE, SIMMONDSIA CHINENSIS OIL*, FRUCTOSE, Urea
+                                        sulphate, XANTHAN GUM, CITRUS SINENSIS PEEL OIL EXPRESSED, NIACINAMIDE,
+                                        CAPRYLYL
+                                        GLYCOL, FERULIC ACID, INOSITOL, LACTIC ACID, ACETYL HEXAPEPTIDE-8,
+                                        PENTAPEPTIDE-18 *
+                                        biogazdálkodásból származó összetevők
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Milyen bőrtípusra alkalmas?</div>
+                                <div class="faq_content">
+                                    <p>Termékcsaládunk minden korosztály számára megfelelő és
+                                        <span class="">m</span>
+                                        <span class="">inden bőrtípusra alkalmas, beleértve az érzékeny bőrt is,
+                                            nőknek és
+                                            férfiaknak egyaránt.</span>A bioszabványoknak megfelelően (vagyis csak a
+                                        bioregiszterben nyilvántartott összetevőkből) készül, nem tartalmaz olyan
+                                        vegyi
+                                        anyagokat, amelyek szükségtelenül terhelnék az összetételét, ezért nincs
+                                        korlátozás
+                                        a használatára.
+                                    </p>
+                                    <p>A Florence® C Vitamin szérumot a Modenai Egyetem Bőrgyógyászati ​​Klinikája
+                                        tesztelt.
+                                        A kapott eredmények elemzése alapján megállapították, hogy a szérum
+                                        használata nem
+                                        vált ki semmilyen irritációt, allergiás reakciót vagy bőrérzékenységet. A
+                                        Florence®
+                                        C Vitamin szérum a vizsgálatok eredményei alapján hipoallergénnek
+                                        tekinthető.
+                                    </p>
+                                    <p>Az érzékeny bőr igényei alapján lett összeállítva, így a hidrolipid egyensúly
+                                        felborulásának veszélye nélkül alkalmas érzékeny bőrre is. A C-vitamin
+                                        szérum
+                                        különösen ajánlott fiatal bőrre, még aknés problémák esetén is.
+                                    </p>
+                                    <p>A Florence® C Vitamin szérum alapvető célja a hidratáció javítása, hiszen 25
+                                        éves
+                                        kortól fokozatosan csökken a bőr autonóm vízmegkötő képessége, és a jó
+                                        bőrtömörség
+                                        fenntartása.
+                                    </p>
+                                    <p>Mire való a hidratálás? Egészségügyi szempontból a szövetek megfelelő
+                                        működésének fenntartása; esztétikai szempontból a tónusos, rugalmas, sima és
+                                        kellemesen feszes és gyönyörű bőr érzése. Az érett bőr különleges ápolást
+                                        igényel a
+                                        hidratálás elérése érdekében. Bármely életkorban a kellően hidratált bőr
+                                        nagy
+                                        elégedettséget jelenthet!
+                                    </p>
+                                    <p>Egyik termékünkben sem használunk szilikont, amelyek a “hamis hidratálás”
+                                        azonnali
+                                        érzetét nyújtják, valódi hidratáció nélkül. Mi olyan formulát alakítunk ki,
+                                        amely a
+                                        bőr alatti rétegek táplálásáról is gondoskodik, amelyek a felületi rész
+                                        tömörségének
+                                        alapját adják. Így a bőr nemcsak simább, hanem tónusosabb és rugalmasabb is
+                                        lesz.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Milyen hialuronsavat használtok a szérumban?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>A laboratóriumainkban használt hialuronsav növényi eredetű, amit bakteriális
+                                        fermentációval nyerjük. Ez egy biotechnológiai eljárás, amelyben bizonyos
+                                        típusú
+                                        élesztőket hagynak erjedni és spontán termelni.
+                                    </p>
+                                    <p>2 fajta molekulatömegben használjuk a hidrolizált hialuronsavat:</p>
+                                    <p>– alacsony molekulatömegű (10 és 1000 kDa közötti méretek). Kis méretének
+                                        köszönhetően a hialuronsav molekulák mélyen behatolnak a bőrbe, elérik a
+                                        legmélyebb
+                                        rétegeket és hatékonyan táplálják azt.
+                                    </p>
+                                    <p>– közepes molekulatömeg (1000 és 1800 kDa közötti méretek). Ez a méret segíti
+                                        a
+                                        könnyű felszívódást, lehetővé téve a víz áthaladását az optimális hidratáció
+                                        fenntartása érdekében;
+                                    </p>
+                                    <p>Ez a fajta hialuronsav kombináció az olcsóbb és leggyakrabban használt nagy
+                                        molekulasúlyúhoz képest a bőr mélyebb rétegeibe hatolva fejti ki hidratáló
+                                        hatását.
+                                        A víz akár 1000-szeresét is képes megkötni a bőrben, ezzel csökkentve a
+                                        ráncok
+                                        megjelenését, javítva a bőr textúráját.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Milyen illata van a C-Vitamin szérumnak?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <p>Szérumunk finom citrusos illatú, ami néhány perccel a felvitel után már nem
+                                        érezhető,
+                                        így nem kell aggódnod, hogy egész nap érezni fogod. A nagyszerű illatot
+                                        mesterséges
+                                        illatanyag hozzáadása nélkül, csakis organikus hatóanyagokkal érjük el a
+                                        szérumban.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="faq_wrap">
+                            <h3>Csiganyál arckrémmel kapcsolatos kérdések</h3>
+
+
+                            <div class="main_faq">
+                                <div class="faq_header">A csigáknak nem lesz bajuk?</div>
+                                <div class="faq_content">
+                                    <p>
+                                        <span class="">A csiganyálat egy Róma melletti csigafarmról szerezzük be,
+                                            amit
+                                            kézzel, kíméletesen és felelősségteljes módon vonnak ki a csigákból
+                                            anélkül,
+                                            hogy az állatnak bármilyen fájdalmat vagy sérülést okoznának. A heti
+                                            egyszeri
+                                            lefejtés után, a csigák tovább legelésznek természetes környezetükben.
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Hogyan használjam a csiganyál arckrémet?</div>
+                                <div class="faq_content">
+                                    <p>Reggel és este enyhe masszírozással vigye fel a krémet az arc, a nyak és a
+                                        dekoltázs
+                                        tiszta és száraz bőrére, amíg teljesen be nem szívódik. Előtte javasoljuk a <a
+                                                href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                                            bio C-Vitamin arcszérumunk
+                                        </a> használatát.
+                                    </p>
+                                    <p>Figyelmeztetés: Ügyeljen, hogy szembe ne kerüljön, és ne alkalmazza irritált
+                                        bőrön.
+                                        Szemkontúrra használható. Tartsa távol a közvetlen napfénytől és UV fénytől.
+                                        Gyermekek elől elzárva tartandó.
+                                    </p>
+                                    <p>Felhasználható a felnyitástól számított 6 hónapig.</p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Honnan ered ez a nagy felhajtás a csiganyál körül?</div>
+                                <div class="faq_content" style="display: none;">
+                                    <section
+                                            class="elementor-section elementor-top-section elementor-element elementor-element-070e243 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                                            data-id="070e243" data-element_type="section"
+                                            data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+                                        <div class="elementor-container elementor-column-gap-default">
+                                            <div class="elementor-row">
+                                                <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0824d24"
+                                                     data-id="0824d24" data-element_type="column">
+                                                    <div class="elementor-column-wrap elementor-element-populated">
+                                                        <div class="elementor-widget-wrap">
+                                                            <div class="elementor-element elementor-element-ae5f54f elementor-widget elementor-widget-text-editor"
+                                                                 data-id="ae5f54f" data-element_type="widget"
+                                                                 data-widget_type="text-editor.default">
+                                                                <div class="elementor-widget-container">
+                                                                    <div class="elementor-text-editor elementor-clearfix">
+                                                                        <p>Több történet is kering, hogy a múltban
+                                                                            kik
+                                                                            találták meg a csigák által termelt
+                                                                            nyálka
+                                                                            jótékony hatását, vagy hogy pontosan
+                                                                            hogy is
+                                                                            történt a felfedezés, de abban biztosak
+                                                                            vagyunk,
+                                                                            hogy az ókori Görögországban a csigákat
+                                                                            gyógyító
+                                                                            tulajdonságaik miatt lokális kezelésként
+                                                                            használták és a bőrápolásban elsőként a
+                                                                            18.
+                                                                            században kezdték el használni a
+                                                                            franciák. Az a
+                                                                            történet járja, hogy a csiga iszap
+                                                                            kozmetikai
+                                                                            előnyeit Chilében fedezték fel az
+                                                                            1980-as
+                                                                            években. Egy chilei család létrehozott
+                                                                            egy
+                                                                            csigafarmot azzal a szándékkal, hogy
+                                                                            gasztronómiai célokra exportáljon
+                                                                            csigákat
+                                                                            Európába. A család viszont hamar rájött,
+                                                                            hogy a csigák kezelésekor a gazda kezén
+                                                                            a bőr
+                                                                            rendkívül lágy és selymes lett. Az éles
+                                                                            csigaketrecek által okozott sérülések és
+                                                                            vágások
+                                                                            pedig gyorsan meggyógyultak anélkül,
+                                                                            hogy
+                                                                            elfertőződtek volna vagy hegeket hagytak
+                                                                            volna
+                                                                            maguk után.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mik a csiganyál krém összetevői?</div>
+                                <div class="faq_content">
+                                    <p>Snail secretion filtrate, Butyrospermum parkii butter*, Aloe barbadensis
+                                        joeuf
+                                        juice*, Metil glucosio sesquistearato, Coco caprylate, Glyceryl stearate,
+                                        Ethyhxyl
+                                        stearate, Simmondsia chinesis oil*, Stearic acid, Prunus amigdalus dulcis
+                                        oil*, Cera
+                                        alba, Rosa damascena flower water*, Olea europea fruit oil*, Argania spinosa
+                                        kernel
+                                        oil*, Glycerin, Sodium dehydroacetate, Hydrolyzed hyaluronic acid, Lycium
+                                        barbarum
+                                        fruit extract, Xanthan gum, Ethylhexylglycerin, Tocopherol, Phenethyl
+                                        alcohol,
+                                        Caprilyl glicol * biogazdálkodásból származó összetevők
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mire jó a csiganyál?</div>
+                                <div class="faq_content">
+                                    <section data-id="38576bb" data-element_type="section"
+                                             data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+                                        <div>
+                                            <div>
+                                                <div data-id="f13620f" data-element_type="column">
+                                                    <div>
+                                                        <div>
+                                                            <div data-id="81415dc" data-element_type="widget"
+                                                                 data-widget_type="text-editor.default">
+                                                                <div>
+                                                                    <div>
+                                                                        <p>A csiganyál, más néven csiga szekréciós
+                                                                            szűrlet
+                                                                            az utóbbi években forradalmasította a
+                                                                            szépségápolást, hiszen rendkívül
+                                                                            sokoldalúan és
+                                                                            hatékonyan felhasználható számos
+                                                                            bőrprobléma és
+                                                                            bőrtípus kezelésére.
+                                                                        </p>
+                                                                        <p>A csiganyálnyálka összetevői kiválóan
+                                                                            helyreállítják a károsodott bőr
+                                                                            szerkezetét,
+                                                                            halványítják a bőr elszíneződését,
+                                                                            valamint
+                                                                            serkentik a kollagéntermelést, ami
+                                                                            elsőként
+                                                                            felel a bőr feszességéért és
+                                                                            simaságáért. A
+                                                                            csiganyálka kiválóan alkalmas a bőr
+                                                                            hidratálására, mivel hialuronsavat
+                                                                            tartalmaz,
+                                                                            amely a vizet a bőr külső rétegeibe
+                                                                            vonzza.
+                                                                        </p>
+                                                                        <p>Emellett gyulladáscsökkentő hatással is
+                                                                            rendelkezik, nagyon jót tesz a problémás
+                                                                            bőrnek,
+                                                                            gyógyítja a pattanások nyomán kialakult
+                                                                            hegeket
+                                                                            és képes megakadályozni az újabb
+                                                                            pattanások
+                                                                            megjelenését is. A nyálka másik fontos
+                                                                            összetevője a természetes allantoin ami
+                                                                            a
+                                                                            legtöbb kozmetikai termékben
+                                                                            megtalálható, de
+                                                                            legtöbbször szintetikus formában.
+                                                                        </p>
+                                                                        <p>Az allantoin intenzív bőrkondicionáló és
+                                                                            bőrvédő
+                                                                            összetevő. Elsősorban bőrszerkezet
+                                                                            javító,
+                                                                            hámképző, sebkezelő, pattanás gyógyító,
+                                                                            bőrnyugtató hatása miatt ennyire
+                                                                            közkedvelt.
+                                                                            Mintha ennyi pozitív tulajdonság nem
+                                                                            lenne elég,
+                                                                            de a csiganyálka erős antimikrobiális
+                                                                            tulajdonsággal is rendelkezik, ami
+                                                                            hatékonyan
+                                                                            eltávolítja a pattanásokat okozó
+                                                                            baktériumokat.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header active">Mire való a Florence csiganyál arckrém?</div>
+                                <div class="faq_content" style="display: block;">
+                                    <p>Bioaktív összetevőkben gazdag, nagyon magas koncentrációjú (65%) szűrt
+                                        csiganyállal
+                                        és 100% tisztaságú hialuronsavval készült professzionális
+                                        <br/>
+                                        arckrém. Csökkenti a ráncokat, bőrhibákat, hegeket, striákat, pattanásokat,
+                                        bőrpírt
+                                        és a túlzott napfény miatti bőrfoltokat. Táplál, hidratál és regeneráló
+                                        hatású.
+                                        Arckrémünk a mélyen hidratált, feszes és egységes tónusú bőr eléréséhez
+                                        tartalmaz
+                                        még antioxidánsokban gazdag goji bogyó kivonatot, shea vajat, aloe verát,
+                                        damaszkuszi rózsavizet, jojoba- és argán olajat is.
+                                    </p>
+                                    <p>Bőrgyógyászatilag tesztelt minősített biokozmetikum, amely minden bőrtípusra
+                                        alkalmas, nők és férfiak egyaránt használhatják. Biogazdálkodásból származó
+                                        organikus összetevőkből készül. Parabén, szulfát és mikroműanyag mentes.
+                                        Állatokon
+                                        nem tesztelték.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="faq_wrap">
+                            <h3>Hidratáló arckrémmel kapcsolatos kérdések</h3>
+
+
+                            <div class="main_faq">
+                                <div class="faq_header">Hogyan használjam a hidratáló krémet?</div>
+                                <div class="faq_content">
+                                    <p>Reggel és este enyhe masszírozással vigye fel a krémet az arc, a nyak és a
+                                        dekoltázs
+                                        tiszta és száraz bőrére, amíg teljesen be nem szívódik. Előtte javasoljuk a <a
+                                                href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                                            bio C-Vitamin arcszérumunk
+                                        </a> használatát, mivel ez a két kozmetikum egymás hatását erősíti.
+                                    </p>
+                                    <p>Figyelmeztetés: Ügyeljen, hogy szembe ne kerüljön, és ne alkalmazza irritált
+                                        bőrön.
+                                        Szemkontúrra használható. Tartsa távol a közvetlen napfénytől és UV fénytől.
+                                        Gyermekek elől elzárva tartandó.
+                                    </p>
+                                    <p>Felhasználható a felnyitástól számított 6 hónapig.</p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mik a hidratáló krém összetevői?</div>
+                                <div class="faq_content">
+                                    <p>Aloe Barbadensis Leaf Juice*, Aqua, Propanediol, Glyceryl stearate citrate,
+                                        Metilglucosio sequistearato, Cetearyl alcohol, Capryl/capric triglyceride,
+                                        Sorbitol,
+                                        Butyrospermum parkii butter*, Prunus amygdalus dulcis oil, Retinol,
+                                        Hydrolyzed
+                                        hyaluronic acid, Sodium ascorbyl phosphate, Ferulic acid, Citrus aurantinum
+                                        amara
+                                        flower water, Sodium hialuronate, Collagen, Laminaria digitata extract,
+                                        Origanum
+                                        majorana leaf extract, Camellia sinensis leaf extract*, Centella asiatica
+                                        extract,
+                                        Equisetum arvense extract, Chlorella vulgaris extract, Simmondsia chinensis
+                                        oil*,
+                                        Persea gratissima oil*, Tamarindus indica extract, Urea, Glycine, Fructose,
+                                        Inositol, Sodium lactate, Sodium PCA, Niacinamide, Maris sal, Tocopherol,
+                                        Ascorbyl
+                                        palmitate, Tocopheryl acetate, Glycerin, Xanthan gum, Sodium benzonate,
+                                        Glyceryl
+                                        caprylate, Tetrasodium glutamate diacetate, Ethylexylglicerin, Maltodextrin,
+                                        Phenethyl alcohol, Citric acid, Lactic acid * biogazdálkodásból származó
+                                        összetevők
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mire való a Florence bio anti-aging hidratáló arckrém?</div>
+                                <div class="faq_content">
+                                    <p>Bio minősítésű arckrémünk rendkívül hatékony finom vonalakra, ráncokra és a
+                                        napkárosodott bőrre. Organikus összetevőivel segíti a bőröregedés elleni
+                                        harcot:
+                                        retinol, alacsony és közepes molekulasúlyú hialuronsav, C- és E-vitamin,
+                                        aloe vera,
+                                        shea vaj, jojoba és édesmandula olaj, tengeri moszat és zöldalga kivonat.
+                                        Továbbá
+                                        található benne gyógynövényinfúzió is, ami majoranna, zöldtea, ázsiai gázló,
+                                        mezei
+                                        zsurló és tamarind kivonatokat tartalmaz.
+                                    </p>
+                                    <p>Bőrgyógyászatilag tesztelt biokozmetikum, amely minden bőrtípusra alkalmas,
+                                        nők és
+                                        férfiak egyaránt használhatják. Organikus összetevőkből készül, amik
+                                        biogazdálodásból származnak. Parabén, szulfát és mikroműanyag mentes. Vegán
+                                        és
+                                        állatokon nem tesztelték.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="faq_wrap">
+                            <h3>Szállítással kapcsolatos kérdések</h3>
+
+
+                            <div class="main_faq">
+                                <div class="faq_header">Melyik futárcég szállítja ki a rendelésem?</div>
+                                <div class="faq_content">
+                                    <p>A rendelésed a GLS futárcég szállítja házhoz. A rendeléskor megadott
+                                        mobiltelefonszámra és email címre kapsz majd tőlük üzenetet, hogy pontosan
+                                        mikor
+                                        kézbesítik a csomagod. Ebben az üzenetekben benne lesz a futár telefonszáma
+                                        is, így
+                                        akár fel is hívhatod ha kérdésed lenne a szállítással kapcsolatban. A GLS
+                                        futároknál
+                                        bankkártya terminál is van, így utánvételes fizetés esetén az összeget
+                                        bankkártyával
+                                        is kifizetheted!
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mennyibe kerül a szállítás?</div>
+                                <div class="faq_content">
+                                    <p>1.990 Ft a szállítási költség Magyarországon belüli rendelés esetén. 15.000
+                                        Ft
+                                        feletti vásárlás esetén a szállítás ingyenes!
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="main_faq">
+                                <div class="faq_header">Mikor kapom meg a rendelésem?</div>
+                                <div class="faq_content">
+                                    <p>A munkanapon 12.00-ig megrendelt Florence termékeket már a következő munkanap
+                                        kiszállítjuk, a 12.00 után leadott rendeléseket pedig 2 munkanap múlva kapod
+                                        készhez. Szombaton és vasárnap nincs kiszállítás, mivel a futárcégek ezeken
+                                        a
+                                        napokon nem dolgoznak. A rendeléskor megadott mobiltelefonszámra és email
+                                        címre
+                                        kapsz majd a GLS futártól üzenetet, hogy pontosan mikor kézbesíti a
+                                        csomagod. Ebben
+                                        az üzenetekben benne lesz a futár telefonszáma is, így akár fel is hívhatod
+                                        ha
+                                        kérdésed lenne a szállítással kapcsolatban. A GLS futároknál bankkártya
+                                        terminál is
+                                        van, így utánvételes fizetés esetén az összeget bankkártyával is
+                                        kifizetheted!
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

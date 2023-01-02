@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="footer_custom_inherit" inherit_id="website.footer_custom" name="Default" active="True">
+            <xpath expr="//div[@id='footer']" position="replace">
+                <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer"
+                >
+                    <section class="footer footer_top">
+                        <div class="container footer_top_wrap">
+
+                            <div class="row ">
+                                <div class="col-md-4 col-12">
+                                    <div class="box contact">
+                                        <a class="logo" href="https://florence.digitalform.hu/">
+                                            <img class="img-fluid img" src="https://florence.digitalform.hu/wp-content/themes/florence/images/logo_white.svg"
+                                                 alt="Florence® Biocosmetics"/>
+                                        </a>
+
+                                        <h4 class="uppercase">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">Official Hungarian distributor:
+                                                </font>
+                                            </font>
+                                        </h4>
+
+                                        <strong>
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">Verexpert Kft.</font>
+                                            </font>
+                                        </strong>
+                                        <br/>
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;">
+
+                                                4031 Debrecen, Szoboszlói út 50. 3.ép.
+                                            </font>
+                                            <font style="vertical-align: inherit;">2/34.</font>
+                                        </font>
+                                        <br/>
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;">
+
+                                                Tax number: 27125780-2-09
+                                            </font>
+                                        </font>
+                                        <br/>
+
+                                        <br/>
+                                        <strong>
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">Tel .:</font>
+                                            </font>
+                                        </strong>
+                                        <a href="tel:+36 20 283 1511">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">+36 20 283 1511</font>
+                                            </font>
+                                        </a>
+
+                                        <br/>
+                                        <strong>
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">E-mail:</font>
+                                            </font>
+                                        </strong>
+                                        <a class="mail" href="mailto:info@florencebio.hu">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">info@florencebio.hu</font>
+                                            </font>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="box pages">
+                                        <h3 class="sec_font">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">Pages</font>
+                                            </font>
+                                        </h3>
+
+                                        <ul id="menu-lablec-menu-1 list-unstyled" class="menu">
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-133">
+                                                <a href="https://florence.digitalform.hu/aszf/">
+                                                    <font style="vertical-align: inherit;">
+                                                        <font style="vertical-align: inherit;">General terms and
+                                                            conditions
+                                                        </font>
+                                                    </font>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-134">
+                                                <a href="https://florence.digitalform.hu/adatkezelesi-tajekoztato/">
+                                                    <font style="vertical-align: inherit;">
+                                                        <font style="vertical-align: inherit;">Privacy Policy</font>
+                                                    </font>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-131">
+                                                <a href="https://florence.digitalform.hu/impresszum/">
+                                                    <font style="vertical-align: inherit;">
+                                                        <font style="vertical-align: inherit;">Imprint</font>
+                                                    </font>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="box social_media">
+                                        <h3 class="sec_font">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">You can find us here too!</font>
+                                            </font>
+                                        </h3>
+
+                                        <div class="text">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">Follow us on Facebook, Instagram
+                                                    and Youtube, where you will find many interesting things about our
+                                                    cosmetics!
+                                                </font>
+                                            </font>
+                                        </div>
+
+                                        <a class="facebook anim b_r_50p" href="https://facebook.com" target="_blank">
+                                        </a>
+
+                                        <a class="instagram anim b_r_50p" href="https://instagram.com" target="_blank">
+                                        </a>
+
+                                        <a class="youtube anim b_r_50p" href="https://youtube.com" target="_blank">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                    <section class="footer_bottom">
+                        <div class="container">
+                            <div class="inner p_l_20 p_r_20">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">
+                                        © Copyright 2022. Florence® Biocosmetics.
+                                    </font>
+                                    <font style="vertical-align: inherit;">All rights reserved!</font>
+                                </font>
+                                <br/>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">
+                                        This web page is not affiliated with Facebook at all.
+                                    </font>
+                                </font>
+                            </div>
+                        </div>
+                    </section>
+                    <p t-raw="request.website.live_chat"/>
+                </div>
+            </xpath>
+        </template>
+        <template id="frontend_layout_inherited" name="Frontend Layout Inherited" inherit_id="web.frontend_layout">
+            <xpath expr="//footer[@id='bottom']/div[hasclass('o_footer_copyright')]" position="replace">
+                <section id="barion">
+                    <div class="inner p_l_30 p_r_30 center">
+                        <picture>
+                            <source srcset="https://florence.digitalform.hu/wp-content/themes/florence/images/barion-card-payment-mark-2017-400px.webp"
+                                    type="image/webp"/>
+                            <source srcset="https://florence.digitalform.hu/wp-content/themes/florence/images/barion-card-payment-mark-2017-400px.png"
+                                    type="image/png"/>
+                            <img class="img-fluid img" src="https://florence.digitalform.hu/wp-content/themes/florence/images/barion-card-payment-mark-2017-400px.png"
+                                 alt="Fizetési lehetőségek"/>
+                        </picture>
+                    </div>
+                </section>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="account_fiscal_position_form_inherit">
+            <field name="name">account.fiscal.position.form.inherit</field>
+            <field name="model">account.fiscal.position</field>
+            <field name="inherit_id" ref="account.view_account_position_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[last()]" position="after">
+                    <page name="fiscal_entity" string="Fiscal Entity">
+                        <group col="2">
+                            <field name="fiscal_partner_id" domain="[('type','=','fiscal_entity')]"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

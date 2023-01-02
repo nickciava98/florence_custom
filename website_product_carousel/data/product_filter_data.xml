@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="filter_is_special_product" model="ir.filters">
+        <field name="name">On Sale Products</field>
+        <field name="model_id">product.template</field>
+        <field name="domain">[('is_special', '=', True), ('website_published', '=', True)]</field>
+        <field name="user_id" eval="False"/>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="filter_is_new_arrival_product" model="ir.filters">
+        <field name="name">New Products</field>
+        <field name="model_id">product.template</field>
+        <field name="domain">[('is_new_arrival', '=', True), ('website_published', '=', True)]</field>
+        <field name="user_id" eval="False"/>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="filter_is_best_seller_product" model="ir.filters">
+        <field name="name">Best Seller Products</field>
+        <field name="model_id">product.template</field>
+        <field name="domain">[('is_best_seller', '=', True), ('website_published', '=', True)]</field>
+        <field name="user_id" eval="False"/>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="filter_is_discount_product" model="ir.filters">
+        <field name="name">Discount Products</field>
+        <field name="model_id">product.template</field>
+        <field name="domain">[('is_discount', '=', 'True'), ('website_published', '=', True)]</field>
+        <field name="user_id" eval="False"/>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="filter_is_upcoming_product" model="ir.filters">
+        <field name="name">Upcoming Products</field>
+        <field name="model_id">product.template</field>
+        <field name="domain">[('is_upcoming', '=', True), ('website_published', '=', True)]</field>
+        <field name="user_id" eval="False"/>
+        <field name="context">{}</field>
+    </record>
+    <record id="website_filter_is_upcoming_product" model="website.product.filter">
+        <field name="name">Upcoming Products</field>
+        <field name="filter_id" ref="filter_is_upcoming_product"/>
+        <field name="website_filter_published">True</field>
+    </record>
+    <record id="website_filter_is_discount_product" model="website.product.filter">
+        <field name="name">Discount Products</field>
+        <field name="filter_id" ref="filter_is_discount_product"/>
+        <field name="website_filter_published">True</field>
+    </record>
+    <record id="website_filter_is_best_seller_product" model="website.product.filter">
+        <field name="name">Best Seller Products</field>
+        <field name="filter_id" ref="filter_is_best_seller_product"/>
+        <field name="website_filter_published">True</field>
+    </record>
+    <record id="website_filter_is_new_arrival_product" model="website.product.filter">
+        <field name="name">New Products</field>
+        <field name="filter_id" ref="filter_is_new_arrival_product"/>
+        <field name="website_filter_published">True</field>
+    </record>
+    <record id="website_filter_is_special_product" model="website.product.filter">
+        <field name="name">On Sale Products</field>
+        <field name="filter_id" ref="filter_is_special_product"/>
+        <field name="website_filter_published">True</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,296 @@
+<odoo>
+    <data>
+        <template id="INVOICE_Hermes_lines">
+            <!-- Is there a discount on at least one line? -->
+            <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+            <!-- Is there tax in at least one line? -->
+            <t t-set="display_taxes" t-value="any([y.tax_ids for y in o.invoice_line_ids])"/>
+            <!-- to take care of columns when no discount -->
+            <t t-set="col_span" t-value="8 if display_discount else 7"/>
+            <table class="table  table-condensed" t-attf-style="color:{{style.text_color}};">
+                <thead t-attf-style="background-color:3f3f3f; page-break-inside: avoid;color:#FFFFFF;">
+                    <tr t-attf-style="background-color:{{style.theme_color if not style.transparent else 'transparent'}};">
+                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                            Codice
+                        </td>
+
+                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;" class="text-left">
+                            Descrizione
+                        </td>
+                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;"
+                            class="text-center">
+                            Quantita'
+                        </td>
+                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;"
+                            class="text-right">
+                            Prezzo Unitario
+                        </td>
+                        <td class="text-center"
+                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                            Sconto (%)
+                        </td>
+                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;"
+                            class="text-center">
+                            IVA
+                        </td>
+                        <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;"
+                            class="text-right">
+                            Importo
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.invoice_line_ids" t-as="l">
+                        <tr t-attf-style="background-color:{{style.odd if (l_parity in 'odd' and not style.transparent) else (not style.transparent and style.even)  or 'transparent'}};page-break-inside: avoid">
+                            <td>
+                                <span t-esc="l.product_id.default_code"/>
+                            </td>
+                            <td class="text-left" style="max-width:200px;">
+                                <span t-field="l.name"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-esc="'{0:.3f}'.format(l.quantity)"/>
+                                <span t-field="l.uom_id" groups="product.group_uom"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="l.price_unit"
+                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-if="l.discount!=0.0" t-esc="'{0:.0f}'.format(l.discount)"/>
+                            </td>
+                            <td t-if="display_taxes"
+                                t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_ids))"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="l.price_subtotal"/>
+
+                            </td>
+                            <!--                            <td class="text-center">-->
+                            <!--                                <t t-foreach="o.ddt_ids" t-as="ddt">-->
+                            <!--                                    <t t-foreach="ddt.line_ids.filtered(lambda x: x.product_id.default_code == l.product_id.default_code)"-->
+                            <!--                                       t-as="p">-->
+                            <!--                                        <t t-if="p.lot_ids">-->
+                            <!--                                            <span t-esc="', '.join(map(lambda x: (x.name),p.lot_ids))"/>-->
+                            <!--                                        </t>-->
+                            <!--                                    </t>-->
+                            <!--                                </t>-->
+                            <!--                            </td>-->
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+            <div class="col-12" style="padding:4px"/>
+            <div class="col-5 pull-right" style="padding-left:0px; padding-right:0px; page-break-inside: avoid;">
+                <table class="table table-condensed" t-attf-style="color:{{style.text_color}};">
+                    <tbody>
+                        <tr t-attf-style="border-top: 1px solid {{style.text_color}};">
+                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <strong>Totale Merce</strong>
+                            </td>
+                            <td class="text-right"
+                                t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <t t-set="total_products" t-value="0"/>
+                                <t t-foreach="o.invoice_line_ids" t-as="inv">
+                                    <t t-set="total_products" t-value="total_products+(inv.quantity*inv.price_unit)"/>
+                                </t>
+                                <t t-esc="total_products"
+                                   t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+
+                            </td>
+                        </tr>
+                        <tr t-if="display_taxes" t-attf-style="border-top: 1px solid {{style.text_color}};">
+                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <strong>Totale Imponibile</strong>
+                            </td>
+                            <td class="text-right"
+                                t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <span t-field="o.amount_untaxed"/>
+
+                            </td>
+                        </tr>
+
+                        <tr t-if="display_taxes" t-attf-style="border-top: 1px solid {{style.text_color}};">
+                            <td t-attf-style="border-top: 1px solid {{style.text_color}};">
+                                <strong>IVA</strong>
+                            </td>
+                            <td t-attf-style="border-top: 1px solid {{style.text_color}};" class="text-right">
+                                <span t-field="o.amount_tax"/>
+
+                            </td>
+                        </tr>
+                        <tr t-if="o.move_type == 'out_refund'"
+                            t-attf-style="border-bottom: 1px solid {{style.text_color}};">
+                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <strong>Totale Nota di Credito</strong>
+                            </td>
+                            <td class="text-right"
+                                t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <span t-field="o.amount_total"/>
+
+                            </td>
+                        </tr>
+                        <tr t-if="o.move_type != 'out_refund'"
+                            t-attf-style="border-bottom: 1px solid {{style.text_color}};">
+                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <strong>Totale Fattura</strong>
+                            </td>
+                            <td class="text-right"
+                                t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <span t-field="o.amount_total"/>
+
+                            </td>
+                        </tr>
+                        <!--                        <tr t-if="o.withholding_tax_amount"-->
+                        <!--                            t-attf-style="border-bottom: 1px solid {{style.text_color}};">-->
+                        <!--                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">-->
+                        <!--                                <strong>Ritenuta</strong>-->
+                        <!--                            </td>-->
+                        <!--                            <td class="text-right"-->
+                        <!--                                t-attf-style="border-top: 1px solid {{style.text_color}} !important;">-->
+                        <!--                                <strong>-->
+                        <!--                                    <span style="font-weight:bold;"-->
+                        <!--                                          t-field="o.withholding_tax_amount"-->
+                        <!--                                          t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>-->
+                        <!---->
+                        <!--                                </strong>-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
+                        <!--                        <tr t-if="o.move_type != 'out_refund'">-->
+                        <!--                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">-->
+                        <!--                                <strong>Totale da Pagare</strong>-->
+                        <!--                            </td>-->
+                        <!--                            <td class="text-right"-->
+                        <!--                                t-attf-style="border-top: 1px solid {{style.text_color}} !important;">-->
+                        <!--                                <strong>-->
+                        <!--                                    <span t-if="o.withholding_tax_amount==0" style="font-weight:bold;"-->
+                        <!--                                          t-field="o.amount_total"/>-->
+                        <!--                                    <span t-if="o.withholding_tax_amount!=0" style="font-weight:bold;"-->
+                        <!--                                          t-field="o.amount_net_pay"-->
+                        <!--                                          t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>-->
+                        <!--                                </strong>-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+            <!--            <div t-if="o.tax_ids" class="col-2 pull-left"-->
+            <!--                 style="padding-top:1px; padding-left:0px; padding-right:0px; page-break-inside: avoid;">-->
+            <!--                <table class="table table-condensed" t-attf-style="color:{{style.text_color}};">-->
+            <!--                    <thead t-attf-style="background-color:3f3f3f; page-break-inside: avoid;color:#FFFFFF;">-->
+            <!--                        <tr t-attf-style="page-break-inside: avoid;font-size:{{style.body_font}}px;">-->
+            <!---->
+            <!--                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">-->
+            <!--                                Descrizione-->
+            <!--                            </td>-->
+            <!--                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">-->
+            <!--                                Imponibile-->
+            <!--                            </td>-->
+            <!--                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">-->
+            <!--                                IVA-->
+            <!--                            </td>-->
+            <!--                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">-->
+            <!--                                Imposta-->
+            <!--                            </td>-->
+            <!--                        </tr>-->
+            <!--                    </thead>-->
+            <!--                    <t t-foreach="o.tax_ids" t-as="t">-->
+            <!--                        <tr t-attf-style="background-color:{{style.odd if (t_parity in 'odd' and not style.transparent) else (not style.transparent and style.even)  or 'transparent'}}; page-break-inside: avoid;">-->
+            <!---->
+            <!--                            <td>-->
+            <!--                                <span t-field="t.name"/>-->
+            <!--                            </td>-->
+            <!--                            <td>-->
+            <!--                                <span t-field="t.base"/>-->
+            <!--                            </td>-->
+            <!--                            <td>-->
+            <!--                                <span t-esc="'{0:.0f}'.format(t.tax_id.amount)"/>-->
+            <!--                            </td>-->
+            <!--                            <td>-->
+            <!--                                <span t-field="t.amount"/>-->
+            <!--                            </td>-->
+            <!--                        </tr>-->
+            <!--                    </t>-->
+            <!--                </table>-->
+            <!--            </div>-->
+            <div class="col-12" style="padding:4px;"/>
+            <div t-if="payments" class="col-xs-6 pull-left"
+                 style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
+                <table class="table">
+
+                    <thead t-attf-style="page-break-inside: avoid;">
+                        <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid !important;">
+                            <th t-attf-style="border-bottom: 1px solid  !important;">No.</th>
+                            <th t-attf-style="border-bottom: 1px solid !important;">Date</th>
+                            <th t-attf-style="border-bottom: 1px solid  !important;">Method</th>
+                            <th t-attf-style="border-bottom: 1px solid  !important;">Ref.</th>
+                            <th class="text-right" t-attf-style="border-bottom: 1px solid !important;">Amount
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="payments['content']" t-as="p">
+                            <tr t-attf-style="page-break-inside: avoid !important;">
+                                <td>
+                                    <span t-esc="p_index + 1"/>
+                                </td>
+                                <td>
+                                    <span t-esc="p['date']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="p['journal_name']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="p['ref']"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="p['amount']"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <!--            <div class="col-5 pull-left"-->
+            <!--                 style="padding-top:1px; padding-left:0px; padding-right:0px; page-break-inside: avoid;">-->
+            <!--                <table t-if="o.payment_term_id and o.type != 'out_refund'" t-attf-style="color:{{style.text_color}};"-->
+            <!--                       style="border:1px solid;padding:5px;">-->
+            <!--                    <thead>-->
+            <!--                        <tr t-attf-style="font-size:{{style.body_font+2}}px;white-space:nowrap;"-->
+            <!--                            style="border:1px solid;padding:5px;">-->
+            <!--                            <td style="border:1px solid;padding:5px;">-->
+            <!--                                Importo-->
+            <!--                            </td>-->
+            <!--                            <td style="border:1px solid;padding:5px;">-->
+            <!--                                Scadenza-->
+            <!--                            </td>-->
+            <!--                            <td style="border:1px solid;padding:5px;text-align:center;">-->
+            <!--                                Pagamento-->
+            <!--                            </td>-->
+            <!--                        </tr>-->
+            <!--                        <t t-foreach="o.move_id.line_ids.sorted(key=lambda x: x.date_maturity)" t-as="p">-->
+            <!--                            <t t-if="p.account_id==o.account_id">-->
+            <!--                                <tr style="border:1px solid;padding:5px;">-->
+            <!--                                    <td style="border:1px solid;padding:5px;">-->
+            <!--                                        <span t-field="p.debit"-->
+            <!--                                              t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>-->
+            <!--                                    </td>-->
+            <!---->
+            <!--                                    <td style="border:1px solid;padding:5px;">-->
+            <!--                                        <span t-esc="time.strftime('%d-%m-%Y', time.strptime(p.date_maturity,'%Y-%m-%d'))"/>-->
+            <!--                                    </td>-->
+            <!--                                    <td style="border:1px solid;padding:5px;">-->
+            <!--                                        <span t-field="o.payment_term_id"/>-->
+            <!---->
+            <!--                                    </td>-->
+            <!--                                </tr>-->
+            <!--                            </t>-->
+            <!--                        </t>-->
+            <!--                    </thead>-->
+            <!--                </table>-->
+            <!--            </div>-->
+        </template>
+    </data>
+</odoo>

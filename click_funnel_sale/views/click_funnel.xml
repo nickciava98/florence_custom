@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<odoo>
+
+     <record id="click_funnel_tree" model="ir.ui.view">
+        <field name="name">click_funnel.tree</field>
+        <field name="model">click.funnel</field>
+        <field name="arch" type="xml">
+            <tree string="Click Funnel">
+                <field name="active" invisible="1"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="click_funnel_id"/>
+                <field name="user_id"/>
+                <field name="team_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="fiscal_position_id"/>
+                <field name="lang_id"/>
+                <field name="journal_id" optional="hide"/>
+                <field name="payment_journal_id" optional="hide"/>
+                <field name="pricelist_id" optional="hide"/>
+                <field name="warehouse_id" optional="hide"/>
+                <field name="can_confirm_sale" optional="hide"/>
+                <field name="can_create_invoice" optional="hide"/>
+                <field name="auto_followers" widget="many2many_tags" optional="hide"/>
+                <field name="can_send_confirmation_email" optional="hide"/>
+                <field name="confirmation_email_template_id" optional="hide"/>
+                <field name="can_send_invoice_confirmation_email" optional="hide"/>
+                <field name="invoice_email_template_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+     <record id="click_funnel_view" model="ir.ui.view">
+        <field name="name">click_funnel.view</field>
+        <field name="model">click.funnel</field>
+        <field name="arch" type="xml">
+            <form string="Click Funnel">
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Disabled" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <widget name="web_ribbon" title="Active" bg_color="bg-info" attrs="{'invisible': [('active', '=', False)]}"/>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Funnel Name"/>
+                        <h1><field name="name" placeholder="Funnel Name"/></h1>
+                    </div>
+                    <group>
+                        <field name="description"/>
+                        <field name="click_funnel_id"/>
+                        <field name="url" widget="url"/>
+                    </group>
+                    <group string="Setting to Apply">
+                        <field name="user_id"/>
+                        <field name="team_id"/>
+                        <field name="lang_id" widget="selection"/>
+                        <field name="pricelist_id"/>
+                        <field name="fiscal_position_id"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="journal_id" widget="selection" required="1"/>
+                        <field name="payment_journal_id" widget="selection" required="1"/>
+                        <field name="warehouse_id"/>
+                        <field name="auto_followers" widget="many2many_tags"/>
+                        <field name="can_confirm_sale"/>
+                        <field name="can_send_confirmation_email"/>
+                        <field name="confirmation_email_template_id" attrs="{'invisible': [('can_send_confirmation_email', '=', False)]}"/>
+                        <field name="can_create_invoice" attrs="{'invisible': [('can_confirm_sale', '=', False)]}"/>
+                        <field name="can_send_invoice_confirmation_email" attrs="{'invisible': [('can_create_invoice', '=', False)]}"/>
+                        <field name="invoice_email_template_id" attrs="{'invisible': ['|', ('can_confirm_sale', '=', False), ('can_send_invoice_confirmation_email', '=', False)]}"/>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Sales">
+                                <field name="sale_ids" readonly="1" nolabel="1" context="{'tree_view_ref': 'sale.view_order_tree'}"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="click_funnel_search" model="ir.ui.view">
+        <field name="name">click_funnel.search</field>
+        <field name="model">click.funnel</field>
+        <field name="arch" type="xml">
+            <search string="Search Click Funnel">
+                <field name="name" string="Name"/>
+                <field name="click_funnel_id" string="Click Funnel ID"/>
+                <separator/>
+                <filter string="Disabled" name="disabled" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By...">
+                    <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}"/>
+                    <filter string="Warehouse" name="warehouse" domain="[]" context="{'group_by': 'warehouse_id'}"/>
+                    <filter string="Fiscal Position" name="fiscal_position" domain="[]" context="{'group_by': 'fiscal_position_id'}"/>
+                    <filter string="User" name="user_id" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter string="Team" name="team_id" domain="[]" context="{'group_by': 'team_id'}"/>
+                    <filter string="Pricelist" name="pricelist_id" domain="[]" context="{'group_by': 'pricelist_id'}"/>
+               </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_click_funnel" model="ir.actions.act_window">
+        <field name="name">Click Funnel</field>
+        <field name="res_model">click.funnel</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="click_funnel_menu"
+        name="Click Funnel"
+        parent="sale.menu_sale_config"
+        groups="sales_team.group_sale_manager"
+        action="action_click_funnel"
+        sequence="100"/>
+
+</odoo>

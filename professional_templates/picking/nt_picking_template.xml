@@ -1,0 +1,157 @@
+<odoo>
+    <data>
+        <template id="PICK_Fashion_Dealer_document" name="Fashion Dealer">
+            <div class="article page"
+                 t-attf-style="color:{{style.text_color}} !important;padding-top:-16px !important;font-size:{{style.body_font}}px !important;font-family:{{style.font_family}} !important;">
+                <div class="col-xs-12"
+                     style="width:100%;padding-left:0px; padding-right:0px;padding-top:5x;padding-bottom:5px;">
+                    <div t-attf-style="float:left;width:100%;padding-left:10px;padding-right:10px;padding-top:5;padding-bottom:5px;
+                color:white; background-color:#c00000;border:1px solid {{style.text_color}};border-color:transparent">
+                        <h7 id="title"
+                            style="margin-top:10px;padding-top:5px;padding-bottom:5px;font-size:13px !important">
+                            <span>PICKING</span>
+                            <span t-field="o.name" style="padding-left:25px"/>
+<!--                            <span t-if="o.min_date" class="text-right pull-right">Date-->
+<!--                                <span t-esc="o.min_date" t-field-options='{"widget": "date"}'/>-->
+<!--                            </span>-->
+                        </h7>
+                    </div>
+                </div>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+                <div class="col-5 pull-left text-left mt8" style="padding-left:0px;">
+                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                         style="width:300px;height:50px;"/>
+                </div>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+                <div class="col-5 pull-right"
+                     t-attf-style="background-color:#efefef!important;height:130px;">
+                    <div t-if="o.partner_id">
+                        <strong>
+                            <span t-if="o.picking_type_id.code=='incoming' and o.partner_id">Vendor Address</span>
+                            <span t-if="o.picking_type_id.code=='internal' and o.partner_id">Warehouse Address</span>
+                            <span t-if="o.picking_type_id.code=='outgoing' and o.partner_id">Customer Address</span>
+                        </strong>
+                    </div>
+                    <div t-if="o.partner_id" style="margin-bottom:0px;">
+                        <span t-if="o.partner_id.name" t-field="o.partner_id.name"/>
+                        <br/>
+                        <span t-if="o.partner_id.street" t-field="o.partner_id.street"/>
+                        <br/>
+                        <span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/>
+                        <br/>
+                        <span t-if="o.partner_id.city" t-field="o.partner_id.city"/>
+                        <br/>
+                        <span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id"/>
+                    </div>
+                    <span t-if="o.partner_id.vat">VAT:
+                        <span t-field="o.partner_id.vat"/>
+                    </span>
+
+                </div>
+
+                <div t-if="o.picking_type_id.code != 'internal' and (not o.move_lines or not o.move_lines[0].partner_id) and
+			o.picking_type_id.warehouse_id.partner_id" class="col-5 pull-left"
+                     t-attf-style="background-color:#efefef!important;height:130px;">
+                    <strong>
+                        Warehouse Address
+                    </strong>
+                    <div>
+                        <div t-if="o.picking_type_id.warehouse_id.partner_id" style="margin-bottom:0px;">
+                            <span t-if="o.picking_type_id.warehouse_id.partner_id.name"
+                                  t-field="o.picking_type_id.warehouse_id.partner_id.name"/>
+                            <br/>
+                            <span t-if="o.picking_type_id.warehouse_id.partner_id.street"
+                                  t-field="o.picking_type_id.warehouse_id.partner_id.street"/>
+                            <br/>
+                            <span t-if="o.picking_type_id.warehouse_id.partner_id.zip"
+                                  t-field="o.picking_type_id.warehouse_id.partner_id.zip"/>
+                            <br/>
+                            <span t-if="o.picking_type_id.warehouse_id.partner_id.city"
+                                  t-field="o.picking_type_id.warehouse_id.partner_id.city"/>
+                            <br/>
+                            <span t-if="o.picking_type_id.warehouse_id.partner_id.country_id"
+                                  t-field="o.picking_type_id.warehouse_id.partner_id.country_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div t-if="o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id != o.partner_id.id"
+                     class="col-5 pull-right text-left"
+                     t-attf-style="background-color:#efefef!important;height:130px;">
+                    <strong>
+                        Delivery Address
+                    </strong>
+                    <div>
+                        <div>
+                            <div t-if="o.move_lines[0].partner_id" style="margin-bottom:0px;">
+                                <span t-if="o.move_lines[0].partner_id.name"
+                                      t-field="o.move_lines[0].partner_id.name"/>
+                                <br/>
+                                <span t-if="o.move_lines[0].partner_id.street"
+                                      t-field="o.move_lines[0].partner_id.street"/>
+                                <br/>
+                                <span t-if="o.move_lines[0].partner_id.zip"
+                                      t-field="o.move_lines[0].partner_id.zip"/>
+                                <br/>
+                                <span t-if="o.move_lines[0].partner_id.city"
+                                      t-field="o.move_lines[0].partner_id.city"/>
+                                <br/>
+                                <span t-if="o.move_lines[0].partner_id.country_id"
+                                      t-field="o.move_lines[0].partner_id.country_id"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+                <table class="col-12"
+                       t-attf-style="padding-left:0px;padding-right:0px; padding-bottom:4px; padding-top:5px;border:1px solid">
+                    <tr t-attf-style="padding:4px">
+                        <td t-attf-style="padding:4px;border:1px solid;width:33%">
+                            <strong>Origin</strong>
+                            <span t-field="o.picking_type_id"/>
+                        </td>
+                        <td t-attf-style="padding:4px;width:33%;border:1px solid">
+                            <strong>Priority</strong>
+                            <span t-field="o.priority"/>
+                        </td>
+                        <td t-attf-style="padding:4px;border:1px solid;width:33%">
+                            <strong>Carrier</strong>
+                            <span t-field="o.carrier_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td t-attf-style="padding:4px;border:1px solid;width:33%">
+                            <strong>Tracking Reference</strong>
+                            <span t-field="o.carrier_tracking_ref"/>
+                        </td>
+                        <td t-attf-style="padding:4px;border:1px solid;width:33%">
+                            <strong>Weight</strong>
+                            <span t-field="o.weight"/>
+                        </td>
+<!--                        <td t-attf-style="padding:4px;border:1 px solid;width:33%">-->
+<!--                            <strong>Number of Packages</strong>-->
+<!--                            <span t-field="o.number_of_packages"/>-->
+<!--                        </td>-->
+                    </tr>
+                </table>
+                <div class="col-12 row" style="padding:16px;"/>
+
+                <!-- DATA-->
+                <t t-call="professional_templates.picking_fashion_dealer_lines"/>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+
+                <div t-if="o.partner_id.internal_delivery_instructions" class="col-12">
+                    <strong t-attf-style="white-space:nowrap;">Delivery instructions</strong>
+                    <br/>
+                    <span t-field="o.partner_id.internal_delivery_instructions"/>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer" t-attf-style="font-size:18px;text-align:center!important">
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

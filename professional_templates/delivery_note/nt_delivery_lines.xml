@@ -1,0 +1,113 @@
+<odoo>
+    <data>
+        <template id="delivery_lines_fashion_dealer">
+            <table class="table table-condensed" t-if="o.state!='done'"
+                   t-attf-style="color:{{style.text_color}};font-family:{{style.font_family}} !important;">
+                <thead t-attf-style="background-color:#3f3f3f; page-break-inside: avoid;color:#ffffff;">
+                    <tr t-attf-style="font-size:{{style.body_font}}px;page-break-inside: avoid !important; border-bottom: 1px solid {{style.text_color}} !important;">
+                        <th id="th_status">
+                            Status
+                        </th>
+                        <th id="th_location">
+                            Location
+                        </th>
+                        <th class="text-right" id="th_qty">
+                            QTY
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.move_lines" t-as="move">
+                        <tr>
+                            <td id="td_state">
+                                <span t-field="move.state"/>
+                            </td>
+                            <td id="td_location_id">
+                                <span t-field="move.location_id"/>
+                            </td>
+                            <td id="td_product_uom_qty" class="text-right">
+                                <span t-esc="'{0:.0f}'.format(move.product_uom_qty)"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+            <t t-set="backorder" t-value="False"/>
+            <table t-if="o.move_line_ids and o.state=='done'" class="table  table-condensed"
+                   t-attf-style="color:{{style.text_color}};font-family:{{style.font_family}} !important;">
+                <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"
+                   groups="stock.group_production_lot"/>
+                <thead t-attf-style="background-color:3f3f3f; page-break-inside: avoid;color:#000000;">
+                    <tr t-attf-style="font-size:{{style.body_font}}px;page-break-inside: avoid !important; border-bottom: 1px solid {{style.text_color}} !important;">
+                        <th id="th_has_serial_number" t-if="has_serial_number">
+                            Barcode
+                            <br/>
+                            barcode
+                        </th>
+                        <th id="th_status">
+                            Status
+                            <br/>
+                            stato
+                        </th>
+                        <th id="th_location">
+                            Location
+                            <br/>
+                            location
+                        </th>
+                        <th class="text-right" id="th_quantity">
+                            QTY
+                            <br/>
+                            quantità
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.move_line_ids" t-as="move_line">
+                        <tr>
+                            <t t-if="has_serial_number"><!-- Start of serial number -->
+                                <td t-if="move_line.pack_lot_ids">
+                                    <table class="table table-condensed" t-if="move_line.pack_lot_ids">
+                                        <thead>
+                                            <tr>
+                                                <th>Lotto</th>
+                                                <th>Quantità</th>
+                                            </tr>
+                                        </thead>
+                                        <tr t-foreach="move_line.pack_lot_ids" t-as="packlot">
+                                            <td>
+                                                <span t-field="packlot.lot_id"/>
+                                                <t t-if="not packlot.lot_id">
+                                                    <span t-field="packlot.lot_name"/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{0:.0f}'.format(packlot.qty)"/>
+                                                <t t-if="o.picking_type_id.use_existing_lots and o.state!='done'">/
+                                                    <span t-esc="'{0:.0f}'.format(packlot.qty_todo)"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td t-if="not move_line.pack_lot_ids"/>
+                            </t> <!-- end of serial number -->
+
+                            <td id="td_state_lines">
+                                <span t-field="move_line.picking_id.move_lines[move_line_index].state"/>
+                            </td>
+                            <td id="td_location_lines">
+                                <span t-field="move_line.location_id"/>
+                                <span t-if="move_line.package_id">:</span>
+                                <span t-field="move_line.package_id"/>
+                            </td>
+                            <td class="text-right" id="td_qty_lines">
+                                <span t-esc="'{0:.0f}'.format(move_line.product_qty)"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </template>
+    </data>
+</odoo>

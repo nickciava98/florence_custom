@@ -1,0 +1,334 @@
+<odoo>
+    <data>
+        <template id="INVOICE_FD_document" name="Fashion Dealer">
+            <div class="article page" t-attf-data-oe-model="account.move" t-attf-data-oe-id="{{o.id}}"
+                 t-attf-style="color:{{style.text_color}} !important;padding-top:-16px !important;font-size:{{style.body_font}}px !important;font-family:{{style.font_family}} !important;">
+                <div class="col-12"
+                     style="width:100%;padding-left:0px; padding-right:0px;padding-top:5x;padding-bottom:5px;">
+                    <div t-attf-style="float:left;width:100%;padding-left:10px;padding-right:10px;padding-top:5;padding-bottom:5px;
+                color:white; background-color:#c00000;border:1px solid {{style.text_color}};border-color:transparent;">
+                        <h7 id="title"
+                            style="margin-top:10px;padding-top:5px;padding-bottom:5px;font-size:13px !important">
+                            <span t-if="o.move_type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
+                                INVOICE /
+                                FATTURA
+                                N.
+                            </span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">DRAFT INVOICE / BOZZA
+                                FATTURA
+                            </span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">CANCELLED INVOICE /
+                                FATTURA
+                                CANCELLATA
+                            </span>
+                            <span t-if="o.move_type == 'out_refund'">CREDIT NOTE / NOTA DI CREDITO</span>
+                            <span t-if="o.move_type == 'in_refund'">REFUND / NOTA DI CREDITO FORNITORE</span>
+                            <span t-if="o.move_type == 'in_invoice'">REFUND INVOICE/ FATTURA FORNITORE</span>
+                            <span t-field="o.name" style="padding-left:25px"/>
+                            <span t-if="o.invoice_date" class="pull-right" style="text-align:right">Date
+                                <span t-esc="time.strftime('%d/%m/%Y', time.strptime(str(o.invoice_date),'%Y-%m-%d'))"/>
+                            </span>
+                        </h7>
+                    </div>
+                </div>
+                <div class="col-12 row " style="padding:8px"/>
+                <div class="col-12 row">
+                    <div class="col-4 float-left text-left"
+                         t-attf-style="color:#000000;background-color:#efefef!important;height:169px;">
+                        <div t-attf-style="padding-top:5px; padding-bottom:0px;">
+                            <span t-if="o.partner_id">
+                                <strong>Bill To (Indirizzo fatturazione)</strong>
+                            </span>
+                        </div>
+                        <div t-if="o.partner_id">
+                            <t t-if="o.partner_id.commercial_partner_id">
+                                <span t-field="o.partner_id.commercial_partner_id"/>
+                                <span t-if="o.partner_id.commercial_partner_id.title"
+                                      t-field="o.partner_id.commercial_partner_id.title"/>
+                                <span t-field="o.partner_id.commercial_partner_id.name"/>
+                            </t>
+                            <t t-if="not o.partner_id.commercial_partner_id">
+                                <span t-if="o.partner_id.commercial_partner_id.title"
+                                      t-field="o.partner_id.commercial_partner_id.title"/>
+                                <span t-field="o.partner_id.commercial_partner_id"/>
+                            </t>
+
+                        </div>
+                        <span style="margin-bottom:0px;">
+                            <span t-if="o.partner_id.commercial_partner_id.street"
+                                  t-field="o.partner_id.commercial_partner_id.street"/>
+                            <br/>
+                            <span t-if="o.partner_id.commercial_partner_id.zip"
+                                  t-field="o.partner_id.commercial_partner_id.zip"/>
+                            <br/>
+                            <span t-if="o.partner_id.commercial_partner_id.city"
+                                  t-field="o.partner_id.commercial_partner_id.city"/>
+                            <br/>
+                            <span t-if="o.partner_id.commercial_partner_id.country_id"
+                                  t-field="o.partner_id.commercial_partner_id.country_id"/>
+                        </span>
+                        <br/>
+                        <span t-if="o.partner_id.commercial_partner_id.fiscalcode">C.F.:
+                            <span t-field="o.partner_id.commercial_partner_id.fiscalcode"/>
+                            <br/>
+                        </span>
+                        <span t-if="o.partner_id.commercial_partner_id.vat">VAT:
+                            <span t-field="o.partner_id.commercial_partner_id.vat"/>
+                        </span>
+                    </div>
+
+                    <div class="col-1" style="width:0px !important"/>
+                    <div t-if="o.partner_shipping_id"
+                         class="col-4 float-center text-left"
+                         t-attf-style="{{style.text_color}};background-color:#efefef!important;height:169px;">
+                        <div t-if="o.partner_shipping_id">
+                            <span>
+                                <strong>Ship To (Indirizzo di Spedizione)</strong>
+                            </span>
+                        </div>
+                        <div t-if="o.partner_shipping_id.commercial_partner_id">
+                            <span t-field="o.partner_shipping_id.name"/>
+                        </div>
+                        <span style="margin-bottom:0px;">
+                            <span t-if="o.partner_shipping_id.street" t-field="o.partner_shipping_id.street"/>
+                            <br/>
+                            <span t-if="o.partner_shipping_id.zip" t-field="o.partner_shipping_id.zip"/>
+                            <br/>
+                            <span t-if="o.partner_shipping_id.city" t-field="o.partner_shipping_id.city"/>
+                            <br/>
+                            <span t-if="o.partner_shipping_id.country_id" t-field="o.partner_shipping_id.country_id"/>
+                        </span>
+                        <br/>
+                        <span t-if="o.partner_id.commercial_partner_id.fiscalcode">C.F.:
+                            <span t-field="o.partner_id.commercial_partner_id.fiscalcode"/>
+                            <br/>
+                        </span>
+                        <span t-if="o.partner_id.commercial_partner_id.vat">VAT:
+                            <span t-field="o.partner_id.commercial_partner_id.vat"/>
+                        </span>
+                        <t t-if="o.partner_shipping_id.delivery_instructions">
+                            <br/>
+                            <br/>
+                            <span t-field="o.partner_shipping_id.delivery_instructions" style="font-weight:bold;"/>
+                        </t>
+
+                    </div>
+                    <div class="col-1" style="width:0px !important"/>
+                    <div class="col-4 float-right "
+                         t-attf-style="{{style.text_color}};background-color:#efefef!important;height:169px;">
+                        <strong>
+                            Shipping Information
+                        </strong>
+                        <br/>
+                        <table t-attf-style="padding:4px;{{style.text_color}};background-color:#efefef!important;">
+                            <thead t-attf-style="background-color:#efefef;">
+                                <tr t-attf-style="background-color:#efefef;">
+                                    <td t-attf-style="padding:4px;background-color:#efefef;width:49%">Carrier name:</td>
+                                    <td t-attf-style="padding:4px;background-color:#efefef;">
+                                        <span t-field="o.carrier_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="background-color:#efefef;">
+                                    <td t-attf-style="padding:4px;background-color:#efefef!important;width:47%">Tracking
+                                        Number:</td>
+                                    <td t-attf-style="padding:4px;background-color:#efefef!important;">
+                                        <span t-field="o.tracking_nr"/>
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="background-color:#efefef!important;">
+                                    <td t-attf-style="padding:4px;background-color:#efefef!important;width:49%">Nr. of
+                                        Pieces:</td>
+                                    <td t-attf-style="padding:4px;background-color:#efefef!important;">
+                                        <t t-set="val" t-value="0"/>
+                                        <t t-foreach="o.invoice_line_ids" t-as="p">
+                                            <t t-set="val" t-value="val+p.quantity"/>
+                                        </t>
+                                        <span t-esc="'{0:.0f}'.format(val)"/>
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="background-color:#efefef!important;">
+                                    <td t-attf-style="padding:4px;background-color:#efefef!important;width:49%">Nr. of
+                                        Packages:</td>
+                                    <td t-attf-style="padding:4px;background-color:#efefef!important;">
+                                        <span t-field="o.packages"/>
+                                    </td>
+                                </tr>
+                                <tr t-attf-style="background-color:efefef;">
+                                    <td t-attf-style="padding:4px;background-color:#efefef;width:49%">Total Gross
+                                        Weight:
+                                    </td>
+                                    <td t-attf-style="padding:4px;background-color:#efefef;">
+                                        <span t-field="o.gross_weight"/>
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!--Internal Info-->
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+                <table class="col-12"
+                       t-attf-style="padding-left:0px;padding-right:0px; padding-bottom:4px; padding-top:5px;background:white;border:1px solid #000 ;">
+                    <tr t-attf-style="padding:4px;background:white;border:1px solid #000 ;">
+                        <td t-attf-style="padding:4px;background:white;border:1px solid #000 ;width:33%">
+                            <strong>Internal Ref.</strong>
+                            <span t-field="o.invoice_origin"/>
+                        </td>
+                        <td t-attf-style="padding:4px;width:33%;background:white;border:1px solid #000 ;">
+                            <strong>Payment Term</strong>
+                            <span t-field="o.invoice_payment_term_id"/>
+                        </td>
+                        <td t-attf-style="padding:4px;background:white;border:1px solid #000 ;width:33%">
+                            <strong>Currency</strong>
+                            <span t-field="o.currency_id.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td t-attf-style="padding:4px;background:white;border:1px solid #000;width:33%">
+                            <strong>Customer Ref.</strong>
+                            <span t-if="o.ref" t-field="o.ref"/>
+                        </td>
+                        <td t-attf-style="padding:4px;border:1px solid #000;width:33%">
+                            <strong>Payment Method</strong>
+                            <!--account_payment_partner_module-->
+                            <span t-field="o.payment_mode_id"/>
+                        </td>
+                        <td t-attf-style="padding:4px;border:1px solid #000;width:33%">
+                            <strong>Terms of Sale</strong>
+                            <span t-field="o.default_transport_condition_id"/>
+                        </td>
+                    </tr>
+                </table>
+                <table t-if="env.context.get('o.partner_bank_id.acc_number') == 'IT66L0341712800CC0010013657'"
+                       class="col-12"
+                       t-attf-style="padding-left:0px;padding-right:0px; padding-bottom:4px; padding-top:5px;">
+                    <tr t-attf-style="padding:4px;">
+                        <td t-attf-style="padding:4px;border:1 px solid #0000000" class="text-center">
+                            <span>This invoice is assigned to : 24 Funding SPV Srl
+                                <br/>z
+                                Payment must be done to:
+                                <br/>
+                                Name of bank account holder: 24 Funding SPV Srl
+                                <br/>
+                                Bank name: Banca Privata Leasing Spa
+                                <br/>
+                                IBAN: IT 66 L 03417 12800 CC0010013657
+                                <br/>
+                                Account number: 0010013657
+                                <br/>
+                                BIC/Swift Code: PRLEIT23XXX
+                                <br/>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <table t-if="env.context.get('o.partner_bank_id.acc_number') != 'IT66L0341712800CC0010013657'"
+                       class="col-12"
+                       t-attf-style="padding-left:0px;padding-right:0px; padding-bottom:4px; padding-top:5px;">
+                    <tr t-attf-style="padding:4px;">
+                        <td t-attf-style="padding:4px;border:1 px solid #0000000" class="text-center">
+                            <span t-if="o.partner_bank_id.bank_id.name">Bank:</span>
+                            <span t-field="o.partner_bank_id.bank_id.name"/>
+                            <span/>
+                            <span t-if="o.partner_bank_id.bank_id.bic">BIC:</span>
+                            <span t-field="o.partner_bank_id.bank_id.bic"/>
+                            <br/>
+                            <span t-if="o.partner_bank_id.acc_number">IBAN:</span>
+                            <span t-field="o.partner_bank_id.acc_number"/>
+                        </td>
+                    </tr>
+                </table>
+                <div class="col-12 row" style="padding:8px"/>
+                <t t-call="professional_templates.INVOICE_FD_lines"/>
+                <div class="col-5 pull-right">
+                    <table t-attf-style="border:1px solid" class="table">
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL PRODUCTS (totale prodotti)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <t t-set="total_products" t-value="0"/>
+                                <t t-foreach="o.invoice_line_ids" t-as="l">
+                                    <t t-if="l.product_id.type != 'service'">
+                                        <t t-set="total_products" t-value="total_products+(l.price_unit*l.quantity)"/>
+                                    </t>
+                                </t>
+                                <t t-esc="total_products"
+                                   t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>DISCOUNTS (importo sconto)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <t t-set="val_discount" t-value="0.0"></t>
+                                <t t-foreach="o.invoice_line_ids" t-as="p">
+                                    <t t-if="p.product_id.type != 'service'">
+                                        <t t-set="val_discount"
+                                           t-value="val_discount+((p.price_unit *p.quantity)-p.price_subtotal)"/>
+                                    </t>
+                                </t>
+                                <t t-esc="val_discount"
+                                   t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL PRODUCTS EXCL.DISCOUNT</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <t t-set="val_excl_discount" t-value="0"></t>
+                                <t t-set="val_excl_discount" t-value="total_products-val_discount"/>
+                                <t t-esc="val_excl_discount"
+                                   t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>SHIPPING (spedizione)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <!--<span t-field="o.delivery_price"/>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL TAXABLE (imponibile)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span t-field="o.amount_untaxed"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>VAT (IVA)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span t-field="o.amount_tax"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL INVOICE (totale fattura)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span t-field="o.amount_total"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--FOOTER -->
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer" t-attf-style="font-size:18px;text-align:center!important">
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+    </data>
+</odoo>

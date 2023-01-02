@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+        <template id="DN_Hermes_document" name="Hermes">
+            <div t-attf-style="padding-left:0px; padding-right:0px; color:{{style.text_color}} !important;font-size:{{style.header_font}}px !important;font-family:{{style.font_family}} !important;"
+                 class="header">
+                <div t-if="style.header">
+                    <table t-attf-style="text-align:center; margin-bottom:5px">
+                        <tr>
+                            <td style="width:50%;">
+                                <div t-if="style.logo"
+                                     style="width:168px; height:130px; margin-top:0px;margin-right 100px;"
+                                     itemprop="image" t-field="style.logo" t-options='{"widget": "image"}'
+                                     t-field-options="{&quot;widget&quot;: &quot;image&quot;}">
+                                </div>
+                                <div t-if="not style.logo and company.logo"
+                                     style="width:100%; text-align:right; margin-right:100px">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                                <div t-if="not style.logo and company.logo"
+                                     style="width:100%; text-align:right;">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                                <div t-if="not style.logo and not company.logo"
+                                     style="width:100%;text-align:right;">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="article page"
+                 t-attf-style="color:{{style.text_color}} !important;padding-left:10px; padding-right:10px;font-size:{{style.body_font}}px !important;font-family:{{style.font_family}} !important;">
+            <div class="col-12 row"
+                 style="width:100%; padding-right:0px;padding-top:20px;padding-bottom:5px;">
+            </div>
+                <div class="col-5 pull-left"
+                     t-attf-style="color:{{style.text_color}} !important; border:1px solid {{style.text_color}};margin-top:35px;height:40px;font-size:12px">
+                    <h6 id="title" style="margin-bottom:10px;font-weight: bolder;margin-top:10px;">
+                        <span>NOTA DI CONSEGNA</span>
+                        <span t-field="o.name" style="padding-left:25px"/>
+                    </h6>
+                </div>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+                <div class="col-5 pull-right"
+                     t-attf-style="{{style.text_color}};background-color:#efefef!important;height:130px;">
+                    <span>
+                        <strong>Indirizzo di consegna</strong>
+                    </span>
+
+                    <div t-if="o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id != o.partner_id.id">
+                        <div>
+                            <address t-field="o.move_lines[0].partner_id" style="margin-bottom:0px;"
+                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone",  "email", "website"]}'/>
+                        </div>
+                    </div>
+                    <div t-if="(o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id == o.partner_id.id) or o.move_lines and not o.move_lines[0].partner_id">
+                        <div t-field="o.partner_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone",  "email", "website"]}'/>
+                    </div>
+                </div>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+                 <div class="col-5 float-right text-left"
+                     t-attf-style="border: 1px solid {{style.text_color}}; padding:15px;">
+                     <div t-if="o.partner_id"
+                         t-attf-style="font-size:{{style.body_font}}px; margin-top:2px; margin-bottom:5px; margin-left:0px;">
+                         <span><strong>Indirizzo Cliente</strong></span>
+                     </div>
+                     <div t-field="o.partner_id" style="margin-bottom:0px;"
+                             t-field-options='{"widget": "contact", "fields": ["address", "phone", "name"]}'/>
+                 </div>
+                <div class="col-12 row" style="padding:8px;"/>
+                <t t-call="professional_templates.delivery_lines_hermes"/>
+            <!--FINE-->
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer" t-attf-style="font-size:18px;text-align:center!important">
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Pagina:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="view_partner_form_vat_inv" model="ir.ui.view">
+            <field name="name">res.partner.form.fiscal.entity.vat.invoice</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='vat']" position="after">
+                      <field name="fiscal_entity_vat"  attrs="{'invisible': [('type', '!=', 'fiscal_entity')]}"/>
+                 </xpath>
+                <xpath expr="//div[@name='div_address']/.." position="after">
+                    <field name="fiscal_entity_vat"  attrs="{'invisible': [('type', '!=', 'fiscal_entity')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

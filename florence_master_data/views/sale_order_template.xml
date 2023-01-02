@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <template id="report_proforma_document_florence_add_image" inherit_id="sale.report_saleorder_document">
+              <xpath expr="//div[@class='page']" position="after">
+                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                    <div class="float-right">
+                        <img src="/florence_master_data/static/src/img/signature.png"/>
+                    </div>
+                    <div class="float-left">
+                        <span>Goods stored in:</span>
+                        <br/>
+                        <span t-field="doc.warehouse_id.name"/>
+                        <address t-field="doc.warehouse_id.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "phone",  "email"], "no_marker": true}'/>
+                        <div class="col-12 row" style="padding:8px"/>
+
+                        <strong>Bank Details</strong><br/>
+                        <strong>BANK:</strong>
+                        <t t-if="doc.partner_bank_id">
+                            <span t-field="doc.partner_bank_id.bank_id.name"/>
+                        </t>
+                        <br/>
+                        <strong>IBAN:</strong>
+                        <t t-if="doc.partner_bank_id.bank_id">
+                            <span t-field="doc.partner_bank_id.acc_number"/>
+                        </t>
+                        <br/>
+                        <strong>BIC:</strong>
+                        <t t-if="doc.partner_bank_id.bank_id">
+                            <span t-field="doc.partner_bank_id.bank_id.bic"/>
+                        </t>
+                        <br/>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

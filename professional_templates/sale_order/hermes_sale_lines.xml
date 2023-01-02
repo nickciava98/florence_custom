@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <template id="SO_Hermes_lines">
+            <!-- Is there a discount on at least one line? -->
+            <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
+            <!-- Is there tax on at least one line? -->
+            <t t-set="display_taxes" t-value="any([y.tax_id for y in doc.order_line])"/>
+            <!-- To take care of columns when no discount -->
+            <t t-set="col_span" t-value="8 if display_discount else 7"/>
+            <!-- common th styles -->
+            <t t-set="th_style" t-value="'border-bottom: 1px solid #ddd !important;white-space:nowrap;'"/>
+            <table class="table  table-condensed" t-attf-style="color:{{style.text_color}};">
+                <thead t-attf-style="background-color:3f3f3f; page-break-inside: avoid;">
+                    <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid {{style.text_color}} !important;">
+                        <th id="th_default_code"
+                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                            Codice
+                        </th>
+                        <th class="text-left" id="th_name"
+                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                            Descrizione
+                        </th>
+                        <th id="th_qty" class="text-center"
+                            t-attf-style="border-top: 1px solid {{style.text_color}} !important;"
+                        >
+                            Quantità
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="doc.order_line" t-as="l">
+                        <tr t-attf-style="background-color:{{style.odd if (l_parity in 'odd' and not style.transparent) else (not style.transparent and style.even) or 'transparent'}}; page-break-inside: avoid">
+                            <td id="td_default_code">
+                                <span t-field="l.product_id.default_code"/>
+                            </td>
+                            <td id="td_name" class="text-left" style="max-width:200px;">
+                                <span t-field="l.name"/>
+                            </td>
+                            <td id="td_qty" class="text-center">
+                                <span t-field="l.product_uom_qty"/>
+                            </td>
+
+                        </tr>
+                    </t>
+                    <t t-if="(layout_category_size > 1 or page_size > 1) and layout_category['subtotal']"
+                       groups="sale.group_sale_layout">
+                        <!-- Subtotal -->
+                        <t t-call="professional_templates.subtotal_template">
+                            <t t-set="cols" t-value="col_span"/>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+            <t t-if="page_index &lt; page_size - 1" groups="sale.group_sale_layout">
+                <p style="page-break-before:always;"></p>
+            </t>
+            <div class="col-5 pull-right"
+                 style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
+                <table class="table table-condensed" t-attf-style="color:{{style.text_color}};">
+                    <tbody>
+                        <tr id="tr_tot_product" t-attf-style="border-top: 1px solid {{style.text_color}};">
+                            <td t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <strong>Totale Merce</strong>
+                            </td>
+                            <td class="text-right"
+                                t-attf-style="border-top: 1px solid {{style.text_color}} !important;">
+                                <t t-set="total_products" t-value="0"/>
+                                <t t-foreach="doc.order_line" t-as="o">
+                                    <t t-set="total_products"
+                                       t-value="total_products+(o.product_uom_qty*o.price_unit)"/>
+                                </t>
+                                <t t-esc="total_products"
+                                   t-options="{'widget': 'monetary', 'display_currency': doc.pricelist_id.currency_id}"/>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12" style="padding:8px;"/>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,1800 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="snippets_florence_bio_arctonik_250_ml" name="Florence BIO arctonik 250 ml">
+        <section id="content">
+            <div class="container">
+                <h3>Arctonik innovatív bio formulával</h3>
+                <p><span class="">Az arctonik hagyományos felfogása mára elhalványult!</span>A Florence® BIO
+                    arctonik egy új és innovatív termék, melynek célja, hogy tökéletesítse a smink
+                    letisztítását, eltávolítsa a vízkő nyomait a bőrbarát pH-érték megtartásával, és ezáltal a
+                    bőrt felkészítse a szérummal illetve hidratáló-ránctalanító krémmel történő kezelésére.
+                    Arctonikunk mindezt tudja, és a legjobb, hogy kíméletesen!
+                </p>
+                <p><span class="">Mit várunk el egy hagyományos arctoniktól?</span>Hogy hatékonyan húzza össze a
+                    kitágult pórusokat, hogy eltávolítsa a sminkmaradványokat és egyébb szennyeződéseket, és
+                    mindezeket hatékonyan tegye. De mi többet akarunk: azt akarjuk, hogy ne okozzon
+                    bőrirritációt és bőrpírt! A gyengéd tisztításért damaszkuszi rózsavízzel és csipkebogyó
+                    kivonattal, alacsony molekulatömegű hialuronsavval és értékes Hexapapetide 10-el dúsított
+                    tonikot készítettünk, ami kellően gyengéd és kíméletes a bőrhöz.
+                </p>
+                <p>A tiszta damaszkuszi rózsavíz általánosan ismert arról, hogy csillapítja az érzékeny bőr
+                    irritációját és kipirosodását. De ez még nem minden: összehúzó tulajdonságai miatt vegyes és
+                    zsíros bőrre egyaránt alkalmas, hasznos az érett bőr felfrissítésére, a lifting hatásnak
+                    köszönhetően pedig a szemkontúr sokkal ellazultabbnak tűnik.
+                </p>
+                <p>
+                    <em>
+                        <strong>TIPP 1:</strong>
+                    </em>
+                    arctonikunk előtt használd BIO arctisztító tejünket, utána pedig BIO C-Vitamin
+                    arcszérumunkat a gyönyörű és egészséges arcbőrért!
+                    <em>
+                        <strong>
+                            <br/>
+                            TIPP 2:
+                        </strong>
+                    </em>
+                    végső fixálóként kend be vagy permetezd a sminkedre, hogy porcelánhoz hasonló egyenletes
+                    arcbőrt kapj és kinézeted még ragyogóbb legyen!
+                </p>
+            </div>
+        </section>
+        <section class="difference">
+            <div class="container">
+                <div class="row">
+                    <div class="wrap_left col-md-6 col-12">
+                        <div class="title">Tonizálj természetesen
+                            <span>a hagyományos arctonik már a múlté!</span>
+                        </div>
+
+                        <ul>
+                            <li>AIAB bio minősítésű vegán arctonik</li>
+                            <li>Ellenőrzött biogazdálkodásból származó természetes összetevők</li>
+                            <li>Damaszkuszi rózsavízzel és csipkebogyó kivonattal</li>
+                            <li>Hialuronsavval, Aloe verával és Betainnel</li>
+                            <li>Kíméletesen tonizál és nem szárítja az arcbőrt</li>
+                            <li>Nem okoz bőrirritációt és bőrpírt</li>
+                            <li>Hatékonyan távolítja el a sminkmaradványokat és szennyeződéseket</li>
+                            <li>Látványosan összehúzza a pórusokat</li>
+                            <li>Bőrgyógyászatilag tesztelt</li>
+                            <li>A bio arcápolási rutinunk második lépéseként használható</li>
+                        </ul>
+                    </div>
+
+                    <div class="wrap_right hide_in_960 col-6 d-none d-md-block">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/arctonik-min.png"
+                             alt="Florence BIO arctonik 250 ml"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="active_substances">
+                    <div class="inner p_l_20 p_r_20">
+                        <div class="sec_font title center">Főbb hatóanyagok</div>
+
+                        <div class="active_substances_wrap row">
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid"
+                                     src="/theme_florence/static/src/img/Aloe-Vera-min-1-300x171.jpg"
+                                     alt="Aloe Vera"/>
+
+                                <h3>Aloe Vera</h3>
+
+                                <div class="text">Kiváló antioxidáns és antibakteriális hatása van. Hűsítő,
+                                    gyulladáscsökkentő és megőrzi a nedvességet. Ideális száraz, irritált és
+                                    érzékeny bőrre. Antioxidatív, serkenti a kollagéntermelést és hatásos
+                                    bizonyos vírusok, baktériumok és gombák ellen. Kiváló pikkelysömör,
+                                    bőrgyulladás, akné és leégés kezelésére is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid"
+                                     src="/theme_florence/static/src/img/damaszkuszi-rozsaviz-min-300x171.jpg"
+                                     alt="Damaszkuszi rózsavíz"/>
+
+                                <h3>Damaszkuszi rózsavíz</h3>
+
+                                <div class="text">Damaszkuszi rózsaszirmok (Rosa damascena)
+                                    vízgőzdesztillálásával nyert valódi hidrolátum, virágvíz. Minden
+                                    bőrtípus számára ajánlott mivel erőteljesen hidratáló, ránctalanító és
+                                    bőrfeszesítő hatású. Magyszerűen tonizál és segít megőrizni a bőr
+                                    nedvességtartalmát, kisebb napégés kezelésére is alkalmazható.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid"
+                                     src="/theme_florence/static/src/img/csipkebogyo-kivonat-min-300x171.jpg"
+                                     alt="Csipkebogyó kivonat"/>
+
+                                <h3>Csipkebogyó kivonat</h3>
+
+                                <div class="text">Legnagyobb mennyiségben C-vitamint tartalmaz, ezenkívül
+                                    B1-, B2-, P-, K- és A-vitamin, valamint gyulladáscsökkentő hatású
+                                    flavonoidok is találhatók benne. Több kutatás is arra jutott, hogy a
+                                    bőrön antioxidáns hatása van, gyulladáscsökkentő, szövetösszehúzó és
+                                    nyugatató hatású is egyben.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid"
+                                     src="/theme_florence/static/src/img/Betain-min-300x171.jpg"
+                                     alt="Betaine"/>
+
+                                <h3>Betaine</h3>
+
+                                <div class="text">Cukorrépából kivont aminosav származék, amit főleg mint
+                                    szuper hidratáló összetevő használnak a kozmetikumokban. Különlegessége,
+                                    hogy képes a sejtek vízháztartását fenntartani. További pozitívuma, hogy
+                                    sok más hidratálóval szemben nem tapad, sőt kifejezetten kellemes és
+                                    selymes érzete van. Irritáció ellen is nagyon hatékony.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid"
+                                     src="/theme_florence/static/src/img/Hialuronsav-min-1-300x171.jpg"
+                                     alt="Hialuronsav"/>
+
+                                <h3>Hialuronsav</h3>
+
+                                <div class="text">Ebben az arctonikban alacsony molekulasúlyú hialuronsavat
+                                    alkalmazunk, aminek közismerten a legjobb felszívódása. Az kis
+                                    molekulaméretéből adódóan a bőr mélyebb rétegeibe képes behatolni és
+                                    fejti ki mélyhidratáló hatását. Emeli a bőr regenerációs képességét,
+                                    simítja finom vonalakat és hosszantartóan hidratál.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid"
+                                     src="/theme_florence/static/src/img/Glycerin-min-300x171.jpg"
+                                     alt="Glycerin"/>
+
+                                <h3>Glycerin</h3>
+
+                                <div class="text">A glicerin természetes vízmegkötő hatása miatt segít a
+                                    folyadékot a bőr felsőbb rétegeiben tartani. Éppen ezért akadályozza a
+                                    kiszáradást, hámlást, erősíti a bőr természetes védőrétegét. A glicerin
+                                    pattanásos bőr ápolására is alkalmas, mivel nem komedogén, tehát nem
+                                    zárja el a pórusokat.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid"
+                                     src="/theme_florence/static/src/img/Coco-glucoside-min-300x171.jpg"
+                                     alt="Coco glucoside"/>
+
+                                <h3>Coco glucoside</h3>
+
+                                <div class="text">A coco glucoside, vagy más néven hidratáló tenzid 100%-ban
+                                    növényi eredetű, környezetbarát nem-ionos felületaktív, habképző anyag,
+                                    kondicionáló- és emulgeálószer. Segít növelni a kozmetikai készítmények
+                                    habosodási képességét. Nagyon gyengéd, nem szárítja a bőrt, ami miatt
+                                    kiváló választás akár babák részére is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid"
+                                     src="/theme_florence/static/src/img/Heptapeptide-10-min-300x171.jpg"
+                                     alt="Heptapeptide-10"/>
+
+                                <h3>Heptapeptide-10</h3>
+
+                                <div class="text">Bőrkondicionáló és nyugtató hatású peptid amely arginint,
+                                    glutamint, glicint, lizint, fenilalanint, szerint és treonint tartalmaz.
+                                    Pikkelysömör ellen is kiváló.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="ingredients">
+                    <div class="ingredients_header">Összetevők</div>
+                    <div class="ingredients_content" style="display: none;">
+                        <p>Aloe barbadensis leaf juice, Aqua, Rosa Damascena flower water, Rosa canina fruit
+                            extract, Heptapeptide-10, Betaine, Hydrolyzed hyaluronic acid, Parfum, Tetrasodium
+                            glutamate diacetate, Ethylhexylglycerin, Coco-glucoside, Glycerin, Caprylyl glycol,
+                            Glyceryl oleate, Sodium benzonate, Potassium sorbate
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="icons">
+            <div class="container">
+                <div class="icons_wrap inner p_l_20 p_r_20 row">
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img-fluid img" src="/theme_florence/static/src/img/icon_bio.svg"
+                             alt="Biogazdálkodásból származó organikus összetevők"/>
+                        <div class="text">Biogazdálkodásból származó organikus összetevők</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img-fluid img" src="/theme_florence/static/src/img/icon_tight_skin.svg"
+                             alt="Hidratált, feszes, egységes tónusú ragyogó bőr"/>
+                        <div class="text">Hidratált, feszes, egységes tónusú ragyogó bőr</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_paraben_free.svg"
+                             alt="Parabén, szulfát, és mikroműanyag mentes"/>
+                        <div class="text">Parabén, szulfát, és mikroműanyag mentes</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_clinically_tested.svg"
+                             alt="Klinikailag és bőrgyógyászatilag tesztelt"/>
+                        <div class="text">Klinikailag és bőrgyógyászatilag tesztelt</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_italy.svg"
+                             alt="Olaszországban kifejlesztve  és gyártva"/>
+                        <div class="text">Olaszországban kifejlesztve és gyártva</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_rabbit.svg"
+                             alt="Vegán és állatokon nem tesztelték"/>
+                        <div class="text">Vegán és állatokon nem tesztelték</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="counterup">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font center">Európa egyik legkeresettebb arcszéruma!</div>
+
+                    <div class="subtitle center">(Amazon 2022.02.22. eladási adatai alapján)</div>
+
+                    <div class="counterup_wrap row">
+                        <div class="wrap_left col-md-4 col-12">
+                            <img src="/theme_florence/static/src/img/siero-florence-riflesso.png"
+                                 alt="" class="img img-fluid"/>
+                        </div>
+
+                        <div class="wrap_right col-12 col-md-8">
+                            <div class="counterup_wrap row">
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">N°1</div>
+
+                                    <div class="part_text">A legtöbbet eladott kozmetikum az Amazon „BEAUTY”
+                                        kategóriában Olaszországban, Franciaországban, Spanyolországban,
+                                        Németországban és Angliában!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">64 314</div>
+
+                                    <div class="part_text">valós vásárlói vélemény. Európában arcszérum még
+                                        soha nem ért el ilyen eredményt!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">12</div>
+
+                                    <div class="part_text">országban kaphatók a Florence bio kozmetikumok,
+                                        és a számuk folyamatosan növekszik!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="center">
+                        <a class="button button_huge button_orange"
+                           href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                            Szeretném kipróbálni
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frontpage_products">
+            <div class="inner p_l_20 p_r_20 container">
+                <div class="title sec_font text-center">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">További biokozmetikumaink</font>
+                    </font>
+                </div>
+            </div>
+        </section>
+        <section class="snippet_product_carousel mb8 oe_website_sale"
+                 data-name="Product Carousel Slider">
+            <div class="js_get_objects product_carousel_design compare_off headline_off text-center quick_off rating_off cart_off wishlist_off"
+                 data-objects_in_slide="4"
+                 data-objects_in_slide_tablet="2"
+                 data-objects_in_slide_mobile="1"
+                 data-split_product_object="1"
+                 data-objects_limit="4"
+                 data-product_view="website_product_carousel.list_of_product_view"/>
+        </section>
+        <section id="try_now">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font">Próbáld ki kockázatmentesen!</div>
+
+                    <div class="text">
+                        <p>A weboldalunkról megrendelt Florence® biokozmetikumok minősége és hatékonysága
+                            mellett maximálisan kiállunk, ezért bátran vállaljuk a 30 napos 100%
+                            pénzvisszafizetési garanciát. Semmit sem kérdezünk ha elégedetlen vagy hanem
+                            azonnal visszautaljuk a pénzed, így nulla rizikóval kipróbálhatod bio
+                            kozmetikumainkat! A visszaküldés folyamatáról itt olvashatsz részletesen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="snippets_2" name="Florence BIO csiganyál arckrém 100 ml">
+        <section id="content">
+            <div class="container">
+                <h3>Csiganyállal a bőröd megújul!</h3>
+                <p>A BIO minősítésű csiganyál alapú hidratáló krémünk könnyű, selymes textúrájú és
+                    hatóanyagokban rendkívül gazdag. Arckrémünk 65% koncentrációban tartalmaz szűrt csiganyálat,
+                    melynek bőre gyakorolt hatékonyságát számos tanulmány és nemzetközi tudományos publikáció
+                    széles körben igazolta.
+                    <span class="">A csiganyál egy bio anti-aging hatóanyag, ami hidratáló, tápláló és
+                        revitalizáló hatással bír. Számos előnye három fő összetevőből származik: allantoinból,
+                        hialuronsavból és glikolsavból. A glikolsav hámlasztó-, és az allatonin regeneráló
+                        hatása elősegíti a bőrfoltok halványítását.
+                    </span>
+                    <span class="">A csiganyál páratlan hatékonysággal csökkenti a ráncokat, az aknényomokat, a
+                        hegeket, a kiütéseket, bőrpírt, a striákat és az öregedés vagy a napfény okozta
+                        bőrfoltokat.
+                    </span>
+                </p>
+                <p>És ez még nem minden! Arckrémünk a mélyen hidratált, feszes és egységes tónusú bőr eléréséért
+                    tartalmaz még hialuronsavat, goji bogyó kivonatot, shea vajat, aloe verát, damaszkuszi
+                    rózsavizet, jojoba- és argán olajat is.
+                </p>
+                <p>
+                    <span class="">A csiganyálat egy Róma melletti csigafarmról szerezzük be, amit kézzel,
+                        kíméletesen és felelősségteljes módon vonnak ki a csigákból anélkül, hogy az állatnak
+                        bármilyen fájdalmat vagy sérülést okoznának. A heti egyszeri lefejtés után, a csigák
+                        tovább legelésznek természetes környezetükben.
+                    </span>
+                </p>
+                <p>
+                    <span class="">Csiganyál krémünk m</span>
+                    <span class="">inden bőrtípusra alkalmas, beleértve az érzékeny bőrt is, nőknek és
+                        férfiaknak egyaránt.
+                    </span>
+                </p>
+                <p>
+                    <em>
+                        <strong>TIPP:</strong>
+                    </em>
+                    arckrémünk felvitele előtt alaposan tisztísd meg arcbőröd BIO arctisztító tejünkkel, majd
+                    használd a BIO C-Vitamin arcszérumunkat a gyönyörű és egészséges arcbőrért!
+                </p>
+            </div>
+        </section>
+        <section class="difference">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="wrap_left col-md-6 col-12">
+                        <div class="title">Nem a csiga a legszebb
+                            <span>de te a legszebb leszel tőle!</span>
+                        </div>
+
+                        <ul>
+                            <li>AIAB bio minősítésű csiganyál arckrém</li>
+                            <li>Ellenőrzött biogazdálkodásból származó természetes összetevők</li>
+                            <li>65% koncentrációjú csiganyállal és alacsony molekulasúlyú hialuronsavval</li>
+                            <li>Goji bogyó kivonatottal, shea vajjal és aloe verával gazdagítva</li>
+                            <li>Damaszkuszi rózsavizet, jojoba- és argán olajat is tartalmaz</li>
+                            <li>Ráncok, aknényomok, hegek, kiütések, bőrpír és striák ellen</li>
+                            <li>Csökkenti az öregedés és a napfény okozta bőrfoltokat</li>
+                            <li>Tónusossá, rugalmassá és hidratálttá varázsolja a bőrt</li>
+                            <li>Egészséges és egységes színt kölcsönöz az arcnak</li>
+                            <li>Pillanatok alatt beszívódik, nem hagy ragacsos érzetet</li>
+                            <li>Parabén, mikroműanyag, kőolaj, szulfát és szilikon mentes</li>
+                            <li>Bőrgyógyászatilag tesztelt</li>
+                            <li>Az arcon túl, a nyakon és a dekoltázson is használható</li>
+                            <li>C-Vitamin szérumunkkal kombinálva a hatás méginkább fokozható</li>
+                            <li>A bio arcápolási rutinunk negyedik lépéseként használható</li>
+                        </ul>
+                    </div>
+                    <div class="wrap_right hide_in_960 col-6 d-none d-md-block">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/csiga2-min.png"
+                             alt="Florence BIO arctonik 250 ml"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="active_substances">
+                    <div class="inner p_l_20 p_r_20">
+                        <div class="sec_font title center">Főbb hatóanyagok</div>
+                        <div class="active_substances_wrap row">
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/csiganyal-min-300x171.jpg"
+                                     alt="Csiganyál"/>
+
+                                <h3>Csiganyál</h3>
+
+                                <div class="text">Serkenti a kollagén és elasztin rostok termelését,
+                                    valamint képes javítani a bőr természetes vízfelvevő és -megtartó
+                                    képességét, és ezeken felül még lokális sebgyógyító hatása is van. A
+                                    csigaváladék növeli a bőrsejtek migrációját, proliferációját és
+                                    túlélését, vagyis az összetevő támogatja a bőr regenerációját, ezzel
+                                    lassítva a bőröregedést.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Hialuronsav-min-1-300x171.jpg"
+                                     alt="Hialuronsav"/>
+
+                                <h3>Hialuronsav</h3>
+
+                                <div class="text">Ebben a krémben alacsony molekulasúlyú hialuronsavat
+                                    alkalmazunk, aminek közismerten a legjobb felszívódása. Az kis
+                                    molekulaméretéből adódóan a bőr mélyebb rétegeibe képes behatolni és
+                                    fejti ki mélyhidratáló hatását. Emeli a bőr regenerációs képességét,
+                                    simítja finom vonalakat és hosszantartóan hidratál.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/golyi-bogyo-min-300x171.jpg"
+                                     alt="Goji bogyó"/>
+
+                                <h3>Goji bogyó kivonat</h3>
+
+                                <div class="text">Nagyon erős antioxidáns, elpusztítja a káros szabad
+                                    gyököket, elősegíti a sejtek megújulását és a kollagéntermelést is
+                                    serkenti. Extra magas C vitamin tartalma mellett gazdag olyan ásványi
+                                    anyagokban, mint a cink, vas, szelénium és kálcium valamint B vitamint
+                                    is tartalmaz. Egy 1991-es tanulmány szerint a goji bogyó segít a DNS
+                                    károk helyreállításában.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Shea-vaj-min-300x171.jpg"
+                                     alt="Shea vaj"/>
+
+                                <h3>Shea vaj</h3>
+
+                                <div class="text">Természetesen táplál és hidratál, késlelteti a bőr
+                                    öregedését, a ráncok kialakulását, a bőrirritációkat és pattanásokat
+                                    csökkenti. Segíti a bőr rugalmasságának megőrzését. A benne található
+                                    E-vitamin és béta-karotin bőrpuhító, regeneráló hatású. Napi használat
+                                    esetén enyhíti a pikkelysömör tüneteit.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Aloe-Vera-min-1-300x171.jpg"
+                                     alt="Aloe Vera"/>
+
+                                <h3>Aloe vera</h3>
+
+                                <div class="text">Kiváló antioxidáns és antibakteriális hatása van. Hűsítő,
+                                    gyulladáscsökkentő és megőrzi a nedvességet. Ideális száraz, irritált és
+                                    érzékeny bőrre. Antioxidatív, serkenti a kollagéntermelést és hatásos
+                                    bizonyos vírusok, baktériumok és gombák ellen. Kiváló pikkelysömör,
+                                    bőrgyulladás, akné és leégés kezelésére is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Jojoba-olaj-min-1-300x171.jpg"
+                                     alt="Jojoba olaj"/>
+
+                                <h3>Jojoba olaj</h3>
+
+                                <div class="text">Védőréteget képez a bőrön és segít bent tartani a
+                                    folyadékot, ezért nagyszerű hidratáló. Segít megakadályozni a
+                                    bakteriális fertőzések kialakulását. Kiváló összetevő a pattanásos bőr
+                                    számára, mert képes csökkenteni a faggyútermelést az aknekezelésektől
+                                    kiszárított bőrben (sokszor a túlszárítás nagyobb faggyútermelésre
+                                    ösztönzi a bőrt).
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/damaszkuszi-rozsaviz-min-300x171.jpg"
+                                     alt="Damaszkuszi rózsavíz"/>
+
+                                <h3>Damaszkuszi rózsavíz</h3>
+
+                                <div class="text">Damaszkuszi rózsaszirmok (Rosa damascena)
+                                    vízgőzdesztillálásával nyert valódi hidrolátum, virágvíz. Minden
+                                    bőrtípus számára ajánlott mivel erőteljesen hidratáló, ránctalanító és
+                                    bőrfeszesítő hatású. Magyszerűen tonizál és segít megőrizni a bőr
+                                    nedvességtartalmát, kisebb napégés kezelésére is alkalmazható.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/argan-olaj-min-300x171.jpg"
+                                     alt="argánolaj"/>
+
+                                <h3>Argánolaj</h3>
+
+                                <div class="text">Számos a bőr számára hasznos anyag forrása: lipidek,
+                                    zsírsavak és antioxidánsok (E vitamin, ferulic sav). Az egyik legjobb
+                                    növényi olajként van számon tartva, E vitamin tartalma 3-szorosa az
+                                    olíva olajénak. A benne lévő omega-6 és omega-9 zsírsavaknak
+                                    gyulladáscsökkentő és hidratáló hatása van, és segítenek a bőr
+                                    rugalmasságának fenntartásában.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="ingredients">
+                    <div class="ingredients_header">Összetevők</div>
+                    <div class="ingredients_content" style="display: none;">
+                        <p>Aloe barbadensis leaf juice, Aqua, Rosa Damascena flower water, Rosa canina fruit
+                            extract, Heptapeptide-10, Betaine, Hydrolyzed hyaluronic acid, Parfum, Tetrasodium
+                            glutamate diacetate, Ethylhexylglycerin, Coco-glucoside, Glycerin, Caprylyl glycol,
+                            Glyceryl oleate, Sodium benzonate, Potassium sorbate
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="icons">
+            <div class="container">
+                <div class="icons_wrap inner p_l_20 p_r_20 row">
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_bio.svg"
+                             alt="Biogazdálkodásból származó organikus összetevők"/>
+                        <div class="text">Biogazdálkodásból származó organikus összetevők</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_tight_skin.svg"
+                             alt="Hidratált, feszes, egységes tónusú ragyogó bőr"/>
+                        <div class="text">Hidratált, feszes, egységes tónusú ragyogó bőr</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_paraben_free.svg"
+                             alt="Parabén, szulfát, és mikroműanyag mentes"/>
+                        <div class="text">Parabén, szulfát, és mikroműanyag mentes</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_clinically_tested.svg"
+                             alt="Klinikailag és bőrgyógyászatilag tesztelt"/>
+                        <div class="text">Klinikailag és bőrgyógyászatilag tesztelt</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_italy.svg"
+                             alt="Olaszországban kifejlesztve  és gyártva"/>
+                        <div class="text">Olaszországban kifejlesztve és gyártva</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_rabbit.svg"
+                             alt="Vegán és állatokon nem tesztelték"/>
+                        <div class="text">Vegán és állatokon nem tesztelték</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="counterup">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font center">Európa egyik legkeresettebb arcszéruma!</div>
+
+                    <div class="subtitle center">(Amazon 2022.02.22. eladási adatai alapján)</div>
+
+                    <div class="counterup_wrap row">
+                        <div class="wrap_left col-md-4 col-12">
+                            <img src="/theme_florence/static/src/img/siero-florence-riflesso.png"
+                                 alt="" class="img img-fluid"/>
+                        </div>
+
+                        <div class="wrap_right col-12 col-md-8">
+                            <div class="counterup_wrap row">
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">N°1</div>
+
+                                    <div class="part_text">A legtöbbet eladott kozmetikum az Amazon „BEAUTY”
+                                        kategóriában Olaszországban, Franciaországban, Spanyolországban,
+                                        Németországban és Angliában!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">64 314</div>
+
+                                    <div class="part_text">valós vásárlói vélemény. Európában arcszérum még
+                                        soha nem ért el ilyen eredményt!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">12</div>
+
+                                    <div class="part_text">országban kaphatók a Florence bio kozmetikumok,
+                                        és a számuk folyamatosan növekszik!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="center">
+                        <a class="button button_huge button_orange"
+                           href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                            Szeretném kipróbálni
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frontpage_products">
+            <div class="inner p_l_20 p_r_20 container">
+                <div class="title sec_font text-center">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">További biokozmetikumaink</font>
+                    </font>
+                </div>
+            </div>
+        </section>
+        <section class="snippet_product_carousel mb8 oe_website_sale"
+                 data-name="Product Carousel Slider">
+            <div class="js_get_objects product_carousel_design compare_off headline_off text-center quick_off rating_off cart_off wishlist_off"
+                 data-objects_in_slide="4"
+                 data-objects_in_slide_tablet="2"
+                 data-objects_in_slide_mobile="1"
+                 data-split_product_object="1"
+                 data-objects_limit="4"
+                 data-product_view="website_product_carousel.list_of_product_view"/>
+        </section>
+        <section id="try_now">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font">Próbáld ki kockázatmentesen!</div>
+
+                    <div class="text">
+                        <p>A weboldalunkról megrendelt Florence® biokozmetikumok minősége és hatékonysága
+                            mellett maximálisan kiállunk, ezért bátran vállaljuk a 30 napos 100%
+                            pénzvisszafizetési garanciát. Semmit sem kérdezünk ha elégedetlen vagy hanem
+                            azonnal visszautaljuk a pénzed, így nulla rizikóval kipróbálhatod bio
+                            kozmetikumainkat! A visszaküldés folyamatáról itt olvashatsz részletesen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="snippets_3" name="Florence BIO anti-aging hidratáló arckrém 100 ml">
+        <section id="content">
+            <div class="container">
+                <h3>Retinollal a ráncok ellen</h3>
+                <p>Bio minősített anti-aging hidratáló arckrémünk válogatott organikus ránctalanító
+                    összetevőivel rendkívül eredményesen harcol az idő múlása ellen. Alacsony és közepes
+                    molekulatömegű hialuronsavval, retinollal, C- és E-vitaminnal, kollagénnel, szerves aloe
+                    verával, shea vajjal, jojoba és édesmandula olajjal segíti a gyönyörű bőr elérését. De itt
+                    nem álltunk meg a fejlesztés során, hiszen található még benne tengeri moszat, zöldalga
+                    kivonat és rendkívül hatékony 5 gyógynövényes infúzió is.
+                </p>
+                <p>Organikus retinolt tartalmaz, amely serkenti a kollagén termelődését, a bőrsejtek megújulását
+                    (sejtcserét) és a hámréteg cserélődését. Egyedi formulánkkal – amely a legerősebb bio
+                    anti-aging összetevőket tartalmazza – megőrizheti az arc és a bőr teltségét és
+                    rugalmasságát. Ránctalanít, növeli a hidratáltságot, javítja a bőr tónusát és textúráját,
+                    felgyorsítja a sejtcserét, helyreállítja az elvesztett rugalmasságot és hosszan tartó
+                    hidratálást biztosít egész nap. Látványosan csökkenti a bőr elszíneződéseit, a pattanásokat,
+                    a napfény okozta károsodásokat és egyéb foltokat (hiperpigmentáció). Ideális arcra, nyakra
+                    és dekoltázsra, nőknek és férfiaknak egyaránt.
+                </p>
+                <p>Úgy tervezték, hogy még a legigényesebb bőrápolási igényeket is kielégítse. Gyorsan
+                    beszívódik és nem tömíti el a pórusokat és nem teszi zsírossá vagy ragadóssá a bőrt. Vegán
+                    arckrémünk parabén, szulfát, és mikroműanyag mentes és nem tesztelték állatokon. Minden
+                    bőrtípusra alkalmazható! Az érzékeny bőr védelmére kialakított krémünk rendkívüli
+                    hatékonyságot mutat érett, vegyes és zsíros bőr esetén is. Használd reggel és este a
+                    gyönyörű bőr elérése érdekében. Előtte javasoljuk a C-Vitamin arcszérumunk használatát,
+                    mivel e két kozmetikum egymás hatását erősíti.
+                </p>
+                <p>
+                    <em>
+                        <strong>TIPP:</strong>
+                    </em>
+                    arckrémünk felvitele előtt alaposan tisztísd meg arcbőröd BIO arctisztító tejünkkel, majd
+                    használd a BIO C-Vitamin arcszérumunkat a gyönyörű és egészséges arcbőrért!
+                </p>
+            </div>
+        </section>
+        <section class="difference">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="wrap_left col-md-6 col-12">
+                        <div class="title">Ránctalanítás
+                            <span>bio anti-aging összetevőkkel</span>
+                        </div>
+
+                        <ul>
+                            <li>AIAB bio minősítésű vegán arckrém bőröregedés és ráncok ellen</li>
+                            <li>Ellenőrzött biogazdálkodásból származó természetes összetevők</li>
+                            <li>Retinol, C-, E-Vitamin és Kollagén</li>
+                            <li>Alacsony és közepes molekulasúlyú hialuronsav</li>
+                            <li>Aloe Vera, Shea vaj, Jojoba-, Édesmandula ás Avokádó olaj</li>
+                            <li>Tengeri moszat és Zöldalga kivonat</li>
+                            <li>Majoranna, Zöldtea, Ázsiai gázló, Mezei Zsurló és Tamarind kivonat</li>
+                            <li>Bőrgyógyászatilag tesztelt</li>
+                            <li>Parabén, mikroműanyag, kőolaj, szulfát és szilikon mentes</li>
+                            <li>Az arcon túl, a nyakon és a dekoltázson is használható</li>
+                            <li>C-Vitamin szérumunkkal kombinálva a hatás méginkább fokozható</li>
+                            <li>A bio arcápolási rutinunk negyedik lépéseként használható</li>
+                        </ul>
+                    </div>
+                    <div class="wrap_right hide_in_960 col-6 d-none d-md-block">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/FLORENCE-ARCKREM-min.png"
+                             alt="Florence BIO arctonik 250 ml"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="active_substances">
+                    <div class="inner p_l_20 p_r_20">
+                        <div class="sec_font title center">Főbb hatóanyagok</div>
+                        <div class="active_substances_wrap row">
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Retinol-min-300x171.jpg"
+                                     alt="Retinol"/>
+
+                                <h3>Retinol</h3>
+
+                                <div class="text">Más néven A-vitamin, ami a ráncok elleni csodafegyver,
+                                    jelenleg ez számít a bőröregedés elleni küzdelem egyik leghatékonyabb
+                                    eszközének. Hatására a hámsejtek osztódni kezdenek, ez serkenti a
+                                    hámréteg cserélődését. Mélyen behatol a bőrrétegekbe, aktiválja a
+                                    kollagén és elasztin rostokat termelő sejteket, így rugalmasabbá válik a
+                                    bőr.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Hialuronsav-min-1-300x171.jpg"
+                                     alt="Hialuronsav"/>
+
+                                <h3>2 fajta hialuronsav</h3>
+
+                                <div class="text">Alacsony és közepes mulekulasúlyú ún. hidrolizált
+                                    hialuronsavat tartalmaz. Ez a fajta kombináció az olcsóbb és
+                                    leggyakrabban használt nagy molekulasúlyúhoz képest a bőr mélyebb
+                                    rétegeibe hatolva fejti ki hidratáló hatását. A víz akár 1000-szeresét
+                                    is képes megkötni a bőrben, ezzel csökkentve a ráncok megjelenését,
+                                    javítva a bőr textúráját.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/C-vitamin-min-1-300x171.jpg"
+                                     alt="C-vitamin"/>
+
+                                <h3>C vitamin</h3>
+
+                                <div class="text">Hatékony antioxidáns amely növeli a bőr
+                                    kollagéntermelését, csökkenti a ráncok mélységét, sőt késlelteti az
+                                    újabbak kialakulását. Halványítja a pigmentfoltokat, rugalmassá,
+                                    természetesen üdévé és ragyogóvá varásolja az arcbőrt. Különösen
+                                    ajánlott napkrárosodott bőrűeknek! A C vitamin hatékonyan csökkenti a
+                                    pattanások okozta gyulladást is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/E-vitamin-min-1-300x171.jpg"
+                                     alt="E vitamin"/>
+
+                                <h3>E vitamin</h3>
+
+                                <div class="text">Közismerten az egyik legjobb antioxidáns. Növeli a
+                                    szaruréteg hidratáltságát, kisimítja a bőrt és kiegyenlíti a ráncokat.
+                                    Fényvédő hatással rendelkezik, így korlátozza az UV-sugárzás hatására
+                                    keletkező bőrelváltozásokat (pigmentfoltok, napégés, bőr öregedése).
+                                    Elősegíti a sebgyógyulást és gyulladáscsökkentő hatású.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Aloe-Vera-min-1-300x171.jpg"
+                                     alt="Aloe Vera"/>
+
+                                <h3>Aloe Vera</h3>
+
+                                <div class="text">Kiváló antioxidáns és antibakteriális hatása van. Hűsítő,
+                                    gyulladáscsökkentő és megőrzi a nedvességet. Ideális száraz, irritált és
+                                    érzékeny bőrre. Antioxidatív, serkenti a kollagéntermelést és hatásos
+                                    bizonyos vírusok, baktériumok és gombák ellen. Kiváló pikkelysömör,
+                                    bőrgyulladás, akné és leégés kezelésére is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Shea-vaj-min-300x171.jpg"
+                                     alt="Shea vaj"/>
+
+                                <h3>Shea vaj</h3>
+
+                                <div class="text">Természetesen táplál és hidratál, késlelteti a bőr
+                                    öregedését, a ráncok kialakulását, a bőrirritációkat és pattanásokat
+                                    csökkenti. Segíti a bőr rugalmasságának megőrzését. A benne található
+                                    E-vitamin és béta-karotin bőrpuhító, regeneráló hatású. Napi használat
+                                    esetén enyhíti a pikkelysömör tüneteit.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Jojoba-olaj-min-1-300x171.jpg"
+                                     alt="Jojoba olaj"/>
+
+                                <h3>Jojoba olaj</h3>
+
+                                <div class="text">Védőréteget képez a bőrön és segít bent tartani a
+                                    folyadékot, ezért nagyszerű hidratáló. Segít megakadályozni a
+                                    bakteriális fertőzések kialakulását. Kiváló összetevő a pattanásos bőr
+                                    számára, mert képes csökkenteni a faggyútermelést az aknekezelésektől
+                                    kiszárított bőrben (sokszor a túlszárítás nagyobb faggyútermelésre
+                                    ösztönzi a bőrt).
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/edes-mandula-min-300x171.jpg"
+                                     alt="Édesmandula olaj"/>
+
+                                <h3>Édesmandula olaj</h3>
+
+                                <div class="text">Az édesmandula olaj könnyen a bőrbe szívódó, finom
+                                    textúrájú olaj, amely puha és selymesen finom érzetet hagy maga után a
+                                    bőrön. Tápláló és védő olaj, mely ideális az irritált és kiszáradt bőr
+                                    regenerálására. Sokoldalúságát a benne lévő vitaminoknak, Omega-9
+                                    zsírsavnak, linolsavnak, olajsavnak köszönheti, amelyek közös erővel
+                                    szépítik bőrödet.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="ingredients">
+                    <div class="ingredients_header">Összetevők</div>
+                    <div class="ingredients_content" style="display: none;">
+                        <p>Aloe barbadensis leaf juice, Aqua, Rosa Damascena flower water, Rosa canina fruit
+                            extract, Heptapeptide-10, Betaine, Hydrolyzed hyaluronic acid, Parfum, Tetrasodium
+                            glutamate diacetate, Ethylhexylglycerin, Coco-glucoside, Glycerin, Caprylyl glycol,
+                            Glyceryl oleate, Sodium benzonate, Potassium sorbate
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="icons">
+            <div class="container">
+                <div class="icons_wrap inner p_l_20 p_r_20 row">
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_bio.svg"
+                             alt="Biogazdálkodásból származó organikus összetevők"/>
+                        <div class="text">Biogazdálkodásból származó organikus összetevők</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_tight_skin.svg"
+                             alt="Hidratált, feszes, egységes tónusú ragyogó bőr"/>
+                        <div class="text">Hidratált, feszes, egységes tónusú ragyogó bőr</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_paraben_free.svg"
+                             alt="Parabén, szulfát, és mikroműanyag mentes"/>
+                        <div class="text">Parabén, szulfát, és mikroműanyag mentes</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_clinically_tested.svg"
+                             alt="Klinikailag és bőrgyógyászatilag tesztelt"/>
+                        <div class="text">Klinikailag és bőrgyógyászatilag tesztelt</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_italy.svg"
+                             alt="Olaszországban kifejlesztve  és gyártva"/>
+                        <div class="text">Olaszországban kifejlesztve és gyártva</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_rabbit.svg"
+                             alt="Vegán és állatokon nem tesztelték"/>
+                        <div class="text">Vegán és állatokon nem tesztelték</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="counterup">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font center">Európa egyik legkeresettebb arcszéruma!</div>
+
+                    <div class="subtitle center">(Amazon 2022.02.22. eladási adatai alapján)</div>
+
+                    <div class="counterup_wrap row">
+                        <div class="wrap_left col-md-4 col-12">
+                            <img src="/theme_florence/static/src/img/siero-florence-riflesso.png"
+                                 alt="" class="img img-fluid"/>
+                        </div>
+
+                        <div class="wrap_right col-12 col-md-8">
+                            <div class="counterup_wrap row">
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">N°1</div>
+
+                                    <div class="part_text">A legtöbbet eladott kozmetikum az Amazon „BEAUTY”
+                                        kategóriában Olaszországban, Franciaországban, Spanyolországban,
+                                        Németországban és Angliában!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">64 314</div>
+
+                                    <div class="part_text">valós vásárlói vélemény. Európában arcszérum még
+                                        soha nem ért el ilyen eredményt!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">12</div>
+
+                                    <div class="part_text">országban kaphatók a Florence bio kozmetikumok,
+                                        és a számuk folyamatosan növekszik!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="center">
+                        <a class="button button_huge button_orange"
+                           href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                            Szeretném kipróbálni
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frontpage_products">
+            <div class="inner p_l_20 p_r_20 container">
+                <div class="title sec_font text-center">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">További biokozmetikumaink</font>
+                    </font>
+                </div>
+            </div>
+        </section>
+        <section class="snippet_product_carousel mb8 oe_website_sale"
+                 data-name="Product Carousel Slider">
+            <div class="js_get_objects product_carousel_design compare_off headline_off text-center quick_off rating_off cart_off wishlist_off"
+                 data-objects_in_slide="4"
+                 data-objects_in_slide_tablet="2"
+                 data-objects_in_slide_mobile="1"
+                 data-split_product_object="1"
+                 data-objects_limit="4"
+                 data-product_view="website_product_carousel.list_of_product_view"/>
+        </section>
+        <section id="try_now">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font">Próbáld ki kockázatmentesen!</div>
+
+                    <div class="text">
+                        <p>A weboldalunkról megrendelt Florence® biokozmetikumok minősége és hatékonysága
+                            mellett maximálisan kiállunk, ezért bátran vállaljuk a 30 napos 100%
+                            pénzvisszafizetési garanciát. Semmit sem kérdezünk ha elégedetlen vagy hanem
+                            azonnal visszautaljuk a pénzed, így nulla rizikóval kipróbálhatod bio
+                            kozmetikumainkat! A visszaküldés folyamatáról itt olvashatsz részletesen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="snippets_4" name="Florence BIO arctisztító tej 250 ml">
+        <section id="content">
+            <div class="container">
+                <h3>Egyszerre kíméletesen tisztít és hidratál</h3>
+                <p>A hidratáló hatású arctisztítónkat az érzékeny bőr igényeire terveztük, rendszeres napi
+                    használatra alkalmas minden bőrtípusra nőknek és férfiaknak egyaránt. Az alapos tisztításhoz
+                    már nincs szükség habzó arctisztítóra vagy aknés tisztítóra: a Florence bio arctisztító tej
+                    hatékonyan távolítja el a sminket és a szennyeződéseket anélkül, hogy megváltoztatná a bőr
+                    hidrolipid egyensúlyát. Számunkra a hatékonyság azt jelenti, hogy megtisztítjuk a bőrt a
+                    szennyeződésektől anélkül, hogy megtámadnák azt és hámlást okoznánk.
+                </p>
+                <p>Lehet ugyanolyan haétkony egy kíméletes bio arctisztító, mint a hagyományos -szintetikus
+                    anyagokkal teli- tisztítók, amiket a mindennapi arctisztítási rutinban használnak? A
+                    válaszunk: Igen! Laboratóriumunk egy új innovációra alapozva új szintre emelte az arcápolási
+                    rutint: már a tisztítási fázisban hidratáló elemeket, például rizskorpa kivonatot és
+                    hialuronsavat viszünk be a bőrbe, amelyek megnyugtatják és hidratálják azt. A bőrsejtek
+                    megújulásához nélkülözhetetlen nyomelemekkel dúsított formulánk tisztít, normalizál, tonizál
+                    és regenerál egyszerre. Az értékes hidratáló biokomplex ellensúlyozza a hámlást, a nagy
+                    molekulatömegű hialuronsav pedig hatékonyan hidratálja a bőrt. A C- és E-vitaminok megvédik
+                    a bőrt a szabad gyökök agressziójától, amelyek felelősek a bőr öregedéséért.
+                </p>
+                <p>Olaszországban készült bio arctisztító tejünk kíméletes, de mégis hatékony tisztító hatást
+                    garantál, ötvözve az öregedésgátló összetevőkkel. Nők és férfiak, zsíros, száraz vagy
+                    érzékeny bőrűek – mindannyian ragyogóan tiszta bőrre számíthatnak bio arctisztító tejünk
+                    használatával. Termékünk pattanásos bőrűeknek különösen ajánlott!
+                </p>
+                <p>
+                    <em>
+                        <strong>TIPP:</strong>
+                    </em>
+                    Arctisztító tejünk után használd BIO Arctonikunkat és BIO C-Vitamin arcszérumunkat a
+                    gyönyörű és egészséges arcbőrért!
+                </p>
+            </div>
+        </section>
+        <section class="difference">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="wrap_left col-md-6 col-12">
+                        <div class="title">Bio arctisztítás
+                            <span>az arcápolási rutin legelső lépése!</span>
+                        </div>
+
+                        <ul>
+                            <li>AIAB bio minősítésű vegán arctisztító tej</li>
+                            <li>Ellenőrzött biogazdálkodásból származó természetes összetevők</li>
+                            <li>Rizskorpa kivonat, Hialuronsav, E- és C-Vitamin</li>
+                            <li>Aloe Vera, Shea vaj, Édesmandula- és Ricinus olaj</li>
+                            <li>Kíméletesen tisztít és hidratál egy lépésben</li>
+                            <li>Nem szárítja az arcbőrt</li>
+                            <li>Használatát követően a bőr ragyogóan tiszta és puha lesz</li>
+                            <li>Pattanásos bőrűeknek különösen ajánlott</li>
+                            <li>Bőrgyógyászatilag tesztelt</li>
+                            <li>Az arcápolási rutin legelső lépéseként használható</li>
+                        </ul>
+                    </div>
+                    <div class="wrap_right hide_in_960 col-6 d-none d-md-block">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/arclemoso-tej-min.png"
+                             alt="Florence BIO arctonik 250 ml"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="active_substances">
+                    <div class="inner p_l_20 p_r_20">
+                        <div class="sec_font title center">Főbb hatóanyagok</div>
+                        <div class="active_substances_wrap row">
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Aloe-Vera-min-1-300x171.jpg"
+                                     alt="Aloe Vera"/>
+
+                                <h3>Aloe Vera</h3>
+
+                                <div class="text">Kiváló antioxidáns és antibakteriális hatása van. Hűsítő,
+                                    gyulladáscsökkentő és megőrzi a nedvességet. Ideális száraz, irritált és
+                                    érzékeny bőrre. Antioxidatív, serkenti a kollagéntermelést és hatásos
+                                    bizonyos vírusok, baktériumok és gombák ellen. Kiváló pikkelysömör,
+                                    bőrgyulladás, akné és leégés kezelésére is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/edes-mandula-min-300x171.jpg"
+                                     alt="Édesmandula olaj"/>
+
+                                <h3>Édesmandula olaj</h3>
+
+                                <div class="text">Az édesmandula olaj könnyen a bőrbe szívódó, finom
+                                    textúrájú olaj, amely puha és selymesen finom érzetet hagy maga után a
+                                    bőrön. Tápláló és védő olaj, mely ideális az irritált és kiszáradt bőr
+                                    regenerálására. Sokoldalúságát a benne lévő vitaminoknak, Omega-9
+                                    zsírsavnak, linolsavnak, olajsavnak köszönheti, amelyek közös erővel
+                                    szépítik bőrödet.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/ricinus-olaj-min-300x171.jpg"
+                                     alt="Ricinusolaj"/>
+
+                                <h3>Ricinusolaj</h3>
+
+                                <div class="text">Rengeteg E-vitamin van benne, így gyulladásgátló és
+                                    antibakteriális hatású így kiváló a pattanásos bőr kezelésére. Fokozza a
+                                    bőr kollagéntermelését és normalizálja azt, így megereszkedett bőrre is
+                                    jól alkalmazható, bársonyos, puha bőrt eredményez. Nyugtatja, táplálja
+                                    az irritált bőrt, ráadásul hozzájárulhat a tünetek visszaszorításához.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Shea-vaj-min-300x171.jpg"
+                                     alt="Shea vaj"/>
+
+                                <h3>Shea vaj</h3>
+
+                                <div class="text">Természetesen táplál és hidratál, késlelteti a bőr
+                                    öregedését, a ráncok kialakulását, a bőrirritációkat és pattanásokat
+                                    csökkenti. Segíti a bőr rugalmasságának megőrzését. A benne található
+                                    E-vitamin és béta-karotin bőrpuhító, regeneráló hatású. Napi használat
+                                    esetén enyhíti a pikkelysömör tüneteit.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/E-vitamin-min-1-300x171.jpg"
+                                     alt="E vitamin"/>
+
+                                <h3>E vitamin</h3>
+
+                                <div class="text">Közismerten az egyik legjobb antioxidáns. Növeli a
+                                    szaruréteg hidratáltságát, kisimítja a bőrt és kiegyenlíti a ráncokat.
+                                    Fényvédő hatással rendelkezik, így korlátozza az UV-sugárzás hatására
+                                    keletkező bőrelváltozásokat (pigmentfoltok, napégés, bőr öregedése).
+                                    Elősegíti a sebgyógyulást és gyulladáscsökkentő hatású.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/rizskorpa-kivonat-min-300x171.jpg"
+                                     alt="Rizskivonat"/>
+
+                                <h3>Rizskorpa kivonat</h3>
+
+                                <div class="text">A rizsmag barna külső rétege, a rizs őrlésének
+                                    mellékterméke. Bőrnyugtató és antioxidáns hatású összetevő, melynek
+                                    jelentős bőrpuhító és kondícionáló hatása is van. Több mint 100
+                                    antioxidáns vegyület gazdag forrása, köztük az E-vitamin, a ferulasav és
+                                    az orizanol. Hidratáló poliszacharidokat és omega-3 zsírsavakat
+                                    tartalmaz.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/C-vitamin-min-1-300x171.jpg"
+                                     alt="C-vitamin"/>
+
+                                <h3>C vitamin</h3>
+
+                                <div class="text">Hatékony antioxidáns amely növeli a bőr
+                                    kollagéntermelését, csökkenti a ráncok mélységét, sőt késlelteti az
+                                    újabbak kialakulását. Halványítja a pigmentfoltokat, rugalmassá,
+                                    természetesen üdévé és ragyogóvá varásolja az arcbőrt. Különösen
+                                    ajánlott napkrárosodott bőrűeknek! A C vitamin hatékonyan csökkenti a
+                                    pattanások okozta gyulladást is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Hialuronsav-min-1-300x171.jpg"
+                                     alt="Hialuronsav"/>
+
+                                <h3>Hialuronsav</h3>
+
+                                <div class="text">Ebben a tisztító tejben a hialuronsav nagyobb
+                                    molekulasúlyú, stabilabb és kevésbé oxidálódó változatát alkalmazzuk.
+                                    Képes a víz akár 1000-szeresét is megkötni a bőrben, hatékonyan
+                                    hidratálva azt, ezzel csökkentve a ráncok megjelenését, javítva a bőr
+                                    textúráját. A bőr puha, rugalmas és kisimult lesz tőle.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="ingredients">
+                    <div class="ingredients_header">Összetevők</div>
+                    <div class="ingredients_content" style="display: none;">
+                        <p>Aloe barbadensis leaf juice, Aqua, Rosa Damascena flower water, Rosa canina fruit
+                            extract, Heptapeptide-10, Betaine, Hydrolyzed hyaluronic acid, Parfum, Tetrasodium
+                            glutamate diacetate, Ethylhexylglycerin, Coco-glucoside, Glycerin, Caprylyl glycol,
+                            Glyceryl oleate, Sodium benzonate, Potassium sorbate
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="icons">
+            <div class="container">
+                <div class="icons_wrap inner p_l_20 p_r_20 row">
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_bio.svg"
+                             alt="Biogazdálkodásból származó organikus összetevők"/>
+                        <div class="text">Biogazdálkodásból származó organikus összetevők</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_tight_skin.svg"
+                             alt="Hidratált, feszes, egységes tónusú ragyogó bőr"/>
+                        <div class="text">Hidratált, feszes, egységes tónusú ragyogó bőr</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_paraben_free.svg"
+                             alt="Parabén, szulfát, és mikroműanyag mentes"/>
+                        <div class="text">Parabén, szulfát, és mikroműanyag mentes</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_clinically_tested.svg"
+                             alt="Klinikailag és bőrgyógyászatilag tesztelt"/>
+                        <div class="text">Klinikailag és bőrgyógyászatilag tesztelt</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_italy.svg"
+                             alt="Olaszországban kifejlesztve  és gyártva"/>
+                        <div class="text">Olaszországban kifejlesztve és gyártva</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_rabbit.svg"
+                             alt="Vegán és állatokon nem tesztelték"/>
+                        <div class="text">Vegán és állatokon nem tesztelték</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="counterup">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font center">Európa egyik legkeresettebb arcszéruma!</div>
+
+                    <div class="subtitle center">(Amazon 2022.02.22. eladási adatai alapján)</div>
+
+                    <div class="counterup_wrap row">
+                        <div class="wrap_left col-md-4 col-12">
+                            <img src="/theme_florence/static/src/img/siero-florence-riflesso.png"
+                                 alt="" class="img img-fluid"/>
+                        </div>
+
+                        <div class="wrap_right col-12 col-md-8">
+                            <div class="counterup_wrap row">
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">N°1</div>
+
+                                    <div class="part_text">A legtöbbet eladott kozmetikum az Amazon „BEAUTY”
+                                        kategóriában Olaszországban, Franciaországban, Spanyolországban,
+                                        Németországban és Angliában!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">64 314</div>
+
+                                    <div class="part_text">valós vásárlói vélemény. Európában arcszérum még
+                                        soha nem ért el ilyen eredményt!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">12</div>
+
+                                    <div class="part_text">országban kaphatók a Florence bio kozmetikumok,
+                                        és a számuk folyamatosan növekszik!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="center">
+                        <a class="button button_huge button_orange"
+                           href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                            Szeretném kipróbálni
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frontpage_products">
+            <div class="inner p_l_20 p_r_20 container">
+                <div class="title sec_font text-center">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">További biokozmetikumaink</font>
+                    </font>
+                </div>
+            </div>
+        </section>
+        <section class="snippet_product_carousel mb8 oe_website_sale"
+                 data-name="Product Carousel Slider">
+            <div class="js_get_objects product_carousel_design compare_off headline_off text-center quick_off rating_off cart_off wishlist_off"
+                 data-objects_in_slide="4"
+                 data-objects_in_slide_tablet="2"
+                 data-objects_in_slide_mobile="1"
+                 data-split_product_object="1"
+                 data-objects_limit="4"
+                 data-product_view="website_product_carousel.list_of_product_view"/>
+        </section>
+        <section id="try_now">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font">Próbáld ki kockázatmentesen!</div>
+
+                    <div class="text">
+                        <p>A weboldalunkról megrendelt Florence® biokozmetikumok minősége és hatékonysága
+                            mellett maximálisan kiállunk, ezért bátran vállaljuk a 30 napos 100%
+                            pénzvisszafizetési garanciát. Semmit sem kérdezünk ha elégedetlen vagy hanem
+                            azonnal visszautaljuk a pénzed, így nulla rizikóval kipróbálhatod bio
+                            kozmetikumainkat! A visszaküldés folyamatáról itt olvashatsz részletesen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="snippets_5" name="Florence BIO arctisztító tej 250 ml">
+        <section
+                class="s_image_gallery s_image_gallery_show_indicators s_image_gallery_indicators_rounded pt24 o_colored_level o_slideshow"
+                data-vcss="001" data-columns="3" style="overflow: hidden; height: 624px;"
+                data-snippet="s_image_gallery" data-name="Image Gallery">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div id="slideshow_1651570930869" class="carousel slide" data-ride="carousel"
+                             data-interval="0"
+                             style="margin: 0 12px;">
+                            <div class="carousel-inner" style="padding: 0;">
+                                <div class="carousel-item active" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6901-d134f3d3/logo_cosmopolitan.svg" style="" alt=""
+                                         data-name="Image" data-index="0"/>
+                                </div>
+                                <div class="carousel-item undefined" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6900-4feb400d/logo_donna_moderna.svg" style="" alt=""
+                                         data-name="Image" data-index="1"/>
+                                </div>
+                                <div class="carousel-item undefined" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6899-f45b082a/logo_marie_claire.svg" style="" alt=""
+                                         data-name="Image" data-index="2"/>
+                                </div>
+                                <div class="carousel-item undefined" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6898-03f482d9/logo_el_pais.svg"
+                                         style="" alt="" data-name="Image" data-index="3"/>
+                                </div>
+                                <div class="carousel-item undefined" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6897-95d43c0f/logo_glamour.svg"
+                                         style="" alt="" data-name="Image" data-index="4"/>
+                                </div>
+                                <div class="carousel-item undefined" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6896-b6a4ebd8/logo_elle.svg"
+                                         style="" alt="" data-name="Image" data-index="5"/>
+                                </div>
+                                <div class="carousel-item undefined" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6895-ad42eb7c/arclemoso-tej-min.png" style="" alt=""
+                                         data-name="Image" data-index="6"/>
+                                </div>
+                                <div class="carousel-item undefined" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6894-f26f5818/FLORENCE-ARCKREM-min.png" style="" alt=""
+                                         data-name="Image" data-index="7"/>
+                                </div>
+                                <div class="carousel-item undefined" style="">
+                                    <img class="img img-fluid d-block "
+                                         src="/web/image/6893-cdfc7ba6/csiga2-min.png"
+                                         style="" alt="" data-name="Image" data-index="8"/>
+                                </div>
+                            </div>
+                            <ul class="carousel-indicators">
+                                <li class="o_indicators_left text-center d-none" aria-label="Previous"
+                                    title="Previous">
+                                    <i class="fa fa-chevron-left"/>
+                                </li>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="0" class="active"
+                                    style="background-image: url(/web/image/6901-d134f3d3/logo_cosmopolitan.svg)"/>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="1"
+                                    style="background-image: url(/web/image/6900-4feb400d/logo_donna_moderna.svg)"/>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="2"
+                                    style="background-image: url(/web/image/6899-f45b082a/logo_marie_claire.svg)"/>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="3"
+                                    style="background-image: url(/web/image/6898-03f482d9/logo_el_pais.svg)"/>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="4"
+                                    style="background-image: url(/web/image/6897-95d43c0f/logo_glamour.svg)"/>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="5"
+                                    style="background-image: url(/web/image/6896-b6a4ebd8/logo_elle.svg)"/>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="6"
+                                    style="background-image: url(/web/image/6895-ad42eb7c/arclemoso-tej-min.png)"/>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="7"
+                                    style="background-image: url(/web/image/6894-f26f5818/FLORENCE-ARCKREM-min.png)"/>
+                                <li data-target="#slideshow_1651570930869" data-slide-to="8"
+                                    style="background-image: url(/web/image/6893-cdfc7ba6/csiga2-min.png)"/>
+                                <li class="o_indicators_right text-center d-none" aria-label="Next"
+                                    title="Next">
+                                    <i class="fa fa-chevron-right"/>
+                                </li>
+                            </ul>
+                            <a class="carousel-control-prev o_we_no_overlay" href="#slideshow_1651570930869"
+                               data-slide="prev" aria-label="Previous" title="Previous">
+                                <span class="fa fa-chevron-left fa-2x text-white"/>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next o_we_no_overlay" href="#slideshow_1651570930869"
+                               data-slide="next" aria-label="Next" title="Next">
+                                <span class="fa fa-chevron-right fa-2x text-white"/>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div id="content">
+                            <h3>Gyönyörű bőr hetek alatt organikus hatóanyagokkal</h3>
+                            <p>Európa egyik legtöbbet eladott arcszéruma végre Magyarországon is elérhető! A
+                                Florence® BIO C-vitamin arcszérum öregedésgátló és ránctalanító összetevőivel
+                                néhány hét használat alatt feszesebb, simább, egységes textúrájú ragyogóbb bőrt
+                                varázsolhat. Fiatalos ragyogást nyújt, csökkenti a ráncokat, látványosan
+                                halványítja a sötét napfoltokat és csökkenti a pattanásokat.
+                            </p>
+                            <p>A biogazdálkodásból származó összetevők szinergikus módon, azaz egymást hatását
+                                elősegítve serkentik a bőr kollagéntermelését, mélyen hidratálnak és csökkentik
+                                az aknés gyulladást. A szérum C-, E-vitamint, alacsony és közepes molekulatömegű
+                                hialuronsavat, díjnyertes Argirelox™ ránctalanító peptidet, jojobaolajat, aloe
+                                verát és további hatékony organikus hatóanyagokat tartalmaz. A kellemes narancs
+                                illatú szérum nagyon gyorsan felszívódik és nem hagy ragacsos érzetet.
+                            </p>
+                            <p>Parabén, szulfát, és mikroműanyag mentes és nem tartalmaz mesterséges
+                                illatanyagot. Bőrgyógyászatilag tesztelt és bőrbarát 5,8PH-val rendelkezik.
+                            </p>
+                            <p>A Florence® C Vitamin arcszérum az arcon túl a nyakon és dekoltázson is
+                                hatékonyan használható bármilyen bőrtípusra, nőknek és férfiaknak egyaránt.
+                                Kiválóan használható dermarollerrel is.
+                            </p>
+                            <p>A szérum az Amazonon eddig több mint 64.000 vásárlói értékelést kapott, ezek
+                                közül pár előtte-utána kép itt is megtekinthető. Tekintse meg saját szemével,
+                                hogy mire is képes Európa egyik legkerestebb arcszéruma!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="video">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="iframe_wrapper_container" style="width: 75%; margin: auto;">
+                        <div class="iframe_wrapper">
+                            <img class="img img-fluid" src="/theme_florence/static/src/img/arcszerum-min.png"
+                                 alt="Florence BIO arctonik 250 ml"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="difference">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="wrap_left col-md-6 col-12">
+                        <div class="title">Miben vagyunk mások
+                            <span>a "nagy nevű" arcszérumoknál?</span>
+                        </div>
+
+                        <ul>
+                            <li>AIAB bio minősítésű vegán kozmetikum, ellenőrzött biogazdálkodásból származó
+                                természetes összetevőkből
+                            </li>
+                            <li>Érzékeny bőrre, szemkontúrra és nikkelre tesztelve (&lt;1 ppm)</li>
+                            <li>Ráncok, napfoltok, fakó arcbőr, pattanások és aknék ellen kifejlesztve</li>
+                            <li>Serkenti a kollagéntermelést és csökkenti a gyulladásokat</li>
+                            <li>Mélyen hidratál, bársonyosan puha, feszes és egységes tónusú ragyogó bőrt
+                                eredményez
+                            </li>
+                            <li>20% C-Vitamin, E-Vitamin és Argirelox™ ránctalanító peptiddel a gyönyörű
+                                bőrért
+                            </li>
+                            <li>Alacsony és közepes molekulatömegű hialuronsavval</li>
+                            <li>Aloe Vera, Jojoba olaj, Keserű Narancs és Varázsmogyoró kivonattal dúsított
+                                formula
+                            </li>
+                            <li>Pillanatok alatt beszívódik, nem hagy ragacsos érzetet</li>
+                            <li>60 ml kiszerelés: a konkurens arcszérumok hasonló áron csak 30 ml űrtartalmúak
+                            </li>
+                            <li>Az arcon túl, a nyakon és a dekoltázson is használható</li>
+                            <li>A bio arcápolási rutinunk harmadik lépéseként használható</li>
+                        </ul>
+                    </div>
+                    <div class="wrap_right hide_in_960 col-6 d-none d-md-block">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/arcszerum-min.png"
+                             alt="Florence BIO arctonik 250 ml"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="active_substances">
+                    <div class="inner p_l_20 p_r_20">
+                        <div class="sec_font title center">Főbb hatóanyagok</div>
+                        <div class="active_substances_wrap row">
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/C-Vitamin-min-300x171.jpg"
+                                     alt="C-vitamin"/>
+
+                                <h3>20% C vitamin</h3>
+
+                                <div class="text">Hatékony antioxidáns amely növeli a bőr
+                                    kollagéntermelését,
+                                    csökkenti a ráncok mélységét, sőt késlelteti az újabbak kialakulását.
+                                    Halványítja a pigmentfoltokat, rugalmassá, természetesen üdévé és
+                                    ragyogóvá
+                                    varásolja az arcbőrt. Különösen ajánlott napkrárosodott bőrűeknek! A C
+                                    vitamin
+                                    hatékonyan csökkenti a pattanások okozta gyulladást is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Hialuronsav-min-300x171.jpg"
+                                     alt="Hialuronsav"/>
+
+                                <h3>2 fajta hialuronsav</h3>
+
+                                <div class="text">Alacsony és közepes mulekulasúlyú ún. hidrolizált
+                                    hialuronsavat
+                                    tartalmaz. Ez a fajta kombináció az olcsóbb és leggyakrabban használt
+                                    nagy
+                                    molekulasúlyúhoz képest a bőr mélyebb rétegeibe hatolva fejti ki
+                                    hidratáló
+                                    hatását. A víz akár 1000-szeresét is képes megkötni a bőrben, ezzel
+                                    csökkentve a
+                                    ráncok megjelenését, javítva a bőr textúráját.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/E-Vitamin-min-300x171.jpg"
+                                     alt="E-vitamin"/>
+
+                                <h3>E vitamin</h3>
+
+                                <div class="text">Közismerten az egyik legjobb antioxidáns. Növeli a
+                                    szaruréteg
+                                    hidratáltságát, kisimítja a bőrt és kiegyenlíti a ráncokat. Fényvédő
+                                    hatással
+                                    rendelkezik, így korlátozza az UV-sugárzás hatására keletkező
+                                    bőrelváltozásokat
+                                    (pigmentfoltok, napégés, bőr öregedése). Elősegíti a sebgyógyulást és
+                                    gyulladáscsökkentő hatású.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Argirelox-min-300x171.jpg"
+                                     alt="Argirelox peptid"/>
+
+                                <h3>Argirelox™ peptid</h3>
+
+                                <div class="text">Látványosan feltölti a ráncokat és feszesíti a bőrt.
+                                    Klinikailag
+                                    tesztelt natúr kozmetikai összetevő, melyet "natur botoxként" is
+                                    emlegetnek. Egy
+                                    fermentációval előállított fehérje, amely az arcizmok ellazításával
+                                    természetes
+                                    úton csökkenti a ráncokat és szarkalábakat. A hamburgi In-Cosmetics
+                                    kozmetikai
+                                    gála díjnyertes hatóanyaga.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Aloe-Vera-min-300x171.jpg"
+                                     alt="Aloe Vera"/>
+
+                                <h3>Aloe Vera</h3>
+
+                                <div class="text">Kiváló antioxidáns és antibakteriális hatása van. Hűsítő,
+                                    gyulladáscsökkentő és megőrzi a nedvességet. Ideális száraz, irritált és
+                                    érzékeny bőrre. Antioxidatív, serkenti a kollagéntermelést és hatásos
+                                    bizonyos
+                                    vírusok, baktériumok és gombák ellen. Kiváló pikkelysömör, bőrgyulladás,
+                                    akné és
+                                    leégés kezelésére is.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Jojoba-olaj-min-300x171.jpg"
+                                     alt="Jojoba olaj"/>
+
+                                <h3>Jojoba olaj</h3>
+
+                                <div class="text">Védőréteget képez a bőrön és segít bent tartani a
+                                    folyadékot,
+                                    ezért nagyszerű hidratáló. Segít megakadályozni a bakteriális fertőzések
+                                    kialakulását. Kiváló összetevő a pattanásos bőr számára, mert képes
+                                    csökkenteni
+                                    a faggyútermelést az aknekezelésektől kiszárított bőrben (sokszor a
+                                    túlszárítás
+                                    nagyobb faggyútermelésre ösztönzi a bőrt).
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Keseru-narancs-min-300x171.jpg"
+                                     alt="Keserű narancs"/>
+
+                                <h3>Keserű narancs</h3>
+
+                                <div class="text">Külsőleg sebgyógyulás elősegítésére, zsíros, pattanásos
+                                    bőr
+                                    kezelésére használható növényi kivonat. Kiválóan szabályozza a
+                                    faggyútermelést,
+                                    bőrregeneráló és frissítő hatású. Élénkebbé és tónusosabbá teszi a bőrt.
+                                    Kiváló
+                                    antioxidáns amely megszabadítja a bőrt a szabad gyököktől, és megvédi a
+                                    további
+                                    károsodásoktól.
+                                </div>
+                            </div>
+                            <div class="part text-center col-md-3 col-6">
+
+                                <img class="img img-fluid" src="/theme_florence/static/src/img/Varazsmogyoro-min-300x171.jpg"
+                                     alt="Varázsmogyoró"/>
+
+                                <h3>Varázsmogyoró</h3>
+
+                                <div class="text">Természetes antioxidáns amely nyugtatja a bőrt, csökkenti
+                                    a
+                                    gyulladást és kipirosodást. A varázsmogyoró az egyik legjobb pattanás
+                                    elleni
+                                    szer, egyrészt mert eltávolítja a felesleges zsírokat és a
+                                    szennyeződéseket a
+                                    bőrről, másrészt összehúzza a pórusokat, így azok nem tömődnek és
+                                    fertőződnek
+                                    el, vagyis sokkal kevesebb új pattanás keletkezik.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="ingredients">
+                    <div class="ingredients_header">Összetevők</div>
+                    <div class="ingredients_content" style="display: none;">
+                        <p>Aloe barbadensis leaf juice, Aqua, Rosa Damascena flower water, Rosa canina fruit
+                            extract, Heptapeptide-10, Betaine, Hydrolyzed hyaluronic acid, Parfum, Tetrasodium
+                            glutamate diacetate, Ethylhexylglycerin, Coco-glucoside, Glycerin, Caprylyl glycol,
+                            Glyceryl oleate, Sodium benzonate, Potassium sorbate
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="" id="icons">
+            <div class="container">
+                <div class="icons_wrap inner p_l_20 p_r_20 row">
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_bio.svg"
+                             alt="Biogazdálkodásból származó organikus összetevők"/>
+                        <div class="text">Biogazdálkodásból származó organikus összetevők</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_tight_skin.svg"
+                             alt="Hidratált, feszes, egységes tónusú ragyogó bőr"/>
+                        <div class="text">Hidratált, feszes, egységes tónusú ragyogó bőr</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_paraben_free.svg"
+                             alt="Parabén, szulfát, és mikroműanyag mentes"/>
+                        <div class="text">Parabén, szulfát, és mikroműanyag mentes</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_clinically_tested.svg"
+                             alt="Klinikailag és bőrgyógyászatilag tesztelt"/>
+                        <div class="text">Klinikailag és bőrgyógyászatilag tesztelt</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_italy.svg"
+                             alt="Olaszországban kifejlesztve  és gyártva"/>
+                        <div class="text">Olaszországban kifejlesztve és gyártva</div>
+                    </div>
+                    <div class="part text-center col-md-2 col-6">
+                        <img class="img img-fluid" src="/theme_florence/static/src/img/icon_rabbit.svg"
+                             alt="Vegán és állatokon nem tesztelték"/>
+                        <div class="text">Vegán és állatokon nem tesztelték</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="counterup">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font center">Európa egyik legkeresettebb arcszéruma!</div>
+
+                    <div class="subtitle center">(Amazon 2022.02.22. eladási adatai alapján)</div>
+
+                    <div class="counterup_wrap row">
+                        <div class="wrap_left col-md-4 col-12">
+                            <img src="/theme_florence/static/src/img/siero-florence-riflesso.png"
+                                 alt="" class="img img-fluid"/>
+                        </div>
+
+                        <div class="wrap_right col-12 col-md-8">
+                            <div class="counterup_wrap row">
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">N°1</div>
+
+                                    <div class="part_text">A legtöbbet eladott kozmetikum az Amazon „BEAUTY”
+                                        kategóriában Olaszországban, Franciaországban, Spanyolországban,
+                                        Németországban és Angliában!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">64 314</div>
+
+                                    <div class="part_text">valós vásárlói vélemény. Európában arcszérum még
+                                        soha nem ért el ilyen eredményt!
+                                    </div>
+                                </div>
+                                <div class="part text-center col-md-4 col-12">
+                                    <div class="part_title">12</div>
+
+                                    <div class="part_text">országban kaphatók a Florence bio kozmetikumok,
+                                        és a számuk folyamatosan növekszik!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="center">
+                        <a class="button button_huge button_orange"
+                           href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                            Szeretném kipróbálni
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frontpage_products">
+            <div class="inner p_l_20 p_r_20 container">
+                <div class="title sec_font text-center">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">További biokozmetikumaink</font>
+                    </font>
+                </div>
+            </div>
+        </section>
+        <section class="snippet_product_carousel mb8 oe_website_sale"
+                 data-name="Product Carousel Slider">
+            <div class="js_get_objects product_carousel_design compare_off headline_off text-center quick_off rating_off cart_off wishlist_off"
+                 data-objects_in_slide="4"
+                 data-objects_in_slide_tablet="2"
+                 data-objects_in_slide_mobile="1"
+                 data-split_product_object="1"
+                 data-objects_limit="4"
+                 data-product_view="website_product_carousel.list_of_product_view"/>
+        </section>
+        <section id="try_now">
+            <div class="container">
+                <div class="inner p_l_20 p_r_20">
+                    <div class="title sec_font">Próbáld ki kockázatmentesen!</div>
+
+                    <div class="text">
+                        <p>A weboldalunkról megrendelt Florence® biokozmetikumok minősége és hatékonysága
+                            mellett maximálisan kiállunk, ezért bátran vállaljuk a 30 napos 100%
+                            pénzvisszafizetési garanciát. Semmit sem kérdezünk ha elégedetlen vagy hanem
+                            azonnal visszautaljuk a pénzed, így nulla rizikóval kipróbálhatod bio
+                            kozmetikumainkat! A visszaküldés folyamatáról itt olvashatsz részletesen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

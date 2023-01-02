@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <template id="delivery_lines_hermes">
+<table class="table  table-condensed"
+                   t-attf-style="color:{{style.text_color}};font-family:{{style.font_family}} !important;">
+                <thead t-attf-style="background-color:3f3f3f; page-break-inside: avoid;color:#000000;">
+                    <tr t-attf-style="font-size:{{style.body_font}}px;page-break-inside: avoid !important; border-bottom: 1px solid {{style.text_color}} !important;">
+                        <th id="th_product">
+                            Prodotto
+                        </th>
+                        <th id="th_qty">
+                            Quantita'
+                        </th>
+                        <th class="text-center" id="th_barcode">
+                            Barcode / Seriale
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.move_lines.sorted(key=lambda m: m.product_id.id)" t-as="move_line">
+                        <tr>
+                            <td>
+                                <span t-field="move_line.product_id.name"/>
+                            </td>
+                            <td id="td_qty">
+                                <span t-esc="'{0:.0f}'.format(move_line.product_qty)"/>
+                                <span t-field="move_line.product_uom_id" groups="product.group_uom"/>
+                            </td>
+
+                            <td class="text-center"  id="td_barcode">
+                                <span t-if="move_line.product_id and move_line.product_id.barcode">
+                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128',
+                                        move_line.product_id.barcode, 600, 100)" style="width:300px;height:50px"/>
+                                </span>
+                            </td>
+
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </template>
+    </data>
+</odoo>

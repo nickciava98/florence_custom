@@ -1,0 +1,136 @@
+<odoo>
+    <data>
+        <template id="INVOICE_FD_lines">
+            <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+            <!-- Is there tax in at least one line? -->
+            <t t-set="display_taxes" t-value="any([y.tax_ids for y in o.invoice_line_ids])"/>
+            <table class="table table-condensed" name="table_invoice"
+                   t-attf-style="color:{{style.text_color}};font-family:{{style.font_family}} !important;">
+                <thead t-attf-style="background-color:#3f3f3f; page-break-inside: avoid;color:#ffffff;">
+                    <tr t-attf-style="font-size:{{style.body_font}}px;page-break-inside: avoid !important; border-bottom: 1px solid {{style.text_color}} !important;">
+                        <th>
+                            SKU
+                        </th>
+                        <th>
+                            Size
+                        </th>
+
+                        <th>
+                            Product Type
+                        </th>
+                        <th>
+                            Origin
+                        </th>
+                        <th>
+                            Brand
+                        </th>
+                        <th class="text-right">
+                            QTY
+                        </th>
+                        <th class="text-right">
+                            Price Unit
+                        </th>
+                        <th t-if="display_taxes">
+                            Taxes
+                        </th>
+
+                        <th class="text-right">
+                            Subtotal
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <!-- Lines associated -->
+                    <t t-foreach="o.invoice_line_ids" t-as="p">
+                        <tr>
+                            <td>
+                                <span t-field="p.product_id.nt_sku"/>
+                            </td>
+                            <td>
+                                <span t-field="p.product_id.nt_size"/>
+                            </td>
+                            <td>
+                                <span t-field="p.product_id.nt_product_type"/>
+                            </td>
+                            <td>
+                                <span t-field="p.product_id.nt_origin"/>
+                            </td>
+                            <td>
+                                <span t-field="p.product_id.product_brand_id.name"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="'{0:.0f}'.format(p.quantity)"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="p.price_unit"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+
+                            <td t-if="display_taxes" class="text-center">
+                                <span t-esc="', '.join(map(lambda x: (x.description or x.name), p.tax_ids))"/>
+                            </td>
+
+                            <td class="text-right">
+                                <span t-field="p.price_subtotal"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+            <div class="col-xs-12" style="padding:8px"/>
+            <div class="col-xs-6 pull-left" style="padding-left:0px; padding-right:0px;">
+                <t t-set="payments" t-value="json.loads(o.invoice_payments_widget)"/>
+                <p t-if="payments">
+                    <strong>Payment Information:</strong>
+                </p>
+                <div t-if="payments" class="col-xs-6 pull-left"
+                     style="padding-left:0px; padding-right:0px; page-break-inside: avoid !important;">
+                    <table class="table">
+
+                        <thead t-attf-style="page-break-inside: avoid;">
+                            <tr t-attf-style="page-break-inside: avoid !important; border-bottom: 1px solid !important;">
+                                <th t-attf-style="border-bottom: 1px solid  !important;">No.</th>
+                                <th t-attf-style="border-bottom: 1px solid !important;">Date</th>
+                                <th t-attf-style="border-bottom: 1px solid  !important;">Method</th>
+                                <th t-attf-style="border-bottom: 1px solid  !important;">Ref.</th>
+                                <th class="text-right" t-attf-style="border-bottom: 1px solid !important;">Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="payments['content']" t-as="p">
+                                <tr t-attf-style="page-break-inside: avoid !important;">
+                                    <td>
+                                        <span t-esc="p_index + 1"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="p['date']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="p['journal_name']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="p['ref']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="p['amount']"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-6 pull-left">
+                <t t-if="o.default_transport_reason_id">
+                    <span>REASON FOR EXPORT (motivazioni dell'esportazione):</span>
+                    <span t-field="o.default_transport_reason_id"/>
+                </t>
+            </div>
+
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="website.template_header_default" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="website.template_header_contact" model="ir.ui.view">
+        <field name="active" eval="True"/>
+    </record>
+    <record id="website.template_header_hamburger_align_right" model="ir.ui.view">
+        <field name="active" eval="True"/>
+    </record>
+    <record id="website.template_header_default_align_right" model="ir.ui.view">
+        <field name="active" eval="True"/>
+    </record>
+    <template id="layout_inherit"
+              inherit_id="website.layout">
+        <xpath expr="//header" position="before">
+            <section class="s_text_block pt8 pb8 o_cc o_cc2" data-snippet="s_text_block" data-name="Text" id="top_bar">
+                <div class="container" style="margin: 2px auto;">
+                    <div class="hwrap top_bar_wrap d-md-none">
+                        <div class="hmove part">
+                            <div class="hslide">
+                                <div class="part">
+                                    <div class="icon b_r_50p">
+                                        <img class="img-fluid img"
+                                             src="/theme_florence/static/src/img/icon_truck_white.svg"
+                                             alt="Free shipping on purchases over HUF 15,000"/>
+                                    </div>
+                                    Free shipping on purchases over HUF 15,000
+                                </div>
+                            </div>
+                            <div class="hslide">
+                                <div class="part">
+                                    <div class="icon b_r_50p">
+                                        <img class="img-fluid img"
+                                             src="/theme_florence/static/src/img/icon_48hours_white.svg"
+                                             alt="Delivery within 2 working days"/>
+                                    </div>
+                                    Delivery within 2 working days
+                                </div>
+                            </div>
+                            <div class="hslide">
+                                <div class="part">
+                                    <div class="icon b_r_50p">
+                                        <img class="img-fluid img"
+                                             src="/theme_florence/static/src/img/icon_money_back_white-1.svg"
+                                             alt="30 day money back guarantee"/>
+                                    </div>
+                                    30 day money back guarantee
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="top_bar_wrap d-none d-md-flex">
+                        <div class="part">
+                            <div class="icon b_r_50p">
+                                <img class="img-fluid img"
+                                     src="/theme_florence/static/src/img/icon_truck_white.svg"
+                                     alt="Free shipping on purchases over HUF 15,000"/>
+                            </div>
+                            Free shipping on purchases over HUF 15,000
+                        </div>
+                        <div class="part d-none d-md-flex">
+                            <div class="icon b_r_50p">
+                                <img class="img-fluid img"
+                                     src="/theme_florence/static/src/img/icon_48hours_white.svg"
+                                     alt="Delivery within 2 working days"/>
+                            </div>
+                            Delivery within 2 working days
+                        </div>
+                        <div class="part d-none d-md-flex">
+                            <div class="icon b_r_50p">
+                                <img class="img-fluid img"
+                                     src="/theme_florence/static/src/img/icon_money_back_white-1.svg"
+                                     alt="30 day money back guarantee"/>
+                            </div>
+                            30 day money back guarantee
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </xpath>
+    </template>
+
+    <record id="website.template_header_contact_oe_structure_header_contact_1" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+    <template id="option_header_brand_logo_inherit" inherit_id="website.option_header_brand_logo"
+              name="Header Brand Logo">
+        <xpath expr="//a" position="replace">
+            <a href="/" t-attf-class="navbar-brand logo #{_link_class}">
+                <img class="img img-fluid d-inline-block header-logo" id="main_logo"
+                     alt="Florence® Organic Cosmetics - Certified Organic Cosmetics from Italy"
+                     src="/theme_florence/static/src/img/logo_white.svg" width="260"
+                     style="height: 100%;margin-right: 15px;"/>
+            </a>
+        </xpath>
+    </template>
+    <!--
+        <template id="user_dropdown_inherit" inherit_id="website.navbar_nav">
+        </template>
+    -->
+
+    <template id="navbar_toggler_inherit" inherit_id="website.navbar_toggler">
+        <xpath expr="//button[@data-target='#top_menu_collapse']" position="before">
+            <!--<a class="button has_icon phone hide_in_480 d-none" href="tel:+36202831511">
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">+36 20 283 1511</font>
+                </font>
+            </a>-->
+            <a href="/shop/cart" t-attf-class="#{_link_class} ajax_cart b_r_50p  d-md-none ml-auto"
+               style="height: 50px;">
+                <i t-if="_icon" class="fa fa-shopping-cart"/>
+                <sup class="my_cart_quantity badge badge-primary count"
+                     t-esc="website_sale_order and website_sale_order.cart_quantity or '0'"
+                     t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+            </a>
+        </xpath>
+    </template>
+    <template id="navbar_nav_inherit" inherit_id="website.navbar_nav">
+        <xpath expr="//ul" position="inside">
+            <t t-set="product_ids" t-value="website.get_header_product()"/>
+            <li class="dropdown  order-first nav-item nav_li_dropdown" t-if="product_ids">
+                <a class="dropdown-toggle dropdown order-first nav-link nv-dropdown" type="button"
+                   id="dropdownMenuButton"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Kozmetikumaink
+                </a>
+                <div class="dropdown-menu dropdown_list mt-0 pt-0 pb-0" aria-labelledby="dropdownMenuButton">
+                    <t t-foreach="product_ids" t-as="product_id">
+                        <a class="dropdown-item nav-link " t-att-href="'/shop/product/%s' % slug(product_id)"
+                           style="color:white!important;font-size: 12px;">
+                            <t t-esc="product_id.name"/>
+                        </a>
+                    </t>
+                </div>
+            </li>
+        </xpath>
+        <xpath expr="//ul" position="after">
+            <!--            <li>-->
+            <a class="button has_icon phone hide_in_480 d-none d-md-block" href="tel:+36202831511">
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">+36 20 283 1511</font>
+                </font>
+            </a>
+            <a href="/shop/cart" t-attf-class="#{_link_class} ajax_cart b_r_50p  d-none d-md-block"
+               style="height: 50px;">
+                <i t-if="_icon" class="fa fa-shopping-cart"/>
+                <sup class="my_cart_quantity badge badge-primary count"
+                     t-esc="website_sale_order and website_sale_order.cart_quantity or '0'"
+                     t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+            </a>
+        </xpath>
+    </template>
+    <template id="navbar_toggler_inherit" inherit_id="website.navbar_toggler">
+        <xpath expr="//button" position="attributes">
+            <attribute name="t-attf-class">navbar-toggler #{_toggler_class} d-md-none d-sm-block d-none</attribute>
+        </xpath>
+        <xpath expr="//button" position="after">
+            <a href="/shop/cart" t-attf-class="#{_link_class} ajax_cart b_r_50p  d-md-none ml-auto"
+               style="height: 50px;">
+                <i t-if="_icon" class="fa fa-shopping-cart"/>
+                <sup class="my_cart_quantity badge badge-primary count"
+                     t-esc="website_sale_order and website_sale_order.cart_quantity or '0'"
+                     t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+            </a>
+            <button type="button" t-attf-class="order-1 navbar-toggler #{_toggler_class} d-sm-none" data-toggle="modal"
+                    data-target="#main_menu_modal">
+                <span class="navbar-toggler-icon o_not_editable"/>
+            </button>
+        </xpath>
+    </template>
+    <template id="theme_florence_menu" inherit_id="website.user_navbar" name="theme_florence_menu Filter">
+        <xpath expr="//nav[@id='oe_main_menu_navbar']" position="after">
+            <div class="modal modal-left fade" id="main_menu_modal" tabindex="-1" role="dialog"
+                 aria-labelledby="main_menu_modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="background: #2b2847;">
+                        <div style="padding: 15px;">
+                            <!--
+                                                        <img class="img img-fluid d-inline-block header-logo" id="main_logo"
+                                                             alt="Florence® Organic Cosmetics - Certified Organic Cosmetics from Italy"
+                                                             src="/theme_florence/static/src/img/logo_white.svg" width="260"
+                                                             style="height: 100%;margin-right: 15px;width: 93px;"/>
+                            -->
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <img id="img_minus" src="/theme_florence/static/src/img/Exit.svg"/>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="bs-example">
+                                <div class="accordion" id="accordionExample">
+                                    <t t-call="website.navbar_nav">
+                                        <t t-set="_nav_class" t-value="'flex-grow-1'"/>
+                                        <!-- Menu -->
+                                        <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                            <t t-call="website.submenu">
+                                                <t t-set="item_class" t-value="'nav-item'"/>
+                                                <t t-set="link_class" t-value="'nav-link'"/>
+                                            </t>
+                                        </t>
+                                        <!-- Sign In -->
+                                        <t t-call="portal.placeholder_user_sign_in">
+                                            <t t-set="_item_class" t-value="'nav-item ml-lg-auto'"/>
+                                            <t t-set="_link_class" t-value="'nav-link font-weight-bold'"/>
+                                        </t>
+                                        <!-- User Dropdown -->
+                                        <t t-call="portal.user_dropdown">
+                                            <t t-set="_user_name" t-value="true"/>
+                                            <t t-set="_item_class" t-value="'nav-item dropdown ml-lg-auto'"/>
+                                            <t t-set="_link_class" t-value="'nav-link font-weight-bold'"/>
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

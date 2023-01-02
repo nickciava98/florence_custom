@@ -1,0 +1,235 @@
+<odoo>
+    <data>
+        <template id="SO_Fashion_Dealer_document" name="Fashion Dealer">
+            <div class="article page"
+                 t-attf-style="color:{{style.text_color}} !important;padding-top:-16px !important;font-size:{{style.body_font}}px !important;font-family:{{style.font_family}} !important;">
+                <div class="col-12"
+                     style="width:100%;padding-left:0px; padding-right:0px;padding-top:5x;padding-bottom:5px;">
+                    <div t-attf-style="float:left;width:100%;padding-left:10px;padding-right:10px;padding-top:5;padding-bottom:5px;
+                color:white; background-color:#c00000;border:1px solid {{style.text_color}};border-color:transparent">
+                        <h7 id="title"
+                            style="margin-top:10px;padding-top:5px;padding-bottom:5px;font-size:13px !important">
+                            <t t-if="(env.context.get('proforma', False) or is_pro_forma)">
+                                <span>FATTURA PROFORMA</span>
+                            </t>
+                            <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                                <span t-if="doc.state not in ['draft','sent']">SALE ORDER / ORDINE
+                                </span>
+                                <span t-if="doc.state in ['draft','sent']">QUOTATION / PREVENTIVO
+                                </span>
+                            </t>
+
+                            <span t-field="doc.name" style="padding-left:30px"/>
+                            <span t-if="doc.validity_date and doc.state not in ['draft','sent']"
+                                  class="float-right" style="text-align:right">Date
+                                <span t-field="doc.validity_date" t-field-options='{"widget": "date"}'/>
+                            </span>
+                            <span t-if="doc.date_order and doc.state in ['draft','sent']" class="float-right"
+                                  style="text-align:right">Date
+                                <span t-field="doc.date_order" t-field-options='{"widget": "date"}'/>
+                            </span>
+                        </h7>
+                    </div>
+                </div>
+                <div class="col-12 row" t-attf-style="padding:8px;"/>
+                <div class="col-5 pull-left"
+                     t-attf-style="{{style.text_color}};background-color:#efefef!important;">
+                    <strong>
+                        Bill To (Indirizzo fatturazione)
+                    </strong>
+                    <br/>
+                    <span t-if="doc.partner_invoice_id.commercial_partner_id"
+                          t-field="doc.partner_invoice_id.commercial_partner_id.name"/>
+                    <br/>
+                    <div style="margin-bottom:0px;">
+                        <span t-if="doc.partner_invoice_id.commercial_partner_id.street"
+                              t-field="doc.partner_invoice_id.commercial_partner_id.street"/>
+                        <br/>
+                        <span t-if="doc.partner_invoice_id.commercial_partner_id.street2"
+                              t-field="doc.partner_invoice_id.commercial_partner_id.street2"/>
+                        <br/>
+                        <span t-if="doc.partner_invoice_id.commercial_partner_id.zip"
+                              t-field="doc.partner_invoice_id.commercial_partner_id.zip"/>
+                        <br/>
+                        <span t-if="doc.partner_invoice_id.commercial_partner_id.city"
+                              t-field="doc.partner_invoice_id.commercial_partner_id.city"/>
+                        <br/>
+                        <span t-if="doc.partner_invoice_id.commercial_partner_id.country_id"
+                              t-field="doc.partner_invoice_id.commercial_partner_id.country_id"/>
+                    </div>
+                    <span t-if="doc.partner_invoice_id.commercial_partner_id.vat">VAT:
+                        <span t-field="doc.partner_invoice_id.commercial_partner_id.vat"/>
+                    </span>
+                </div>
+                <!--SHIP TO-->
+                <div class="col-5 pull-right"
+                     t-attf-style="{{style.text_color}};background-color:#efefef !important;">
+                    <strong>
+                        Ship To (Indirizzo spedizione)
+                    </strong>
+                    <br/>
+                    <span t-if="doc.partner_shipping_id.name" t-field="doc.partner_shipping_id.name"/>
+                    <br/>
+
+                    <div style="margin-bottom:0px;">
+                        <span t-if="doc.partner_shipping_id.street" t-field="doc.partner_shipping_id.street"/>
+                        <br/>
+                        <span t-if="doc.partner_shipping_id.street2" t-field="doc.partner_shipping_id.street2"/>
+                        <br/>
+                        <span t-if="doc.partner_shipping_id.zip" t-field="doc.partner_shipping_id.zip"/>
+                        <br/>
+                        <span t-if="doc.partner_shipping_id.city" t-field="doc.partner_shipping_id.city"/>
+                        <br/>
+                        <span t-if="doc.partner_shipping_id.country_id" t-field="doc.partner_shipping_id.country_id"/>
+                    </div>
+
+                    <span t-if="doc.partner_shipping_id.vat">VAT:
+                        <span t-field="doc.partner_shipping_id.vat"/>
+                    </span>
+                </div>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+                <table class="col-8"
+                       t-attf-style="border:1px solid">
+                    <tr t-attf-style="padding:4px">
+                        <td t-attf-style="padding:4px;border:1px solid;width:50%">
+                            <strong>Customer Ref.</strong>
+                            <span t-field="doc.client_order_ref"/>
+                        </td>
+                        <td t-attf-style="padding:4px;width:50%;border:1px solid">
+                            <strong>Payment Term</strong>
+                            <span t-field="doc.payment_term_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td t-attf-style="padding:4px;width:50%;border:1px solid">
+                            <strong>Payment Method</strong>
+                            <span t-field="doc.default_transport_condition_id"/>
+                        </td>
+                        <td t-attf-style="padding:4px;width:50%;border:1px solid">
+                            <strong>Terms of Sale</strong>
+                            <span t-field="doc.payment_mode_id.name"/>
+                        </td>
+                    </tr>
+                </table>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+
+                <t t-if="(env.context.get('proforma', False) or is_pro_forma)">
+                    <table class="col-12"
+                           t-attf-style="padding-left:0px;padding-right:0px; padding-bottom:4px; padding-top:5px;">
+                        <tr t-attf-style="padding:4px;">
+                            <td t-attf-style="padding:4px;border:1 px solid" class="text-center">
+                                <span>Bank:</span>
+                                <span t-field="doc.partner_bank_id.bank_id.name"/>
+                                <span/>
+                                <span>BIC:</span>
+                                <span t-field="doc.partner_bank_id.bank_id.bic"/>
+                                <br/>
+                                <span>IBAN:</span>
+                                <span t-field="doc.partner_bank_id.acc_number"/>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+                <t t-call="professional_templates.order_lines_fashion_dealer"/>
+                <!--Total table-->
+                <div class="col-6 float-right">
+                    <table t-attf-style="border:1px solid" class="table">
+                        <tr t-if="env.context.get('sale_total_line_quantity')">
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL QUANTITY (totale quantita')</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <t t-esc="'{0:.0f}'.format(env.context.get('sale_total_line_quantity'))"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL PRODUCTS (totale prodotti)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <t t-set="total_products" t-value="0"/>
+                                <t t-foreach="doc.order_line" t-as="l">
+                                    <t t-set="total_products"
+                                       t-value="total_products+(l.price_unit*l.product_uom_qty)"/>
+                                </t>
+                                <t t-esc="total_products"
+                                   t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>DISCOUNTS (importo sconto)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <t t-set="val_discount" t-value="0.0"></t>
+                                <t t-foreach="doc.order_line" t-as="p">
+                                    <t t-set="val_discount"
+                                       t-value="val_discount+((p.price_unit *p.product_uom_qty)-p.price_subtotal)"/>
+                                </t>
+                                <t t-esc="val_discount"
+                                   t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL PRODUCTS EXCL.DISCOUNT</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <t t-set="val_excl_discount" t-value="0"></t>
+                                <t t-set="val_excl_discount" t-value="total_products-val_discount"/>
+                                <t t-esc="val_excl_discount"
+                                   t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                            </td>
+                        </tr>
+                        <!--                        <tr t-if="doc.delivery_price">-->
+                        <!--                            <td t-attf-style="border:1px solid;padding:4px">-->
+                        <!--                                <span>SHIPPING (spedizione)</span>-->
+                        <!--                            </td>-->
+                        <!--                            <td t-attf-style="border:1px solid;padding:4px">-->
+                        <!--                                <span t-field="doc.delivery_price"/>-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL TAXABLE (imponibile)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span t-field="doc.amount_untaxed"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>VAT (IVA)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span t-field="doc.amount_tax"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span>TOTAL INVOICE (totale fattura)</span>
+                            </td>
+                            <td t-attf-style="border:1px solid;padding:4px">
+                                <span t-field="doc.amount_total"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-12 row" t-attf-style="padding:8px"/>
+
+                <div t-if="doc.partner_id.internal_delivery_instructions" class="col-12">
+                    <strong t-attf-style="white-space:nowrap;">Delivery instructions</strong>
+                    <br/>
+                    <span t-field="doc.partner_id.internal_delivery_instructions"/>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer" t-attf-style="font-size:18px;text-align:center!important">
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

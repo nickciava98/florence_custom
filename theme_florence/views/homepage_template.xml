@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="homepage1" name="Homepage" inherit_id="website.homepage" priority="100">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure oe_empty">
+                <section class="s_carousel_wrapper" data-vxml="001" data-snippet="s_carousel" data-name="Carousel"
+                         id="slider_wrap">
+                    <div id="myCarousel1651483939075" class="s_carousel carousel slide s_carousel_rounded"
+                         data-interval="10000">
+                        <ol class="carousel-indicators o_we_no_overlay">
+                            <li data-target="#myCarousel1651483939075" data-slide-to="0" class="active">
+                                <span>1</span>
+                            </li>
+                            <li data-target="#myCarousel1651483939075" data-slide-to="1">
+                                <span>2</span>
+                            </li>
+                            <li data-target="#myCarousel1651483939075" data-slide-to="2">
+                                <span>3</span>
+                            </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item pt152 pb152 oe_img_bg o_colored_level active"
+                                 style="background-image: url(&quot;/theme_florence/static/src/img/Florence-C-vitmin-arcszerum-2-min.png&quot;);background-size: auto;"
+                                 data-name="Slide">
+                                <div class="container">
+                                    <div class="inner p_l_20 p_r_20">
+                                        <div class="text_wrap">
+                                            <div class="text">
+                                                <p>
+                                                    <img loading="lazy" width="171" height="138"
+                                                         class="alignnone size-full wp-image-45 img img-fluid"
+                                                         src="/theme_florence/static/src/img/logo_amazon_bestseller.png"
+                                                         alt=""/>
+                                                </p>
+                                                <h1>
+                                                    <font style="vertical-align: inherit;">
+                                                        <font style="vertical-align: inherit;">Amazon N ° 1 Face Serum
+                                                            is now available at home!
+                                                        </font>
+                                                    </font>
+                                                </h1>
+                                            </div>
+
+                                            <a class="button button_huge button_orange button_has_arrow"
+                                               href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/"
+                                               tabindex="0">
+                                                <font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">Let's see what he can do
+                                                    </font>
+                                                </font>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item oe_img_bg o_colored_level pt152 pb152"
+                                 style="background-image: url(&quot;/theme_florence/static/src/img/Florence-arctisztito-tej-min.png&quot;);background-size: auto;"
+                                 data-name="Slide">
+                                <div class="container">
+                                    <div class="inner p_l_20 p_r_20">
+                                        <div class="text_wrap">
+                                            <div class="text">
+                                                <h1>
+                                                    <font style="vertical-align: inherit;">
+                                                        <font style="vertical-align: inherit;">Organic facial cleansing
+                                                            and hydration in one step!
+                                                        </font>
+                                                    </font>
+                                                </h1>
+                                            </div>
+
+                                            <a class="button button_huge button_orange button_has_arrow"
+                                               href="https://florence.digitalform.hu/termek/bio-arctisztito-tej/"
+                                               tabindex="-1">
+                                                <font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">I'll see</font>
+                                                </font>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item pt128 pb128 oe_img_bg o_colored_level"
+                                 style="background-image: url(&quot;/theme_florence/static/src/img/Florence-4-lepeses-arcapolasi-rutin-min-1.png&quot;);background-size: auto;"
+                                 data-name="Slide">
+                                <div class="container">
+                                    <div class="inner p_l_20 p_r_20">
+                                        <div class="text_wrap">
+                                            <div class="text">
+                                                <h1>
+                                                    <font style="vertical-align: inherit;">
+                                                        <font style="vertical-align: inherit;">4-step organic facial
+                                                            routine package
+                                                        </font>
+                                                    </font>
+                                                </h1>
+                                                <p>
+                                                    <font style="vertical-align: inherit;">
+                                                        <font style="vertical-align: inherit;">1st cleansing / 2nd
+                                                            toning / 3rd serum / 4th hydration
+                                                        </font>
+                                                    </font>
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev o_not_editable o_we_no_overlay" href="#myCarousel1651483939075"
+                           data-slide="prev" role="img" aria-label="Previous" title="Previous">
+                            <span class="carousel-control-prev-icon"/>
+                            <span class="sr-only o_default_snippet_text">Previous</span>
+                        </a>
+                        <a class="carousel-control-next o_not_editable o_we_no_overlay" href="#myCarousel1651483939075"
+                           data-slide="next" role="img" aria-label="Next" title="Next">
+                            <span class="carousel-control-next-icon"/>
+                            <span class="sr-only o_default_snippet_text">Next</span>
+                        </a>
+                    </div>
+                </section>
+                <section id="video">
+                    <div class="video_wrap inner p_l_20 p_r_20 container">
+                        <div class="row">
+                            <div class="wrap_left col-md-6 col-12">
+                                <div class="image"
+                                     style="background-image: url(/theme_florence/static/src/img/video-boritokep-min-1200x675.jpg);">
+                                    <a class="anim b_r_50p active" data-fancybox=""
+                                       href="https://www.youtube.com/watch?v=uopGARMSuCw">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="wrap_right center col-md-6 col-12">
+                                <div class="title">Állítsd meg az időt
+                                    <span>C-vitamin szérumunkkal!</span>
+                                </div>
+
+                                <p style="text-align: left;">Európa egyik legtöbbet eladott arcszéruma végre
+                                    Magyarországon
+                                    is elérhető! Az olaszországi Florence® bio minősítésű C vitamin arcszéruma pár hét
+                                    alatt
+                                    csodát tesz a bőröddel. Válogatott organikus összetevői mélyen hidratálják,
+                                    feszesítik
+                                    és egységes tónusúvá varázsolják az arcbőrt.
+                                </p>
+                                <p style="text-align: left;">Fiatalos ragyogást nyújt, csökkenti a ráncokat, látványosan
+                                    halványítja a napfoltokat, valamint segít az aknés-pattanásos bőrűeknek is! A
+                                    biogazdálkodásból származó összetevők szinergikus módon, azaz egymást hatását
+                                    elősegítve
+                                    serkentik a bőr kollagéntermelését.
+                                </p>
+                                <p style="text-align: left;">A Florence® C Vitamin arcszérum az arcon túl a nyakon és
+                                    dekoltázson is hatékonyan használható, nőknek és férfiaknak egyaránt.
+                                </p>
+
+                                <div class="center">
+                                    <a class="button button_huge button_orange"
+                                       href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                                        Tovább a
+                                        szérumhoz
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="icons">
+                    <div class="container">
+                        <div class="icons_wrap inner p_l_20 p_r_20 row">
+                            <div class="part text-center col-md-2 col-6">
+                                <img class="img-fluid img" src="/theme_florence/static/src/img/icon_bio.svg"
+                                     alt="Biogazdálkodásból származó organikus összetevők"/>
+                                <div class="text">Biogazdálkodásból származó organikus összetevők</div>
+                            </div>
+                            <div class="part text-center col-md-2 col-6">
+                                <img  class="img-fluid img" src="/theme_florence/static/src/img/icon_tight_skin.svg"
+                                     alt="Hidratált, feszes, egységes tónusú ragyogó bőr"/>
+                                <div class="text">Hidratált, feszes, egységes tónusú ragyogó bőr</div>
+                            </div>
+                            <div class="part text-center col-md-2 col-6">
+                                <img  class="img-fluid img" src="/theme_florence/static/src/img/icon_paraben_free.svg"
+                                     alt="Parabén, szulfát, és mikroműanyag mentes"/>
+                                <div class="text">Parabén, szulfát, és mikroműanyag mentes</div>
+                            </div>
+                            <div class="part text-center col-md-2 col-6">
+                                <img class="img-fluid img" src="/theme_florence/static/src/img/icon_clinically_tested.svg"
+                                     alt="Klinikailag és bőrgyógyászatilag tesztelt"/>
+                                <div class="text">Klinikailag és bőrgyógyászatilag tesztelt</div>
+                            </div>
+                            <div class="part text-center col-md-2 col-6">
+                                <img class="img-fluid img" src="/theme_florence/static/src/img/icon_italy.svg"
+                                     alt="Olaszországban kifejlesztve  és gyártva"/>
+                                <div class="text">Olaszországban kifejlesztve és gyártva</div>
+                            </div>
+                            <div class="part text-center col-md-2 col-6">
+                                <img class="img-fluid img" src="/theme_florence/static/src/img/icon_rabbit.svg"
+                                     alt="Vegán és állatokon nem tesztelték"/>
+                                <div class="text">Vegán és állatokon nem tesztelték</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="counterup">
+                    <div class="container">
+                        <div class="inner p_l_20 p_r_20">
+                            <div class="title sec_font center">Európa egyik legkeresettebb arcszéruma!</div>
+
+                            <div class="subtitle center">(Amazon 2022.02.22. eladási adatai alapján)</div>
+
+                            <div class="counterup_wrap row">
+                                <div class="wrap_left col-md-4 col-12">
+                                    <img src="/theme_florence/static/src/img/siero-florence-riflesso.png"
+                                         alt="" class="img img-fluid"/>
+                                </div>
+
+                                <div class="wrap_right col-12 col-md-8">
+                                    <div class="counterup_wrap row">
+                                        <div class="part text-center col-md-4 col-12">
+                                            <div class="part_title">N°1</div>
+
+                                            <div class="part_text">A legtöbbet eladott kozmetikum az Amazon „BEAUTY”
+                                                kategóriában Olaszországban, Franciaországban, Spanyolországban,
+                                                Németországban és Angliában!
+                                            </div>
+                                        </div>
+                                        <div class="part text-center col-md-4 col-12">
+                                            <div class="part_title">64 314</div>
+
+                                            <div class="part_text">valós vásárlói vélemény. Európában arcszérum még
+                                                soha nem ért el ilyen eredményt!
+                                            </div>
+                                        </div>
+                                        <div class="part text-center col-md-4 col-12">
+                                            <div class="part_title">12</div>
+
+                                            <div class="part_text">országban kaphatók a Florence bio kozmetikumok,
+                                                és a számuk folyamatosan növekszik!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="center">
+                                <a class="button button_huge button_orange"
+                                   href="https://florence.digitalform.hu/termek/florence-c-vitamin-arcszerum/">
+                                    Szeretném kipróbálni
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="frontpage_products">
+                    <div class="inner p_l_20 p_r_20 container">
+                        <div class="title sec_font text-center">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Our other biocosmetics</font>
+                            </font>
+                        </div>
+                    </div>
+                </section>
+                <section class="snippet_product_carousel mb8 oe_website_sale"
+                         data-name="Product Carousel Slider">
+                    <div class="js_get_objects product_carousel_design compare_off headline_off text-center quick_off rating_off cart_off wishlist_off"
+                         data-objects_in_slide="4"
+                         data-objects_in_slide_tablet="2"
+                         data-objects_in_slide_mobile="1"
+                         data-split_product_object="1"
+                         data-objects_limit="7"
+                         data-product_view="website_product_carousel.list_of_product_view"/>
+                </section>
+                <section id="try_now">
+                    <div class="container">
+                        <div class="inner p_l_20 p_r_20">
+                            <div class="title sec_font">Próbáld ki kockázatmentesen!</div>
+
+                            <div class="text">
+                                <p>A weboldalunkról megrendelt Florence® biokozmetikumok minősége és hatékonysága
+                                    mellett maximálisan kiállunk, ezért bátran vállaljuk a 30 napos 100%
+                                    pénzvisszafizetési garanciát. Semmit sem kérdezünk ha elégedetlen vagy hanem
+                                    azonnal visszautaljuk a pénzed, így nulla rizikóval kipróbálhatod bio
+                                    kozmetikumainkat! A visszaküldés folyamatáról itt olvashatsz részletesen.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="logos" class="mt-4 mb-4">
+                    <div class="inner p_l_20 p_r_20 container">
+                        <div class="logos_wrap row">
+                            <img class="img-fluid img col-md-2 col-4" src="/theme_florence/static/src/img/logo_cosmopolitan.svg"
+                                 alt="Cosmopolitan"/>
+                            <img class="img-fluid img col-md-2 col-4" src="/theme_florence/static/src/img/logo_donna_moderna.svg"
+                                 alt="Donna Moderna"/>
+                            <img class="img-fluid img col-md-2 col-4" src="/theme_florence/static/src/img/logo_marie_claire.svg"
+                                 alt="Marie Claire"/>
+                            <img class="img-fluid img col-md-2 col-4" src="/theme_florence/static/src/img/logo_elle.svg"
+                                 alt="ELLE"/>
+                            <img class="img-fluid img col-md-2 col-4" src="/theme_florence/static/src/img/logo_glamour.svg"
+                                 alt="Glamour"/>
+                            <img class="img-fluid img col-md-2 col-4" src="/theme_florence/static/src/img/logo_el_pais.svg"
+                                 alt="El Pais"/>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="montage">
+                    <div class="container-fluid">
+                        <img class="img-fluid img" src="/theme_florence/static/src/img/florence-influencers.jpg"
+                             alt=""/>
+                        <div class="montage_wrap p_l_20 p_r_20">
+                            <p>Több tízezer elégedett vásárló</p>
+                            <h2>Világszerte</h2>
+                        </div>
+                    </div>
+                </section>
+                <section id="aboutus">
+                    <div class="aboutus_wrap inner p_l_20 p_r_20 container">
+                        <div class="row">
+                            <div class="wrap_left center col-md-6 col-12">
+                                <div class="title">A szívünk Szardínián
+                                    <span>a csapatunk Olaszországban Érted dolgozik!</span>
+                                </div>
+
+                                <p style="text-align: left;">A Florence® 2017-es indulása óta nemcsak Olaszország,
+                                    hanem
+                                    egész Európa egyik legkeresettebb BIO kozmetikai márkájává nőtte ki magát. A
+                                    siker
+                                    kulcsa a legfrissebb kozmetikai kutatásokra épülő válogatott organikus
+                                    hatóanyagok és a
+                                    vásárlói visszajelzésekre épülő folyamatos fejlesztésben rejlik. Termékskálánk
+                                    lefedi a
+                                    komplett napi arcápolási rutint szintetikus összetevők használata nélkül.
+                                    Büszkék
+                                    vagyunk rá, hogy minden termékünk megkapta a szigorú AIAB biokozmetikai
+                                    minősítést,
+                                    amely igazolja, hogy az összetevők ellenőrzött biogazdálkodásból származnak.
+                                    Kozmetikumunkat Olaszországban fejlesztjük, gyártjuk és bőrgyógyászatilag
+                                    teszteljük.
+                                </p>
+                                <p style="text-align: left;">Florence® – Mindig melletted!</p>
+                                <p style="text-align: left;">Üdvözlettel,</p>
+                                <p style="text-align: left;">Giampaolo Floris
+                                    <br/>
+                                    alapító
+                                </p>
+                            </div>
+
+                            <div class="col-md-6 col-12 wrap_right">
+                                <img class="img-fluid img" src="/theme_florence/static/src/img/szardinia-min.jpg"
+                                     alt=""/>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </xpath>
+    </template>
+</odoo>

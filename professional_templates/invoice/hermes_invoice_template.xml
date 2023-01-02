@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="INVOICE_Hermes_document" name="Hermes">
+            <div t-attf-style="padding-left:0px; padding-right:0px; color:{{style.text_color}} !important;font-size:{{style.header_font}}px !important;font-family:{{style.font_family}} !important;"
+                 class="header col-12">
+                <div t-if="style.header">
+                    <table t-attf-style="text-align:center; margin-bottom:5px">
+                        <tr>
+                            <td style="width:50%;">
+                                <div t-if="style.logo"
+                                     style="width:168px; height:130px; margin-top:0px;margin-right 100px;"
+                                     itemprop="image" t-field="style.logo" t-options='{"widget": "image"}'
+                                     t-field-options="{&quot;widget&quot;: &quot;image&quot;}">
+                                </div>
+                                <div t-if="not style.logo and company.logo"
+                                     style="width:100%; text-align:right; margin-right:100px">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                                <div t-if="not style.logo and company.logo"
+                                     style="width:100%; text-align:right;">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                                <div t-if="not style.logo and not company.logo"
+                                     style="width:100%;text-align:right;">
+                                    <span itemprop="image" t-field="company.logo" t-options='{"widget": "image"}'
+                                          t-field-options="{&quot;widget&quot;: &quot;image&quot;}"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div t-if="style.logo" t-attf-style="margin-top:-130px;padding-left:-120px !important"
+                         class="pull-right text-center">
+                        <strong style="font-size:23px;font-style:italic;">Hermes group SRL</strong>
+                        <br/>
+                        <strong style="font-size:18px;font-style:italic">VIA CAPRERA, 35 - 09123 CAGLIARI (ca)</strong>
+                        <br/>
+                        <span style="font-size:16px;">www.gruppohermes.com</span>
+                        <br/>
+
+                        <span style="font-size:16px;">info@greuppohermes.com</span>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article page" t-attf-data-oe-model="account.move" t-attf-data-oe-id="{{o.id}}"
+                 t-attf-style="color:{{style.text_color}} !important;font-size:{{style.body_font}}px !important;font-family:{{style.font_family}} !important;">
+                <div class="col-12"
+                     t-attf-style="white-space:pre-line;color:#{style.wm_color};left:#{style.leftpadding}mm; top:#{style.toppadding}mm;font-size:#{style.fontsize}px; opacity:#{style.opacity};z-index:-99; -webkit-transform:rotate(-#{style.rotate}deg);position:fixed;">
+                    <t t-esc="style.wm_eval(o, time, user, res_company)"/>
+                </div>
+
+                <div class="col-5 pull-left"
+                     t-attf-style="color:{{style.text_color}} !important; border:1px solid {{style.text_color}};margin-top:35px;height:60px">
+                    <h4 id="title" style="margin-bottom:10px;">
+                        <strong>
+                            <span t-if="o.state == 'draft'">Bozza</span>
+                            <span t-if="o.state == 'cancel'">Cancellata</span>
+                            <span t-if="o.move_type == 'out_invoice'">Fattura</span>
+                            <span t-if="o.move_type == 'out_refund'">Nota di credito</span>
+                            <span t-if="o.move_type == 'in_refund'">Nota di credito Fornitore</span>
+                            <span t-if="o.move_type == 'in_invoice'">Fattura Fornitore</span>
+                            <span t-field="o.name" t-if="o.state not in ['draft', 'cancel']"/>
+                        </strong>
+                    </h4>
+                </div>
+                <div class="col-12" style="padding:8px"/>
+                <div class="col-5 pull-right text-left"
+                     t-attf-style="margin-left:3px;border: 1px solid {{style.text_color}}; padding:9px;height:187px">
+                    <div t-attf-style="padding-top:5px; padding-bottom:0px;">
+                        <span t-if="o.partner_shipping_id and o.partner_shipping_id != o.partner_id"
+                              t-attf-style="font-size:{{style.body_font+1}}px; font-weight:bold;">
+                            Indirizzo di Fatturazione.
+                        </span>
+                        <span t-if="o.partner_shipping_id == o.partner_id or not o.partner_shipping_id"
+                              t-attf-style="font-size:{{int(style.body_font)+1}}px; font-weight:bold;">
+                            Fatturazione e
+                            Indirizzo di Spedizione.
+                        </span>
+                        <br/>
+                        <t t-if="o.partner_id.parent_id">
+                            <span t-field="o.partner_id.parent_id"/>,
+                            <span t-if="o.partner_id.title" t-field="o.partner_id.title"/>
+                            <span t-field="o.partner_id.name"/>
+                        </t>
+                        <t t-if="not o.partner_id.parent_id">
+                            <span t-if="o.partner_id.title" t-field="o.partner_id.title"/>
+                            <span t-field="o.partner_id"/>
+                        </t>
+                        <address t-field="o.partner_id" style="margin-bottom:0px;"
+                                 t-field-options='{"widget": "contact", "fields": ["address", "phone","mobile","fax", "email", "website"], "no_marker": false}'/>
+                        <span t-if="o.partner_id.fiscalcode">C.F.:
+                            <span t-field="o.partner_id.fiscalcode"/>
+                        </span>
+                        <br/>
+                        <span t-if="o.partner_id.vat">Partita IVA:
+                            <span t-field="o.partner_id.vat"/>
+                        </span>
+                    </div>
+                </div>
+                <div t-if="o.partner_shipping_id and o.partner_shipping_id != o.partner_id"
+                     class="col-5 pull-left"
+                     t-attf-style="border: 1px solid {{style.text_color}}; padding:9px;height:187px">
+                    <div t-if="o.partner_shipping_id and o.partner_shipping_id != o.partner_id"
+                         t-attf-style="padding-top:5px; padding-bottom:0px;">
+                        <span t-attf-style="font-size:{{style.body_font+1}}px; font-weight:bold;">
+                            Indirizzo di Spedizione.
+                        </span>
+                        <address t-field="o.partner_shipping_id" style="margin-bottom:0px;"
+                                 t-field-options='{"widget": "contact", "fields": ["name", "address", "phone", "fax", "email", "website"], "no_marker": false}'/>
+                        <span t-if="o.partner_id.fiscalcode">C.F.:
+                            <span t-field="o.partner_id.fiscalcode"/>
+                        </span>
+                        <br/>
+                        <span t-if="o.partner_shipping_id.vat">Partita IVA:
+                            <span t-field="o.partner_shipping_id.vat"/>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12" style="padding:8px;"/>
+                <table class="col-12"
+                       t-attf-style="padding-left:0px;color:{{style.cust_color}};padding-right:0px; padding-bottom:4px; padding-top:5px;{{style.text_color}};"><!--start of wrapper -->
+                    <t t-set="div_style"
+                       t-value="'width:auto;max-width:100%;font-size:{}px;padding-left:10px; padding-right:10px;padding-bottom:4px;padding-top:5px;float:left; margin-left:0px;'.format(int(style.body_font)+1)"/>
+                    <tr>
+                        <td t-if="o.invoice_date" t-attf-style="{{div_style}};border:1px solid{{style.text_color}};">
+                            <strong style="white-space:nowrap;">Data Fattura</strong>
+                            <t t-if="o.invoice_date">
+                                <p t-field="o.invoice_date"/>
+                            </t>
+                        </td>
+                        <!--                        <td t-if="o.origin"-->
+                        <!--                            t-attf-style="{{div_style}};border:1px solid{{style.text_color}};">-->
+                        <!--                            <strong style="white-space:nowrap;">Documento di Origine</strong>-->
+                        <!--                            <br/>-->
+                        <!--                            <span t-field="o.origin"/>-->
+                        <!--                            <br/>-->
+                        <!--                            <span t-if="o.invoice_date"-->
+                        <!--                                  t-field="o.invoice_date"/>-->
+                        <!--                        </td>-->
+                        <!--                        <td t-if="o.incoterms_id"-->
+                        <!--                            t-attf-style="{{div_style}};border:1px solid{{style.text_color}};">-->
+                        <!--                            <strong style="white-space:nowrap;">Porto</strong>-->
+                        <!--                            <p t-field="o.incoterms_id"/>-->
+                        <!---->
+                        <!--                        </td>-->
+                    </tr>
+                    <tr>
+                        <td t-if="o.narration" t-attf-style="{{div_style}};">
+                            <strong style="white-space:nowrap;">Note</strong>
+                            <br/>
+                            <span t-field="o.narration"/>
+                        </td>
+                    </tr>
+                </table>
+                <div class="col-12" style="padding:8px"/>
+                <t t-call="professional_templates.INVOICE_Hermes_lines"/>
+            </div>
+
+            <!--FOOTER -->
+            <div class="col-sm-6 col-lg-2">
+                <div class="footer" t-attf-style="font-size:18px;text-align:center!important">
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Pagina: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+            <!--/FOOTER-->
+
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="product_carousel_template_form_view">
+        <field name="name">product.template.carousel.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <group name="sale" position="inside">
+                <group>
+                    <field name="is_discount"/>
+                    <field name="is_best_seller"/>
+                    <field name="is_new_arrival"/>
+                    <field name="is_special"/>
+                    <field name="is_upcoming"/>
+                    <field name="comming_soon_date"/>
+                </group>
+            </group>
+            <group name="product_template_images" position="after">
+                <group name="back_image" string="Back Images">
+                    <field name="back_image" widget="image" class="oe_avatar"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>
