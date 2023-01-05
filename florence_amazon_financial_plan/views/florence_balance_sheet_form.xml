@@ -25,6 +25,10 @@
                         </h1>
                     </div>
 
+                    <group>
+                        <field name="date"/>
+                    </group>
+
                     <field name="currency_id" invisible="True"/>
                     <field name="notebook_invisible" invisible="True"/>
 

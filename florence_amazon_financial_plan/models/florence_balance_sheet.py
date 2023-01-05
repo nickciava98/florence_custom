@@ -1,3 +1,5 @@
+import datetime
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
@@ -8,7 +10,12 @@ class FlorenceBalanceSheet(models.Model):
     _description = "Florence Balance Sheet"
 
     name = fields.Char(
-        copy = False
+        copy = False,
+        required = True
+    )
+    date = fields.Date(
+        default = datetime.datetime.now(),
+        required = True
     )
 
     def _default_products_cash(self):

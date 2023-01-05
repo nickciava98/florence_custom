@@ -11,7 +11,8 @@
         'base',
         'mail',
         'stock',
-        'board'
+        'board',
+        'florence_amazon_financial_plan'
     ],
     'data': [
         'security/ir.model.access.csv',

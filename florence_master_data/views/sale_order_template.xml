@@ -1,7 +1,7 @@
 <odoo>
     <data>
         <template id="report_proforma_document_florence_add_image" inherit_id="sale.report_saleorder_document">
-              <xpath expr="//div[@class='page']" position="after">
+              <xpath expr="//div[hasclass('page')]" position="after">
                 <t t-if="env.context.get('proforma', False) or is_pro_forma">
                     <div class="float-right">
                         <img src="/florence_master_data/static/src/img/signature.png"/>

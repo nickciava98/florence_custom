@@ -17,6 +17,10 @@ class AmazonRevenuesLine(models.Model):
         ondelete = "cascade"
     )
     parent = fields.Char()
+    mktp = fields.Char(
+        compute = "_compute_mktp",
+        store = True
+    )
     product = fields.Many2one(
         "product.template"
     )
@@ -26,6 +30,11 @@ class AmazonRevenuesLine(models.Model):
     week = fields.Char(
         compute = "_compute_week",
         store = True
+    )
+    capacity = fields.Float(
+        compute = "_compute_capacity",
+        store = True,
+        group_operator = "avg"
     )
     price_unit = fields.Float(
         group_operator = "avg"
@@ -68,6 +77,53 @@ class AmazonRevenuesLine(models.Model):
         "res.currency",
         compute = "_compute_currency_id"
     )
+
+    @api.depends("pcs_sold", "date", "product")
+    def _compute_capacity(self):
+        for line in self:
+            line.capacity = 0
+
+            if line.date and line.product:
+                total = 0
+                counter = 0
+                average = 0
+
+                for rev_line in self.env["amazon.revenues.line"].search([]):
+                    if rev_line.date.strftime("%m") == line.date.strftime("%m"):
+                        total += rev_line.pcs_sold
+                        counter += 1
+
+                if counter > 0:
+                    average = total / counter
+
+                if average != 0:
+                    quantity = 0
+
+                    for bs in self.env["florence.balance.sheet"].search([]):
+                        if bs.date:
+                            if bs.date.strftime("%m") == line.date.strftime("%m"):
+                                for bs_line in bs.balance_sheet_lines:
+                                    if bs_line.product_id.product_tmpl_id.id == line.product.id \
+                                        and bs_line.amazon_marketplace == line.mktp:
+                                        quantity = bs_line.quantity
+                                        break
+                                if quantity != 0:
+                                    break
+                        if quantity != 0:
+                            break
+
+                    if quantity != 0:
+                        line.capacity = quantity / average
+
+    @api.depends("parent")
+    def _compute_mktp(self):
+        for line in self:
+            line.mktp = ""
+
+            if line.parent == "IT" or line.parent == "FR" or line.parent == "DE" or line.parent == "ES":
+                line.mktp = "EU"
+            else:
+                line.mktp = "UK"
 
     @api.depends("date")
     def _compute_week(self):

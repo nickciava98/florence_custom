@@ -10,7 +10,6 @@
     'depends': [
         'base',
         'florence_manufacturing_costs',
-        'florence_amazon_revenues',
         'florence_stock'
     ],
     'data': [
