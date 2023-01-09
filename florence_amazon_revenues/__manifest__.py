@@ -27,7 +27,8 @@
         'views/amazon_revenues_tree.xml',
         'views/amazon_revenues_line_graph.xml',
         'views/amazon_revenues_line_dashboard.xml',
-        'wizard/help_wizard.xml'
+        'wizard/help_wizard.xml',
+        'wizard/date_interval_form.xml'
     ],
     'application': True,
     'installable': True,
