@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template name="xero management dashboard assets " id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/pragmatic_odoo_xero_connector/static/src/js/dashboard.js"></script>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <link rel="stylesheet" href="/pragmatic_odoo_xero_connector/static/src/css/xero.css"/>
+        </xpath>
+    </template>
+</odoo>
