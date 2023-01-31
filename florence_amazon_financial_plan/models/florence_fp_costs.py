@@ -11,7 +11,7 @@ class FlorenceFpCosts(models.Model):
 
     name = fields.Many2one(
         "product.product",
-        copy = False,
+        copy = True,
         string = "Product"
     )
     sku_id = fields.Many2one(
@@ -20,7 +20,7 @@ class FlorenceFpCosts(models.Model):
     )
     date = fields.Date(
         default = datetime.datetime.now(),
-        required = True
+        copy = False
     )
     currency_id = fields.Many2one(
         "res.currency",
@@ -34,8 +34,7 @@ class FlorenceFpCosts(models.Model):
     pieces = fields.Float(
         default = 1,
         copy = True,
-        digits = (12, 4),
-        required = True
+        digits = (12, 4)
     )
     price = fields.Float(
         compute = "_compute_price",
@@ -193,7 +192,3 @@ class FlorenceFpCosts(models.Model):
                         }
                     )]
                 })
-
-    _sql_constraint = [
-        ("unique_name", "unique(name)", _("Name must be unique!"))
-    ]

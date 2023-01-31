@@ -10,12 +10,20 @@ class FpCostsUpdate(models.TransientModel):
 
     def update_action(self):
         year = str(datetime.datetime.now().year)
-        prev_month = str(int(datetime.datetime.now().month) - 1)
+
+        if int(datetime.datetime.now().month) == 1:
+            prev_month = "12"
+        else:
+            prev_month = str(int(datetime.datetime.now().month) - 1)
+
         last_day = str(calendar.monthrange(int(year), int(prev_month))[1])
         updates = 0
 
         if len(self.env["florence.fp.costs"].search([])) > 0:
             for fp_cost in self.env["florence.fp.costs"].search([]):
+                print(year + "-" + prev_month + "-1")
+                print("<=")
+                print(str(fp_cost.date.year) + "-" + str(fp_cost.date.month + fp_cost.date.day))
                 if datetime.datetime.strptime(year + "-" + prev_month + "-1", "%Y-%m-%d") \
                     <= datetime.datetime(fp_cost.date.year, fp_cost.date.month, fp_cost.date.day) \
                     <= datetime.datetime.strptime(year + "-" + prev_month + "-" + last_day, "%Y-%m-%d"):

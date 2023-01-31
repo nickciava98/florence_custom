@@ -30,7 +30,6 @@ class FlorenceBalanceSheetLine(models.Model):
         for line in self:
             line.currency_id = self.env.ref('base.main_company').currency_id
 
-    @api.depends("product_id")
     def _compute_price_unit(self):
         for line in self:
             line.price_unit = 0
