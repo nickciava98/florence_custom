@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+import datetime
 
 
 class FlorenceBalanceSheetLine(models.Model):
@@ -36,6 +37,9 @@ class FlorenceBalanceSheetLine(models.Model):
 
             if line.product_id:
                 for fp in self.env["florence.fp.costs"].search([]):
-                    if fp.name.id == line.product_id.id:
+                    if fp.name.id == line.product_id.id \
+                            and datetime.datetime(
+                        fp.date.year, fp.date.month, fp.date.day) == datetime.datetime(
+                        line.name.date.year, line.name.date.month, line.name.date.day):
                         line.price_unit = fp.total
                         break
