@@ -10,12 +10,10 @@ class FlorenceBalanceSheet(models.Model):
     _description = "Florence Balance Sheet"
 
     name = fields.Char(
-        copy = False,
-        required = True
+        copy = False
     )
     date = fields.Date(
-        default = datetime.datetime.now(),
-        required = True
+        default = datetime.datetime.now()
     )
 
     def _default_products_cash(self):

@@ -19,14 +19,14 @@
 
                     <div class="oe_title">
                         <h1>
-                            <field name="name"
+                            <field name="name" required="1"
                                    help="Balance Sheet Name"
                                    placeholder="Insert the name of the Balance Sheet"/>
                         </h1>
                     </div>
 
                     <group>
-                        <field name="date"/>
+                        <field name="date" required="1"/>
                     </group>
 
                     <field name="currency_id" invisible="True"/>
