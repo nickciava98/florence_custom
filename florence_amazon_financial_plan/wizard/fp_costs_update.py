@@ -9,11 +9,11 @@ class FpCostsUpdate(models.TransientModel):
     _description = "FP Costs Update"
 
     def update_action(self):
-        year = str(datetime.datetime.now().year)
-
         if int(datetime.datetime.now().month) == 1:
+            year = str(datetime.datetime.now().year - 1)
             prev_month = "12"
         else:
+            year = str(datetime.datetime.now().year)
             prev_month = str(int(datetime.datetime.now().month) - 1)
 
         last_day = str(calendar.monthrange(int(year), int(prev_month))[1])
