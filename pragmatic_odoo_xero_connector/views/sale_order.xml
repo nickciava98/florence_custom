@@ -30,12 +30,13 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='payment_term_id']" position="after">
-                     <field name="xero_sale_id" />
-                     <field name="tax_state"  />
+                <xpath expr="//group[@name='sales_person']" position="after">
+                    <group name="xero_info" string="Xero Info">
+                        <field name="xero_sale_id"/>
+                        <field name="tax_state"/>
+                    </group>
                 </xpath>
                 <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='tax_id']" position="replace">
-
                     <field name="inclusive"  invisible="1"/>
                     <field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('price_include','=', inclusive)]" context="{'default_type_tax_use': 'sale'}" options="{'no_create': True}"/>
                 </xpath>

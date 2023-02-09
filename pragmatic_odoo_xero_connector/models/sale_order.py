@@ -13,7 +13,7 @@ class SaleOrder(models.Model):
 
     xero_sale_id = fields.Char(string="Xero SO Id", copy=False)
     tax_state = fields.Selection([('inclusive', 'Tax Inclusive'), ('exclusive', 'Tax Exclusive'), ('no_tax', 'No Tax')],
-                                 string='Tax Status', default='exclusive')
+                                 string='Tax Status', default='no_tax')
     inclusive = fields.Boolean('Inclusive')
 
     @api.onchange('tax_state', 'inclusive')

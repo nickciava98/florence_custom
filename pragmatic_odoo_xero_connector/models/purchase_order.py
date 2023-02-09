@@ -11,7 +11,7 @@ class PurchaseOrder(models.Model):
 
     xero_purchase_id = fields.Char(string="Xero PO Id",copy=False)
     tax_state = fields.Selection([('inclusive', 'Tax Inclusive'), ('exclusive', 'Tax Exclusive'), ('no_tax', 'No Tax')],
-                                 string='Tax Status', default='exclusive')
+                                 string='Tax Status', default='no_tax')
 
     @api.model
     @api.onchange('tax_state')

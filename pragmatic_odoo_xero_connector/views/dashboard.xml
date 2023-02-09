@@ -17,5 +17,12 @@
         <menuitem id="menu_xero_odoo_connector_companies" name="Companies"
                   action="base.action_res_company_form" parent="menu_xero_odoo_connector_configuration"
                   sequence="1"/>
+
+        <record id="pragmatic_odoo_xero_connector.menu_xero_odoo_connector" model="ir.ui.menu">
+            <field name="groups_id"
+                   eval="[(6,0,[ref('florence_amazon_revenues.group_admin'),
+                                ref('florence_amazon_revenues.group_accountant')]
+                         )]"/>
+        </record>
     </data>
 </odoo>

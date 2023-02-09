@@ -15,7 +15,7 @@ class Invoice(models.Model):
     xero_cust_id = fields.Char(string="Xero Customer Id")
     xero_invoice_id = fields.Char(string="Xero Invoice Id", copy=False)
     tax_state = fields.Selection([('inclusive', 'Tax Inclusive'), ('exclusive', 'Tax Exclusive'), ('no_tax', 'No Tax')],
-                                 string='Tax Status', default='exclusive')
+                                 string='Tax Status', default='no_tax')
     xero_invoice_number = fields.Char(string="Xero Invoice Number", copy=False)
 
     @api.model
