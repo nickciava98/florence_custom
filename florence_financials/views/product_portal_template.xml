@@ -1,0 +1,71 @@
+<odoo>
+    <template id="portal_product_inherit" name="Portal Products" customize_show="True"
+              inherit_id="portal.portal_my_home" priority="100">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Stock</t>
+                <t t-set="url" t-value="'/my/products'"/>
+                <t t-set="placeholder_count" t-value="'product_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_products" name="Portal Products">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Stock</t>
+            </t>
+            <t t-if="not products">
+                <p>There are currently no products for your account.</p>
+            </t>
+            <t t-if="products" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Product</th>
+                        <th>Can Be Used</th>
+                        <th>Can Be Sold</th>
+                        <th>Location</th>
+                        <th>Lot/Serial Number</th>
+                        <th>Available Quantity</th>
+                        <th>Unit of Measure</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="products" t-as="product">
+                        <tr>
+                            <td style="word-wrap: break-word !important; white-space: normal !important;">
+                                <span t-esc="product.product_id.display_name"/>
+                            </td>
+                            <td>
+                                <span t-if="product.can_be_used">Yes</span>
+                                <span t-if="not product.can_be_used">No</span>
+                            </td>
+                            <td>
+                                <span t-if="product.sale_ok">Yes</span>
+                                <span t-if="not product.sale_ok">No</span>
+                            </td>
+                            <td style="word-wrap: break-word !important; white-space: normal !important;">
+                                <span t-esc="product.location_id.display_name"/>
+                            </td>
+                            <td style="word-wrap: break-word !important; white-space: normal !important;">
+                                <span t-esc="product.lot_id.display_name"/>
+                            </td>
+                            <td>
+                                <span t-field="product.available_quantity"/>
+                            </td>
+                            <td style="word-wrap: break-word !important; white-space: normal !important;">
+                                <span t-esc="product.product_uom_id.display_name"/>
+                            </td>
+                            <td>
+                                <span t-esc="product.value"
+                                      t-options='{"widget": "monetary", "display_currency": product.currency_id}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+</odoo>

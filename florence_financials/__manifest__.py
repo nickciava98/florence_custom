@@ -8,16 +8,17 @@
     'version': '14.0.4',
     'website': "http://www.nciavarella.me",
     'depends': [
-        'base',
-        'sale',
-        'sale_management'
+        'sale_management',
+        'account_accountant',
+        'stock'
     ],
     'data': [
         'views/sale_order_template_form.xml',
         'views/sale_order_form.xml',
         'views/sale_order_tree.xml',
         'views/purchase_order_tree.xml',
-        'views/purchase_order_form.xml'
+        'views/purchase_order_form.xml',
+        'views/product_portal_template.xml'
     ],
     'application': False,
     'installable': True,
