@@ -1,8 +1,0 @@
-<odoo>
-    <menuitem id="amazon_connector_menu" name="Amazon Connector" groups="florence_amazon_revenues.group_admin"
-              parent="florence_amazon_revenues.amazon_revenues_base_menu" sequence="9"/>
-    <menuitem id="amazon_accounts_menu" name="Amazon Accounts" parent="amazon_connector_menu"
-              action="sale_amazon.list_amazon_account_action" sequence="1"/>
-    <menuitem id="amazon_marketplaces_menu" name="Amazon Marketplaces" parent="amazon_connector_menu"
-              action="sale_amazon.list_amazon_marketplace_action" sequence="2"/>
-</odoo>

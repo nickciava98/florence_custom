@@ -1,0 +1,183 @@
+<odoo>
+    <record id="sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <field name="order_type" invisible="True"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="amazon_order_country" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="expand">True</attribute>
+            </xpath>
+
+            <xpath expr="//tree" position="inside">
+                <field name="order_type" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_tree_with_onboarding_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.with.onboarding.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="expand">True</attribute>
+            </xpath>
+
+            <xpath expr="//tree" position="inside">
+                <field name="order_type" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_search_inherit" model="ir.ui.view">
+        <field name="name">sale.order.search.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_quotation']" position="replace">
+                <filter string="My Quotations" name="my_quotation"
+                        domain="['&amp;', ('user_id', '=', uid), ('amazon_order_ref', '=', False)]"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='draft']" position="replace">
+                <filter string="Quotations" name="draft"
+                        domain="['&amp;', ('state', 'in', ('draft', 'sent')), ('amazon_order_ref', '=', False)]"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='sales']" position="replace">
+                <filter string="Sales Orders" name="sales"
+                        domain="['&amp;', ('state', 'in', ('sale', 'done')), ('amazon_order_ref', '=', False)]"/>
+                <filter string="Orders to Invoice" name="to_invoice"
+                        domain="['&amp;', ('invoice_status', '=', 'to invoice'), ('amazon_order_ref', '=', False)]"/>
+                <filter string="Orders to Upsell" name="to_upsell"
+                        domain="['&amp;', ('invoice_status', '=', 'upselling'), ('amazon_order_ref', '=', False)]"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='filter_create_date']" position="after">
+                <separator/>
+                <filter string="Amazon Orders" name="amazon_orders" domain="[('amazon_order_ref', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale.action_orders" model="ir.actions.act_window">
+        <field name="name">Sales Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="context">{'search_default_sales': 1, 'group_by': 'order_type'}</field>
+        <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new quotation, the first step of a new sale!
+            </p>
+            <p>
+                Once the quotation is confirmed, it becomes a sales order.
+                <br/>
+                You will be able to create an invoice and collect the payment.
+            </p>
+        </field>
+    </record>
+
+    <record id="sale.action_orders_to_invoice" model="ir.actions.act_window">
+        <field name="name">Orders to Invoice</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form,calendar,graph,pivot,kanban,activity</field>
+        <field name="context">{'create': False, 'search_default_to_invoice': 1, 'group_by': 'order_type'}</field>
+        <field name="domain">[('invoice_status', '=', 'to invoice')]</field>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No orders to invoice found
+            </p>
+            <p>
+                You can select all orders and invoice them in batch,
+                <br/>
+                or check every order and invoice them one by one.
+            </p>
+        </field>
+    </record>
+
+    <record id="sale.action_orders_upselling" model="ir.actions.act_window">
+        <field name="name">Orders to Upsell</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form,calendar,graph,pivot,kanban,activity</field>
+        <field name="domain">[('invoice_status', '=', 'upselling')]</field>
+        <field name="context">{'create': False, 'search_default_to_upsell': 1, 'group_by': 'order_type'}</field>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No orders to upsell found.
+            </p>
+            <p>
+                An order is to upsell when delivered quantities are above initially
+                ordered quantities, and the invoicing policy is based on ordered quantities.
+            </p>
+            <p>
+                As an example, if you sell pre-paid hours of services, Odoo recommends you
+                to sell extra hours when all ordered hours have been consumed.
+            </p>
+        </field>
+    </record>
+
+    <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+        <field name="name">Quotations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="context">{'search_default_my_quotation': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new quotation, the first step of a new sale!
+            </p>
+            <p>
+                Once the quotation is confirmed by the customer, it becomes a sales order.
+                <br/>
+                You will be able to create an invoice and collect the payment.
+            </p>
+        </field>
+    </record>
+
+    <record id="sale.action_quotations" model="ir.actions.act_window">
+        <field name="name">Quotations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="context">{'search_default_my_quotation': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new quotation, the first step of a new sale!
+            </p>
+            <p>
+                Once the quotation is confirmed by the customer, it becomes a sales order.
+                <br/>
+                You will be able to create an invoice and collect the payment.
+            </p>
+        </field>
+    </record>
+</odoo>

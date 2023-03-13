@@ -11,7 +11,8 @@
         'sale_amazon'
     ],
     'data': [
-        'views/amazon_connector_menu.xml'
+        'views/amazon_connector_views.xml',
+        'views/sale_order_views.xml'
     ],
     'application': False,
     'installable': True,

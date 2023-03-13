@@ -1,0 +1,42 @@
+<odoo>
+    <record id="sale_reports_view_pivot" model="ir.ui.view">
+        <field name="name">Sale Reports</field>
+        <field name="model">sale.order.line</field>
+
+        <field name="arch" type="xml">
+            <pivot string="Sale Reports">
+                <field name="product_template_id" type="row"/>
+                <field name="product_uom_qty" type="measure"/>
+                <field name="price_total" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="sale_reports_action" model="ir.actions.act_window">
+        <field name="name">Sale Reports</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_mode">pivot</field>
+        <field name="domain">[('order_id.amazon_order_ref', '!=', False)]</field>
+        <field name="context">{}</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+
+            <p>
+                Start report sales of products from Amazon!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="amazon_connector_menu" name="Amazon Connector" groups="florence_amazon_revenues.group_admin"
+              parent="florence_amazon_revenues.amazon_revenues_base_menu" sequence="9"/>
+    <menuitem id="amazon_accounts_menu" name="Amazon Accounts" parent="amazon_connector_menu"
+              action="sale_amazon.list_amazon_account_action" sequence="1"/>
+    <menuitem id="amazon_marketplaces_menu" name="Amazon Marketplaces" parent="amazon_connector_menu"
+              action="sale_amazon.list_amazon_marketplace_action" sequence="2"/>
+<!--    <menuitem id="amazon_reporting_menu" name="Reports" parent="amazon_connector_menu" sequence="3"/>-->
+<!--    <menuitem id="amazon_sale_reports_menu" name="Sale Reports" parent="amazon_reporting_menu"-->
+<!--              action="sale_reports_action" sequence="1"/>-->
+</odoo>
