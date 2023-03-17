@@ -7,6 +7,8 @@
         <field name="arch" type="xml">
             <xpath expr="//group" position="inside">
                 <field name="order_type" invisible="True"/>
+                <field name="amazon_order_country" invisible="True"/>
+                <field name="amazon_products" invisible="True"/>
             </xpath>
 
             <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">

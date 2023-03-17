@@ -1,32 +1,23 @@
 <odoo>
-    <record id="sale_reports_view_pivot" model="ir.ui.view">
-        <field name="name">Sale Reports</field>
-        <field name="model">sale.order.line</field>
-
-        <field name="arch" type="xml">
-            <pivot string="Sale Reports">
-                <field name="product_template_id" type="row"/>
-                <field name="product_uom_qty" type="measure"/>
-                <field name="price_total" type="col"/>
-            </pivot>
-        </field>
-    </record>
-
     <record id="sale_reports_action" model="ir.actions.act_window">
         <field name="name">Sale Reports</field>
         <field name="res_model">sale.order.line</field>
         <field name="view_mode">pivot</field>
-        <field name="domain">[('order_id.amazon_order_ref', '!=', False)]</field>
-        <field name="context">{}</field>
+        <field name="domain">[('amazon_order_country', '!=', False)]</field>
+        <field name="context">
+            {'pivot_measures': ['__count'], 'pivot_column_groupby': ['amazon_order_country'],
+             'pivot_row_groupby': ['product_id', 'create_date:day'], 'group_by': []}
+        </field>
+    </record>
 
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                No data yet!
-            </p>
-
-            <p>
-                Start report sales of products from Amazon!
-            </p>
+    <record id="sale_revenues_action" model="ir.actions.act_window">
+        <field name="name">Sale Revenues</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">pivot</field>
+        <field name="domain">[('amazon_order_country', '!=', False)]</field>
+        <field name="context">
+            {'pivot_measures': ['amount_total'], 'pivot_column_groupby': ['amazon_order_country'],
+             'pivot_row_groupby': ['create_date:day', 'amazon_products'], 'group_by': []}
         </field>
     </record>
 
@@ -36,7 +27,9 @@
               action="sale_amazon.list_amazon_account_action" sequence="1"/>
     <menuitem id="amazon_marketplaces_menu" name="Amazon Marketplaces" parent="amazon_connector_menu"
               action="sale_amazon.list_amazon_marketplace_action" sequence="2"/>
-<!--    <menuitem id="amazon_reporting_menu" name="Reports" parent="amazon_connector_menu" sequence="3"/>-->
-<!--    <menuitem id="amazon_sale_reports_menu" name="Sale Reports" parent="amazon_reporting_menu"-->
-<!--              action="sale_reports_action" sequence="1"/>-->
+    <menuitem id="amazon_reporting_menu" name="Reports" parent="amazon_connector_menu" sequence="3"/>
+    <menuitem id="amazon_sale_reports_menu" name="Sale Reports" parent="amazon_reporting_menu"
+              action="sale_reports_action" sequence="1"/>
+    <menuitem id="amazon_sale_revenues_reports_menu" name="Sale Revenues" parent="amazon_reporting_menu"
+              action="sale_revenues_action" sequence="2"/>
 </odoo>
