@@ -21,6 +21,15 @@
         </field>
     </record>
 
+    <record id="stock_reports_action" model="ir.actions.act_window">
+        <field name="name">Stock Reports</field>
+        <field name="res_model">stock.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('reference', 'ilike', 'Amazon move')]</field>
+        <field name="context">{'group_by': ['location_id']}</field>
+        <field name="view_id" ref="stock.view_move_tree"/>
+    </record>
+
     <menuitem id="amazon_connector_menu" name="Amazon Connector" groups="florence_amazon_revenues.group_admin"
               parent="florence_amazon_revenues.amazon_revenues_base_menu" sequence="9"/>
     <menuitem id="amazon_accounts_menu" name="Amazon Accounts" parent="amazon_connector_menu"
@@ -32,4 +41,6 @@
               action="sale_reports_action" sequence="1"/>
     <menuitem id="amazon_sale_revenues_reports_menu" name="Sale Revenues" parent="amazon_reporting_menu"
               action="sale_revenues_action" sequence="2"/>
+    <menuitem id="amazon_stock_revenues_reports_menu" name="Stock Reports" parent="amazon_reporting_menu"
+              action="stock_reports_action" sequence="3"/>
 </odoo>

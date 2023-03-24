@@ -23,7 +23,8 @@
         'views/stock_quant_tree.xml',
         'views/product_sku_form.xml',
         'views/product_sku_tree.xml',
-        'views/stock_actions.xml'
+        'views/stock_actions.xml',
+        'views/stock_move_tree.xml'
     ],
     'application': False,
     'installable': True,
