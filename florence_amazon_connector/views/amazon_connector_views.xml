@@ -25,8 +25,11 @@
         <field name="name">Stock Reports</field>
         <field name="res_model">stock.move</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('reference', 'ilike', 'Amazon move')]</field>
-        <field name="context">{'group_by': ['location_id']}</field>
+        <field name="domain">
+            ['&amp;', ('state', '=', 'done'),
+             '|', ('reference', 'ilike', 'Amazon move'), ('location_dest_id', 'ilike', 'Amz')]
+        </field>
+        <field name="context">{'group_by': ['location_id', 'date:day']}</field>
         <field name="view_id" ref="stock.view_move_tree"/>
     </record>
 
