@@ -1,0 +1,15 @@
+<odoo>
+    <record id="auto_update_fp_costs_action" model="ir.cron">
+        <field name="name">Auto Update FP Costs</field>
+        <field name="model_id" ref="florence_amazon_financial_plan.model_florence_fp_costs_update"/>
+        <field name="state">code</field>
+        <field name="code">model.auto_update_action()</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall"
+               eval="(DateTime.now().replace(day=30, hour=2, minute=0, second=0)).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

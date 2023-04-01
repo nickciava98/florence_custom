@@ -14,7 +14,7 @@ class FpCostsUpdate(models.TransientModel):
             prev_month = "12"
         else:
             year = str(datetime.datetime.now().year)
-            prev_month = str(int(datetime.datetime.now().month) - 2)
+            prev_month = str(int(datetime.datetime.now().month) - 1)
 
         last_day = str(calendar.monthrange(int(year), int(prev_month))[1])
         updates = 0
@@ -47,3 +47,38 @@ class FpCostsUpdate(models.TransientModel):
 
         if updates == 0:
             raise ValidationError("No records found to update FP Cost!")
+
+    def auto_update_action(self):
+        if int(datetime.datetime.now().month) == 1:
+            year = str(datetime.datetime.now().year - 1)
+            prev_month = "12"
+        else:
+            year = str(datetime.datetime.now().year)
+            prev_month = str(int(datetime.datetime.now().month) - 1)
+
+        last_day = str(calendar.monthrange(int(year), int(prev_month))[1])
+        updates = 0
+
+        if len(self.env["florence.fp.costs"].search([])) > 0:
+            for fp_cost in self.env["florence.fp.costs"].search([]):
+                if datetime.datetime.strptime(year + "-" + prev_month + "-1", "%Y-%m-%d") \
+                    <= datetime.datetime(fp_cost.date.year, fp_cost.date.month, fp_cost.date.day) \
+                    <= datetime.datetime.strptime(year + "-" + prev_month + "-" + last_day, "%Y-%m-%d"):
+                    fp_costs_lines = []
+
+                    for fp_cost_line in fp_cost.fp_costs_lines:
+                        fp_costs_lines.append((0, 0, {
+                            "name": fp_cost.id,
+                            "component": fp_cost_line.component.id,
+                            "cost": fp_cost_line.cost
+                        }))
+
+                    self.env["florence.fp.costs"].sudo().create({
+                        "name": fp_cost.name.id,
+                        "sku_id": fp_cost.sku_id.id,
+                        "date": datetime.datetime.now(),
+                        "pieces": 1,
+                        "fp_costs_lines": fp_costs_lines if len(fp_costs_lines) > 0 else [(5, 0, 0)]
+                    })
+
+                    updates += 1

@@ -14,6 +14,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_cron.xml',
         'views/amazon_financial_plan_actions.xml',
         'views/amazon_financial_plan_form.xml',
         'views/amazon_financial_plan_tree.xml',
