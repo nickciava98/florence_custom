@@ -108,13 +108,13 @@
                                 <tree editable="bottom" create="false" default_order="location_id asc">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
-                                    <field name="product_id" readonly="True"/>
-                                    <field name="can_be_used" readonly="True"/>
-                                    <field name="sale_ok" readonly="True"/>
-                                    <field name="location_id" readonly="True"/>
-                                    <field name="lot_id" readonly="True"/>
-                                    <field name="available_quantity" readonly="True"/>
-                                    <field name="value" widget="monetary" sum="Value" readonly="True"
+                                    <field name="product_id" readonly="True" force_save="1"/>
+                                    <field name="can_be_used" readonly="True" force_save="1"/>
+                                    <field name="sale_ok" readonly="True" force_save="1"/>
+                                    <field name="location_id" readonly="True" force_save="1"/>
+                                    <field name="lot_id" readonly="True" force_save="1"/>
+                                    <field name="available_quantity"/>
+                                    <field name="value" widget="monetary" sum="Value" readonly="True" force_save="1"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -126,13 +126,13 @@
                                 <tree editable="bottom" default_order="location_id asc">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
-                                    <field name="product_id" readonly="True"/>
-                                    <field name="can_be_used" readonly="True"/>
-                                    <field name="sale_ok" readonly="True"/>
-                                    <field name="location" readonly="True"/>
-                                    <field name="lot" readonly="True"/>
-                                    <field name="available_quantity" readonly="True"/>
-                                    <field name="value" widget="monetary" sum="Value" readonly="True"
+                                    <field name="product_id" readonly="True" force_save="1"/>
+                                    <field name="can_be_used" readonly="True" force_save="1"/>
+                                    <field name="sale_ok" readonly="True" force_save="1"/>
+                                    <field name="location" readonly="True" force_save="1"/>
+                                    <field name="lot" readonly="True" force_save="1"/>
+                                    <field name="available_quantity"/>
+                                    <field name="value" widget="monetary" sum="Value" readonly="True" force_save="1"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
