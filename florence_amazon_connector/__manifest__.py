@@ -12,6 +12,7 @@
     ],
     'data': [
         'views/amazon_connector_views.xml',
+        'views/stock_location_form.xml',
         'views/sale_order_views.xml'
     ],
     'application': False,

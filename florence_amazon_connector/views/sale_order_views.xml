@@ -1,18 +1,13 @@
 <odoo>
-    <record id="sale_order_form_inherit" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit</field>
+    <record id="sale_stock_sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.stock.sale.order.form.inherit</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
 
         <field name="arch" type="xml">
-            <xpath expr="//group" position="inside">
-                <field name="order_type" invisible="True"/>
-                <field name="amazon_order_country" invisible="True"/>
-                <field name="amazon_products" invisible="True"/>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
-                <field name="amazon_order_country" optional="hide"/>
+            <xpath expr="//group[@name='sale_shipping']/field[@name='warehouse_id']" position="after">
+                <field name="amazon_mktp_ids" widget="many2many_tags"/>
+                <field name="amazon_locations" invisible="True"/>
             </xpath>
         </field>
     </record>
@@ -28,7 +23,7 @@
             </xpath>
 
             <xpath expr="//tree" position="inside">
-                <field name="order_type" optional="hide"/>
+                <field name="amazon_locations" optional="hide"/>
             </xpath>
         </field>
     </record>
@@ -44,7 +39,7 @@
             </xpath>
 
             <xpath expr="//tree" position="inside">
-                <field name="order_type" optional="hide"/>
+                <field name="amazon_locations" optional="hide"/>
             </xpath>
         </field>
     </record>
@@ -57,26 +52,26 @@
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='my_quotation']" position="replace">
                 <filter string="My Quotations" name="my_quotation"
-                        domain="['&amp;', ('user_id', '=', uid), ('amazon_order_ref', '=', False)]"/>
+                        domain="['&amp;', ('user_id', '=', uid), ('amazon_locations', '=', False)]"/>
             </xpath>
 
             <xpath expr="//filter[@name='draft']" position="replace">
                 <filter string="Quotations" name="draft"
-                        domain="['&amp;', ('state', 'in', ('draft', 'sent')), ('amazon_order_ref', '=', False)]"/>
+                        domain="['&amp;', ('state', 'in', ('draft', 'sent')), ('amazon_locations', '=', False)]"/>
             </xpath>
 
             <xpath expr="//filter[@name='sales']" position="replace">
                 <filter string="Sales Orders" name="sales"
-                        domain="['&amp;', ('state', 'in', ('sale', 'done')), ('amazon_order_ref', '=', False)]"/>
+                        domain="['&amp;', ('state', 'in', ('sale', 'done')), ('amazon_locations', '=', False)]"/>
                 <filter string="Orders to Invoice" name="to_invoice"
-                        domain="['&amp;', ('invoice_status', '=', 'to invoice'), ('amazon_order_ref', '=', False)]"/>
+                        domain="['&amp;', ('invoice_status', '=', 'to invoice'), ('amazon_locations', '=', False)]"/>
                 <filter string="Orders to Upsell" name="to_upsell"
-                        domain="['&amp;', ('invoice_status', '=', 'upselling'), ('amazon_order_ref', '=', False)]"/>
+                        domain="['&amp;', ('invoice_status', '=', 'upselling'), ('amazon_locations', '=', False)]"/>
             </xpath>
 
             <xpath expr="//filter[@name='filter_create_date']" position="after">
                 <separator/>
-                <filter string="Amazon Orders" name="amazon_orders" domain="[('amazon_order_ref', '!=', False)]"/>
+                <filter string="Amazon Orders" name="amazon_orders" domain="[('amazon_locations', '!=', False)]"/>
             </xpath>
         </field>
     </record>
@@ -87,7 +82,7 @@
         <field name="res_model">sale.order</field>
         <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
         <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
-        <field name="context">{'search_default_sales': 1, 'group_by': 'order_type'}</field>
+        <field name="context">{'search_default_sales': 1, 'group_by': 'amazon_locations'}</field>
         <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -106,7 +101,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">sale.order</field>
         <field name="view_mode">tree,form,calendar,graph,pivot,kanban,activity</field>
-        <field name="context">{'create': False, 'search_default_to_invoice': 1, 'group_by': 'order_type'}</field>
+        <field name="context">{'create': False, 'search_default_to_invoice': 1, 'group_by': 'amazon_locations'}</field>
         <field name="domain">[('invoice_status', '=', 'to invoice')]</field>
         <field name="search_view_id" ref="sale.view_sales_order_filter"/>
         <field name="help" type="html">
@@ -127,7 +122,7 @@
         <field name="res_model">sale.order</field>
         <field name="view_mode">tree,form,calendar,graph,pivot,kanban,activity</field>
         <field name="domain">[('invoice_status', '=', 'upselling')]</field>
-        <field name="context">{'create': False, 'search_default_to_upsell': 1, 'group_by': 'order_type'}</field>
+        <field name="context">{'create': False, 'search_default_to_upsell': 1, 'group_by': 'amazon_locations'}</field>
         <field name="search_view_id" ref="sale.view_sales_order_filter"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
