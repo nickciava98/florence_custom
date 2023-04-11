@@ -1,45 +1,9 @@
 <odoo>
-    <record id="sale_reports_action" model="ir.actions.act_window">
-        <field name="name">Sale Reports</field>
-        <field name="res_model">sale.order.line</field>
-        <field name="view_mode">pivot</field>
-        <field name="domain">[('amazon_order_country', '!=', False)]</field>
-        <field name="context">
-            {'pivot_measures': ['__count'], 'pivot_column_groupby': ['amazon_order_country'],
-             'pivot_row_groupby': ['product_id', 'create_date:day'], 'group_by': []}
-        </field>
-    </record>
-
-    <record id="sale_revenues_action" model="ir.actions.act_window">
-        <field name="name">Sale Revenues</field>
-        <field name="res_model">sale.order</field>
-        <field name="view_mode">pivot</field>
-        <field name="domain">[('amazon_order_country', '!=', False)]</field>
-        <field name="context">
-            {'pivot_measures': ['amount_total'], 'pivot_column_groupby': ['amazon_order_country'],
-             'pivot_row_groupby': ['create_date:day', 'amazon_products'], 'group_by': []}
-        </field>
-    </record>
-
-    <record id="stock_out_moves_action" model="ir.actions.act_window">
-        <field name="name">Stock Out Moves</field>
-        <field name="res_model">stock.move</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">
-            ['&amp;', ('state', '=', 'done'),
-             '|', ('reference', 'ilike', 'Amazon move'), ('location_dest_id', 'ilike', 'Amz')]
-        </field>
-        <field name="context">{'group_by': ['location_id', 'date:day']}</field>
-        <field name="view_id" ref="stock.view_move_tree"/>
-    </record>
-
-    <record id="stock_in_moves_action" model="ir.actions.act_window">
-        <field name="name">Stock In Moves</field>
-        <field name="res_model">stock.move</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('picking_id.amz_mktp_id', '!=', False)]</field>
-        <field name="context">{'group_by': ['amz_mktp_id', 'date:day']}</field>
-        <field name="view_id" ref="stock.view_move_tree"/>
+    <record id="sale_reports_action_server" model="ir.actions.server">
+        <field name="name">Sale Analysis</field>
+        <field name="model_id" ref="sale.model_sale_report"/>
+        <field name="state">code</field>
+        <field name="code">action = env["sale.report"].view_amazon_report_action()</field>
     </record>
 
     <menuitem id="amazon_connector_menu" name="Amazon Connector" groups="florence_amazon_revenues.group_admin"
@@ -48,14 +12,8 @@
               action="sale_amazon.list_amazon_account_action" sequence="1"/>
     <menuitem id="amazon_marketplaces_menu" name="Amazon Marketplaces" parent="amazon_connector_menu"
               action="sale_amazon.list_amazon_marketplace_action" sequence="2"/>
+
     <menuitem id="amazon_reporting_menu" name="Reports" parent="amazon_connector_menu" sequence="3"/>
     <menuitem id="amazon_sale_reports_menu" name="Sale Reports" parent="amazon_reporting_menu"
-              action="sale_reports_action" sequence="1"/>
-    <menuitem id="amazon_sale_revenues_reports_menu" name="Sale Revenues" parent="amazon_reporting_menu"
-              action="sale_revenues_action" sequence="2"/>
-
-    <menuitem id="amazon_stock_out_moves_menu" name="Stock Out Moves" parent="amazon_connector_menu"
-              action="stock_out_moves_action" sequence="3"/>
-    <menuitem id="amazon_stock_in_moves_menu" name="Stock In Moves" parent="amazon_connector_menu"
-              action="stock_in_moves_action" sequence="4"/>
+              action="sale_reports_action_server" sequence="1"/>
 </odoo>
