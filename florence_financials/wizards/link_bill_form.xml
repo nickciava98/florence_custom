@@ -1,0 +1,25 @@
+<odoo>
+    <record id="link_bill_view_form" model="ir.ui.view">
+        <field name="name">Link Bill</field>
+        <field name="model">link.bill</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="purchase_id" invisible="True"/>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field name="bill_ids" widget="many2many_tags" required="1"/>
+                        </h1>
+                    </div>
+                </sheet>
+
+                <footer>
+                    <button name="link_bill_action" type="object" class="oe_highlight" string="Link Bill"/>
+                    <button name="cancel_action" special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

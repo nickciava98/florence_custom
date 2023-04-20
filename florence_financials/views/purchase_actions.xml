@@ -1,0 +1,12 @@
+<odoo>
+    <record id="link_bill_server_action" model="ir.actions.server">
+        <field name="name">Link Bill</field>
+        <field name="model_id" ref="model_purchase_order"/>
+        <field name="binding_model_id" ref="model_purchase_order"/>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.open_link_bill_wizard_action()
+        </field>
+    </record>
+</odoo>

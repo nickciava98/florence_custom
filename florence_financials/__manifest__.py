@@ -13,12 +13,15 @@
         'stock'
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/sale_order_template_form.xml',
         'views/sale_order_form.xml',
         'views/sale_order_tree.xml',
         'views/purchase_order_tree.xml',
         'views/purchase_order_form.xml',
-        'views/product_portal_template.xml'
+        'views/product_portal_template.xml',
+        'views/purchase_actions.xml',
+        'wizards/link_bill_form.xml'
     ],
     'application': False,
     'installable': True,
