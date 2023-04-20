@@ -22,8 +22,9 @@
                                    decoration-danger="payment_state == 'not_paid'"
                                    decoration-warning="payment_state in ('partial', 'in_payment')"
                                    decoration-success="payment_state in ('paid', 'reversed')"/>
-                            <button type="object" name="get_formview_action"
-                                    string="Open" icon="fa-edit"/>
+                            <button type="object" name="get_formview_action" string="Open" icon="fa-edit"/>
+                            <button type="object" name="unlink_action" string="Unlink" icon="fa-unlink"
+                                    context="{'po_id': parent.id, 'bill_id': id}"/>
                         </tree>
                     </field>
                 </page>
