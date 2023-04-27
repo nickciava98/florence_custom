@@ -70,4 +70,10 @@
         <field name="res_model">florence.balance.sheet</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+    <record id="forecast_configuration_action" model="ir.actions.act_window">
+        <field name="name">Forecast Configuration</field>
+        <field name="res_model">forecast.configuration</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 </odoo>

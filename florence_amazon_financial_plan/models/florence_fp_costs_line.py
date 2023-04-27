@@ -1,4 +1,6 @@
-from odoo import models, fields
+from odoo import models, fields, api
+import calendar
+import math
 
 
 class FlorenceFpCostsLine(models.Model):
@@ -32,6 +34,40 @@ class FlorenceFpCostsLine(models.Model):
         "res.currency",
         compute = "_compute_currency_id"
     )
+    to_refill = fields.Boolean(
+        compute = "_compute_to_refill"
+    )
+
+    @api.depends("component", "bill")
+    def _compute_to_refill(self):
+        for line in self:
+            line.cost = 0.0
+            line.to_refill = False
+
+            if line.component:
+                line.to_refill = True if self.env["stock.quant"].search(
+                    ["&", ("product_id", "=", line.component.id), ("location_id.is_valuable_stock", "=", True)],
+                    limit = 1
+                ).months_autonomy < 2.00 else False
+
+                if line.to_refill:
+                    line.cost = line.bill.invoice_line_ids.filtered(
+                        lambda invoice_line: invoice_line.product_id.id == line.component.id
+                    ).price_unit if line.bill else 0.0
+                    configuration_id = self.env["forecast.configuration"].search([], limit = 1)
+
+                    if configuration_id:
+                        line.message_post(
+                            body_message = "Please Refill " + line.component.name,
+                            partner_ids = configuration_id.partner_ids.ids
+                        )
+                    else:
+                        line.message_post(
+                            body_message = "Please Refill " + line.component.name
+                        )
+
+            line.name._compute_price()
+            line.name._compute_total()
 
     # @api.depends("component")
     # def _compute_bill(self):

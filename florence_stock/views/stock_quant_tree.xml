@@ -14,6 +14,11 @@
                 <field name="can_be_used"/>
                 <field name="sale_ok"/>
             </xpath>
+
+            <xpath expr="//field[@name='quantity']" position="before">
+                <field name="months_autonomy"/>
+                <field name="avg_qty_sold"/>
+            </xpath>
         </field>
     </record>
 </odoo>

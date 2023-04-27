@@ -1,0 +1,15 @@
+<odoo>
+    <record id="forecast_configuration_view_tree" model="ir.ui.view">
+        <field name="name">Forecast Configurations</field>
+        <field name="model">forecast.configuration</field>
+
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" invisible="True"/>
+                <field name="user_id" required="1"/>
+                <field name="partner_id" invisible="True"/>
+                <field name="partner_ids" widget="many2many_tags" required="1"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

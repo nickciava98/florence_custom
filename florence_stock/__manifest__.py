@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'stock',
-    'version': '14.0.9',
+    'version': '14.0.10',
     'website': "http://www.nciavarella.me",
     'depends': [
         'base',
@@ -14,6 +14,8 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_cron_actions.xml',
+        'data/mail_template_data.xml',
         'views/product_template_form.xml',
         'views/product_template_search.xml',
         'views/product_product_form.xml',
@@ -24,7 +26,8 @@
         'views/product_sku_form.xml',
         'views/product_sku_tree.xml',
         'views/stock_actions.xml',
-        'views/stock_move_tree.xml'
+        'views/stock_move_tree.xml',
+        'views/forecast_configuration_tree.xml'
     ],
     'application': False,
     'installable': True,
