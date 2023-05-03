@@ -9,6 +9,7 @@
                 <field name="user_id" required="1"/>
                 <field name="partner_id" invisible="True"/>
                 <field name="partner_ids" widget="many2many_tags" required="1"/>
+                <field name="months_treshold" required="1"/>
             </tree>
         </field>
     </record>

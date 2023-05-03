@@ -35,7 +35,8 @@ class FlorenceFpCostsLine(models.Model):
         compute = "_compute_currency_id"
     )
     to_refill = fields.Boolean(
-        compute = "_compute_to_refill"
+        compute = "_compute_to_refill",
+        store = True
     )
 
     @api.depends("component", "bill")
@@ -45,16 +46,16 @@ class FlorenceFpCostsLine(models.Model):
             line.to_refill = False
 
             if line.component:
+                configuration_id = self.env["forecast.configuration"].search([], limit = 1)
                 line.to_refill = True if self.env["stock.quant"].search(
                     ["&", ("product_id", "=", line.component.id), ("location_id.is_valuable_stock", "=", True)],
                     limit = 1
-                ).months_autonomy < 2.00 else False
+                ).months_autonomy < configuration_id.months_treshold else False
 
                 if line.to_refill:
                     line.cost = line.bill.invoice_line_ids.filtered(
                         lambda invoice_line: invoice_line.product_id.id == line.component.id
                     ).price_unit if line.bill else 0.0
-                    configuration_id = self.env["forecast.configuration"].search([], limit = 1)
 
                     if configuration_id:
                         line.message_post(

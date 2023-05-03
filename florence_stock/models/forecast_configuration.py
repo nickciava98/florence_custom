@@ -1,4 +1,6 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
+import math
 
 
 class ForecastConfiguration(models.Model):
@@ -21,6 +23,18 @@ class ForecastConfiguration(models.Model):
         "res_partner_forecast_configuration_rel",
         string = "Partner To"
     )
+    months_treshold = fields.Float(
+        default = 2.0,
+        help = "Minimum Months Autonomy Allowed for Stock items"
+    )
+
+    @api.constrains("months_treshold")
+    def _constrains_months_treshold(self):
+        for line in self:
+            if line.months_treshold < 0.0 or math.isclose(line.months_treshold, 0.0):
+                raise ValidationError(
+                    "Months Treshold must be greater than zero!"
+                )
 
     def send_stock_forecast_reminder_action(self):
         for conf in self.search([]):
