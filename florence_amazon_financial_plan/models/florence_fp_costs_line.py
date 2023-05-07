@@ -42,20 +42,30 @@ class FlorenceFpCostsLine(models.Model):
     @api.depends("component", "bill")
     def _compute_to_refill(self):
         for line in self:
-            line.cost = 0.0
             line.to_refill = False
 
             if line.component:
                 configuration_id = self.env["forecast.configuration"].search([], limit = 1)
-                line.to_refill = True if self.env["stock.quant"].search(
+                stock_quant_product_id = self.env["stock.quant"].search(
                     ["&", ("product_id", "=", line.component.id), ("location_id.is_valuable_stock", "=", True)],
                     limit = 1
-                ).months_autonomy < configuration_id.months_treshold else False
+                )
+                invoice_line_ids = line.bill.invoice_line_ids.filtered(
+                    lambda invoice_line: invoice_line.product_id.id == line.component.id
+                )
+                line.cost = invoice_line_ids[0].price_unit \
+                    if len(invoice_line_ids) > 0 and line.bill and not stock_quant_product_id.to_be_computed \
+                    else invoice_line_ids.price_unit if len(invoice_line_ids) == 0 and line.bill and not stock_quant_product_id.to_be_computed \
+                    else 0.0
+                line.to_refill = True \
+                    if stock_quant_product_id.to_be_computed \
+                       and stock_quant_product_id.months_autonomy < configuration_id.months_treshold \
+                    else False
 
                 if line.to_refill:
                     line.cost = line.bill.invoice_line_ids.filtered(
                         lambda invoice_line: invoice_line.product_id.id == line.component.id
-                    ).price_unit if line.bill else 0.0
+                    )[0].price_unit if line.bill else 0.0
 
                     if configuration_id:
                         line.message_post(
@@ -69,6 +79,9 @@ class FlorenceFpCostsLine(models.Model):
 
             line.name._compute_price()
             line.name._compute_total()
+
+    def _recompute_to_refill_action(self):
+        self._compute_to_refill()
 
     # @api.depends("component")
     # def _compute_bill(self):

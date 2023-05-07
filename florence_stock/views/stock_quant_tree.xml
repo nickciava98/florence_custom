@@ -16,8 +16,9 @@
             </xpath>
 
             <xpath expr="//field[@name='quantity']" position="before">
+                <field name="to_be_computed"/>
                 <field name="months_autonomy"/>
-                <field name="avg_qty_sold"/>
+                <field name="avg_qty_sold" force_save="1" attrs="{'readonly': [('to_be_computed', '=', False)]}"/>
             </xpath>
         </field>
     </record>

@@ -20,19 +20,27 @@ class StockQuant(models.Model):
     can_be_used = fields.Boolean(
         related = "product_id.can_be_used"
     )
+    to_be_computed = fields.Boolean(
+        groups = "stock.group_stock_manager",
+        default = False
+    )
     avg_qty_sold = fields.Float(
         groups = "stock.group_stock_manager",
         group_operator = "avg",
         string = "Avg. Qty. Sold per Month"
     )
     months_autonomy = fields.Float(
+        groups = "stock.group_stock_manager",
         compute = "_compute_months_autonomy"
     )
 
-    @api.depends("avg_qty_sold", "available_quantity")
+    @api.depends("to_be_computed", "avg_qty_sold", "available_quantity")
     def _compute_months_autonomy(self):
         for line in self:
-            line.months_autonomy = line.available_quantity / line.avg_qty_sold if line.avg_qty_sold > 0.0 else 0.0
+            line.months_autonomy = 0.0
+
+            if line.to_be_computed:
+                line.months_autonomy = line.available_quantity / line.avg_qty_sold if line.avg_qty_sold > 0.0 else 0.0
 
     @api.depends("company_id")
     def _compute_currency_id(self):

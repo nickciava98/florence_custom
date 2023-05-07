@@ -132,19 +132,21 @@ class FlorenceFpCosts(models.Model):
             if line.name and line.name.bom_count > 0:
                 year = line.date.strftime("%Y")
                 month = line.date.strftime("%m")
+                bom_id = self.env["mrp.bom"].search(
+                    [("product_id", "=", line.name.id)],
+                    limit = 1
+                )
 
-                for bom_line in self.env["mrp.bom.line"].search(
-                    [("bom_id", "=", self.env["mrp.bom"].search(
-                        [("product_id", "=", line.name.id)]
-                    )[0].id)]):
+                for bom_line in self.env["mrp.bom.line"].search([("bom_id", "=", bom_id.id)]):
                     bill_id = 0
                     cost = 0
+                    domain = [
+                        "&",
+                        ("move_type", "=", "in_invoice"),
+                        ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))
+                    ]
 
-                    for bill in self.env["account.move"].search(
-                        ["&",
-                         ("move_type", "=", "in_invoice"),
-                         ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))],
-                        order = "name desc"):
+                    for bill in self.env["account.move"].search(domain, order = "name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id.id == bom_line.product_id.id:
                                 bill_id = bill.id
@@ -167,12 +169,13 @@ class FlorenceFpCosts(models.Model):
 
                 bill_id = 0
                 cost = 0
+                domain = [
+                    "&",
+                    ("move_type", "=", "in_invoice"),
+                    ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))
+                ]
 
-                for bill in self.env["account.move"].search(
-                    ["&",
-                     ("move_type", "=", "in_invoice"),
-                     ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))],
-                    order = "name desc"):
+                for bill in self.env["account.move"].search(domain, order = "name desc"):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id.id == line.name.id:
                             bill_id = bill.id
