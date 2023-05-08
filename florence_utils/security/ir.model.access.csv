@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_utils_utils,access_utils_utils,model_utils_utils,base.group_user,1,1,1,1
+access_utils_months,access_utils_months,model_utils_months,base.group_user,1,1,1,1

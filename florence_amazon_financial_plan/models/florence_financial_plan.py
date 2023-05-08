@@ -403,10 +403,10 @@ class FlorenceFinancialPlan(models.Model):
                 for item in line.div7:
                     line.approved_total += item.approved
 
-    @api.depends("disbursment", "approved_total", "taxes")
+    @api.depends("disbursment", "approved_total")
     def _compute_surplus(self):
         for line in self:
-            line.surplus = line.disbursment - line.approved_total - line.taxes
+            line.surplus = line.disbursment - line.approved_total
 
     @api.constrains("name")
     def _constrains_name(self):

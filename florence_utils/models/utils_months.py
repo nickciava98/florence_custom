@@ -1,0 +1,63 @@
+from odoo import models, fields, api
+import calendar
+
+
+class UtilsMonths(models.Model):
+    _name = "utils.months"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _description = "Utils Months"
+
+    name = fields.Many2one(
+        "utils.utils",
+        ondelete = "cascade",
+        string = "Util Ref."
+    )
+    month = fields.Selection(
+        [("01", "January"),
+         ("02", "February"),
+         ("03", "March"),
+         ("04", "April"),
+         ("05", "May"),
+         ("06", "June"),
+         ("07", "July"),
+         ("08", "August"),
+         ("09", "September"),
+         ("10", "October"),
+         ("11", "November"),
+         ("12", "December")],
+        string = "Month",
+        copy = True
+    )
+    taxes = fields.Float(
+        default = 0.0,
+        string = "Taxes"
+    )
+    util = fields.Float(
+        compute = "_compute_util",
+        string = "Util"
+    )
+    inventory = fields.Float(
+        default = 0.0,
+        string = "Inventory"
+    )
+    currency_id = fields.Many2one(
+        "res.currency",
+        related = "name.currency_id",
+        store = True
+    )
+
+    @api.depends("month")
+    def _compute_util(self):
+        for line in self:
+            line.util = 0.0
+
+            if line.month:
+                last_day = str(calendar.monthrange(int(line.name.name), int(line.month))[1])
+                domain = [
+                    "&",
+                    ("date", ">=", str(line.name.name) + "-" + str(line.month) + "-" + "01"),
+                    ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
+                ]
+
+                for fp in self.env["florence.financial.plan"].search(domain):
+                    line.util += fp.surplus
