@@ -1,3 +1,5 @@
+import math
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 import datetime
@@ -139,7 +141,7 @@ class FlorenceFpCosts(models.Model):
 
                 for bom_line in self.env["mrp.bom.line"].search([("bom_id", "=", bom_id.id)]):
                     bill_id = 0
-                    cost = 0
+                    cost = 0.0
                     domain = [
                         "&",
                         ("move_type", "=", "in_invoice"),
@@ -153,18 +155,14 @@ class FlorenceFpCosts(models.Model):
                                 cost = invoice_line.price_unit
                                 break
 
-                        if bill_id != 0 and cost != 0:
+                        if bill_id != 0 and not math.isclose(cost, 0.0):
                             break
 
-                    self.sudo().write({
-                        "fp_costs_lines": [(
-                            0, 0, {
-                                "name": line.id,
-                                "component": bom_line.product_id.id,
-                                "cost": cost,
-                                "bill": bill_id
-                            }
-                        )]
+                    self.env["florence.fp.costs.line"].sudo().create({
+                        "name": line.id,
+                        "component": bom_line.product_id.id,
+                        "cost": cost,
+                        "bill": bill_id
                     })
 
                 bill_id = 0
@@ -182,16 +180,12 @@ class FlorenceFpCosts(models.Model):
                             cost = invoice_line.price_unit
                             break
 
-                    if bill_id != 0 and cost != 0:
+                    if bill_id != 0 and not math.isclose(cost, 0.0):
                         break
 
-                self.sudo().write({
-                    "fp_costs_lines": [(
-                        0, 0, {
-                            "name": line.id,
-                            "component": line.name.id,
-                            "cost": cost,
-                            "bill": bill_id,
-                        }
-                    )]
+                self.env["florence.fp.costs.line"].sudo().create({
+                    "name": line.id,
+                    "component": line.name.id,
+                    "cost": cost,
+                    "bill": bill_id
                 })

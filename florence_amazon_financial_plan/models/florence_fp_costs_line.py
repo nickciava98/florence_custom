@@ -50,22 +50,29 @@ class FlorenceFpCostsLine(models.Model):
                     ["&", ("product_id", "=", line.component.id), ("location_id.is_valuable_stock", "=", True)],
                     limit = 1
                 )
-                invoice_line_ids = line.bill.invoice_line_ids.filtered(
-                    lambda invoice_line: invoice_line.product_id.id == line.component.id
-                )
-                line.cost = invoice_line_ids[0].price_unit \
-                    if len(invoice_line_ids) > 0 and line.bill and not stock_quant_product_id.to_be_computed \
-                    else invoice_line_ids.price_unit if len(invoice_line_ids) == 0 and line.bill and not stock_quant_product_id.to_be_computed \
-                    else 0.0
+                line.cost = 0.0
+
+                if line.bill:
+                    if len(line.bill.invoice_line_ids) > 0:
+                        for invoice_line in line.bill.invoice_line_ids:
+                            if invoice_line.product_id.id == line.component.id:
+                                line.cost = invoice_line.price_unit
+                                break
+
                 line.to_refill = True \
                     if stock_quant_product_id.to_be_computed \
                        and stock_quant_product_id.months_autonomy < configuration_id.months_treshold \
                     else False
 
                 if line.to_refill:
-                    line.cost = line.bill.invoice_line_ids.filtered(
-                        lambda invoice_line: invoice_line.product_id.id == line.component.id
-                    )[0].price_unit if line.bill else 0.0
+                    line.cost = 0.0
+
+                    if line.bill:
+                        if len(line.bill.invoice_line_ids) > 0:
+                            for invoice_line in line.bill.invoice_line_ids:
+                                if invoice_line.product_id.id == line.component.id:
+                                    line.cost = invoice_line.price_unit
+                                    break
 
                     if configuration_id:
                         line.message_post(
