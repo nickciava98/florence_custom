@@ -34,61 +34,61 @@ class FlorenceFpCostsLine(models.Model):
         "res.currency",
         compute = "_compute_currency_id"
     )
-    to_refill = fields.Boolean(
-        compute = "_compute_to_refill",
-        store = True
-    )
-
-    @api.depends("component", "bill")
-    def _compute_to_refill(self):
-        for line in self:
-            line.to_refill = False
-
-            if line.component:
-                configuration_id = self.env["forecast.configuration"].search([], limit = 1)
-                stock_quant_product_id = self.env["stock.quant"].search(
-                    ["&", ("product_id", "=", line.component.id), ("location_id.is_valuable_stock", "=", True)],
-                    limit = 1
-                )
-                line.cost = 0.0
-
-                if line.bill:
-                    if len(line.bill.invoice_line_ids) > 0:
-                        for invoice_line in line.bill.invoice_line_ids:
-                            if invoice_line.product_id.id == line.component.id:
-                                line.cost = invoice_line.price_unit
-                                break
-
-                line.to_refill = True \
-                    if stock_quant_product_id.to_be_computed \
-                       and stock_quant_product_id.months_autonomy < configuration_id.months_treshold \
-                    else False
-
-                if line.to_refill:
-                    line.cost = 0.0
-
-                    if line.bill:
-                        if len(line.bill.invoice_line_ids) > 0:
-                            for invoice_line in line.bill.invoice_line_ids:
-                                if invoice_line.product_id.id == line.component.id:
-                                    line.cost = invoice_line.price_unit
-                                    break
-
-                    if configuration_id:
-                        line.message_post(
-                            body_message = "Please Refill " + line.component.name,
-                            partner_ids = configuration_id.partner_ids.ids
-                        )
-                    else:
-                        line.message_post(
-                            body_message = "Please Refill " + line.component.name
-                        )
-
-            line.name._compute_price()
-            line.name._compute_total()
-
-    def _recompute_to_refill_action(self):
-        self._compute_to_refill()
+    # to_refill = fields.Boolean(
+    #     compute = "_compute_to_refill",
+    #     store = True
+    # )
+    #
+    # @api.depends("component", "bill")
+    # def _compute_to_refill(self):
+    #     for line in self:
+    #         line.to_refill = False
+    #
+    #         if line.component:
+    #             configuration_id = self.env["forecast.configuration"].search([], limit = 1)
+    #             stock_quant_product_id = self.env["stock.quant"].search(
+    #                 ["&", ("product_id", "=", line.component.id), ("location_id.is_valuable_stock", "=", True)],
+    #                 limit = 1
+    #             )
+    #             line.cost = 0.0
+    #
+    #             if line.bill:
+    #                 if len(line.bill.invoice_line_ids) > 0:
+    #                     for invoice_line in line.bill.invoice_line_ids:
+    #                         if invoice_line.product_id.id == line.component.id:
+    #                             line.cost = invoice_line.price_unit
+    #                             break
+    #
+    #             line.to_refill = True \
+    #                 if stock_quant_product_id.to_be_computed \
+    #                    and stock_quant_product_id.months_autonomy < configuration_id.months_treshold \
+    #                 else False
+    #
+    #             if line.to_refill:
+    #                 line.cost = 0.0
+    #
+    #                 if line.bill:
+    #                     if len(line.bill.invoice_line_ids) > 0:
+    #                         for invoice_line in line.bill.invoice_line_ids:
+    #                             if invoice_line.product_id.id == line.component.id:
+    #                                 line.cost = invoice_line.price_unit
+    #                                 break
+    #
+    #                 if configuration_id:
+    #                     line.message_post(
+    #                         body_message = "Please Refill " + line.component.name,
+    #                         partner_ids = configuration_id.partner_ids.ids
+    #                     )
+    #                 else:
+    #                     line.message_post(
+    #                         body_message = "Please Refill " + line.component.name
+    #                     )
+    #
+    #         line.name._compute_price()
+    #         line.name._compute_total()
+    #
+    # def _recompute_to_refill_action(self):
+    #     self._compute_to_refill()
 
     # @api.depends("component")
     # def _compute_bill(self):
