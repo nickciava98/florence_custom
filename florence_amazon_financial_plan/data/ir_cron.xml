@@ -13,18 +13,17 @@
         <field name="active" eval="True"/>
     </record>
 
-<!--    <record id="recompute_to_refill_action" model="ir.cron">-->
-<!--        <field name="name">Recompute To Refill</field>-->
-<!--        <field name="model_id" ref="florence_amazon_financial_plan.model_florence_fp_costs_line"/>-->
-<!--        <field name="state">code</field>-->
-<!--        <field name="code">-->
-<!--for fp_cost_line in env["florence.fp.costs.line"].search([]):-->
-<!--    fp_cost_line._compute_to_refill()-->
-<!--        </field>-->
-<!--        <field name="user_id" ref="base.user_root"/>-->
-<!--        <field name="interval_number">24</field>-->
-<!--        <field name="interval_type">hours</field>-->
-<!--        <field name="numbercall">-1</field>-->
-<!--        <field name="active" eval="True"/>-->
-<!--    </record>-->
+    <record id="auto_update_forecasting_action" model="ir.cron">
+        <field name="name">Auto Update Forecasting</field>
+        <field name="model_id" ref="florence_amazon_financial_plan.model_florence_forecasting"/>
+        <field name="state">code</field>
+        <field name="code">model.auto_update_action()</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall"
+               eval="(DateTime.now().replace(day=30, hour=2, minute=0, second=0)).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="active" eval="True"/>
+    </record>
 </odoo>

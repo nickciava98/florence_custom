@@ -32,12 +32,16 @@ class UtilsMonths(models.Model):
         default = 0.0,
         string = "Taxes"
     )
+    monthly_total = fields.Float(
+        compute = "_compute_monthly_total",
+        string = "Monthly Total"
+    )
     util = fields.Float(
         compute = "_compute_util",
         string = "Util"
     )
     inventory = fields.Float(
-        default = 0.0,
+        compute = "_compute_inventory",
         string = "Inventory"
     )
     currency_id = fields.Many2one(
@@ -45,6 +49,39 @@ class UtilsMonths(models.Model):
         related = "name.currency_id",
         store = True
     )
+
+    @api.depends("month")
+    def _compute_monthly_total(self):
+        for line in self:
+            line.monthly_total = 0.0
+
+            if line.month:
+                last_day = str(calendar.monthrange(int(line.name.name), int(line.month))[1])
+                domain = [
+                    "&",
+                    ("date", ">=", str(line.name.name) + "-" + str(line.month) + "-" + "01"),
+                    ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
+                ]
+                florence_fp_id = self.env["florence.financial.plan"].search(domain, limit = 1)
+
+                if florence_fp_id:
+                    line.monthly_total = florence_fp_id.monthly_total
+
+    @api.depends("month")
+    def _compute_inventory(self):
+        for line in self:
+            line.inventory = 0.0
+
+            if line.month:
+                last_day = str(calendar.monthrange(int(line.name.name), int(line.month))[1])
+                domain = [
+                    "&",
+                    ("date", ">=", str(line.name.name) + "-" + str(line.month) + "-" + "01"),
+                    ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
+                ]
+
+                for forecast in self.env["florence.forecasting"].search(domain):
+                    line.inventory += forecast.est_value
 
     @api.depends("month")
     def _compute_util(self):

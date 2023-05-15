@@ -43,7 +43,6 @@
                                     <field name="component" readonly="True" force_save="1"/>
                                     <field name="cost" widget="monetary" sum="Total"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-<!--                                    <field name="to_refill"/>-->
                                     <field name="vendor" string="Vendor" readonly="True" force_save="1"/>
                                     <field name="bill" options="{'no_create': True}"/>
                                     <field name="bill_date" string="Bill Date" readonly="True" force_save="1"/>

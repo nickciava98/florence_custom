@@ -11,3 +11,4 @@ from . import florence_balance_sheet_line
 from . import florence_balance_sheet_more
 from . import florence_balance_sheet_inventory
 from . import stock_location
+from . import florence_forecasting

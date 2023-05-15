@@ -14,8 +14,6 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'data/ir_cron_actions.xml',
-        'data/mail_template_data.xml',
         'views/product_template_form.xml',
         'views/product_template_search.xml',
         'views/product_product_form.xml',
@@ -26,8 +24,7 @@
         'views/product_sku_form.xml',
         'views/product_sku_tree.xml',
         'views/stock_actions.xml',
-        'views/stock_move_tree.xml',
-        'views/forecast_configuration_tree.xml'
+        'views/stock_move_tree.xml'
     ],
     'application': False,
     'installable': True,

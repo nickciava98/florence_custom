@@ -28,22 +28,103 @@
                                     <field name="month"/>
                                     <field name="taxes" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="util" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="inventory" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="monthly_total" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="util" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
 
                                 <form>
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
-                                    <field name="month" readonly="True"/>
-                                    <field name="taxes" widget="monetary"
+
+                                    <table class="table table-bordered w-100">
+                                        <thead>
+                                            <th class="text-left">Month</th>
+                                            <th class="text-right">Taxes</th>
+                                            <th class="text-right">Inventory</th>
+                                            <th class="text-right">Monthly Total</th>
+                                            <th class="text-right">Util</th>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left">
+                                                    <field name="month" readonly="True" nolabel="1"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="taxes" widget="monetary" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="inventory" widget="monetary" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="monthly_total" widget="monetary" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="util" widget="monetary" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </field>
+                        </page>
+
+                        <page name="days" string="Days">
+                            <button name="update_days_action" type="object" string="Update Days" class="btn btn-primary"/>
+
+                            <field name="day_ids" widget="one2many" view_mode="tree,form" readonly="True" force_save="1">
+                                <tree default_order="date desc">
+                                    <field name="name" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="date"/>
+                                    <field name="probable_income_amz" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="monthly_total_per_day" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="util" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="inventory" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+
+                                <form>
+                                    <field name="name" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+
+                                    <table class="table table-bordered w-100">
+                                        <thead>
+                                            <th class="text-left">Date</th>
+                                            <th class="text-right">Probable Income Amz</th>
+                                            <th class="text-right">Monthly Total Per Day</th>
+                                            <th class="text-right">Util</th>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left">
+                                                    <field name="date" readonly="True" nolabel="1"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="probable_income_amz" widget="monetary" readonly="True" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="monthly_total_per_day" widget="monetary" readonly="True" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="util" widget="monetary" readonly="True" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </form>
                             </field>
                         </page>

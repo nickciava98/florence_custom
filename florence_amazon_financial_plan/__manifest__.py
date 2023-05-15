@@ -34,6 +34,7 @@
         'views/florence_balance_sheet_form.xml',
         'views/florence_balance_sheet_tree.xml',
         'views/stock_location_form.xml',
+        'views/florence_forecasting_views.xml',
         'wizard/fp_costs_update_form.xml'
     ],
     'application': False,
