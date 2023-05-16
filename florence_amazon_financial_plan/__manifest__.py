@@ -17,7 +17,6 @@
         'data/ir_cron.xml',
         'views/amazon_financial_plan_form.xml',
         'views/amazon_financial_plan_tree.xml',
-        'views/amazon_financial_plan_menus.xml',
         'views/amazon_financial_plan_search.xml',
         'views/amazon_financial_plan_tree.xml',
         'views/amazon_financial_plan_line_form.xml',
@@ -35,6 +34,7 @@
         'views/stock_location_form.xml',
         'views/florence_forecasting_views.xml',
         'views/amazon_financial_plan_actions.xml',
+        'views/amazon_financial_plan_menus.xml',
         'wizard/fp_costs_update_form.xml'
     ],
     'application': False,
