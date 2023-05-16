@@ -14,4 +14,31 @@
             </graph>
         </field>
     </record>
+
+    <record id="florence_financial_plan_pie_view_graph" model="ir.ui.view">
+        <field name="name">FPs Chart</field>
+        <field name="model">florence.financial.plan.pie</field>
+
+        <field name="arch" type="xml">
+            <graph>
+                <field name="name"/>
+                <field name="date" invisible="True"/>
+                <field name="cost"/>
+                <field name="percentage" widget="percentage"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="florence_financial_plan_pie_view_search" model="ir.ui.view">
+        <field name="name">FPS Pies</field>
+        <field name="model">florence.financial.plan.pie</field>
+
+        <field name="arch" type="xml">
+            <search>
+                <field name="date"/>
+
+                <filter string="Date" name="date" date="date"/>
+            </search>
+        </field>
+    </record>
 </odoo>

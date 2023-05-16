@@ -31,6 +31,16 @@
         </field>
     </record>
 
+    <record id="florence_fp_piechart_action" model="ir.actions.act_window">
+        <field name="name">FPs Pie Chart</field>
+        <field name="res_model">florence.financial.plan.pie</field>
+        <field name="view_mode">graph</field>
+        <field name="search_view_id" ref="florence_financial_plan_pie_view_search"/>
+        <field name="context">
+            {'graph_measure': 'cost', 'graph_mode': 'pie', 'graph_groupbys': ['name', 'date', 'cost']}
+        </field>
+    </record>
+
     <record id="florence_fp_chart_action" model="ir.actions.act_window">
         <field name="name">FPs Chart</field>
         <field name="res_model">florence.financial.plan</field>

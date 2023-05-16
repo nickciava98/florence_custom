@@ -16,9 +16,12 @@
     <menuitem name="FPs" id="florence_fps_menu"
               parent="florence_financial_plan_menu" sequence="1"
               action="florence_financial_plan_action"/>
+    <menuitem name="FPs Pie Chart" id="florence_fps_pie_chart_menu"
+              parent="florence_financial_plan_menu"
+              sequence="2" action="florence_fp_piechart_action"/>
     <menuitem name="FPs Chart" id="florence_fps_chart_menu"
               parent="florence_financial_plan_menu"
-              sequence="2" action="florence_fp_chart_action"/>
+              sequence="3" action="florence_fp_chart_action"/>
 
     <menuitem name="FP - Costs" id="florence_fp_costs_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"

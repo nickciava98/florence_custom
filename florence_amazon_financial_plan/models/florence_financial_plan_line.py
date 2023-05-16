@@ -6,6 +6,7 @@ class FlorenceFinancialPlanLine(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Florence Financial Plan Line"
 
+    date = fields.Date()
     basics_id = fields.Many2one(
         "florence.financial.plan",
         ondelete = "cascade"
@@ -39,6 +40,10 @@ class FlorenceFinancialPlanLine(models.Model):
         ondelete = "cascade"
     )
     div7_id = fields.Many2one(
+        "florence.financial.plan",
+        ondelete = "cascade"
+    )
+    expenses_id = fields.Many2one(
         "florence.financial.plan",
         ondelete = "cascade"
     )
