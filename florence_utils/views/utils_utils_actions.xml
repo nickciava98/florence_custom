@@ -15,5 +15,6 @@
     </record>
 
     <menuitem name="Utils" id="utils_utils_base_menu" action="utils_utils_base_action"
+              groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_accountant"
               web_icon="florence_utils,static/description/app_icon.png"/>
 </odoo>
