@@ -60,7 +60,9 @@ class FlorenceForecasting(models.Model):
     def update_values_action(self):
         if self.name:
             self.line_ids = [(5, 0, 0)]
-            bom_id = self.name.bom_ids[0] if len(self.name.bom_ids) > 0 else False
+            bom_id = self.env["mrp.bom"].search(
+                [("product_id", "=", self.name.id)], limit = 1
+            )
             name_est_value = 0.0
             year = self.date.strftime("%Y")
             month = self.date.strftime("%m")
@@ -95,17 +97,7 @@ class FlorenceForecasting(models.Model):
 
             if bom_id:
                 for bom_line in bom_id.bom_line_ids:
-                    est_value = 0.0
-
-                    for bill in self.env["account.move"].search(domain, order = "name desc"):
-                        for invoice_line in bill.invoice_line_ids:
-                            if invoice_line.product_id.id == bom_line.product_id.id:
-                                est_value = invoice_line.price_unit
-                                break
-
-                        if est_value != 0:
-                            break
-
+                    est_value = bom_line.cost
                     est_value *= bom_line.product_id.qty_available
                     months_autonomy = bom_line.product_id.qty_available / self.avg_qty_sold if self.avg_qty_sold > 0 else 0.0
                     self.line_ids = [(
