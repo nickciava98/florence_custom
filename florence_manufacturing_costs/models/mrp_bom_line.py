@@ -34,7 +34,7 @@ class MrpBomLine(models.Model):
                             line.bill = bill
                             line.cost = invoice_line.price_unit * line.product_qty
                             break
-                    if line.bill:
+                    if line.bill and line.cost > 0.0:
                         break
 
     def _compute_currency_id(self):
