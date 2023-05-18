@@ -10,10 +10,18 @@ class UtilsDays(models.Model):
         "utils.utils",
         ondelete = "cascade"
     )
-    date = fields.Date()
-    probable_income_amz = fields.Float()
-    monthly_total_per_day = fields.Float()
-    util = fields.Float()
+    date = fields.Date(
+        string = "Date (i)"
+    )
+    probable_income_amz = fields.Float(
+        string = "Probable Income (Amazon) (ii)"
+    )
+    monthly_total_per_day = fields.Float(
+        string = "Monthly Total Per Day (iii)"
+    )
+    util = fields.Float(
+        string = "Util (iv)"
+    )
     currency_id = fields.Many2one(
         "res.currency",
         related = "name.currency_id",

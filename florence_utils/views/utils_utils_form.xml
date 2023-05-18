@@ -13,8 +13,16 @@
                     </div>
 
                     <group>
-                        <field name="total_util" widget="monetary"
-                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        <label for="total_util" string="Total Util"/>
+                        <div class="o_row">
+                            <field name="total_util" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+
+                            <i>
+                                (Sum of Util of 'Months' Tab + Sum of Util of 'Days' Tab)
+                            </i>
+                        </div>
+
                         <field name="currency_id" required="1"/>
                     </group>
 
@@ -22,7 +30,7 @@
                         <page name="months" string="Months">
                             <field name="month_ids" widget="one2many" view_mode="tree,form"
                                    attrs="{'readonly': [('name', '=', False)]}" context="{'default_name': name}">
-                                <tree editable="bottom">
+                                <tree editable="bottom" limit="12">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="month"/>
@@ -32,7 +40,7 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="monthly_total" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="util" widget="monetary"
+                                    <field name="util" widget="monetary" sum="Util (v)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
 
@@ -75,13 +83,23 @@
                                     </table>
                                 </form>
                             </field>
+
+                            <div>
+                                <i>
+                                    (i): Month of the Year <br/>
+                                    (ii): Taxes value computed by the Accountant <br/>
+                                    (iii): Sum of Estimated Values computed by Forecasting in that specific month <br/>
+                                    (iv): Computed from Monthly Total of FP - Florence in that specific month <br/>
+                                    (v): Sum of FP - Florence Surplus in that specific month
+                                </i>
+                            </div>
                         </page>
 
                         <page name="days" string="Days">
                             <button name="update_days_action" type="object" string="Update Days" class="btn btn-primary"/>
 
                             <field name="day_ids" widget="one2many" view_mode="tree,form" readonly="True" force_save="1">
-                                <tree default_order="date desc">
+                                <tree default_order="date desc" limit="366">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date"/>
@@ -89,7 +107,7 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="monthly_total_per_day" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="util" widget="monetary"
+                                    <field name="util" widget="monetary" sum="Util (iv)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
 
@@ -127,6 +145,15 @@
                                     </table>
                                 </form>
                             </field>
+
+                            <div>
+                                <i>
+                                    (i): Date of the Day <br/>
+                                    (ii): Sum of Probable Income (Amazon) of all products present in Amazon Revenues app in that specific day <br/>
+                                    (iii): Monthly Total for the month divided by the number of days in the month <br/>
+                                    (iv): Probable Income (Amazon) - Monthly Total Per Day
+                                </i>
+                            </div>
                         </page>
                     </notebook>
                 </sheet>

@@ -25,24 +25,24 @@ class UtilsMonths(models.Model):
          ("10", "October"),
          ("11", "November"),
          ("12", "December")],
-        string = "Month",
+        string = "Month (i)",
         copy = True
     )
     taxes = fields.Float(
         default = 0.0,
-        string = "Taxes"
-    )
-    monthly_total = fields.Float(
-        compute = "_compute_monthly_total",
-        string = "Monthly Total"
-    )
-    util = fields.Float(
-        compute = "_compute_util",
-        string = "Util"
+        string = "Taxes (ii)"
     )
     inventory = fields.Float(
         compute = "_compute_inventory",
-        string = "Inventory"
+        string = "Inventory (iii)"
+    )
+    monthly_total = fields.Float(
+        compute = "_compute_monthly_total",
+        string = "Monthly Total (iv)"
+    )
+    util = fields.Float(
+        compute = "_compute_util",
+        string = "Util (v)"
     )
     currency_id = fields.Many2one(
         "res.currency",
