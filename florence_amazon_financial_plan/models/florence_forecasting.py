@@ -18,7 +18,7 @@ class FlorenceForecasting(models.Model):
     avg_qty_sold = fields.Float(
         digits = (11, 2)
     )
-    treshold = fields.Float(
+    threshold = fields.Float(
         default = 2.0
     )
     est_value = fields.Float(
@@ -90,7 +90,7 @@ class FlorenceForecasting(models.Model):
                     "available_qty": self.name.qty_available,
                     "avg_qty_sold": self.avg_qty_sold,
                     "months_autonomy": months_autonomy,
-                    "est_value": name_est_value if months_autonomy < self.treshold else 0.0,
+                    "est_value": name_est_value if months_autonomy < self.threshold else 0.0,
                     "currency_id": self.currency_id.id
                 }
             )]
@@ -107,7 +107,7 @@ class FlorenceForecasting(models.Model):
                             "available_qty": bom_line.product_id.qty_available,
                             "avg_qty_sold": self.avg_qty_sold,
                             "months_autonomy": months_autonomy,
-                            "est_value": est_value if months_autonomy < self.treshold else 0.0,
+                            "est_value": est_value if months_autonomy < self.threshold else 0.0,
                             "currency_id": self.currency_id.id
                         }
                     )]
@@ -133,7 +133,7 @@ class FlorenceForecasting(models.Model):
                         "name": forecast.name.id,
                         "date": datetime.datetime.now(),
                         "avg_qty_sold": forecast.avg_qty_sold,
-                        "treshold": forecast.treshold
+                        "threshold": forecast.threshold
                     })
                     forecast_id.update_values_action()
 

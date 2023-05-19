@@ -427,9 +427,12 @@ class FlorenceFinancialPlan(models.Model):
         basics = vals["basics"] if "basics" in vals else []
         emergencies = vals["emergencies"] if "emergencies" in vals else []
         date = vals["date"]
+        surplus = self.surplus
         perc = self.perc
 
-        self.create_write_pie_object(basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, perc, "create")
+        self.create_write_pie_object(
+            basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus, perc, "create"
+        )
 
         return super(FlorenceFinancialPlan, self).create(vals)
 
@@ -444,13 +447,17 @@ class FlorenceFinancialPlan(models.Model):
         basics = vals["basics"] if "basics" in vals else self.basics
         emergencies = vals["emergencies"] if "emergencies" in vals else self.emergencies
         date = vals["date"] if "date" in vals else self.date
+        surplus = vals["surplus"] if "surplus" in vals else self.surplus
         perc = vals["perc"] if "perc" in vals else self.perc
 
-        self.create_write_pie_object(basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, perc, "write")
+        self.create_write_pie_object(
+            basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus, perc, "write"
+        )
 
         return super(FlorenceFinancialPlan, self).write(vals)
 
-    def create_write_pie_object(self, basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, perc, method):
+    def create_write_pie_object(
+            self, basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus, perc, method):
         production_cost = 0.0
         remuneration_cost = 0.0
         running_cost = 0.0
@@ -506,11 +513,10 @@ class FlorenceFinancialPlan(models.Model):
                 itm = item[2]["approved"] if method == "create" else item.approved
                 running_cost += itm
 
+        total_costs = production_cost + remuneration_cost + running_cost + surplus
         pie_production_cost = self.env["florence.financial.plan.pie"].sudo().search(
             ["&", ("date", "=", date), ("name", "=", "Production Cost")]
         )
-        
-        total_costs = production_cost + remuneration_cost + running_cost
 
         if not pie_production_cost:
             self.env["florence.financial.plan.pie"].sudo().create({
@@ -563,6 +569,25 @@ class FlorenceFinancialPlan(models.Model):
                 "date": date,
                 "cost": running_cost,
                 "percentage": (running_cost / total_costs) * 100
+            })
+
+        pie_utils = self.env["florence.financial.plan.pie"].sudo().search(
+            ["&", ("date", "=", date), ("name", "=", "Util")]
+        )
+
+        if not pie_utils:
+            self.env["florence.financial.plan.pie"].sudo().create({
+                "name": "Util",
+                "date": date,
+                "cost": surplus,
+                "percentage": (surplus / total_costs) * 100
+            })
+        else:
+            pie_utils.sudo().write({
+                "name": "Util",
+                "date": date,
+                "cost": surplus,
+                "percentage": (surplus / total_costs) * 100
             })
 
     _sql_constraint = [

@@ -45,7 +45,7 @@
                         </group>
 
                         <group col="1" colspan="1">
-                            <field name="treshold"/>
+                            <field name="threshold"/>
                         </group>
 
                         <group col="1" colspan="1">

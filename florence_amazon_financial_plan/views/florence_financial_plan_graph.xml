@@ -20,7 +20,7 @@
         <field name="model">florence.financial.plan.pie</field>
 
         <field name="arch" type="xml">
-            <graph>
+            <graph type="pie">
                 <field name="name"/>
                 <field name="date" invisible="True"/>
                 <field name="cost"/>
