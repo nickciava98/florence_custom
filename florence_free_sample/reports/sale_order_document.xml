@@ -1,5 +1,130 @@
 <odoo>
     <template id="sale_order_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//t/t[@t-set='address']" position="replace">
+            <t t-set="address">
+                <div t-field="doc.partner_id" t-if="false"
+                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                <p t-if="doc.partner_id.vat">
+                    <t t-if="false">
+                        <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/>
+                    </t>
+                </p>
+
+                <div class="mt16">
+                    <span t-field="doc.partner_id.name"/>
+
+                    <t t-if="doc.partner_id.street">
+                        <br/><span t-field="doc.partner_id.street"/>
+                    </t>
+
+                    <t t-if="doc.partner_id.street2">
+                        <br/><span t-field="doc.partner_id.street2"/>
+                    </t>
+
+                    <t t-if="doc.partner_id.city">
+                        <br/><span t-field="doc.partner_id.city"/>
+                    </t>
+
+                    <t t-if="doc.partner_id.state_id">
+                        <span t-field="doc.partner_id.state_id"/>
+                    </t>
+
+                    <t t-if="doc.partner_id.zip">
+                        <span t-field="doc.partner_id.zip"/>
+                    </t>
+
+                    <t t-if="doc.partner_id.country_id">
+                        <span t-field="doc.partner_id.country_id"/>
+                    </t>
+
+                    <t t-if="doc.partner_id.vat">
+                        <br/><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
+                        <span t-field="doc.partner_id.vat"/>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+
+        <xpath expr="//t/t[3]" position="replace">
+            <t t-if="doc.partner_invoice_id != doc.partner_id or doc.partner_shipping_id != doc.partner_id">
+                <t t-set="information_block">
+                    <t t-if="doc.partner_invoice_id != doc.partner_id">
+                        <strong>Invoicing Address:</strong>
+
+                        <div class="mt16">
+                            <span t-field="doc.partner_invoice_id.name"/>
+
+                            <t t-if="doc.partner_invoice_id.street">
+                                <br/><span t-field="doc.partner_invoice_id.street"/>
+                            </t>
+
+                            <t t-if="doc.partner_invoice_id.street2">
+                                <br/><span t-field="doc.partner_invoice_id.street2"/>
+                            </t>
+
+                            <t t-if="doc.partner_invoice_id.city">
+                                <br/><span t-field="doc.partner_invoice_id.city"/>
+                            </t>
+
+                            <t t-if="doc.partner_invoice_id.state_id">
+                                <span t-field="doc.partner_invoice_id.state_id"/>
+                            </t>
+
+                            <t t-if="doc.partner_invoice_id.zip">
+                                <span t-field="doc.partner_invoice_id.zip"/>
+                            </t>
+
+                            <t t-if="doc.partner_invoice_id.country_id">
+                                <span t-field="doc.partner_invoice_id.country_id"/>
+                            </t>
+
+                            <t t-if="doc.partner_invoice_id.vat">
+                                <br/><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
+                                <span t-field="doc.partner_invoice_id.vat"/>
+                            </t>
+                        </div>
+                    </t>
+
+                    <t t-if="doc.partner_shipping_id != doc.partner_id">
+                        <strong>Shipping Address:</strong>
+
+                        <div class="mt16">
+                            <span t-field="doc.partner_shipping_id.name"/>
+
+                            <t t-if="doc.partner_shipping_id.street">
+                                <br/><span t-field="doc.partner_shipping_id.street"/>
+                            </t>
+
+                            <t t-if="doc.partner_shipping_id.street2">
+                                <br/><span t-field="doc.partner_shipping_id.street2"/>
+                            </t>
+
+                            <t t-if="doc.partner_shipping_id.city">
+                                <br/><span t-field="doc.partner_shipping_id.city"/>
+                            </t>
+
+                            <t t-if="doc.partner_shipping_id.state_id">
+                                <span t-field="doc.partner_shipping_id.state_id"/>
+                            </t>
+
+                            <t t-if="doc.partner_shipping_id.zip">
+                                <span t-field="doc.partner_shipping_id.zip"/>
+                            </t>
+
+                            <t t-if="doc.partner_shipping_id.country_id">
+                                <span t-field="doc.partner_shipping_id.country_id"/>
+                            </t>
+
+                            <t t-if="doc.partner_shipping_id.vat">
+                                <br/><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
+                                <span t-field="doc.partner_shipping_id.vat"/>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </xpath>
+
         <xpath expr="//thead" position="replace">
             <t t-if="doc.is_free_sample">
                 <thead style="display: table-row-group">
