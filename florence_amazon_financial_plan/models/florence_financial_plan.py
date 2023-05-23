@@ -1,6 +1,7 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 import datetime
+import calendar
 
 
 class FlorenceFinancialPlan(models.Model):
@@ -574,20 +575,28 @@ class FlorenceFinancialPlan(models.Model):
         pie_utils = self.env["florence.financial.plan.pie"].sudo().search(
             ["&", ("date", "=", date), ("name", "=", "Util")]
         )
+        year = date.strftime("%Y")
+        month = date.strftime("%m")
+        last_day = str(calendar.monthrange(int(year), int(month))[1])
+        domain = ["&", ("date", ">=", year + "-" + month + "-01"), ("date", "<=", year + "-" + month + "-" + last_day)]
+        new_surplus = 0.0
+
+        for fp in self.sudo().search(domain):
+            new_surplus += fp.surplus
 
         if not pie_utils:
             self.env["florence.financial.plan.pie"].sudo().create({
                 "name": "Util",
                 "date": date,
-                "cost": surplus,
-                "percentage": (surplus / total_costs) * 100
+                "cost": new_surplus,
+                "percentage": (new_surplus / total_costs) * 100
             })
         else:
             pie_utils.sudo().write({
                 "name": "Util",
                 "date": date,
-                "cost": surplus,
-                "percentage": (surplus / total_costs) * 100
+                "cost": new_surplus,
+                "percentage": (new_surplus / total_costs) * 100
             })
 
     _sql_constraint = [
@@ -601,5 +610,7 @@ class FlorenceFinancialPlanPie(models.Model):
 
     name = fields.Char()
     date = fields.Date()
-    cost = fields.Float()
+    cost = fields.Float(
+        group_operator = "avg"
+    )
     percentage = fields.Float()
