@@ -4,7 +4,7 @@ from odoo import models, fields
 class UtilsDays(models.Model):
     _name = "utils.days"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Utils Days"
+    _description = "Util Days"
 
     name = fields.Many2one(
         "utils.utils",

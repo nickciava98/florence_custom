@@ -5,7 +5,7 @@ import calendar
 class UtilsUtils(models.Model):
     _name = "utils.utils"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Utils"
+    _description = "Util"
 
     name = fields.Char(
         copy = False,

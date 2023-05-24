@@ -5,7 +5,7 @@ import calendar
 class UtilsMonths(models.Model):
     _name = "utils.months"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Utils Months"
+    _description = "Util Months"
 
     name = fields.Many2one(
         "utils.utils",

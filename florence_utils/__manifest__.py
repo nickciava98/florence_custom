@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Florence Utils",
+    'name': "Florence Util",
     'summary': "Florence customizations for utils tracking",
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
