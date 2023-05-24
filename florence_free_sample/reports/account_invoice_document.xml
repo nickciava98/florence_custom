@@ -1,5 +1,46 @@
 <odoo>
     <template id="account_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//t/t[@t-set='address']" position="before">
+            <t t-set="information_block">
+                <t t-if="o.partner_shipping_id != o.partner_id">
+                    <strong>Shipping Address:</strong>
+
+                    <div class="mt16">
+                        <span t-field="o.partner_shipping_id.name"/>
+
+                        <t t-if="o.partner_shipping_id.street">
+                            <br/><span t-field="o.partner_shipping_id.street"/>
+                        </t>
+
+                        <t t-if="o.partner_shipping_id.street2">
+                            <br/><span t-field="o.partner_shipping_id.street2"/>
+                        </t>
+
+                        <t t-if="o.partner_shipping_id.city">
+                            <br/><span t-field="o.partner_shipping_id.city"/>
+                        </t>
+
+                        <t t-if="o.partner_shipping_id.state_id">
+                            <span t-field="o.partner_shipping_id.state_id"/>
+                        </t>
+
+                        <t t-if="o.partner_shipping_id.zip">
+                            <span t-field="o.partner_shipping_id.zip"/>
+                        </t>
+
+                        <t t-if="o.partner_shipping_id.country_id">
+                            <span t-field="o.partner_shipping_id.country_id"/>
+                        </t>
+
+                        <t t-if="o.partner_shipping_id.vat">
+                            <br/><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>:
+                            <span t-field="o.partner_shipping_id.vat"/>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+        
         <xpath expr="//t/t[@t-set='address']" position="replace">
             <t t-set="address">
                 <address t-if="false" t-field="o.partner_id"
