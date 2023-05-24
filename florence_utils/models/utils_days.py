@@ -4,7 +4,7 @@ from odoo import models, fields
 class UtilsDays(models.Model):
     _name = "utils.days"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Util Days"
+    _description = "Profit Days"
 
     name = fields.Many2one(
         "utils.utils",
@@ -20,7 +20,7 @@ class UtilsDays(models.Model):
         string = "Monthly Total Per Day (iii)"
     )
     util = fields.Float(
-        string = "Util (iv)"
+        string = "Profit (iv)"
     )
     currency_id = fields.Many2one(
         "res.currency",

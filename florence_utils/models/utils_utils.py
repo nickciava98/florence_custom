@@ -5,7 +5,7 @@ import calendar
 class UtilsUtils(models.Model):
     _name = "utils.utils"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Util"
+    _description = "Profit"
 
     name = fields.Char(
         copy = False,
@@ -26,6 +26,7 @@ class UtilsUtils(models.Model):
     total_util = fields.Float(
         digits = (11, 2),
         compute = "_compute_total_util",
+        string = "Total Profit",
         store = True
     )
     currency_id = fields.Many2one(

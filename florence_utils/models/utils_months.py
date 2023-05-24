@@ -5,12 +5,12 @@ import calendar
 class UtilsMonths(models.Model):
     _name = "utils.months"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Util Months"
+    _description = "Profit Months"
 
     name = fields.Many2one(
         "utils.utils",
         ondelete = "cascade",
-        string = "Util Ref."
+        string = "Profit Ref."
     )
     month = fields.Selection(
         [("01", "January"),
@@ -42,7 +42,7 @@ class UtilsMonths(models.Model):
     )
     util = fields.Float(
         compute = "_compute_util",
-        string = "Util (v)"
+        string = "Profit (v)"
     )
     currency_id = fields.Many2one(
         "res.currency",

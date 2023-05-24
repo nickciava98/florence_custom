@@ -573,7 +573,7 @@ class FlorenceFinancialPlan(models.Model):
             })
 
         pie_utils = self.env["florence.financial.plan.pie"].sudo().search(
-            ["&", ("date", "=", date), ("name", "=", "Util")]
+            ["&", ("date", "=", date), ("name", "=", "Profit")]
         )
         year = date.strftime("%Y")
         month = date.strftime("%m")
@@ -586,14 +586,14 @@ class FlorenceFinancialPlan(models.Model):
 
         if not pie_utils:
             self.env["florence.financial.plan.pie"].sudo().create({
-                "name": "Util",
+                "name": "Profit",
                 "date": date,
                 "cost": new_surplus,
                 "percentage": (new_surplus / total_costs) * 100
             })
         else:
             pie_utils.sudo().write({
-                "name": "Util",
+                "name": "Profit",
                 "date": date,
                 "cost": new_surplus,
                 "percentage": (new_surplus / total_costs) * 100

@@ -1,6 +1,6 @@
 <odoo>
     <record id="utils_utils_base_action" model="ir.actions.act_window">
-        <field name="name">Util</field>
+        <field name="name">Utili</field>
         <field name="res_model">utils.utils</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
@@ -9,12 +9,12 @@
             </p>
 
             <p>
-                Start tracking utils!
+                Start tracking profits!
             </p>
         </field>
     </record>
 
-    <menuitem name="Util" id="utils_utils_base_menu" action="utils_utils_base_action"
+    <menuitem name="Utili" id="utils_utils_base_menu" action="utils_utils_base_action"
               groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_accountant"
               web_icon="florence_utils,static/description/app_icon.png"/>
 </odoo>

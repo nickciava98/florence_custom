@@ -1,6 +1,6 @@
 <odoo>
     <record id="utils_utils_view_tree" model="ir.ui.view">
-        <field name="name">Util</field>
+        <field name="name">Utili</field>
         <field name="model">utils.utils</field>
 
         <field name="arch" type="xml">
