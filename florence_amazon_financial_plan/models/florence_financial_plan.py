@@ -2,6 +2,7 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 import datetime
 import calendar
+import math
 
 
 class FlorenceFinancialPlan(models.Model):
@@ -417,23 +418,25 @@ class FlorenceFinancialPlan(models.Model):
                     _("Name must be filled!")
                 )
 
+    @api.model_create_multi
     def create(self, vals):
-        div1 = vals["div1"] if "div1" in vals else []
-        div2 = vals["div2"] if "div2" in vals else []
-        div3 = vals["div3"] if "div3" in vals else []
-        div4 = vals["div4"] if "div4" in vals else []
-        div5 = vals["div5"] if "div5" in vals else []
-        div6 = vals["div6"] if "div6" in vals else []
-        div7 = vals["div7"] if "div7" in vals else []
-        basics = vals["basics"] if "basics" in vals else []
-        emergencies = vals["emergencies"] if "emergencies" in vals else []
-        date = vals["date"]
-        surplus = self.surplus
-        perc = self.perc
+        for val in vals:
+            div1 = val["div1"] if "div1" in val else []
+            div2 = val["div2"] if "div2" in val else []
+            div3 = val["div3"] if "div3" in val else []
+            div4 = val["div4"] if "div4" in val else []
+            div5 = val["div5"] if "div5" in val else []
+            div6 = val["div6"] if "div6" in val else []
+            div7 = val["div7"] if "div7" in val else []
+            basics = val["basics"] if "basics" in val else []
+            emergencies = val["emergencies"] if "emergencies" in val else []
+            date = val["date"]
+            surplus = self.surplus
+            perc = self.perc
 
-        self.create_write_pie_object(
-            basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus, perc, "create"
-        )
+            self.create_write_pie_object(
+                basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus, perc, "create"
+            )
 
         return super(FlorenceFinancialPlan, self).create(vals)
 
@@ -457,61 +460,62 @@ class FlorenceFinancialPlan(models.Model):
 
         return super(FlorenceFinancialPlan, self).write(vals)
 
-    def create_write_pie_object(
-            self, basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus, perc, method):
+    def create_write_pie_object(self, basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus, perc, method):
         production_cost = 0.0
         remuneration_cost = 0.0
         running_cost = 0.0
 
         if len(div4) > 0:
             for item in div4:
-                itm = item[2]["approved"] if method == "create" else item.approved
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                 production_cost += itm
 
         if len(basics) > 0:
             for item in basics:
-                chr = item[2]["item"] if method == "create" else item.item
+                chr = item.item if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["item"] if item[2] else False
+
                 if chr != False:
                     if "Salar" in chr:
-                        itm = item[2]["approved"] if method == "create" else item.approved
+                        itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                         remuneration_cost += itm
 
             remuneration_cost += perc
 
         if len(div1) > 0:
             for item in div1:
-                itm = item[2]["approved"] if method == "create" else item.approved
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                 running_cost += itm
         if len(div2) > 0:
             for item in div2:
-                itm = item[2]["approved"] if method == "create" else item.approved
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                 running_cost += itm
         if len(div3) > 0:
             for item in div3:
-                itm = item[2]["approved"] if method == "create" else item.approved
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                 running_cost += itm
         if len(div5) > 0:
             for item in div5:
-                itm = item[2]["approved"] if method == "create" else item.approved
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                 running_cost += itm
         if len(div6) > 0:
             for item in div6:
-                itm = item[2]["approved"] if method == "create" else item.approved
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                 running_cost += itm
         if len(div7) > 0:
             for item in div7:
-                itm = item[2]["approved"] if method == "create" else item.approved
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                 running_cost += itm
         if len(basics) > 0:
             for item in basics:
-                chr = item[2]["item"] if method == "create" else item.item
+                chr = item.item if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["item"] if item[2] else False
+
                 if chr != False:
                     if "Salar" not in chr:
-                        itm = item[2]["approved"] if method == "create" else item.approved
+                        itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                         running_cost += itm
         if len(emergencies) > 0:
             for item in emergencies:
-                itm = item[2]["approved"] if method == "create" else item.approved
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
                 running_cost += itm
 
         total_costs = production_cost + remuneration_cost + running_cost + surplus
@@ -524,14 +528,14 @@ class FlorenceFinancialPlan(models.Model):
                 "name": "Production Cost",
                 "date": date,
                 "cost": production_cost,
-                "percentage": (production_cost / total_costs) * 100
+                "percentage": (production_cost / total_costs) * 100 if not math.isclose(total_costs, 0.0) else 0.0
             })
         else:
             pie_production_cost.sudo().write({
                 "name": "Production Cost",
                 "date": date,
                 "cost": production_cost,
-                "percentage": (production_cost / total_costs) * 100
+                "percentage": (production_cost / total_costs) * 100 if not math.isclose(total_costs, 0.0) else 0.0
             })
 
         pie_remuneration_cost = self.env["florence.financial.plan.pie"].sudo().search(
@@ -543,14 +547,14 @@ class FlorenceFinancialPlan(models.Model):
                 "name": "Remuneration Cost",
                 "date": date,
                 "cost": remuneration_cost,
-                "percentage": (remuneration_cost / total_costs) * 100
+                "percentage": (remuneration_cost / total_costs) * 100 if not math.isclose(total_costs, 0.0) else 0.0
             })
         else:
             pie_remuneration_cost.sudo().write({
                 "name": "Remuneration Cost",
                 "date": date,
                 "cost": remuneration_cost,
-                "percentage": (remuneration_cost / total_costs) * 100
+                "percentage": (remuneration_cost / total_costs) * 100 if not math.isclose(total_costs, 0.0) else 0.0
             })
 
         pie_running_cost = self.env["florence.financial.plan.pie"].sudo().search(
@@ -562,21 +566,21 @@ class FlorenceFinancialPlan(models.Model):
                 "name": "Running Cost",
                 "date": date,
                 "cost": running_cost,
-                "percentage": (running_cost / total_costs) * 100
+                "percentage": (running_cost / total_costs) * 100 if not math.isclose(total_costs, 0.0) else 0.0
             })
         else:
             pie_running_cost.sudo().write({
                 "name": "Running Cost",
                 "date": date,
                 "cost": running_cost,
-                "percentage": (running_cost / total_costs) * 100
+                "percentage": (running_cost / total_costs) * 100 if not math.isclose(total_costs, 0.0) else 0.0
             })
 
         pie_utils = self.env["florence.financial.plan.pie"].sudo().search(
             ["&", ("date", "=", date), ("name", "=", "Profit")]
         )
-        year = date.strftime("%Y")
-        month = date.strftime("%m")
+        year = str(datetime.datetime.strptime(date, "%Y-%m-%d").year) if isinstance(date, str) else date.strftime("%Y")
+        month = str(datetime.datetime.strptime(date, "%Y-%m-%d").month) if isinstance(date, str) else date.strftime("%m")
         last_day = str(calendar.monthrange(int(year), int(month))[1])
         domain = ["&", ("date", ">=", year + "-" + month + "-01"), ("date", "<=", year + "-" + month + "-" + last_day)]
         new_surplus = 0.0
@@ -589,14 +593,14 @@ class FlorenceFinancialPlan(models.Model):
                 "name": "Profit",
                 "date": date,
                 "cost": new_surplus,
-                "percentage": (new_surplus / total_costs) * 100
+                "percentage": (new_surplus / total_costs) * 100 if not math.isclose(total_costs, 0.0) else 0.0
             })
         else:
             pie_utils.sudo().write({
                 "name": "Profit",
                 "date": date,
                 "cost": new_surplus,
-                "percentage": (new_surplus / total_costs) * 100
+                "percentage": (new_surplus / total_costs) * 100 if not math.isclose(total_costs, 0.0) else 0.0
             })
 
     _sql_constraint = [
