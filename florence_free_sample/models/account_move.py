@@ -43,7 +43,7 @@ class AccountMove(models.Model):
     @api.depends("invoice_line_ids")
     def _compute_amount_subtotal(self):
         for line in self:
-            line.amount_subtotal = 0
+            line.amount_subtotal = .0
 
             for invoice_line in line.invoice_line_ids:
                 line.amount_subtotal += invoice_line.total_price
@@ -67,7 +67,7 @@ class AccountMove(models.Model):
                 for invoice_line in line.invoice_line_ids:
                     if invoice_line.sale_line_ids.order_id.amount_total == 0:
                         line.amount_untaxed_free_sample = invoice_line.sale_line_ids.order_id.amount_untaxed_free_sample
-                        line.amount_untaxed_signed = .0
+                        line.amount_untaxed_signed = line.amount_untaxed = .0
                         break
 
     @api.depends("is_free_sample")
