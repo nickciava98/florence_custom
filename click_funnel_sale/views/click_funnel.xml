@@ -55,8 +55,8 @@
                         <field name="pricelist_id"/>
                         <field name="fiscal_position_id"/>
                         <field name="company_id" groups="base.group_multi_company"/>
-                        <field name="journal_id" widget="selection" required="1"/>
-                        <field name="payment_journal_id" widget="selection" required="1"/>
+                        <field name="journal_id" widget="selection" required="True"/>
+                        <field name="payment_journal_id" widget="selection" required="True"/>
                         <field name="warehouse_id"/>
                         <field name="auto_followers" widget="many2many_tags"/>
                         <field name="can_confirm_sale"/>

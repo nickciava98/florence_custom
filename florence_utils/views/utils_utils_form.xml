@@ -8,7 +8,7 @@
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" required="1" attrs="{'readonly': [('month_ids', '!=', [])]}"/>
+                            <field name="name" required="True" attrs="{'readonly': [('month_ids', '!=', [])]}"/>
                         </h1>
                     </div>
 
@@ -23,7 +23,7 @@
                             </i>
                         </div>
 
-                        <field name="currency_id" required="1"/>
+                        <field name="currency_id" required="True"/>
                     </group>
 
                     <notebook>
@@ -98,7 +98,7 @@
                         <page name="days" string="Days">
                             <button name="update_days_action" type="object" string="Update Days" class="btn btn-primary"/>
 
-                            <field name="day_ids" widget="one2many" view_mode="tree,form" readonly="True" force_save="1">
+                            <field name="day_ids" widget="one2many" view_mode="tree,form" readonly="True" force_save="True">
                                 <tree default_order="date desc" limit="366">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>

@@ -16,7 +16,7 @@
                     <div class="oe_title">
                         <h1>
                             <field name="name" style="width:100%"
-                                   help="Product to track costs" required="1"
+                                   help="Product to track costs" required="True"
                                    placeholder="Insert the name of the Product"/>
                         </h1>
                     </div>
@@ -40,12 +40,12 @@
                                 <tree editable="bottom">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
-                                    <field name="component" readonly="True" force_save="1"/>
+                                    <field name="component" readonly="True" force_save="True"/>
                                     <field name="cost" widget="monetary" sum="Total"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="vendor" string="Vendor" readonly="True" force_save="1"/>
+                                    <field name="vendor" string="Vendor" readonly="True" force_save="True"/>
                                     <field name="bill" options="{'no_create': True}"/>
-                                    <field name="bill_date" string="Bill Date" readonly="True" force_save="1"/>
+                                    <field name="bill_date" string="Bill Date" readonly="True" force_save="True"/>
                                 </tree>
                             </field>
                         </page>
@@ -53,7 +53,7 @@
 
                     <group col="4" colspan="4">
                         <group string="Pieces" col="1" colspan="1">
-                            <field name="pieces" widget="integer" nolabel="1" required="1"/>
+                            <field name="pieces" widget="integer" nolabel="1" required="True"/>
                         </group>
 
                         <group string="Price" col="1" colspan="1">

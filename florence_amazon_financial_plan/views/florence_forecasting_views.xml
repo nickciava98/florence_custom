@@ -29,7 +29,7 @@
 
                     <div class="oe_title">
                         <h1>
-                            <field name="name" required="1"/>
+                            <field name="name" required="True"/>
                         </h1>
                     </div>
 
@@ -57,7 +57,7 @@
                     <notebook>
                         <page name="components" string="Components">
                             <field name="line_ids" widget="one2many" readonly="True"
-                                   force_save="1" options="{'no_open': True}">
+                                   force_save="True" options="{'no_open': True}">
                                 <tree>
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
