@@ -467,55 +467,55 @@ class FlorenceFinancialPlan(models.Model):
 
         if len(div4) > 0:
             for item in div4:
-                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                 production_cost += itm
 
         if len(basics) > 0:
             for item in basics:
-                chr = item.item if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["item"] if item[2] else False
+                chr = item.item if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["item"] if item[2] and "approved" in item[2] else False
 
                 if chr != False:
                     if "Salar" in chr:
-                        itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                        itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                         remuneration_cost += itm
 
             remuneration_cost += perc
 
         if len(div1) > 0:
             for item in div1:
-                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                 running_cost += itm
         if len(div2) > 0:
             for item in div2:
-                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                 running_cost += itm
         if len(div3) > 0:
             for item in div3:
-                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                 running_cost += itm
         if len(div5) > 0:
             for item in div5:
-                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                 running_cost += itm
         if len(div6) > 0:
             for item in div6:
-                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                 running_cost += itm
         if len(div7) > 0:
             for item in div7:
-                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                 running_cost += itm
         if len(basics) > 0:
             for item in basics:
-                chr = item.item if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["item"] if item[2] else False
+                chr = item.item if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["item"] if item[2] and "approved" in item[2] else False
 
                 if chr != False:
                     if "Salar" not in chr:
-                        itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                        itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                         running_cost += itm
         if len(emergencies) > 0:
             for item in emergencies:
-                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] else 0.0
+                itm = item.approved if isinstance(item, type(self.env["florence.financial.plan.line"])) else item[2]["approved"] if item[2] and "approved" in item[2] else 0.0
                 running_cost += itm
 
         total_costs = production_cost + remuneration_cost + running_cost + surplus
