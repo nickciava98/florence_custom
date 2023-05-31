@@ -5,9 +5,9 @@
 
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <button name="export_xlsx_action" type="object" string="Export XLSX" class="btn btn-primary"/>
-                </header>
+<!--                <header>-->
+<!--                    <button name="export_xlsx_action" type="object" string="Export XLSX" class="btn btn-primary"/>-->
+<!--                </header>-->
 
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -25,7 +25,7 @@
                         </h1>
                     </div>
 
-                    <group invisible="0">
+                    <group invisible="True">
                         <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True" force_save="True"/>
                         <field name="xlsx_file_name"/>
                     </group>
@@ -101,7 +101,7 @@
                                     <field name="location_id" readonly="True" force_save="True"/>
                                     <field name="lot_id" readonly="True" force_save="True"/>
                                     <field name="available_quantity"/>
-                                    <field name="value" widget="monetary" sum="Value" readonly="True" force_save="True"
+                                    <field name="value" widget="monetary" sum="Value"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -119,7 +119,7 @@
                                     <field name="location" readonly="True" force_save="True"/>
                                     <field name="lot" readonly="True" force_save="True"/>
                                     <field name="available_quantity"/>
-                                    <field name="value" widget="monetary" sum="Value" readonly="True" force_save="True"
+                                    <field name="value" widget="monetary" sum="Value"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
