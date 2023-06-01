@@ -22,7 +22,7 @@
                 </sheet>
 
                 <footer invisible="True">
-                    <button name="cancel_action" special="cancel" string="Cancel"/>
+                    <button name="cancel_action" special="cancel" string="Close"/>
                 </footer>
             </form>
         </field>
@@ -51,7 +51,7 @@
                 </sheet>
 
                 <footer>
-                    <button name="cancel_action" special="cancel" string="Cancel"/>
+                    <button name="cancel_action" special="cancel" string="Close"/>
                 </footer>
             </form>
         </field>

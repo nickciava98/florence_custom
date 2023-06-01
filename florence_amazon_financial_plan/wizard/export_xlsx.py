@@ -107,7 +107,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         index = 1
 
         for value in self.balance_sheet_id.balance_sheet_lines:
-            amazon_values.write(index, 0, value.product_id.name, text_format)
+            amazon_values.write(index, 0, value.product_id.display_name, text_format)
             amazon_values.write(index, 1, value.amazon_marketplace, text_center)
             amazon_values.write(index, 2, value.quantity, qty_format)
             amazon_values.write(index, 3, value.price_unit, currency_format)
@@ -196,7 +196,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
                 can_be_sold = "Yes" if value.sale_ok else "No"
                 lot = value.lot_id.name if value.lot_id else ""
 
-                inventory_values.write(index, 0, value.product_id.name, text_format)
+                inventory_values.write(index, 0, value.product_id.display_name, text_format)
                 inventory_values.write(index, 1, can_be_used, text_center)
                 inventory_values.write(index, 2, can_be_sold, text_center)
                 inventory_values.write(index, 3, value.location_id.display_name, text_format)
@@ -243,7 +243,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
                 can_be_sold = "Yes" if value.sale_ok else "No"
                 lot = value.lot_id.name if value.lot_id else ""
 
-                external_inventory_values.write(index, 0, value.product_id.name, text_format)
+                external_inventory_values.write(index, 0, value.product_id.display_name, text_format)
                 external_inventory_values.write(index, 1, can_be_used, text_center)
                 external_inventory_values.write(index, 2, can_be_sold, text_center)
                 external_inventory_values.write(index, 3, value.location_id.display_name, text_format)
