@@ -1,0 +1,59 @@
+<odoo>
+    <record id="export_xlsx_balance_sheet_init_view_form" model="ir.ui.view">
+        <field name="name">Generate XLSX Balance Sheet</field>
+        <field name="model">export.xlsx.balance.sheet</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="o_row" invisible="True">
+                        <strong>To download the XLSX File click: </strong>
+                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True" force_save="True"/>
+                        <field name="xlsx_file_name" invisible="True"/>
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-center">
+                        <strong>To generate the XLSX File click the button</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button name="export_xlsx_action" type="object" string="Export XLSX" class="btn btn-primary"/>
+                    </div>
+                </sheet>
+
+                <footer invisible="True">
+                    <button name="cancel_action" special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="export_xlsx_balance_sheet_post_view_form" model="ir.ui.view">
+        <field name="name">Export XLSX Balance Sheet</field>
+        <field name="model">export.xlsx.balance.sheet</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="o_row">
+                        <strong>To download the XLSX File click: </strong>
+                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True" force_save="True"/>
+                        <field name="xlsx_file_name" invisible="True"/>
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-center" invisible="True">
+                        <strong>To generate the XLSX File click the button</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-center" invisible="True">
+                        <button name="export_xlsx_action" type="object" string="Export XLSX" class="btn btn-primary"/>
+                    </div>
+                </sheet>
+
+                <footer>
+                    <button name="cancel_action" special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

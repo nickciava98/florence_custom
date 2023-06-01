@@ -5,9 +5,10 @@
 
         <field name="arch" type="xml">
             <form>
-<!--                <header>-->
-<!--                    <button name="export_xlsx_action" type="object" string="Export XLSX" class="btn btn-primary"/>-->
-<!--                </header>-->
+                <header>
+                    <button name="export_xlsx_action" type="object" string="Export XLSX"
+                            class="btn btn-primary" groups="base.group_no_one"/>
+                </header>
 
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -24,11 +25,6 @@
                                    placeholder="Insert the name of the Balance Sheet"/>
                         </h1>
                     </div>
-
-                    <group invisible="True">
-                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True" force_save="True"/>
-                        <field name="xlsx_file_name"/>
-                    </group>
 
                     <group col="2" colspan="2">
                         <group col="1" colspan="1">
