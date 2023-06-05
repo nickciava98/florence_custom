@@ -37,7 +37,7 @@ class UtilsUtils(models.Model):
     @api.depends("month_ids", "day_ids")
     def _compute_total_util(self):
         for line in self:
-            line.total_util = 0.0
+            line.total_util = .0
 
             if len(line.month_ids) > 0:
                 for month in line.month_ids:
@@ -49,37 +49,15 @@ class UtilsUtils(models.Model):
 
     def update_days_action(self):
         days_present = [day.date for day in self.day_ids] if len(self.day_ids) > 0 else []
-        days_total = []
-        domain = [
-            "&",
-            ("date", ">=", self.name + "-01-01"),
-            ("date", "<=", self.name + "-12-31")
-        ]
-
-        for revenue in self.env["amazon.revenues.line"].search(domain):
-            if revenue.date not in days_total:
-                days_total.append(revenue.date)
+        revenues = self.env["amazon.revenues.line"].search(
+            ["&", ("date", ">=", self.name + "-01-01"), ("date", "<=", self.name + "-12-31")]
+        )
+        days_total = [revenue.date for revenue in revenues]
+        days_total = list(dict.fromkeys(days_total))
 
         if len(days_total) > 0:
-            for day in days_total:
-                if day not in days_present:
-                    probable_income = 0.0
-                    monthly_total_per_day = 0.0
-
-                    for revenue in self.env["amazon.revenues.line"].search([("date", "=", day)]):
-                        probable_income += revenue.probable_income_amz
-
-                    if len(self.month_ids) > 0:
-                        month_days = int(calendar.monthrange(int(self.name), int(day.strftime("%m")))[1])
-
-                        for month in self.month_ids:
-                            if month.month == str(day.strftime("%m")):
-                                monthly_total_per_day = month.monthly_total / month_days
-
-                    self.env["utils.days"].sudo().create({
-                        "name": self.id,
-                        "date": day,
-                        "probable_income_amz": probable_income,
-                        "monthly_total_per_day": monthly_total_per_day,
-                        "util": probable_income - monthly_total_per_day
-                    })
+            for day in filter(lambda d: d not in days_present, days_total):
+                self.env["utils.days"].sudo().create({
+                    "name": self.id,
+                    "date": day
+                })
