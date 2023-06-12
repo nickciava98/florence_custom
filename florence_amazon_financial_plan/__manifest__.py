@@ -36,7 +36,8 @@
         'views/amazon_financial_plan_actions.xml',
         'views/amazon_financial_plan_menus.xml',
         'wizard/fp_costs_update_form.xml',
-        'wizard/export_xlsx_views.xml'
+        'wizard/export_xlsx_views.xml',
+        'data/server_action.xml'
     ],
     'application': False,
     'installable': True,

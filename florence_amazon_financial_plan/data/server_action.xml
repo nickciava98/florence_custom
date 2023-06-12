@@ -1,0 +1,9 @@
+<odoo>
+    <record id="export_xlsx_amz_vat_action" model="ir.actions.server">
+        <field name="name">Export XLSX Amazon VAT</field>
+        <field name="model_id" ref="florence_amazon_financial_plan.model_florence_financial_plan"/>
+        <field name="binding_model_id" ref="florence_amazon_financial_plan.model_florence_financial_plan"/>
+        <field name="state">code</field>
+        <field name="code">action = records.export_xlsx_action()</field>
+    </record>
+</odoo>

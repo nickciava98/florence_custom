@@ -631,6 +631,23 @@ class FlorenceFinancialPlan(models.Model):
         ("unique_name", "unique(name)", _("Name must be unique!"))
     ]
 
+    def export_xlsx_action(self):
+        fp_ids = [fp.id for fp in self]
+        init_form_id = self.env.ref("florence_amazon_financial_plan.export_xlsx_florence_fp_init_view_form")
+
+        return {
+            "name": "Export XLSX Amazon VAT",
+            "type": "ir.actions.act_window",
+            "res_model": "export.xlsx.florence.financial.plan",
+            "view_mode": "form",
+            "view_type": "tree,form",
+            "views": [(init_form_id.id, "form")],
+            "context": {
+                "default_florence_fp_ids": fp_ids
+            },
+            "target": "new"
+        }
+
 
 class FlorenceFinancialPlanPie(models.Model):
     _name = "florence.financial.plan.pie"

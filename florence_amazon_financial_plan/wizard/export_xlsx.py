@@ -284,3 +284,271 @@ class ExportXlsxBalanceSheet(models.TransientModel):
             "res_id": self.id,
             "target": "new"
         }
+
+
+class ExportXlsxFlorenceFinancialPlan(models.TransientModel):
+    _name = "export.xlsx.florence.financial.plan"
+    _description = "Export XLSX Florence Financial Plan"
+
+    florence_fp_ids = fields.Many2many(
+        "florence.financial.plan",
+        "florence_fp_export_xlsx_rel"
+    )
+    xlsx_file_name = fields.Char(
+        string = "XLSX Name"
+    )
+    xlsx_file = fields.Binary(
+        string = "XLSX File"
+    )
+
+    def export_xlsx_action(self):
+        file_name = "temp"
+        workbook = xlsxwriter.Workbook(file_name, {"in_memory": True})
+        header_format = workbook.add_format({
+            "bold": True,
+            "border": 1
+        })
+        header_format.set_bg_color("#F2F2F2")
+        header_format.set_align("vcenter")
+        header_format_right = workbook.add_format({
+            "bold": True,
+            "align": "right",
+            "border": 1
+        })
+        header_format_right.set_bg_color("#F2F2F2")
+        header_format_right.set_align("vcenter")
+        header_format_center = workbook.add_format({
+            "bold": True,
+            "align": "center",
+            "border": 1
+        })
+        header_format_center.set_bg_color("#F2F2F2")
+        header_format_center.set_align("vcenter")
+        currency_format = workbook.add_format({
+            "num_format": "_-* #,##0.00 €_-;-* #,##0.00 €_-;_-* -?? €_-;_-@_-",
+            "align": "right",
+            "border": 1
+        })
+        currency_format.set_align("vcenter")
+        qty_format = workbook.add_format({
+            "num_format": "#,##0",
+            "align": "right",
+            "border": 1
+        })
+        qty_format.set_align("vcenter")
+        text_format = workbook.add_format({
+            "text_wrap": True,
+            "align": "left",
+            "border": 1
+        })
+        text_format.set_align("vcenter")
+        text_center = workbook.add_format({
+            "align": "center",
+            "border": 1
+        })
+        text_center.set_align("vcenter")
+        text_center_italic = workbook.add_format({
+            "italic": True,
+            "align": "center",
+            "border": 1
+        })
+        text_center_italic.set_align("vcenter")
+
+        # Amazon IT
+        amazon_it = workbook.add_worksheet(name = "Amazon IT")
+
+        amazon_it.write(0, 0, "Date", header_format)
+        amazon_it.write(0, 1, "Amazon IT Total", header_format_right)
+        amazon_it.write(0, 2, "Amazon IT VAT", header_format_right)
+        amazon_it.write(0, 3, "Amazon IT Net", header_format_right)
+
+        amazon_it.set_column(0, 5, 30)
+
+        row = 1
+        sum_amz_total_it = .0
+        sum_amz_vat_it = .0
+        sum_amz_net_it = .0
+
+        for fp in self.florence_fp_ids:
+            amazon_it.write(row, 0, fp.name, text_format)
+            amazon_it.write(row, 1, fp.amz_total_it, currency_format)
+            amazon_it.write(row, 2, fp.amz_vat_it, currency_format)
+            amazon_it.write(row, 3, fp.amz_net_it, currency_format)
+
+            sum_amz_total_it += fp.amz_total_it
+            sum_amz_vat_it += fp.amz_vat_it
+            sum_amz_net_it += fp.amz_net_it
+            row += 1
+
+        row += 1
+
+        amazon_it.write(row, 0, "Total", header_format)
+        amazon_it.write(row, 1, sum_amz_total_it, currency_format)
+        amazon_it.write(row, 2, sum_amz_vat_it, currency_format)
+        amazon_it.write(row, 3, sum_amz_net_it, currency_format)
+
+        # Amazon DE
+        amazon_de = workbook.add_worksheet(name = "Amazon DE")
+
+        amazon_de.write(0, 0, "Date", header_format)
+        amazon_de.write(0, 1, "Amazon DE Total", header_format_right)
+        amazon_de.write(0, 2, "Amazon DE VAT", header_format_right)
+        amazon_de.write(0, 3, "Amazon DE Net", header_format_right)
+
+        amazon_de.set_column(0, 5, 30)
+
+        row = 1
+        sum_amz_total_de = .0
+        sum_amz_vat_de = .0
+        sum_amz_net_de = .0
+
+        for fp in self.florence_fp_ids:
+            amazon_de.write(row, 0, fp.name, text_format)
+            amazon_de.write(row, 1, fp.amz_total_de, currency_format)
+            amazon_de.write(row, 2, fp.amz_vat_de, currency_format)
+            amazon_de.write(row, 3, fp.amz_net_de, currency_format)
+
+            sum_amz_total_de += fp.amz_total_de
+            sum_amz_vat_de += fp.amz_vat_de
+            sum_amz_net_de += fp.amz_net_de
+            row += 1
+
+        row += 1
+
+        amazon_de.write(row, 0, "Total", header_format)
+        amazon_de.write(row, 1, sum_amz_total_de, currency_format)
+        amazon_de.write(row, 2, sum_amz_vat_de, currency_format)
+        amazon_de.write(row, 3, sum_amz_net_de, currency_format)
+
+        # Amazon FR
+        amazon_fr = workbook.add_worksheet(name = "Amazon FR")
+
+        amazon_fr.write(0, 0, "Date", header_format)
+        amazon_fr.write(0, 1, "Amazon FR Total", header_format_right)
+        amazon_fr.write(0, 2, "Amazon FR VAT", header_format_right)
+        amazon_fr.write(0, 3, "Amazon FR Net", header_format_right)
+
+        amazon_fr.set_column(0, 5, 30)
+
+        row = 1
+        sum_amz_total_fr = .0
+        sum_amz_vat_fr = .0
+        sum_amz_net_fr = .0
+
+        for fp in self.florence_fp_ids:
+            amazon_fr.write(row, 0, fp.name, text_format)
+            amazon_fr.write(row, 1, fp.amz_total_fr, currency_format)
+            amazon_fr.write(row, 2, fp.amz_vat_fr, currency_format)
+            amazon_fr.write(row, 3, fp.amz_net_fr, currency_format)
+
+            sum_amz_total_fr += fp.amz_total_fr
+            sum_amz_vat_fr += fp.amz_vat_fr
+            sum_amz_net_fr += fp.amz_net_fr
+            row += 1
+
+        row += 1
+
+        amazon_fr.write(row, 0, "Total", header_format)
+        amazon_fr.write(row, 1, sum_amz_total_fr, currency_format)
+        amazon_fr.write(row, 2, sum_amz_vat_fr, currency_format)
+        amazon_fr.write(row, 3, sum_amz_net_fr, currency_format)
+
+        # Amazon ES
+        amazon_es = workbook.add_worksheet(name = "Amazon ES")
+
+        amazon_es.write(0, 0, "Date", header_format)
+        amazon_es.write(0, 1, "Amazon ES Total", header_format_right)
+        amazon_es.write(0, 2, "Amazon ES VAT", header_format_right)
+        amazon_es.write(0, 3, "Amazon ES Net", header_format_right)
+
+        amazon_es.set_column(0, 5, 30)
+
+        row = 1
+        sum_amz_total_es = .0
+        sum_amz_vat_es = .0
+        sum_amz_net_es = .0
+
+        for fp in self.florence_fp_ids:
+            amazon_es.write(row, 0, fp.name, text_format)
+            amazon_es.write(row, 1, fp.amz_total_es, currency_format)
+            amazon_es.write(row, 2, fp.amz_vat_es, currency_format)
+            amazon_es.write(row, 3, fp.amz_net_es, currency_format)
+
+            sum_amz_total_es += fp.amz_total_es
+            sum_amz_vat_es += fp.amz_vat_es
+            sum_amz_net_es += fp.amz_net_es
+            row += 1
+
+        row += 1
+
+        amazon_es.write(row, 0, "Total", header_format)
+        amazon_es.write(row, 1, sum_amz_total_es, currency_format)
+        amazon_es.write(row, 2, sum_amz_vat_es, currency_format)
+        amazon_es.write(row, 3, sum_amz_net_es, currency_format)
+
+        # Amazon UK
+        amazon_uk = workbook.add_worksheet(name = "Amazon UK")
+
+        amazon_uk.write(0, 0, "Date", header_format)
+        amazon_uk.write(0, 1, "Amazon UK Total", header_format_right)
+        amazon_uk.write(0, 2, "Amazon UK VAT", header_format_right)
+        amazon_uk.write(0, 3, "Amazon UK Net", header_format_right)
+
+        amazon_uk.set_column(0, 5, 30)
+
+        row = 1
+        sum_amz_total_uk = .0
+        sum_amz_vat_uk = .0
+        sum_amz_net_uk = .0
+
+        for fp in self.florence_fp_ids:
+            amazon_uk.write(row, 0, fp.name, text_format)
+            amazon_uk.write(row, 1, fp.amz_total_uk, currency_format)
+            amazon_uk.write(row, 2, fp.amz_vat_uk, currency_format)
+            amazon_uk.write(row, 3, fp.amz_net_uk, currency_format)
+
+            sum_amz_total_uk += fp.amz_total_uk
+            sum_amz_vat_uk += fp.amz_vat_uk
+            sum_amz_net_uk += fp.amz_net_uk
+            row += 1
+
+        row += 1
+
+        amazon_uk.write(row, 0, "Total", header_format)
+        amazon_uk.write(row, 1, sum_amz_total_uk, currency_format)
+        amazon_uk.write(row, 2, sum_amz_vat_uk, currency_format)
+        amazon_uk.write(row, 3, sum_amz_net_uk, currency_format)
+
+        workbook.close()
+
+        with open(file_name, "rb") as file:
+            file_base64 = base64.b64encode(file.read())
+
+        months = [fp.date.strftime("%b").capitalize() for fp in self.florence_fp_ids]
+        months = list(dict.fromkeys(months))
+        month = "/".join(months)
+        years = [fp.date.strftime("%y") for fp in self.florence_fp_ids]
+        years = list(dict.fromkeys(years))
+        year = "/".join(years)
+        name = "Amazon VAT - " + month + " " + year + ".xlsx"
+
+        self.sudo().write({
+            "xlsx_file_name": name,
+            "xlsx_file": file_base64
+        })
+
+        export_form_id = self.env.ref("florence_amazon_financial_plan.export_xlsx_florence_fp_post_view_form")
+
+        return {
+            "name": "Export XLSX Amazon VAT",
+            "type": "ir.actions.act_window",
+            "res_model": "export.xlsx.florence.financial.plan",
+            "view_mode": "form",
+            "view_type": "tree,form",
+            "views": [(export_form_id.id, "form")],
+            "context": {
+                "default_florence_fp_ids": self.florence_fp_ids.ids
+            },
+            "res_id": self.id,
+            "target": "new"
+        }
