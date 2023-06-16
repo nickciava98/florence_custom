@@ -106,9 +106,10 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
@@ -127,9 +128,10 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
@@ -148,9 +150,10 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
@@ -169,9 +172,10 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
@@ -190,9 +194,10 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
@@ -211,9 +216,10 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
@@ -232,9 +238,11 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
@@ -253,9 +261,10 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
@@ -274,9 +283,10 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="quantity"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>

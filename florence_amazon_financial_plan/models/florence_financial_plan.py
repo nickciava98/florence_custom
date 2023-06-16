@@ -150,10 +150,10 @@ class FlorenceFinancialPlan(models.Model):
         compute = "_compute_currency_id"
     )
     amz_total_it = fields.Float(
-        default = 0
+        default = .0
     )
     amz_vat_it = fields.Float(
-        default = 0
+        default = .0
     )
     amz_net_it = fields.Float(
         compute = "_compute_amz_net_it",
@@ -161,10 +161,10 @@ class FlorenceFinancialPlan(models.Model):
         string = "Amazon IT Net Income"
     )
     amz_total_fr = fields.Float(
-        default = 0
+        default = .0
     )
     amz_vat_fr = fields.Float(
-        default = 0
+        default = .0
     )
     amz_net_fr = fields.Float(
         compute = "_compute_amz_net_fr",
@@ -172,10 +172,10 @@ class FlorenceFinancialPlan(models.Model):
         string = "Amazon FR Net Income"
     )
     amz_total_de = fields.Float(
-        default = 0
+        default = .0
     )
     amz_vat_de = fields.Float(
-        default = 0
+        default = .0
     )
     amz_net_de = fields.Float(
         compute = "_compute_amz_net_de",
@@ -183,10 +183,10 @@ class FlorenceFinancialPlan(models.Model):
         string = "Amazon DE Net Income"
     )
     amz_total_es = fields.Float(
-        default = 0
+        default = .0
     )
     amz_vat_es = fields.Float(
-        default = 0
+        default = .0
     )
     amz_net_es = fields.Float(
         compute = "_compute_amz_net_es",
@@ -194,10 +194,10 @@ class FlorenceFinancialPlan(models.Model):
         string = "Amazon ES Net Income"
     )
     amz_total_uk = fields.Float(
-        default = 0
+        default = .0
     )
     amz_vat_uk = fields.Float(
-        default = 0
+        default = .0
     )
     amz_net_uk = fields.Float(
         compute = "_compute_amz_net_uk",
@@ -656,6 +656,9 @@ class FlorenceFinancialPlanPie(models.Model):
     name = fields.Char()
     date = fields.Date()
     cost = fields.Float(
+        default = .0,
         group_operator = "avg"
     )
-    percentage = fields.Float()
+    percentage = fields.Float(
+        default = .0
+    )

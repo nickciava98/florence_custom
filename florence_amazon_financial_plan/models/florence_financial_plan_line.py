@@ -51,11 +51,19 @@ class FlorenceFinancialPlanLine(models.Model):
     is_deductible = fields.Boolean(
         default = False
     )
-    quantity = fields.Float()
+    quantity = fields.Float(
+        default = .0
+    )
+    moq = fields.Float(
+        default = .0,
+        string = "MOQ"
+    )
     monthly = fields.Float(
+        default = .0,
         string = "Monthly Cost"
     )
     approved = fields.Float(
+        default = .0,
         string = "Approved Cost"
     )
     currency_id = fields.Many2one(
