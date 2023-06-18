@@ -100,10 +100,11 @@
                             </group>
 
                             <field name="basics" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
                                     <field name="basics_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" invisible="True"/>
@@ -122,10 +123,11 @@
                             </group>
 
                             <field name="emergencies" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
                                     <field name="emergencies_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" invisible="True"/>
@@ -144,10 +146,11 @@
                             </group>
 
                             <field name="div7" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
                                     <field name="div7_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" invisible="True"/>
@@ -166,10 +169,11 @@
                             </group>
 
                             <field name="div1" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom" default_order="item asc">
                                     <field name="div1_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" invisible="True"/>
@@ -188,10 +192,11 @@
                             </group>
 
                             <field name="div2" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
                                     <field name="div2_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" invisible="True"/>
@@ -210,10 +215,11 @@
                             </group>
 
                             <field name="div3" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
                                     <field name="div3_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" invisible="True"/>
@@ -232,13 +238,16 @@
                             </group>
 
                             <field name="div4" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom" default_order="item asc">
                                     <field name="div4_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="0"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="monthly_computed" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="monthly" widget="monetary" sum="Monthly"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -255,10 +264,11 @@
                             </group>
 
                             <field name="div5" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
                                     <field name="div5_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" invisible="True"/>
@@ -277,10 +287,11 @@
                             </group>
 
                             <field name="div6" widget="one2many"
-                                   context="{'default_currency_id': currency_id}">
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
                                     <field name="div6_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
                                     <field name="moq" invisible="True"/>

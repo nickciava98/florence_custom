@@ -36,11 +36,13 @@
 
                     <notebook>
                         <page name="costs" string="Costs">
-                            <field name="fp_costs_lines" widget="one2many" context="{'default_currency_id': currency_id}">
+                            <field name="fp_costs_lines" widget="one2many">
                                 <tree editable="bottom">
                                     <field name="name" invisible="True"/>
+                                    <field name="date" invisible="0"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="component" readonly="True" force_save="True"/>
+                                    <field name="product_description"/>
                                     <field name="cost" widget="monetary" sum="Total"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="vendor" string="Vendor" readonly="True" force_save="True"/>

@@ -1,6 +1,4 @@
-from odoo import models, fields, api
-import calendar
-import math
+from odoo import models, fields
 
 
 class FlorenceFpCostsLine(models.Model):
@@ -12,9 +10,13 @@ class FlorenceFpCostsLine(models.Model):
         "florence.fp.costs",
         ondelete = "cascade"
     )
+    date = fields.Date(
+        related = "name.date"
+    )
     component = fields.Many2one(
         "product.product"
     )
+    product_description = fields.Char()
     cost = fields.Float(
         digits = (12, 4)
     )
@@ -32,9 +34,6 @@ class FlorenceFpCostsLine(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        related = "name.currency_id",
+        store = True
     )
-
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref("base.main_company").currency_id
