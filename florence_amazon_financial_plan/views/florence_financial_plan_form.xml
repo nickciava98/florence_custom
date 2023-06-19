@@ -279,7 +279,7 @@
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>
                                     <field name="item" invisible="True"/>
-                                    <field name="product"/>
+                                    <field name="product" options="{'no_create': True}"/>
                                     <field name="is_deductible" invisible="True"/>
                                     <field name="moq" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
