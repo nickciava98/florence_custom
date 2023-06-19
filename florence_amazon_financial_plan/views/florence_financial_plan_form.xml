@@ -8,9 +8,8 @@
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name"
-                                   help="FP Name"
-                                   placeholder="Insert the name of the FP"/>
+                            <field name="name" required="True"
+                                   help="FP Name" placeholder="Insert the name of the FP"/>
                         </h1>
                     </div>
 
@@ -102,6 +101,7 @@
                             <field name="basics" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="basics_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>
@@ -125,6 +125,7 @@
                             <field name="emergencies" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="emergencies_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>
@@ -148,6 +149,7 @@
                             <field name="div7" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="div7_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>
@@ -171,6 +173,7 @@
                             <field name="div1" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom" default_order="item asc">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="div1_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>
@@ -194,6 +197,7 @@
                             <field name="div2" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="div2_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>
@@ -217,6 +221,7 @@
                             <field name="div3" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="div3_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>
@@ -240,19 +245,50 @@
                             <field name="div4" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom" default_order="item asc">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="div4_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
-                                    <field name="date" invisible="0"/>
+                                    <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="moq" widget="monetary"
+                                    <field name="moq" widget="monetary" invisible="True"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="monthly_computed" widget="monetary" sum="Monthly"
+                                    <field name="monthly_computed" widget="monetary"
+                                           sum="Monthly Computed" invisible="True"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="monthly" widget="monetary" sum="Monthly"
+                                    <field name="monthly" widget="monetary" sum="Monthly" invisible="True"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="DIV4A - Production" name="div4">
+                            <group>
+                                <field name="div4a_condition" string="Condition"/>
+                            </group>
+
+                            <field name="div4a" widget="one2many"
+                                   context="{'default_currency_id': currency_id, 'default_date': date}">
+                                <tree editable="bottom" default_order="item asc">
+                                    <field name="parent_id" invisible="True"/>
+                                    <field name="parent_id" invisible="True"/>
+                                    <field name="div4_id" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="date" invisible="True"/>
+                                    <field name="item" invisible="True"/>
+                                    <field name="product"/>
+                                    <field name="is_deductible" invisible="True"/>
+                                    <field name="moq" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="monthly_computed" widget="monetary" sum="Monthly Computed"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="monthly" widget="monetary" sum="Monthly" invisible="True"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="quantity" invisible="True"/>
+                                    <field name="approved" widget="monetary" sum="Approved" invisible="True"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </tree>
                             </field>
@@ -266,6 +302,7 @@
                             <field name="div5" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="div5_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>
@@ -289,6 +326,7 @@
                             <field name="div6" widget="one2many"
                                    context="{'default_currency_id': currency_id, 'default_date': date}">
                                 <tree editable="bottom">
+                                    <field name="parent_id" invisible="True"/>
                                     <field name="div6_id" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
                                     <field name="date" invisible="True"/>

@@ -8,8 +8,14 @@ class FlorenceFinancialPlanLine(models.Model):
     _description = "Florence Financial Plan Line"
     _rec_name = "item"
 
+    parent_id = fields.Many2one(
+        "florence.financial.plan",
+        ondelete = "cascade",
+        compute = "_compute_parent_id",
+        store = True
+    )
     date = fields.Date(
-        compute = "_compute_date"
+        related = "parent_id.date"
     )
     basics_id = fields.Many2one(
         "florence.financial.plan",
@@ -35,6 +41,10 @@ class FlorenceFinancialPlanLine(models.Model):
         "florence.financial.plan",
         ondelete = "cascade"
     )
+    div4a_id = fields.Many2one(
+        "florence.financial.plan",
+        ondelete = "cascade"
+    )
     div5_id = fields.Many2one(
         "florence.financial.plan",
         ondelete = "cascade"
@@ -52,6 +62,9 @@ class FlorenceFinancialPlanLine(models.Model):
         ondelete = "cascade"
     )
     item = fields.Char()
+    product = fields.Many2one(
+        "product.product"
+    )
     is_deductible = fields.Boolean(
         default = False
     )
@@ -75,33 +88,30 @@ class FlorenceFinancialPlanLine(models.Model):
         string = "Approved Cost"
     )
     currency_id = fields.Many2one(
-        "res.currency"
+        "res.currency",
+        related = "parent_id.currency_id"
     )
 
     @api.depends("basics_id", "emergencies_id", "div1_id", "div2_id", "div3_id",
-                 "div4_id", "div5_id", "div6_id", "div7_id", "expenses_id")
-    def _compute_date(self):
+                 "div4_id", "div4a_id", "div5_id", "div6_id", "div7_id", "expenses_id")
+    def _compute_parent_id(self):
         for line in self:
-            parent_id = line.basics_id or line.emergencies_id or line.div1_id or line.div2_id or line.div3_id \
-                        or line.div4_id or line.div5_id or line.div6_id or line.div7_id or line.expenses_id
-            line.date = parent_id.date
+            line.parent_id = line.basics_id or line.emergencies_id or line.div1_id or line.div2_id \
+                             or line.div3_id or line.div4_id or line.div4a_id or line.div5_id \
+                             or line.div6_id or line.div7_id or line.expenses_id
 
-    @api.depends("item", "date", "moq")
+    @api.depends("product", "date", "moq")
     def _compute_monthly_computed(self):
         for line in self:
             line.monthly_computed = .0
 
-            if line.date and line.item:
+            if line.date and line.product:
                 year = line.date.strftime("%Y")
                 month = line.date.strftime("%m")
                 last_day = str(calendar.monthrange(int(year), int(month))[1])
                 domain = [
-                    "&", "&",
-                    ("date", ">=", year + "-" + month + "-01"), ("date", "<=", year + "-" + month + "-" + last_day),
-                    "|", ("component", "ilike", line.item), ("product_description", "=", line.item)
+                    "&",
+                    ("date", "<=", year + "-" + month + "-" + last_day), ("component", "=", line.product.id)
                 ]
-                fp_costs_line_ids = self.env["florence.fp.costs.line"].search(domain)
-
-                if len(fp_costs_line_ids) > 0:
-                    for fp_costs_line_id in fp_costs_line_ids:
-                        line.monthly_computed += line.moq * fp_costs_line_id.cost
+                fp_costs_line_id = self.env["florence.fp.costs.line"].search(domain, limit = 1)
+                line.monthly_computed = line.moq * fp_costs_line_id.cost if fp_costs_line_id else .0

@@ -16,7 +16,6 @@ class FlorenceFpCostsLine(models.Model):
     component = fields.Many2one(
         "product.product"
     )
-    product_description = fields.Char()
     cost = fields.Float(
         digits = (12, 4)
     )

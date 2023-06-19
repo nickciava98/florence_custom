@@ -118,6 +118,15 @@ class FlorenceFinancialPlan(models.Model):
         string = "DIV4 - Condition",
         copy = True
     )
+    div4a = fields.One2many(
+        "florence.financial.plan.line",
+        "div4a_id",
+        copy = True
+    )
+    div4a_condition = fields.Char(
+        string = "DIV4A - Condition",
+        copy = True
+    )
     div5 = fields.One2many(
         "florence.financial.plan.line",
         "div5_id",
@@ -205,48 +214,28 @@ class FlorenceFinancialPlan(models.Model):
         string = "Amazon UK Net Income"
     )
 
-    @api.depends("div1", "div2", "div3", "div4", "div5",
-                 "div6", "div7", "basics", "emergencies")
+    @api.depends("div1", "div2", "div3", "div4", "div4a", "div5", "div6", "div7", "basics", "emergencies")
     def _compute_deductible_total(self):
         for line in self:
-            line.deductible_total = 0
-
-            if len(line.div1) > 0:
-                for item in line.div1:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
-            if len(line.div2) > 0:
-                for item in line.div2:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
-            if len(line.div3) > 0:
-                for item in line.div3:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
-            if len(line.div4) > 0:
-                for item in line.div4:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
-            if len(line.div5) > 0:
-                for item in line.div5:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
-            if len(line.div6) > 0:
-                for item in line.div6:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
-            if len(line.div7) > 0:
-                for item in line.div7:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
-            if len(line.basics) > 0:
-                for item in line.basics:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
-            if len(line.emergencies) > 0:
-                for item in line.emergencies:
-                    if item.is_deductible:
-                        line.deductible_total += item.approved
+            line.deductible_total = .0
+            div1 = line.div1.filtered(lambda item: item.is_deductible)
+            div2 = line.div2.filtered(lambda item: item.is_deductible)
+            div3 = line.div3.filtered(lambda item: item.is_deductible)
+            div4 = line.div4.filtered(lambda item: item.is_deductible)
+            div5 = line.div5.filtered(lambda item: item.is_deductible)
+            div6 = line.div6.filtered(lambda item: item.is_deductible)
+            div7 = line.div7.filtered(lambda item: item.is_deductible)
+            basics = line.basics.filtered(lambda item: item.is_deductible)
+            emergencies = line.emergencies.filtered(lambda item: item.is_deductible)
+            line.deductible_total += sum([item.approved for item in div1]) if len(div1) > 0 else .0
+            line.deductible_total += sum([item.approved for item in div2]) if len(div2) > 0 else .0
+            line.deductible_total += sum([item.approved for item in div3]) if len(div3) > 0 else .0
+            line.deductible_total += sum([item.approved for item in div4]) if len(div4) > 0 else .0
+            line.deductible_total += sum([item.approved for item in div5]) if len(div5) > 0 else .0
+            line.deductible_total += sum([item.approved for item in div6]) if len(div6) > 0 else .0
+            line.deductible_total += sum([item.approved for item in div7]) if len(div7) > 0 else .0
+            line.deductible_total += sum([item.approved for item in basics]) if len(basics) > 0 else .0
+            line.deductible_total += sum([item.approved for item in emergencies]) if len(emergencies) > 0 else .0
 
     @api.depends("disbursment", "deductible_total")
     def _compute_taxable(self):
@@ -256,15 +245,12 @@ class FlorenceFinancialPlan(models.Model):
     @api.depends("taxable")
     def _compute_taxes(self):
         for line in self:
-            line.taxes = 0.2 * line.taxable
+            line.taxes = .2 * line.taxable
 
     @api.depends("date")
     def _compute_date_str(self):
         for line in self:
-            line.date_str = ""
-
-            if line.date:
-                line.date_str = line.date.strftime("%m/%d/%Y")
+            line.date_str = line.date.strftime("%m/%d/%Y") if line.date else ""
 
     @api.depends("amz_total_it", "amz_vat_it")
     def _compute_amz_net_it(self):
@@ -291,23 +277,19 @@ class FlorenceFinancialPlan(models.Model):
         for line in self:
             line.amz_net_uk = line.amz_total_uk - line.amz_vat_uk
 
-    @api.depends("amz_total_it", "amz_total_fr",
-                 "amz_total_de", "amz_total_es",
-                 "amz_total_uk")
+    @api.depends("amz_total_it", "amz_total_fr", "amz_total_de", "amz_total_es", "amz_total_uk")
     def _compute_gi(self):
         for line in self:
-            line.gi = line.amz_total_it + line.amz_total_fr \
-                      + line.amz_total_de + line.amz_total_es \
-                      + line.amz_total_uk
+            line.gi = sum([
+                line.amz_total_it, line.amz_total_fr, line.amz_total_de, line.amz_total_es, line.amz_total_uk
+            ])
 
-    @api.depends("amz_vat_it", "amz_vat_fr",
-                 "amz_vat_de", "amz_vat_es",
-                 "amz_vat_uk")
+    @api.depends("amz_vat_it", "amz_vat_fr", "amz_vat_de", "amz_vat_es", "amz_vat_uk")
     def _compute_vat(self):
         for line in self:
-            line.vat = line.amz_vat_it + line.amz_vat_fr \
-                       + line.amz_vat_de + line.amz_vat_es \
-                       + line.amz_vat_uk
+            line.vat = sum([
+                line.amz_vat_it, line.amz_vat_fr, line.amz_vat_de, line.amz_vat_es, line.amz_vat_uk
+            ])
 
     def _compute_currency_id(self):
         for line in self:
@@ -316,107 +298,51 @@ class FlorenceFinancialPlan(models.Model):
     @api.depends("cgi")
     def _compute_perc(self):
         for line in self:
-            line.perc = 0
-
-            if line.cgi:
-                line.perc = 0.1 * line.cgi
+            line.perc = .1 * line.cgi if line.cgi else .0
 
     @api.depends("gi", "vat")
     def _compute_cgi(self):
         for line in self:
-            line.cgi = 0
-
-            if line.gi and line.vat:
-                line.cgi = line.gi - line.vat
+            line.cgi = line.gi - line.vat if line.gi and line.vat else .0
 
     @api.depends("cgi", "perc")
     def _compute_disbursment(self):
         for line in self:
-            line.disbursment = 0
+            line.disbursment = line.cgi - line.perc if line.cgi and line.perc else .0
 
-            if line.cgi and line.perc:
-                line.disbursment = line.cgi - line.perc
-
-    @api.depends("basics", "emergencies",
-                 "div1", "div2", "div3", "div4", "div5", "div6", "div7")
+    @api.depends("basics", "emergencies", "div1", "div2", "div3", "div4", "div4a", "div5", "div6", "div7")
     def _compute_monthly_total(self):
         for line in self:
-            line.monthly_total = 0
+            line.monthly_total = .0
+            line.monthly_total += sum([item.monthly for item in line.basics])
+            line.monthly_total += sum([item.monthly for item in line.emergencies])
+            line.monthly_total += sum([item.monthly for item in line.div1])
+            line.monthly_total += sum([item.monthly for item in line.div2])
+            line.monthly_total += sum([item.monthly for item in line.div3])
+            line.monthly_total += sum([item.monthly for item in line.div4])
+            line.monthly_total += sum([item.monthly_computed for item in line.div4a])
+            line.monthly_total += sum([item.monthly for item in line.div5])
+            line.monthly_total += sum([item.monthly for item in line.div6])
+            line.monthly_total += sum([item.monthly for item in line.div7])
 
-            if len(line.basics) > 0:
-                for item in line.basics:
-                    line.monthly_total += item.monthly
-            if len(line.emergencies) > 0:
-                for item in line.emergencies:
-                    line.monthly_total += item.monthly
-            if len(line.div1) > 0:
-                for item in line.div1:
-                    line.monthly_total += item.monthly
-            if len(line.div2) > 0:
-                for item in line.div2:
-                    line.monthly_total += item.monthly
-            if len(line.div3) > 0:
-                for item in line.div3:
-                    line.monthly_total += item.monthly
-            if len(line.div4) > 0:
-                for item in line.div4:
-                    line.monthly_total += item.monthly
-            if len(line.div5) > 0:
-                for item in line.div5:
-                    line.monthly_total += item.monthly
-            if len(line.div6) > 0:
-                for item in line.div6:
-                    line.monthly_total += item.monthly
-            if len(line.div7) > 0:
-                for item in line.div7:
-                    line.monthly_total += item.monthly
-
-    @api.depends("basics", "emergencies",
-                 "div1", "div2", "div3", "div4", "div5", "div6", "div7")
+    @api.depends("basics", "emergencies", "div1", "div2", "div3", "div4", "div5", "div6", "div7")
     def _compute_approved_total(self):
         for line in self:
-            line.approved_total = 0
-
-            if len(line.basics) > 0:
-                for item in line.basics:
-                    line.approved_total += item.approved
-            if len(line.emergencies) > 0:
-                for item in line.emergencies:
-                    line.approved_total += item.approved
-            if len(line.div1) > 0:
-                for item in line.div1:
-                    line.approved_total += item.approved
-            if len(line.div2) > 0:
-                for item in line.div2:
-                    line.approved_total += item.approved
-            if len(line.div3) > 0:
-                for item in line.div3:
-                    line.approved_total += item.approved
-            if len(line.div4) > 0:
-                for item in line.div4:
-                    line.approved_total += item.approved
-            if len(line.div5) > 0:
-                for item in line.div5:
-                    line.approved_total += item.approved
-            if len(line.div6) > 0:
-                for item in line.div6:
-                    line.approved_total += item.approved
-            if len(line.div7) > 0:
-                for item in line.div7:
-                    line.approved_total += item.approved
+            line.approved_total = .0
+            line.approved_total += sum([item.approved for item in line.basics])
+            line.approved_total += sum([item.approved for item in line.emergencies])
+            line.approved_total += sum([item.approved for item in line.div1])
+            line.approved_total += sum([item.approved for item in line.div2])
+            line.approved_total += sum([item.approved for item in line.div3])
+            line.approved_total += sum([item.approved for item in line.div4])
+            line.approved_total += sum([item.approved for item in line.div5])
+            line.approved_total += sum([item.approved for item in line.div6])
+            line.approved_total += sum([item.approved for item in line.div7])
 
     @api.depends("disbursment", "approved_total")
     def _compute_surplus(self):
         for line in self:
             line.surplus = line.disbursment - line.approved_total
-
-    @api.constrains("name")
-    def _constrains_name(self):
-        for line in self:
-            if not line.name:
-                raise ValidationError(
-                    _("Name must be filled!")
-                )
 
     @api.model_create_multi
     def create(self, vals):
