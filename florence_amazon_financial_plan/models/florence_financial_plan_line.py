@@ -113,5 +113,5 @@ class FlorenceFinancialPlanLine(models.Model):
                     "&",
                     ("date", "<=", year + "-" + month + "-" + last_day), ("component", "=", line.product.id)
                 ]
-                fp_costs_line_id = self.env["florence.fp.costs.line"].search(domain, limit = 1)
+                fp_costs_line_id = self.env["florence.fp.costs.line"].search(domain, order = "date desc", limit = 1)
                 line.monthly_computed = line.moq * fp_costs_line_id.cost if fp_costs_line_id else .0
