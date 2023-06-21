@@ -1,8 +1,14 @@
 from odoo import models, fields, api
+from odoo.osv import expression
+
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
+    display_value = fields.Char(
+        compute = "_compute_display_value",
+        store = True
+    )
     is_decommissioned = fields.Boolean(
         default = False
     )
@@ -28,6 +34,15 @@ class ProductProduct(models.Model):
         store = True,
         digits = (12, 4)
     )
+
+    @api.depends("name", "product_template_attribute_value_ids")
+    def _compute_display_value(self):
+        for line in self:
+            values = [value.name for value in line.product_template_attribute_value_ids] \
+                if len(line.product_template_attribute_value_ids) > 0 else []
+            line.display_value = line.name + " (" + ", ".join(values) + ")" \
+                if line.name and len(values) > 0 else line.name \
+                if line.name and len(values) == 0 else ""
 
     def _compute_location_ids(self):
         for line in self:
@@ -65,3 +80,10 @@ class ProductProduct(models.Model):
 
                 if len(location_names) > 0:
                     line.locations = ", ".join(location_names)
+
+    @api.model
+    def _name_search(self, name, args = None, operator = "ilike", limit = 100, name_get_uid = None):
+        args = args or []
+        domain = ["|", ("name", operator, name), ("display_value", operator, name)] if name else []
+
+        return self._search(expression.AND([domain, args]), limit = limit, access_rights_uid = name_get_uid)
