@@ -115,27 +115,35 @@ class FlorenceForecasting(models.Model):
         self._compute_est_value()
 
     def auto_update_action(self):
-        if int(datetime.datetime.now().month) == 1:
-            year = str(datetime.datetime.now().year - 1)
-            prev_month = "12"
-        else:
-            year = str(datetime.datetime.now().year)
-            prev_month = str(int(datetime.datetime.now().month) - 1)
+        year = str(datetime.datetime.now().year - 1) \
+            if int(datetime.datetime.now().month) == 1 else str(datetime.datetime.now().year)
+        prev_month = "12" \
+            if int(datetime.datetime.now().month) == 1 else str(int(datetime.datetime.now().month) - 1) \
+            if int(datetime.datetime.now().month) > 10 else "0" + str(int(datetime.datetime.now().month) - 1)
+        curr_month = str(datetime.datetime.now().month) \
+            if int(datetime.datetime.now().month) > 9 else "0" + str(datetime.datetime.now().month)
+        prev_last_day = str(calendar.monthrange(int(year), int(prev_month))[1])
+        curr_last_day = str(calendar.monthrange(int(year), int(curr_month))[1])
+        domain = [
+            "&", ("date", ">=", year + "-" + prev_month + "-1"),
+            ("date", "<=", year + "-" + prev_month + "-" + prev_last_day)
+        ]
+        forecasts = self.env["florence.forecasting"].search(domain)
+        domain_current = [
+            "&", ("date", ">=", year + "-" + curr_month + "-1"),
+            ("date", "<=", year + "-" + curr_month + "-" + curr_last_day)
+        ]
+        forecasts_current = self.env["florence.forecasting"].search(domain_current)
 
-        last_day = str(calendar.monthrange(int(year), int(prev_month))[1])
-
-        if len(self.env["florence.forecasting"].search([])) > 0:
-            for forecast in self.env["florence.forecasting"].search([]):
-                if datetime.datetime.strptime(year + "-" + prev_month + "-1", "%Y-%m-%d") \
-                    <= datetime.datetime(forecast.date.year, forecast.date.month, forecast.date.day) \
-                    <= datetime.datetime.strptime(year + "-" + prev_month + "-" + last_day, "%Y-%m-%d"):
-                    forecast_id = self.env["florence.forecasting"].sudo().create({
-                        "name": forecast.name.id,
-                        "date": datetime.datetime.now(),
-                        "avg_qty_sold": forecast.avg_qty_sold,
-                        "threshold": forecast.threshold
-                    })
-                    forecast_id.update_values_action()
+        if len(forecasts) > 0 and len(forecasts_current) == 0:
+            for forecast in forecasts:
+                forecast_id = self.env["florence.forecasting"].sudo().create({
+                    "name": forecast.name.id,
+                    "date": datetime.datetime.now().replace(day = 1),
+                    "avg_qty_sold": forecast.avg_qty_sold,
+                    "threshold": forecast.threshold
+                })
+                forecast_id.update_values_action()
 
 
 class FlorenceForecastingLine(models.Model):
