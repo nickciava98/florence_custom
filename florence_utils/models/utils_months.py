@@ -34,15 +34,23 @@ class UtilsMonths(models.Model):
     )
     inventory = fields.Float(
         compute = "_compute_inventory",
-        string = "Inventory (iii)"
+        string = "Product Real Cost (iii)"
+    )
+    inventory_value = fields.Float(
+        compute = "_compute_inventory_value",
+        string = "Inventory Value (iv)"
+    )
+    div4a_value = fields.Float(
+        compute = "_compute_div4a_value",
+        string = "DIV4A Value (v)"
     )
     monthly_total = fields.Float(
         compute = "_compute_monthly_total",
-        string = "Monthly Total (iv)"
+        string = "Monthly Total (vi)"
     )
     util = fields.Float(
         compute = "_compute_util",
-        string = "Profit (v)"
+        string = "Profit (vii)"
     )
     currency_id = fields.Many2one(
         "res.currency",
@@ -70,7 +78,7 @@ class UtilsMonths(models.Model):
     @api.depends("month")
     def _compute_inventory(self):
         for line in self:
-            line.inventory = 0.0
+            line.inventory = .0
 
             if line.month:
                 last_day = str(calendar.monthrange(int(line.name.name), int(line.month))[1])
@@ -84,9 +92,44 @@ class UtilsMonths(models.Model):
                     line.inventory += forecast.est_value
 
     @api.depends("month")
+    def _compute_inventory_value(self):
+        for line in self:
+            line.inventory_value = .0
+
+            if line.month:
+                last_day = str(calendar.monthrange(int(line.name.name), int(line.month))[1])
+                domain = [
+                    "&",
+                    ("date", ">=", str(line.name.name) + "-" + str(line.month) + "-" + "01"),
+                    ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
+                ]
+                line.inventory_value = self.env["florence.balance.sheet"].search(
+                    domain, order = "create_date desc", limit = 1
+                ).inventory_value
+
+    @api.depends("month")
+    def _compute_div4a_value(self):
+        for line in self:
+            line.div4a_value = .0
+
+            if line.month:
+                last_day = str(calendar.monthrange(int(line.name.name), int(line.month))[1])
+                domain = [
+                    "&",
+                    ("date", ">=", str(line.name.name) + "-" + str(line.month) + "-" + "01"),
+                    ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
+                ]
+                fp_lines = self.env["florence.financial.plan"].search(
+                    domain, order = "create_date desc", limit = 1
+                ).div4a
+
+                for fp_line in fp_lines:
+                    line.div4a_value += fp_line.monthly_computed
+
+    @api.depends("month")
     def _compute_util(self):
         for line in self:
-            line.util = 0.0
+            line.util = .0
 
             if line.month:
                 last_day = str(calendar.monthrange(int(line.name.name), int(line.month))[1])

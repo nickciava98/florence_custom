@@ -38,6 +38,10 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="inventory" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="inventory_value" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="div4a_value" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="monthly_total" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="util" widget="monetary" sum="Profit (v)"
@@ -89,8 +93,10 @@
                                     (i): Month of the Year <br/>
                                     (ii): Taxes value computed by the Accountant <br/>
                                     (iii): Sum of Estimated Values computed by Forecasting in that specific month <br/>
-                                    (iv): Computed from Monthly Total of FP - Florence in that specific month <br/>
-                                    (v): Sum of FP - Florence Surplus in that specific month
+                                    (iv): Inventory Value from Balance Sheet in that specific month <br/>
+                                    (v): Sum of values from FP Florence DIV4A in that specific month <br/>
+                                    (vi): Computed from Monthly Total of FP - Florence in that specific month <br/>
+                                    (vii): Sum of FP - Florence Surplus in that specific month
                                 </i>
                             </div>
                         </page>
