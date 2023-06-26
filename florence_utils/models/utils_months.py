@@ -61,7 +61,7 @@ class UtilsMonths(models.Model):
     @api.depends("month")
     def _compute_monthly_total(self):
         for line in self:
-            line.monthly_total = 0.0
+            line.monthly_total = .0
 
             if line.month:
                 last_day = str(calendar.monthrange(int(line.name.name), int(line.month))[1])
@@ -70,7 +70,7 @@ class UtilsMonths(models.Model):
                     ("date", ">=", str(line.name.name) + "-" + str(line.month) + "-" + "01"),
                     ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
                 ]
-                florence_fp_id = self.env["florence.financial.plan"].search(domain, limit = 1)
+                florence_fp_id = self.env["florence.financial.plan"].search(domain, order = "date desc", limit = 1)
 
                 if florence_fp_id:
                     line.monthly_total = florence_fp_id.monthly_total

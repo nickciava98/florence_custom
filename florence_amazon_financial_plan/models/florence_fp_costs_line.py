@@ -11,7 +11,8 @@ class FlorenceFpCostsLine(models.Model):
         ondelete = "cascade"
     )
     date = fields.Date(
-        related = "name.date"
+        related = "name.date",
+        store = True
     )
     component = fields.Many2one(
         "product.product"
