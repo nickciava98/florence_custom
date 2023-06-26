@@ -113,6 +113,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -137,6 +138,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -161,6 +163,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -185,6 +188,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -209,6 +213,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -233,6 +238,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -251,8 +257,7 @@
                                     <field name="date" invisible="True"/>
                                     <field name="item"/>
                                     <field name="is_deductible"/>
-                                    <field name="moq" widget="monetary" invisible="True"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="moq" invisible="True"/>
                                     <field name="monthly_computed" widget="monetary"
                                            sum="Monthly Computed" invisible="True"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
@@ -261,6 +266,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -281,8 +287,7 @@
                                     <field name="item" invisible="True"/>
                                     <field name="product" options="{'no_create': True}"/>
                                     <field name="is_deductible" invisible="True"/>
-                                    <field name="moq" widget="monetary"
-                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="moq"/>
                                     <field name="monthly_computed" widget="monetary" sum="Monthly Computed"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="monthly" widget="monetary" sum="Monthly" invisible="True"
@@ -290,6 +295,7 @@
                                     <field name="quantity" invisible="True"/>
                                     <field name="approved" widget="monetary" sum="Approved" invisible="True"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -314,6 +320,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -338,6 +345,7 @@
                                     <field name="quantity"/>
                                     <field name="approved" widget="monetary" sum="Approved"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="is_single_cost"/>
                                 </tree>
                             </field>
                         </page>
@@ -367,20 +375,27 @@
                         </group>
                     </group>
 
-                    <div>
-                        <i>
-                            (i): Sum of all incomes <br/>
-                            (ii): Value added tax <br/>
-                            (iii): Gross Income - VAT <br/>
-                            (iv): 10% of Corrected Gross Income <br/>
-                            (v): Corrected Gross Income - 10% of Corrected Gross Income <br/>
-                            (vi): Sum of Approved Cost column of each tab where Item is deductible <br/>
-                            (vii): Available Net - Deductible Total <br/>
-                            (viii): 20% of Taxable Income <br/>
-                            (ix): Sum of Monthly Cost column of each tab <br/>
-                            (x): Sum of Approved Cost column of each tab <br/>
-                            (xi): Disbursment - Approved Total
-                        </i>
+                    <div class="w-100">
+                        <div class="w-45 float-left mr-5">
+                            <i>
+                                (i): Sum of all incomes <br/>
+                                (ii): Value added tax <br/>
+                                (iii): Gross Income - VAT <br/>
+                                (iv): 10% of Corrected Gross Income <br/>
+                                (v): Corrected Gross Income - 10% of Corrected Gross Income <br/>
+                                (vi): Sum of Approved Cost column of each tab where Item is deductible
+                            </i>
+                        </div>
+
+                        <div class="w-45 float-center ml-5">
+                            <i>
+                                (vii): Available Net - Deductible Total <br/>
+                                (viii): 20% of Taxable Income <br/>
+                                (ix): Sum of Monthly Cost column of each tab <br/>
+                                (x): Sum of Approved Cost column of each tab <br/>
+                                (xi): Disbursment - Approved Total
+                            </i>
+                        </div>
                     </div>
                 </sheet>
 

@@ -1,3 +1,5 @@
+import math
+
 from odoo import models, fields, api
 import calendar
 
@@ -75,6 +77,10 @@ class FlorenceFinancialPlanLine(models.Model):
         default = .0,
         string = "MOQ"
     )
+    is_single_cost = fields.Boolean(
+        default = False,
+        string = "Single Cost?"
+    )
     monthly = fields.Float(
         default = .0,
         string = "Monthly Cost"
@@ -91,6 +97,14 @@ class FlorenceFinancialPlanLine(models.Model):
         "res.currency",
         related = "parent_id.currency_id"
     )
+
+    @api.onchange("is_single_cost")
+    def _onchange_is_single_cost(self):
+        for line in self:
+            if line.is_single_cost:
+                line.monthly += line.approved
+            else:
+                line.monthly -= line.approved
 
     @api.depends("basics_id", "emergencies_id", "div1_id", "div2_id", "div3_id",
                  "div4_id", "div4a_id", "div5_id", "div6_id", "div7_id", "expenses_id")
