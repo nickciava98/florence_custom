@@ -295,7 +295,7 @@
                                     <field name="quantity" invisible="True"/>
                                     <field name="approved" widget="monetary" sum="Approved" invisible="True"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="is_single_cost"/>
+                                    <field name="is_single_cost" invisible="True"/>
                                 </tree>
                             </field>
                         </page>

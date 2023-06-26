@@ -89,6 +89,9 @@ class FlorenceFinancialPlanLine(models.Model):
         compute = "_compute_monthly_computed",
         string = "Computed Monthly"
     )
+    total_to_compute = fields.Float(
+        compute = "_compute_total_to_compute",
+    )
     approved = fields.Float(
         default = .0,
         string = "Approved Cost"
@@ -98,13 +101,11 @@ class FlorenceFinancialPlanLine(models.Model):
         related = "parent_id.currency_id"
     )
 
-    @api.onchange("is_single_cost")
-    def _onchange_is_single_cost(self):
+    @api.depends("is_single_cost", "monthly", "monthly_computed", "approved")
+    def _compute_total_to_compute(self):
         for line in self:
-            if line.is_single_cost:
-                line.monthly += line.approved
-            else:
-                line.monthly -= line.approved
+            approved = line.approved if line.is_single_cost else .0
+            line.total_to_compute = sum([line.monthly, line.monthly_computed, approved])
 
     @api.depends("basics_id", "emergencies_id", "div1_id", "div2_id", "div3_id",
                  "div4_id", "div4a_id", "div5_id", "div6_id", "div7_id", "expenses_id")

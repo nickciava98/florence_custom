@@ -314,16 +314,16 @@ class FlorenceFinancialPlan(models.Model):
     def _compute_monthly_total(self):
         for line in self:
             line.monthly_total = .0
-            line.monthly_total += sum([item.monthly for item in line.basics])
-            line.monthly_total += sum([item.monthly for item in line.emergencies])
-            line.monthly_total += sum([item.monthly for item in line.div1])
-            line.monthly_total += sum([item.monthly for item in line.div2])
-            line.monthly_total += sum([item.monthly for item in line.div3])
-            line.monthly_total += sum([item.monthly for item in line.div4])
-            line.monthly_total += sum([item.monthly_computed for item in line.div4a])
-            line.monthly_total += sum([item.monthly for item in line.div5])
-            line.monthly_total += sum([item.monthly for item in line.div6])
-            line.monthly_total += sum([item.monthly for item in line.div7])
+            line.monthly_total += sum([item.total_to_compute for item in line.basics])
+            line.monthly_total += sum([item.total_to_compute for item in line.emergencies])
+            line.monthly_total += sum([item.total_to_compute for item in line.div1])
+            line.monthly_total += sum([item.total_to_compute for item in line.div2])
+            line.monthly_total += sum([item.total_to_compute for item in line.div3])
+            line.monthly_total += sum([item.total_to_compute for item in line.div4])
+            line.monthly_total += sum([item.total_to_compute - item.monthly for item in line.div4a])
+            line.monthly_total += sum([item.total_to_compute for item in line.div5])
+            line.monthly_total += sum([item.total_to_compute for item in line.div6])
+            line.monthly_total += sum([item.total_to_compute for item in line.div7])
 
     @api.depends("basics", "emergencies", "div1", "div2", "div3", "div4", "div5", "div6", "div7")
     def _compute_approved_total(self):
