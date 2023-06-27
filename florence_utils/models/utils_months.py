@@ -75,6 +75,18 @@ class UtilsMonths(models.Model):
                 if florence_fp_id:
                     line.monthly_total = florence_fp_id.monthly_total
 
+                domain2 = [
+                    "&", "&",
+                    ("date", ">=", str(line.name.name) + "-" + str(line.month) + "-" + "01"),
+                    ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day)),
+                    ("is_single_cost", "=", True)
+                ]
+                florence_fp_lines_single_cost = self.env["florence.financial.plan.line"].search(domain2)
+
+                if len(florence_fp_lines_single_cost) > 0:
+                    for fp_line in florence_fp_lines_single_cost:
+                        line.monthly_total += fp_line.approved
+
     @api.depends("month")
     def _compute_inventory(self):
         for line in self:

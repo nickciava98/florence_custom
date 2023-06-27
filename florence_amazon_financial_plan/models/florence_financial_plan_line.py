@@ -1,3 +1,4 @@
+import datetime
 import math
 
 from odoo import models, fields, api
@@ -17,7 +18,8 @@ class FlorenceFinancialPlanLine(models.Model):
         store = True
     )
     date = fields.Date(
-        related = "parent_id.date"
+        compute = "_compute_date",
+        store = True
     )
     basics_id = fields.Many2one(
         "florence.financial.plan",
@@ -114,6 +116,21 @@ class FlorenceFinancialPlanLine(models.Model):
             line.parent_id = line.basics_id or line.emergencies_id or line.div1_id or line.div2_id \
                              or line.div3_id or line.div4_id or line.div4a_id or line.div5_id \
                              or line.div6_id or line.div7_id or line.expenses_id
+
+    @api.depends("basics_id", "emergencies_id", "div1_id", "div2_id", "div3_id",
+                 "div4_id", "div4a_id", "div5_id", "div6_id", "div7_id", "expenses_id")
+    def _compute_date(self):
+        for line in self:
+            line.date = line.basics_id.date \
+                if line.basics_id else line.emergencies_id.date \
+                if line.emergencies_id else line.div1_id.date \
+                if line.div1_id else line.div2_id.date \
+                if line.div2_id else line.div3_id.date \
+                if line.div3_id else line.div4_id.date \
+                if line.div4_id else line.div5_id.date \
+                if line.div5_id else line.div6_id.date \
+                if line.div6_id else line.div7_id.date \
+                if line.div7_id else datetime.datetime.today()
 
     @api.depends("product", "date", "moq")
     def _compute_monthly_computed(self):
