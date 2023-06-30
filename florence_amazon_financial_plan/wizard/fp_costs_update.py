@@ -2,6 +2,7 @@ from odoo import models
 from odoo.exceptions import ValidationError
 import calendar
 import datetime
+import math
 
 
 class FpCostsUpdate(models.TransientModel):
@@ -43,19 +44,21 @@ class FpCostsUpdate(models.TransientModel):
                         ("invoice_date", "<=", invoice_last_date)
                     ]
                     bill_id = 0
+                    cost = .0
 
                     for bill in self.env["account.move"].search(domain, order = "name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id.id == fp_cost_line.component.id:
                                 bill_id = bill.id
+                                cost = invoice_line.price_unit
                                 break
 
-                        if bill_id != 0:
+                        if bill_id != 0 and not math.isclose(cost, 0.0):
                             break
 
                     fp_costs_lines.append({
                         "component": fp_cost_line.component.id,
-                        "cost": fp_cost_line.cost,
+                        "cost": cost,
                         "bill": bill_id
                     })
 

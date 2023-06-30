@@ -44,7 +44,7 @@ class FlorenceForecasting(models.Model):
     @api.depends("line_ids")
     def _compute_est_value(self):
         for line in self:
-            line.est_value = 0.0
+            line.est_value = .0
 
             if len(line.line_ids) > 0:
                 for f_line in line.line_ids:
@@ -63,7 +63,7 @@ class FlorenceForecasting(models.Model):
             bom_id = self.env["mrp.bom"].search(
                 [("product_id", "=", self.name.id)], limit = 1
             )
-            name_est_value = 0.0
+            name_est_value = .0
             year = self.date.strftime("%Y")
             month = self.date.strftime("%m")
             domain = [
@@ -82,7 +82,8 @@ class FlorenceForecasting(models.Model):
                     break
 
             name_est_value *= self.name.qty_available
-            months_autonomy = self.name.qty_available / self.avg_qty_sold if self.avg_qty_sold > 0 else 0.0
+            months_autonomy = self.name.qty_available / self.avg_qty_sold \
+                if self.avg_qty_sold > 0 else .0
             self.line_ids = [(
                 0, 0, {
                     "name": self.id,
@@ -90,7 +91,8 @@ class FlorenceForecasting(models.Model):
                     "available_qty": self.name.qty_available,
                     "avg_qty_sold": self.avg_qty_sold,
                     "months_autonomy": months_autonomy,
-                    "est_value": name_est_value if months_autonomy < self.threshold else 0.0,
+                    "est_value": name_est_value
+                        if months_autonomy < self.threshold else .0,
                     "currency_id": self.currency_id.id
                 }
             )]
@@ -99,7 +101,8 @@ class FlorenceForecasting(models.Model):
                 for bom_line in bom_id.bom_line_ids:
                     est_value = bom_line.cost
                     est_value *= bom_line.product_id.qty_available
-                    months_autonomy = bom_line.product_id.qty_available / self.avg_qty_sold if self.avg_qty_sold > 0 else 0.0
+                    months_autonomy = bom_line.product_id.qty_available / self.avg_qty_sold \
+                        if self.avg_qty_sold > 0 else .0
                     self.line_ids = [(
                         0, 0, {
                             "name": self.id,

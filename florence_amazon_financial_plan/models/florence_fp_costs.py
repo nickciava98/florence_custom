@@ -163,7 +163,7 @@ class FlorenceFpCosts(models.Model):
                     })
 
                 bill_id = 0
-                cost = 0
+                cost = .0
                 domain = [
                     "&",
                     ("move_type", "=", "in_invoice"),

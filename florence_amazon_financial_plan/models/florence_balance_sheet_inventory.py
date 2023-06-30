@@ -37,10 +37,10 @@ class FlorenceBalanceSheetInventory(models.Model):
     def _onchange_available_quantity(self):
         for line in self:
             if line.product_id:
-                cost = 0
+                cost = .0
+                bills = self.env["account.move"].search([("move_type", "=", "in_invoice")], order = "name desc")
 
-                for bill in self.env["account.move"].search(
-                        [("move_type", "=", "in_invoice")], order="name desc"):
+                for bill in bills:
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.product_id:
                             cost = invoice_line.price_unit
@@ -83,10 +83,10 @@ class FlorenceBalanceSheetInventoryMore(models.Model):
     def _onchange_available_quantity(self):
         for line in self:
             if line.product_id:
-                cost = 0
+                cost = .0
+                bills = self.env["account.move"].search([("move_type", "=", "in_invoice")], order = "name desc")
 
-                for bill in self.env["account.move"].search(
-                        [("move_type", "=", "in_invoice")], order="name desc"):
+                for bill in bills:
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id == line.product_id:
                             cost = invoice_line.price_unit

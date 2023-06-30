@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-import datetime
+import calendar
 
 
 class FlorenceBalanceSheetLine(models.Model):
@@ -31,15 +31,20 @@ class FlorenceBalanceSheetLine(models.Model):
         for line in self:
             line.currency_id = self.env.ref('base.main_company').currency_id
 
+    @api.depends("name.date", "product_id")
     def _compute_price_unit(self):
         for line in self:
-            line.price_unit = 0
+            line.price_unit = .0
 
             if line.product_id:
-                for fp in self.env["florence.fp.costs"].search([]):
-                    if fp.name.id == line.product_id.id \
-                            and datetime.datetime(
-                        fp.date.year, fp.date.month, fp.date.day) == datetime.datetime(
-                        line.name.date.year, line.name.date.month, line.name.date.day):
-                        line.price_unit = fp.total
-                        break
+                year = str(line.name.date.year)
+                month = str(line.name.date.month)
+                day = str(line.name.date.day)
+                last_day = str(calendar.monthrange(int(year), int(month))[1])
+                date_from = year + "-" + month + "-" + day
+                date_to = year + "-" + month + "-" + last_day
+                fp_cost_id = self.env["florence.fp.costs"].search(
+                    ["&", "&", ("name", "=", line.product_id.id), ("date", ">=", date_from), ("date", "<=", date_to)],
+                    limit = 1
+                )
+                line.price_unit = fp_cost_id.total
