@@ -159,6 +159,11 @@ class ExportXlsxBalanceSheet(models.TransientModel):
                 "align": "center",
                 "border": 1
             }),
+            "Linea ORO": workbook.add_format({
+                "italic": True,
+                "align": "center",
+                "border": 1
+            }),
             "LFA I/Stock-NonVendibile": workbook.add_format({
                 "italic": True,
                 "align": "center",
@@ -173,6 +178,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
 
         locations_formats["BIONA/Stock"].set_bg_color("#EBF1DE")
         locations_formats["LFA I/Stock"].set_bg_color("#DCE6F1")
+        locations_formats["Linea ORO"].set_bg_color("#FFF2CC")
         locations_formats["LFA I/Stock-NonVendibile"].set_bg_color("#FDE9D9")
         locations_formats["OFFLI/Stock"].set_bg_color("#E4DFEC")
 
