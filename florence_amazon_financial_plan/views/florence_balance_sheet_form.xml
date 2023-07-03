@@ -125,9 +125,9 @@
                     <div attrs="{'invisible': [('notebook_invisible', '=', True)]}">
                         <br/>
                         <i>
-                            (i): Total To Use from FP - Amazon in that date<br/>
-                            (ii): Sum of Values from Inventory Values Tab and Values from External Inventories Values Tab<br/>
-                            (iii): Sum of Quantity x Price Unit from Amazon Values Tab<br/>
+                            (i): Difference between Total To Use from FP and Amazon in that date <br/>
+                            (ii): Sum of Values from Inventory Values Tab and Values from External Inventories Values Tab <br/>
+                            (iii): Sum of Quantity x Price Unit from Amazon Values Tab <br/>
                             (iv): Sum of Values from More Values Tab
                         </i>
                     </div>
