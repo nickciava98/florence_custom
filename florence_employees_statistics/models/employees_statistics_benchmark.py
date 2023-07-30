@@ -1,5 +1,6 @@
-from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+
+from odoo import models, fields, api, _
 
 
 class EmployeesStatisticsBenchmark(models.Model):
@@ -8,11 +9,11 @@ class EmployeesStatisticsBenchmark(models.Model):
     _description = "Employees Statistics Benchmark"
 
     name = fields.Char(
-        copy = False
+        copy=False
     )
     job_position = fields.Many2one(
         "hr.job",
-        required = True
+        required=True
     )
 
     @api.constrains("name")

@@ -1,5 +1,6 @@
-from odoo import models, fields, api
 import calendar
+
+from odoo import models, fields, api
 
 
 class UtilsDays(models.Model):
@@ -9,27 +10,27 @@ class UtilsDays(models.Model):
 
     name = fields.Many2one(
         "utils.utils",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     date = fields.Date(
-        string = "Date (i)"
+        string="Date (i)"
     )
     probable_income_amz = fields.Float(
-        compute = "_compute_probable_income_amz",
-        string = "Probable Income (Amazon) (ii)"
+        compute="_compute_probable_income_amz",
+        string="Probable Income (Amazon) (ii)"
     )
     monthly_total_per_day = fields.Float(
-        compute = "_compute_monthly_total_per_day",
-        string = "Monthly Total Per Day (iii)"
+        compute="_compute_monthly_total_per_day",
+        string="Monthly Total Per Day (iii)"
     )
     util = fields.Float(
-        compute = "_compute_util",
-        string = "Profit (iv)"
+        compute="_compute_util",
+        string="Profit (iv)"
     )
     currency_id = fields.Many2one(
         "res.currency",
-        related = "name.currency_id",
-        store = True
+        related="name.currency_id",
+        store=True
     )
 
     @api.depends("date")
@@ -48,7 +49,7 @@ class UtilsDays(models.Model):
             line.monthly_total_per_day = line.name.month_ids.filtered(
                 lambda month: month.month == str(line.date.strftime("%m"))
             ).monthly_total / int(calendar.monthrange(int(line.name.name), int(line.date.strftime("%m")))[1]) \
-            if len(line.name.month_ids) > 0 else .0
+                if len(line.name.month_ids) > 0 else .0
 
     @api.depends("probable_income_amz", "monthly_total_per_day")
     def _compute_util(self):

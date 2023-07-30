@@ -1,8 +1,10 @@
-from odoo import http, _
-from odoo.http import request
-from odoo.addons.portal.controllers.portal import pager as portal_pager
-from odoo.addons.account.controllers.portal import PortalAccount
 from collections import OrderedDict
+
+from odoo.http import request
+
+from odoo import http, _
+from odoo.addons.account.controllers.portal import PortalAccount
+from odoo.addons.portal.controllers.portal import pager as portal_pager
 
 
 class AccountPortal(PortalAccount):
@@ -41,23 +43,23 @@ class AccountPortal(PortalAccount):
             filterby = "all"
 
         domain += searchbar_filters[filterby]["domain"]
-        
+
         if date_begin and date_end:
             domain += [("create_date", ">", date_begin), ("create_date", "<=", date_end)]
 
         invoice_count = len(request.env["account.move"].sudo().search(domain))
         pager = portal_pager(
-            url = "/my/invoices",
-            url_args = {"date_begin": date_begin, "date_end": date_end, "sortby": sortby},
-            total = invoice_count,
-            page = page,
-            step = self._items_per_page
+            url="/my/invoices",
+            url_args={"date_begin": date_begin, "date_end": date_end, "sortby": sortby},
+            total=invoice_count,
+            page=page,
+            step=self._items_per_page
         )
         invoices = request.env["account.move"].sudo().search(
-            domain, order = order, limit = self._items_per_page, offset = pager["offset"]
+            domain, order=order, limit=self._items_per_page, offset=pager["offset"]
         )
         request.session["my_invoices_history"] = invoices.ids[:100]
-        
+
         values.update({
             "date": date_begin,
             "invoices": invoices,

@@ -7,14 +7,14 @@ class LinkBill(models.Model):
 
     purchase_id = fields.Many2one(
         "purchase.order",
-        ondelete = "cascade",
-        string = "Purchase Order"
+        ondelete="cascade",
+        string="Purchase Order"
     )
     bill_ids = fields.Many2many(
         "account.move",
         "link_bill_account_move_rel",
-        domain = "[('move_type', 'in', ['in_invoice', 'in_refund', 'in_receipt'])]",
-        string = "Vendor Bill"
+        domain="[('move_type', 'in', ['in_invoice', 'in_refund', 'in_receipt'])]",
+        string="Vendor Bill"
     )
 
     def link_bill_action(self):

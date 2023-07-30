@@ -1,7 +1,9 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
-from datetime import datetime
 import calendar
+from datetime import datetime
+
+from odoo.exceptions import ValidationError
+
+from odoo import models, fields, api, _
 
 
 class ManufacturingCosts(models.Model):
@@ -11,14 +13,14 @@ class ManufacturingCosts(models.Model):
 
     name = fields.Many2one(
         "product.product",
-        copy = False,
-        tracking = True
+        copy=False,
+        tracking=True
     )
     super_product = fields.Many2one(
         "product.template",
-        tracking = True,
-        compute = "_compute_super_product",
-        store = True
+        tracking=True,
+        compute="_compute_super_product",
+        store=True
     )
     month = fields.Selection(
         [("1", "January"),
@@ -33,19 +35,19 @@ class ManufacturingCosts(models.Model):
          ("10", "October"),
          ("11", "November"),
          ("12", "December")],
-        default = str(datetime.now().month),
-        required = True,
-        tracking = True
+        default=str(datetime.now().month),
+        required=True,
+        tracking=True
     )
     year = fields.Char(
-        required = True,
-        size = 4,
-        tracking = True,
-        default = str(datetime.now().year)
+        required=True,
+        size=4,
+        tracking=True,
+        default=str(datetime.now().year)
     )
     start_date = fields.Date(
-        compute = "_compute_start_date",
-        required = True
+        compute="_compute_start_date",
+        required=True
     )
     costs_lines = fields.One2many(
         "manufacturing.costs.line",
@@ -53,57 +55,57 @@ class ManufacturingCosts(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     last_price_invoiced = fields.Float(
-        compute = "_compute_last_price_invoiced",
-        digits = (12, 4)
+        compute="_compute_last_price_invoiced",
+        digits=(12, 4)
     )
     last_price_packaging = fields.Float(
-        compute = "_compute_last_price_packaging",
-        digits = (12, 4)
+        compute="_compute_last_price_packaging",
+        digits=(12, 4)
     )
     last_price_public = fields.Float(
-        compute = "_compute_last_price_public",
-        digits = (12, 4)
+        compute="_compute_last_price_public",
+        digits=(12, 4)
     )
     product_last_manufacturer = fields.Char(
-        compute = "_compute_product_last_manufacturer"
+        compute="_compute_product_last_manufacturer"
     )
     product_updated_qty = fields.Float(
-        compute = "_compute_product_updated_qty",
-        digits = (12, 4)
+        compute="_compute_product_updated_qty",
+        digits=(12, 4)
     )
     last_bill_number = fields.Many2one(
         "account.move",
-        compute = "_compute_last_bill_number"
+        compute="_compute_last_bill_number"
     )
     last_bill_date = fields.Date(
-        related = "last_bill_number.invoice_date"
+        related="last_bill_number.invoice_date"
     )
     price_invoiced_avg = fields.Float(
-        compute = "_compute_price_invoiced_avg",
-        group_operator = "avg",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_price_invoiced_avg",
+        group_operator="avg",
+        store=True,
+        digits=(12, 4)
     )
     price_packaging_avg = fields.Float(
-        compute = "_compute_price_packaging_avg",
-        group_operator = "avg",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_price_packaging_avg",
+        group_operator="avg",
+        store=True,
+        digits=(12, 4)
     )
     price_total_avg = fields.Float(
-        compute = "_compute_price_total_avg",
-        group_operator = "avg",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_price_total_avg",
+        group_operator="avg",
+        store=True,
+        digits=(12, 4)
     )
     other_costs_avg = fields.Float(
-        compute = "_compute_other_costs_avg",
-        group_operator = "avg",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_other_costs_avg",
+        group_operator="avg",
+        store=True,
+        digits=(12, 4)
     )
 
     @api.depends("costs_lines")
@@ -174,7 +176,7 @@ class ManufacturingCosts(models.Model):
         if len(order) > 0:
             return self.env[model].search(
                 domain,
-                order = order
+                order=order
             )
 
         return self.env[model].search(
@@ -193,11 +195,11 @@ class ManufacturingCosts(models.Model):
                          ("move_type", "=", "in_invoice"),
                          ("invoice_date", ">=", line.year + "-" + str(line.month) + "-1"),
                          ("invoice_date", "<=",
-                            line.year + "-"
-                            + str(line.month) + "-"
-                            + str(calendar.monthrange(int(line.year), int(line.month))[1])
-                         ),
-                        ],
+                          line.year + "-"
+                          + str(line.month) + "-"
+                          + str(calendar.monthrange(int(line.year), int(line.month))[1])
+                          ),
+                         ],
                         "name desc"
                 ):
                     for invoice_line in bill.invoice_line_ids:
@@ -284,13 +286,13 @@ class ManufacturingCosts(models.Model):
                 for bom_line_id in bom_id.bom_line_ids:
                     previous_price_packaging = line.last_price_packaging
                     for bill in line.model_search("account.move",
-                            ["&",
-                             ("move_type", "=", "in_invoice"),
-                             ("invoice_date", "<=",
-                                 line.year + "-"
-                                    + str(line.month) + "-"
-                                    + str(calendar.monthrange(int(line.year), int(line.month))[1]))
-                            ], "name desc"):
+                                                  ["&",
+                                                   ("move_type", "=", "in_invoice"),
+                                                   ("invoice_date", "<=",
+                                                    line.year + "-"
+                                                    + str(line.month) + "-"
+                                                    + str(calendar.monthrange(int(line.year), int(line.month))[1]))
+                                                   ], "name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id == bom_line_id.product_id:
                                 line.last_price_packaging += \

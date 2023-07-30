@@ -1,6 +1,8 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
 import datetime
+
+from odoo.exceptions import ValidationError
+
+from odoo import models, fields, api, _
 
 
 class EmployeesStatistics(models.Model):
@@ -10,11 +12,11 @@ class EmployeesStatistics(models.Model):
 
     name = fields.Many2one(
         "hr.employee",
-        copy = False
+        copy=False
     )
     job_position = fields.Many2one(
         "hr.job",
-        related = "name.job_id"
+        related="name.job_id"
     )
     statistics_lines = fields.One2many(
         "employees.statistics.line",
@@ -23,11 +25,11 @@ class EmployeesStatistics(models.Model):
     chart_start = fields.Date()
     chart_end = fields.Date()
     start_date = fields.Date(
-        compute = "_compute_start_date"
+        compute="_compute_start_date"
     )
     benchmark = fields.Many2one(
         "employees.statistics.benchmark",
-        domain = "[('job_position', '=', job_position)]"
+        domain="[('job_position', '=', job_position)]"
     )
 
     def _compute_start_date(self):

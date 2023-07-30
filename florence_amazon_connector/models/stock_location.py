@@ -7,5 +7,5 @@ class StockLocation(models.Model):
     amazon_mktp_ids = fields.Many2many(
         "amazon.marketplace",
         "amz_mktp_location_rel",
-        string = "Amazon Marketplaces"
+        string="Amazon Marketplaces"
     )

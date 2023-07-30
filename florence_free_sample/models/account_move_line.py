@@ -1,17 +1,18 @@
 from odoo import models, fields, api
 
+
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     discount = fields.Float(
-        string = "Discount (%)",
-        digits = (16, 20),
-        default = 0.0
+        string="Discount (%)",
+        digits=(16, 20),
+        default=0.0
     )
     total_price = fields.Float(
-        compute = "_compute_total_price",
-        string = "Total Price",
-        digits = (12, 4)
+        compute="_compute_total_price",
+        string="Total Price",
+        digits=(12, 4)
     )
 
     @api.depends("price_unit", "tax_ids", "quantity")

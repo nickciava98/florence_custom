@@ -104,7 +104,8 @@
                         </page>
 
                         <page name="external_inventory" string="External Inventories Values">
-                            <field name="balance_sheet_inventory_more_lines" widget="one2many" options="{'no_open': True}"
+                            <field name="balance_sheet_inventory_more_lines" widget="one2many"
+                                   options="{'no_open': True}"
                                    context="{'default_currency_id': currency_id}">
                                 <tree editable="bottom" default_order="location_id asc">
                                     <field name="name" invisible="True"/>
@@ -125,9 +126,13 @@
                     <div attrs="{'invisible': [('notebook_invisible', '=', True)]}">
                         <br/>
                         <i>
-                            (i): Difference between Total To Use from FP and Amazon in that date <br/>
-                            (ii): Sum of Values from Inventory Values Tab and Values from External Inventories Values Tab <br/>
-                            (iii): Sum of Quantity x Price Unit from Amazon Values Tab <br/>
+                            (i): Difference between Total To Use from FP and Amazon in that date
+                            <br/>
+                            (ii): Sum of Values from Inventory Values Tab and Values from External Inventories Values
+                            Tab
+                            <br/>
+                            (iii): Sum of Quantity x Price Unit from Amazon Values Tab
+                            <br/>
                             (iv): Sum of Values from More Values Tab
                         </i>
                     </div>

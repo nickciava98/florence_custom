@@ -1,6 +1,6 @@
-from odoo import models, fields, api
 from datetime import datetime, timedelta
-import locale
+
+from odoo import models, fields, api
 
 
 class AmazonRevenuesLine(models.Model):
@@ -10,16 +10,16 @@ class AmazonRevenuesLine(models.Model):
     # Invisible fields
     amazon_revenues_line_id = fields.Many2one(
         "amazon.revenues",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     amazon_revenues_line_id_test = fields.Many2one(
         "amazon.revenues",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     parent = fields.Char()
     mktp = fields.Char(
-        compute = "_compute_mktp",
-        store = True
+        compute="_compute_mktp",
+        store=True
     )
     product = fields.Many2one(
         "product.template"
@@ -28,54 +28,54 @@ class AmazonRevenuesLine(models.Model):
     # Visible fields
     date = fields.Date()
     week = fields.Char(
-        compute = "_compute_week",
-        store = True
+        compute="_compute_week",
+        store=True
     )
     capacity = fields.Float(
-        compute = "_compute_capacity",
-        store = True,
-        group_operator = "avg"
+        compute="_compute_capacity",
+        store=True,
+        group_operator="avg"
     )
     price_unit = fields.Float(
-        group_operator = "avg"
+        group_operator="avg"
     )
     amazon_fees = fields.Float()
     taxes = fields.Float(
-        compute = "_compute_taxes",
-        store = True
+        compute="_compute_taxes",
+        store=True
     )
     sku_cost = fields.Float(
-        group_operator = "avg"
+        group_operator="avg"
     )
     gross_revenues = fields.Float(
-        compute = "_compute_gross_revenues",
-        store = True
+        compute="_compute_gross_revenues",
+        store=True
     )
     ads_total_cost = fields.Float()
     ads_cost_per_unit = fields.Float(
-        compute = "_compute_ads_cost_per_unit",
-        store = True,
-        group_operator = "avg"
+        compute="_compute_ads_cost_per_unit",
+        store=True,
+        group_operator="avg"
     )
     pcs_sold = fields.Float()
     earned_per_pc = fields.Float(
-        compute = "_compute_earned_per_pc",
-        store = True,
-        group_operator = "avg"
+        compute="_compute_earned_per_pc",
+        store=True,
+        group_operator="avg"
     )
     probable_income = fields.Float(
-        compute = "_compute_probable_income",
-        store = True,
-        string = "Probable Income (Odoo)"
+        compute="_compute_probable_income",
+        store=True,
+        string="Probable Income (Odoo)"
     )
     probable_income_amz = fields.Float(
-        compute = "_compute_probable_income_amz",
-        store = True,
-        string = "Probable Income (Amazon)"
+        compute="_compute_probable_income_amz",
+        store=True,
+        string="Probable Income (Amazon)"
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
 
     @api.depends("pcs_sold", "date", "product")
@@ -104,7 +104,7 @@ class AmazonRevenuesLine(models.Model):
                             if bs.date.strftime("%m") == line.date.strftime("%m"):
                                 for bs_line in bs.balance_sheet_lines:
                                     if bs_line.product_id.product_tmpl_id.id == line.product.id \
-                                        and bs_line.amazon_marketplace == line.mktp:
+                                            and bs_line.amazon_marketplace == line.mktp:
                                         quantity = bs_line.quantity
                                         break
                                 if quantity != 0:
@@ -132,8 +132,8 @@ class AmazonRevenuesLine(models.Model):
 
             if line.date:
                 dt = datetime.strptime(str(line.date), "%Y-%m-%d")
-                start = dt - timedelta(days = dt.weekday())
-                end = start + timedelta(days = 6)
+                start = dt - timedelta(days=dt.weekday())
+                end = start + timedelta(days=6)
 
                 line.week = start.strftime("%d/%m/%Y") + " - " + end.strftime("%d/%m/%Y")
 

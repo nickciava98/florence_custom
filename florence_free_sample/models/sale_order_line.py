@@ -1,17 +1,18 @@
 from odoo import models, fields, api
 
+
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     discount = fields.Float(
-        string = "Discount (%)",
-        digits = (16, 20),
-        default = 0.0
+        string="Discount (%)",
+        digits=(16, 20),
+        default=0.0
     )
     price_total = fields.Float(
-        compute = "_compute_price_total",
-        string = "Total",
-        digits = (12, 4)
+        compute="_compute_price_total",
+        string="Total",
+        digits=(12, 4)
     )
 
     @api.depends("price_unit", "product_uom_qty", "tax_id")

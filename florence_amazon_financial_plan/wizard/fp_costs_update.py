@@ -1,15 +1,17 @@
-from odoo import models
-from odoo.exceptions import ValidationError
 import calendar
 import datetime
 import math
+
+from odoo.exceptions import ValidationError
+
+from odoo import models
 
 
 class FpCostsUpdate(models.TransientModel):
     _name = "florence.fp.costs.update"
     _description = "FP Costs Update"
 
-    def update_action(self, auto = None):
+    def update_action(self, auto=None):
         if int(datetime.datetime.now().month) == 1:
             year = str(datetime.datetime.now().year - 1)
             prev_month = "12"
@@ -46,7 +48,7 @@ class FpCostsUpdate(models.TransientModel):
                     bill_id = 0
                     cost = .0
 
-                    for bill in self.env["account.move"].search(domain, order = "name desc"):
+                    for bill in self.env["account.move"].search(domain, order="name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id.id == fp_cost_line.component.id:
                                 bill_id = bill.id
@@ -84,4 +86,4 @@ class FpCostsUpdate(models.TransientModel):
             raise ValidationError("No records found to update FP Cost!")
 
     def auto_update_action(self):
-        self.update_action(auto = "auto")
+        self.update_action(auto="auto")

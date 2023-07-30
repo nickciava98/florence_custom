@@ -1,33 +1,34 @@
 from odoo import models, fields, api
 
+
 class AccountMove(models.Model):
     _inherit = "account.move"
 
     is_free_sample = fields.Boolean(
-        compute = "_compute_is_free_sample",
-        string = "Original Is Free Sample"
+        compute="_compute_is_free_sample",
+        string="Original Is Free Sample"
     )
     is_free_sample_stored = fields.Boolean(
-        related = "is_free_sample",
-        store = True,
-        string = "Is Free Sample"
+        related="is_free_sample",
+        store=True,
+        string="Is Free Sample"
     )
     amount_untaxed_free_sample = fields.Monetary(
-        compute = "_compute_amount_untaxed_free_sample"
+        compute="_compute_amount_untaxed_free_sample"
     )
     amount_tax_free_sample = fields.Monetary(
-        compute = "_compute_amount_tax_free_sample"
+        compute="_compute_amount_tax_free_sample"
     )
     free_sample_total = fields.Monetary(
-        compute = "_compute_free_sample_total"
+        compute="_compute_free_sample_total"
     )
     amount_subtotal = fields.Float(
-        compute = "_compute_amount_subtotal",
-        string = "Subtotal"
+        compute="_compute_amount_subtotal",
+        string="Subtotal"
     )
     amount_discount = fields.Monetary(
-        compute = "_compute_amount_discount",
-        string = "Discount"
+        compute="_compute_amount_discount",
+        string="Discount"
     )
 
     @api.depends("invoice_line_ids")

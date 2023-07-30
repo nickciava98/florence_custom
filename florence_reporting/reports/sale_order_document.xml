@@ -3,7 +3,8 @@
         <xpath expr="//t[@t-set='address']/p[@t-if='doc.partner_id.vat']"
                position="before">
             <t t-if="doc.partner_id.phone">
-                Phone: <span t-field="doc.partner_id.phone"/>
+                Phone:
+                <span t-field="doc.partner_id.phone"/>
             </t>
 
             <t t-if="doc.partner_id.mobile">
@@ -11,13 +12,15 @@
                     <br/>
                 </t>
 
-                Mobile: <span t-field="doc.partner_id.mobile"/>
+                Mobile:
+                <span t-field="doc.partner_id.mobile"/>
             </t>
         </xpath>
 
         <xpath expr="//span[@t-field='doc.name']" position="after">
             <t t-if="doc.document_type">
-                - <span t-field="doc.document_type"/>
+                -
+                <span t-field="doc.document_type"/>
             </t>
         </xpath>
 

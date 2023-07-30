@@ -1,5 +1,6 @@
-from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+
+from odoo import models, fields, api, _
 
 
 class ProductSku(models.Model):
@@ -8,11 +9,11 @@ class ProductSku(models.Model):
     _description = "Product SKU"
 
     name = fields.Char(
-        copy = False
+        copy=False
     )
     product_id = fields.Many2one(
         "product.product",
-        required = True
+        required=True
     )
 
     @api.constrains("name")

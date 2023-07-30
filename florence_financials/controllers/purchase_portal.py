@@ -1,8 +1,10 @@
-from odoo import http, _
-from odoo.http import request
-from odoo.addons.purchase.controllers.portal import CustomerPortal
-from odoo.addons.portal.controllers.portal import pager as portal_pager
 from collections import OrderedDict
+
+from odoo.http import request
+
+from odoo import http, _
+from odoo.addons.portal.controllers.portal import pager as portal_pager
+from odoo.addons.purchase.controllers.portal import CustomerPortal
 
 
 class PurchasePortal(CustomerPortal):
@@ -45,14 +47,14 @@ class PurchasePortal(CustomerPortal):
         domain += searchbar_filters[filterby]["domain"]
         purchase_count = len(request.env["purchase.order"].sudo().search(domain))
         pager = portal_pager(
-            url = "/my/purchase",
-            url_args = {"date_begin": date_begin, "date_end": date_end, "sortby": sortby, "filterby": filterby},
-            total = purchase_count,
-            page = page,
-            step = self._items_per_page
+            url="/my/purchase",
+            url_args={"date_begin": date_begin, "date_end": date_end, "sortby": sortby, "filterby": filterby},
+            total=purchase_count,
+            page=page,
+            step=self._items_per_page
         )
         orders = request.env["purchase.order"].sudo().search(
-            domain, order = order, limit = self._items_per_page, offset = pager["offset"]
+            domain, order=order, limit=self._items_per_page, offset=pager["offset"]
         )
         request.session["my_purchases_history"] = orders.ids[:100]
 

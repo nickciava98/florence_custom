@@ -378,21 +378,30 @@
                     <div class="w-100">
                         <div class="w-45 float-left mr-5">
                             <i>
-                                (i): Sum of all incomes <br/>
-                                (ii): Value added tax <br/>
-                                (iii): Difference between Gross Income and VAT <br/>
-                                (iv): 10% of Corrected Gross Income <br/>
-                                (v): Difference between Corrected Gross Income and 10% of Corrected Gross Income <br/>
+                                (i): Sum of all incomes
+                                <br/>
+                                (ii): Value added tax
+                                <br/>
+                                (iii): Difference between Gross Income and VAT
+                                <br/>
+                                (iv): 10% of Corrected Gross Income
+                                <br/>
+                                (v): Difference between Corrected Gross Income and 10% of Corrected Gross Income
+                                <br/>
                                 (vi): Sum of Approved Cost column of each tab where Item is deductible
                             </i>
                         </div>
 
                         <div class="w-45 float-center ml-5">
                             <i>
-                                (vii): Difference between Available Net and Deductible Total <br/>
-                                (viii): 20% of Taxable Income <br/>
-                                (ix): Sum of Monthly Cost column of each tab <br/>
-                                (x): Sum of Approved Cost column of each tab <br/>
+                                (vii): Difference between Available Net and Deductible Total
+                                <br/>
+                                (viii): 20% of Taxable Income
+                                <br/>
+                                (ix): Sum of Monthly Cost column of each tab
+                                <br/>
+                                (x): Sum of Approved Cost column of each tab
+                                <br/>
                                 (xi): Difference between Disbursment and Approved Total
                             </i>
                         </div>

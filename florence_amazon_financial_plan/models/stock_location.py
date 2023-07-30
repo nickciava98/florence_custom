@@ -5,5 +5,5 @@ class StockLocation(models.Model):
     _inherit = "stock.location"
 
     is_valuable_stock = fields.Boolean(
-        default = False
+        default=False
     )

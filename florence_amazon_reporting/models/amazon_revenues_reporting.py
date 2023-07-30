@@ -1,5 +1,6 @@
-from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+
+from odoo import models, fields, api, _
 
 
 class AmazonRevenuesReporting(models.Model):
@@ -8,31 +9,31 @@ class AmazonRevenuesReporting(models.Model):
     _description = "Revenues Report"
 
     name = fields.Char(
-        string = "Report",
-        copy = False
+        string="Report",
+        copy=False
     )
     date_start = fields.Date()
     date_to = fields.Date()
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     total_revenues = fields.Float(
-        compute = "_compute_total_revenues",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_total_revenues",
+        store=True,
+        digits=(12, 4)
     )
     financial_plan_value = fields.Float(
-        digits = (12, 4)
+        digits=(12, 4)
     )
     delta = fields.Float(
-        compute = "_compute_delta",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_delta",
+        store=True,
+        digits=(12, 4)
     )
     delta_hint = fields.Char(
-        compute = "_compute_delta_hint",
-        string = "Status"
+        compute="_compute_delta_hint",
+        string="Status"
     )
 
     def _compute_currency_id(self):
@@ -49,7 +50,7 @@ class AmazonRevenuesReporting(models.Model):
                     if len(marketplace.revenues_line) > 0:
                         for revenues_line in marketplace.revenues_line:
                             if revenues_line.date >= line.date_start \
-                                and revenues_line.date <= line.date_to:
+                                    and revenues_line.date <= line.date_to:
                                 line.total_revenues += revenues_line.probable_income
 
     @api.depends("total_revenues", "financial_plan_value")

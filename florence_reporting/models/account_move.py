@@ -1,10 +1,11 @@
 from odoo import models, fields
 
+
 class AccountMove(models.Model):
     _inherit = "account.move"
 
     document_type = fields.Char(
-        compute = "_compute_document_type"
+        compute="_compute_document_type"
     )
 
     def _compute_document_type(self):

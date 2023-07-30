@@ -1,7 +1,8 @@
-from odoo import http, _
 from odoo.http import request
-from odoo.addons.sale.controllers.portal import CustomerPortal
+
+from odoo import http
 from odoo.addons.portal.controllers.portal import pager as portal_pager
+from odoo.addons.sale.controllers.portal import CustomerPortal
 
 
 class SalePortal(CustomerPortal):
@@ -25,7 +26,7 @@ class SalePortal(CustomerPortal):
 
         if not sortby:
             sortby = "date"
-            
+
         sort_order = searchbar_sortings[sortby]["order"]
 
         if date_begin and date_end:
@@ -33,14 +34,14 @@ class SalePortal(CustomerPortal):
 
         quotation_count = len(request.env["sale.order"].sudo().search(domain))
         pager = portal_pager(
-            url = "/my/quotes",
-            url_args = {"date_begin": date_begin, "date_end": date_end, "sortby": sortby},
-            total = quotation_count,
-            page = page,
-            step = self._items_per_page
+            url="/my/quotes",
+            url_args={"date_begin": date_begin, "date_end": date_end, "sortby": sortby},
+            total=quotation_count,
+            page=page,
+            step=self._items_per_page
         )
         quotations = request.env["sale.order"].sudo().search(
-            domain, order = sort_order, limit = self._items_per_page, offset = pager["offset"]
+            domain, order=sort_order, limit=self._items_per_page, offset=pager["offset"]
         )
         request.session["my_quotations_history"] = quotations.ids[:100]
 
@@ -53,7 +54,7 @@ class SalePortal(CustomerPortal):
             "searchbar_sortings": searchbar_sortings,
             "sortby": sortby,
         })
-        
+
         return request.render("sale.portal_my_quotations", values)
 
     @http.route(["/my/orders", "/my/orders/page/<int:page>"], type="http", auth="user", website=True)
@@ -72,14 +73,14 @@ class SalePortal(CustomerPortal):
 
         order_count = len(request.env["sale.order"].sudo().search(domain))
         pager = portal_pager(
-            url = "/my/orders",
-            url_args = {"date_begin": date_begin, "date_end": date_end, "sortby": sortby},
-            total = order_count,
-            page = page,
-            step = self._items_per_page
+            url="/my/orders",
+            url_args={"date_begin": date_begin, "date_end": date_end, "sortby": sortby},
+            total=order_count,
+            page=page,
+            step=self._items_per_page
         )
         orders = request.env["sale.order"].sudo().search(
-            domain, order = sort_order, limit = self._items_per_page, offset = pager["offset"]
+            domain, order=sort_order, limit=self._items_per_page, offset=pager["offset"]
         )
         request.session["my_orders_history"] = orders.ids[:100]
 
@@ -94,4 +95,3 @@ class SalePortal(CustomerPortal):
         })
 
         return request.render("sale.portal_my_orders", values)
-    

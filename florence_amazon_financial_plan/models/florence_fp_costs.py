@@ -1,8 +1,10 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
-import datetime
 import calendar
+import datetime
 import math
+
+from odoo.exceptions import ValidationError
+
+from odoo import models, fields, api, _
 
 
 class FlorenceFpCosts(models.Model):
@@ -12,40 +14,40 @@ class FlorenceFpCosts(models.Model):
 
     name = fields.Many2one(
         "product.product",
-        copy = True,
-        string = "Product"
+        copy=True,
+        string="Product"
     )
     sku_id = fields.Many2one(
         "product.sku",
-        copy = True
+        copy=True
     )
     date = fields.Date(
-        default = datetime.datetime.now(),
-        copy = False
+        default=datetime.datetime.now(),
+        copy=False
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     total = fields.Float(
-        compute = "_compute_total",
-        digits = (12, 4),
-        store = True
+        compute="_compute_total",
+        digits=(12, 4),
+        store=True
     )
     pieces = fields.Float(
-        default = 1,
-        copy = True,
-        digits = (12, 4)
+        default=1,
+        copy=True,
+        digits=(12, 4)
     )
     price = fields.Float(
-        compute = "_compute_price",
-        digits = (12, 4),
-        store = True
+        compute="_compute_price",
+        digits=(12, 4),
+        store=True
     )
     fp_costs_lines = fields.One2many(
         "florence.fp.costs.line",
         "name",
-        copy = True
+        copy=True
     )
 
     @api.constrains("pieces")
@@ -64,7 +66,7 @@ class FlorenceFpCosts(models.Model):
                 month = line.date.strftime("%m")
                 last_day = str(calendar.monthrange(int(year), int(month))[1])
                 bom_id = self.env["mrp.bom"].search(
-                    [("product_id", "=", line.name.id)], limit = 1
+                    [("product_id", "=", line.name.id)], limit=1
                 ).id
 
                 for bom_line in self.env["mrp.bom.line"].search([("bom_id", "=", bom_id)]):
@@ -75,7 +77,7 @@ class FlorenceFpCosts(models.Model):
                         ("move_type", "=", "in_invoice"), ("invoice_date", "<=", year + "-" + month + "-" + last_day)
                     ]
 
-                    for bill in self.env["account.move"].search(invoice_domain, order = "name desc"):
+                    for bill in self.env["account.move"].search(invoice_domain, order="name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id.id == bom_line.product_id.id:
                                 bill_id = bill.id
@@ -134,7 +136,7 @@ class FlorenceFpCosts(models.Model):
                 last_day = str(calendar.monthrange(int(year), int(month))[1])
                 bom_id = self.env["mrp.bom"].search(
                     [("product_id", "=", line.name.id)],
-                    limit = 1
+                    limit=1
                 )
 
                 for bom_line in self.env["mrp.bom.line"].search([("bom_id", "=", bom_id.id)]):
@@ -145,7 +147,7 @@ class FlorenceFpCosts(models.Model):
                         ("move_type", "=", "in_invoice"), ("invoice_date", "<=", year + "-" + month + "-" + last_day)
                     ]
 
-                    for bill in self.env["account.move"].search(domain, order = "name desc"):
+                    for bill in self.env["account.move"].search(domain, order="name desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id.id == bom_line.product_id.id:
                                 bill_id = bill.id
@@ -170,7 +172,7 @@ class FlorenceFpCosts(models.Model):
                     ("invoice_date", "<=", year + "-" + month + "-" + last_day)
                 ]
 
-                for bill in self.env["account.move"].search(domain, order = "name desc"):
+                for bill in self.env["account.move"].search(domain, order="name desc"):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id.id == line.name.id:
                             bill_id = bill.id

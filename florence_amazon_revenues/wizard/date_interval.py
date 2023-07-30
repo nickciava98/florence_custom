@@ -25,7 +25,7 @@ class DateInterval(models.TransientModel):
                 ('date', '<=', self.end_date)
             ],
             'context': {
-                'group_by': ['date:day','product']
+                'group_by': ['date:day', 'product']
             },
             'target': 'main'
         }

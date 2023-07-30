@@ -1,8 +1,7 @@
+import calendar
 import datetime
-import math
 
 from odoo import models, fields, api
-import calendar
 
 
 class FlorenceFinancialPlanLine(models.Model):
@@ -13,94 +12,94 @@ class FlorenceFinancialPlanLine(models.Model):
 
     parent_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade",
-        compute = "_compute_parent_id",
-        store = True
+        ondelete="cascade",
+        compute="_compute_parent_id",
+        store=True
     )
     date = fields.Date(
-        compute = "_compute_date",
-        store = True
+        compute="_compute_date",
+        store=True
     )
     basics_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     emergencies_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     div1_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     div2_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     div3_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     div4_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     div4a_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     div5_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     div6_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     div7_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     expenses_id = fields.Many2one(
         "florence.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     item = fields.Char()
     product = fields.Many2one(
         "product.product"
     )
     is_deductible = fields.Boolean(
-        default = False
+        default=False
     )
     quantity = fields.Float(
-        default = .0
+        default=.0
     )
     moq = fields.Float(
-        default = .0,
-        string = "MOQ"
+        default=.0,
+        string="MOQ"
     )
     is_single_cost = fields.Boolean(
-        default = False,
-        string = "Single Cost?"
+        default=False,
+        string="Single Cost?"
     )
     monthly = fields.Float(
-        default = .0,
-        string = "Monthly Cost"
+        default=.0,
+        string="Monthly Cost"
     )
     monthly_computed = fields.Float(
-        compute = "_compute_monthly_computed",
-        string = "Computed Monthly"
+        compute="_compute_monthly_computed",
+        string="Computed Monthly"
     )
     total_to_compute = fields.Float(
-        compute = "_compute_total_to_compute",
+        compute="_compute_total_to_compute",
     )
     approved = fields.Float(
-        default = .0,
-        string = "Approved Cost"
+        default=.0,
+        string="Approved Cost"
     )
     currency_id = fields.Many2one(
         "res.currency",
-        related = "parent_id.currency_id"
+        related="parent_id.currency_id"
     )
 
     @api.depends("is_single_cost", "monthly", "monthly_computed", "approved")
@@ -145,7 +144,7 @@ class FlorenceFinancialPlanLine(models.Model):
                     "&",
                     ("date", "<=", year + "-" + month + "-" + last_day), ("component", "=", line.product.id)
                 ]
-                fp_costs_line_id = self.env["florence.fp.costs.line"].search(domain, order = "date desc", limit = 1)
+                fp_costs_line_id = self.env["florence.fp.costs.line"].search(domain, order="date desc", limit=1)
 
                 if fp_costs_line_id:
                     line.monthly_computed = line.moq * fp_costs_line_id.cost \

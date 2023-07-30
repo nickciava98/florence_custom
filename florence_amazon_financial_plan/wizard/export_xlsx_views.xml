@@ -7,8 +7,9 @@
             <form>
                 <sheet>
                     <div class="o_row" invisible="True">
-                        <strong>To download the XLSX File click: </strong>
-                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True" force_save="True"/>
+                        <strong>To download the XLSX File click:</strong>
+                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True"
+                               force_save="True"/>
                         <field name="xlsx_file_name" invisible="True"/>
                     </div>
 
@@ -36,8 +37,9 @@
             <form>
                 <sheet>
                     <div class="o_row">
-                        <strong>To download the XLSX File click: </strong>
-                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True" force_save="True"/>
+                        <strong>To download the XLSX File click:</strong>
+                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True"
+                               force_save="True"/>
                         <field name="xlsx_file_name" invisible="True"/>
                     </div>
 
@@ -65,8 +67,9 @@
             <form>
                 <sheet>
                     <div class="o_row" invisible="True">
-                        <strong>To download the XLSX File click: </strong>
-                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True" force_save="True"/>
+                        <strong>To download the XLSX File click:</strong>
+                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True"
+                               force_save="True"/>
                         <field name="xlsx_file_name" invisible="True"/>
                     </div>
 
@@ -94,8 +97,9 @@
             <form>
                 <sheet>
                     <div class="o_row">
-                        <strong>To download the XLSX File click: </strong>
-                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True" force_save="True"/>
+                        <strong>To download the XLSX File click:</strong>
+                        <field name="xlsx_file" widget="binary" filename="xlsx_file_name" readonly="True"
+                               force_save="True"/>
                         <field name="xlsx_file_name" invisible="True"/>
                     </div>
 

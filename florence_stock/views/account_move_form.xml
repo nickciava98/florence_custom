@@ -9,9 +9,9 @@
                    position="attributes">
                 <attribute name="domain">
                     ['&amp;', '&amp;',
-                     ('is_decommissioned', '!=', True),
-                     '|', ('sale_ok', '=', True), ('purchase_ok', '=', True),
-                     '|',('company_id', '=', parent.company_id),('company_id', '=', False)]
+                    ('is_decommissioned', '!=', True),
+                    '|', ('sale_ok', '=', True), ('purchase_ok', '=', True),
+                    '|',('company_id', '=', parent.company_id),('company_id', '=', False)]
                 </attribute>
             </xpath>
         </field>

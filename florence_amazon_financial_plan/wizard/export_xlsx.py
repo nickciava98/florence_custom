@@ -1,23 +1,25 @@
-from odoo import models, fields
-import xlsxwriter
 import base64
 import locale
+
+import xlsxwriter
+
+from odoo import models, fields
 
 
 class ExportXlsxBalanceSheet(models.TransientModel):
     _name = "export.xlsx.balance.sheet"
     _description = "Export XLSX Balance Sheet"
-    
+
     balance_sheet_id = fields.Many2one(
         "florence.balance.sheet"
     )
     xlsx_file_name = fields.Char(
-        string = "XLSX Name"
+        string="XLSX Name"
     )
     xlsx_file = fields.Binary(
-        string = "XLSX File"
+        string="XLSX File"
     )
-    
+
     def export_xlsx_action(self):
         file_name = "temp"
         workbook = xlsxwriter.Workbook(file_name, {"in_memory": True})
@@ -72,7 +74,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         text_center_italic.set_align("vcenter")
 
         # Summary
-        summary = workbook.add_worksheet(name = "Summary")
+        summary = workbook.add_worksheet(name="Summary")
 
         summary.write(0, 0, "Name", header_format)
         summary.write(1, 0, self.balance_sheet_id.name, text_format)
@@ -96,7 +98,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         summary.set_column(1, 5, 30)
 
         # Amazon Values
-        amazon_values = workbook.add_worksheet(name = "Amazon Values")
+        amazon_values = workbook.add_worksheet(name="Amazon Values")
 
         amazon_values.write(0, 0, "Product", header_format)
         amazon_values.write(0, 1, "Amazon Marketplace", header_format_center)
@@ -118,7 +120,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         amazon_values.set_column(0, 4, 30)
 
         # More Values
-        more_values = workbook.add_worksheet(name = "More Values")
+        more_values = workbook.add_worksheet(name="More Values")
 
         more_values.write(0, 0, "Item", header_format)
         more_values.write(0, 1, "Value", header_format_right)
@@ -134,7 +136,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         more_values.set_column(0, 1, 30)
 
         # Inventory Values
-        inventory_values = workbook.add_worksheet(name = "Inventory Values")
+        inventory_values = workbook.add_worksheet(name="Inventory Values")
 
         inventory_values.write(0, 0, "Product", header_format)
         inventory_values.write(0, 1, "Can Be Used", header_format_center)
@@ -189,7 +191,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
                 lambda inv_line: inv_line.location_id and inv_line.location_id.display_name == location
             )
             location_value = str(locale.currency(
-                sum([inv_line.value for inv_line in inv_lines]), grouping = True, symbol = False
+                sum([inv_line.value for inv_line in inv_lines]), grouping=True, symbol=False
             )) + " €"
             location_header = location + " [ " + location_value + " ]"
 
@@ -215,7 +217,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         inventory_values.set_column(0, 6, 30)
 
         # External Inventories Values
-        external_inventory_values = workbook.add_worksheet(name = "External Inventories Values")
+        external_inventory_values = workbook.add_worksheet(name="External Inventories Values")
 
         external_inventory_values.write(0, 0, "Product", header_format)
         external_inventory_values.write(0, 1, "Can Be Used", header_format_center)
@@ -236,7 +238,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
                 lambda inv_line: inv_line.location_id and inv_line.location_id.display_name == location
             )
             location_value = str(locale.currency(
-                sum([inv_line.value for inv_line in inv_lines]), grouping = True, symbol = False
+                sum([inv_line.value for inv_line in inv_lines]), grouping=True, symbol=False
             )) + " €"
             location_header = location + " [ " + location_value + " ]"
 
@@ -301,10 +303,10 @@ class ExportXlsxFlorenceFinancialPlan(models.TransientModel):
         "florence_fp_export_xlsx_rel"
     )
     xlsx_file_name = fields.Char(
-        string = "XLSX Name"
+        string="XLSX Name"
     )
     xlsx_file = fields.Binary(
-        string = "XLSX File"
+        string="XLSX File"
     )
 
     def export_xlsx_action(self):
@@ -361,7 +363,7 @@ class ExportXlsxFlorenceFinancialPlan(models.TransientModel):
         text_center_italic.set_align("vcenter")
 
         # Amazon IT
-        amazon_it = workbook.add_worksheet(name = "Amazon IT")
+        amazon_it = workbook.add_worksheet(name="Amazon IT")
 
         amazon_it.write(0, 0, "Date", header_format)
         amazon_it.write(0, 1, "Amazon IT Total", header_format_right)
@@ -394,7 +396,7 @@ class ExportXlsxFlorenceFinancialPlan(models.TransientModel):
         amazon_it.write(row, 3, sum_amz_net_it, currency_format)
 
         # Amazon DE
-        amazon_de = workbook.add_worksheet(name = "Amazon DE")
+        amazon_de = workbook.add_worksheet(name="Amazon DE")
 
         amazon_de.write(0, 0, "Date", header_format)
         amazon_de.write(0, 1, "Amazon DE Total", header_format_right)
@@ -427,7 +429,7 @@ class ExportXlsxFlorenceFinancialPlan(models.TransientModel):
         amazon_de.write(row, 3, sum_amz_net_de, currency_format)
 
         # Amazon FR
-        amazon_fr = workbook.add_worksheet(name = "Amazon FR")
+        amazon_fr = workbook.add_worksheet(name="Amazon FR")
 
         amazon_fr.write(0, 0, "Date", header_format)
         amazon_fr.write(0, 1, "Amazon FR Total", header_format_right)
@@ -460,7 +462,7 @@ class ExportXlsxFlorenceFinancialPlan(models.TransientModel):
         amazon_fr.write(row, 3, sum_amz_net_fr, currency_format)
 
         # Amazon ES
-        amazon_es = workbook.add_worksheet(name = "Amazon ES")
+        amazon_es = workbook.add_worksheet(name="Amazon ES")
 
         amazon_es.write(0, 0, "Date", header_format)
         amazon_es.write(0, 1, "Amazon ES Total", header_format_right)
@@ -493,7 +495,7 @@ class ExportXlsxFlorenceFinancialPlan(models.TransientModel):
         amazon_es.write(row, 3, sum_amz_net_es, currency_format)
 
         # Amazon UK
-        amazon_uk = workbook.add_worksheet(name = "Amazon UK")
+        amazon_uk = workbook.add_worksheet(name="Amazon UK")
 
         amazon_uk.write(0, 0, "Date", header_format)
         amazon_uk.write(0, 1, "Amazon UK Total", header_format_right)

@@ -48,9 +48,9 @@
         <field name="view_mode">graph</field>
         <field name="context">
             {'graph_measure': 'amz_net_it',
-             'graph_mode': 'line',
-             'graph_groupbys': ['date_str'],
-             'group_by': ['date_str']}
+            'graph_mode': 'line',
+            'graph_groupbys': ['date_str'],
+            'group_by': ['date_str']}
         </field>
     </record>
 

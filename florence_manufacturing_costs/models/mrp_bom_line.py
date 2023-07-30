@@ -5,19 +5,19 @@ class MrpBomLine(models.Model):
     _inherit = "mrp.bom.line"
 
     cost = fields.Float(
-        compute = "_compute_bill",
-        digits = (12, 4)
+        compute="_compute_bill",
+        digits=(12, 4)
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     bill = fields.Many2one(
         "account.move",
-        compute = "_compute_bill"
+        compute="_compute_bill"
     )
     bill_date = fields.Date(
-        related = "bill.invoice_date"
+        related="bill.invoice_date"
     )
 
     @api.depends("product_id", "product_qty")
@@ -28,7 +28,7 @@ class MrpBomLine(models.Model):
 
             if line.product_id:
                 for bill in self.env["account.move"].search(
-                        [("move_type", "=", "in_invoice")], order = "name desc"):
+                        [("move_type", "=", "in_invoice")], order="name desc"):
                     for invoice_line in bill.invoice_line_ids:
                         if invoice_line.product_id.id == line.product_id.id:
                             line.bill = bill

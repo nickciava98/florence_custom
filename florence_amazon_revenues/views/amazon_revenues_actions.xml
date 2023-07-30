@@ -83,8 +83,8 @@
 
         <field name="context">
             {'graph_measure': 'probable_income',
-             'graph_mode': 'line',
-             'graph_groupbys': ['date:day']}
+            'graph_mode': 'line',
+            'graph_groupbys': ['date:day']}
         </field>
     </record>
 
@@ -101,14 +101,14 @@
         <field name="view_mode">dashboard</field>
         <field name="domain">
             ['&amp;',
-                ('parent', '=', 'IT'),
-                ('amazon_revenues_line_id_test', '=', False)]
+            ('parent', '=', 'IT'),
+            ('amazon_revenues_line_id_test', '=', False)]
         </field>
         <field name="context">
             {'graph':
-                {'graph_measure': 'probable_income',
-                 'graph_mode': 'line',
-                 'graph_groupbys': ['date:day', 'product']},
+            {'graph_measure': 'probable_income',
+            'graph_mode': 'line',
+            'graph_groupbys': ['date:day', 'product']},
             'group_by': []}
         </field>
     </record>
@@ -119,14 +119,14 @@
         <field name="view_mode">dashboard</field>
         <field name="domain">
             ['&amp;',
-                ('parent', '=', 'FR'),
-                ('amazon_revenues_line_id_test', '=', False)]
+            ('parent', '=', 'FR'),
+            ('amazon_revenues_line_id_test', '=', False)]
         </field>
         <field name="context">
             {'graph':
-                {'graph_measure': 'probable_income',
-                 'graph_mode': 'line',
-                 'graph_groupbys': ['date:day', 'product']},
+            {'graph_measure': 'probable_income',
+            'graph_mode': 'line',
+            'graph_groupbys': ['date:day', 'product']},
             'group_by': []}
         </field>
     </record>
@@ -137,14 +137,14 @@
         <field name="view_mode">dashboard</field>
         <field name="domain">
             ['&amp;',
-                ('parent', '=', 'DE'),
-                ('amazon_revenues_line_id_test', '=', False)]
+            ('parent', '=', 'DE'),
+            ('amazon_revenues_line_id_test', '=', False)]
         </field>
         <field name="context">
             {'graph':
-                {'graph_measure': 'probable_income',
-                 'graph_mode': 'line',
-                 'graph_groupbys': ['date:day', 'product']},
+            {'graph_measure': 'probable_income',
+            'graph_mode': 'line',
+            'graph_groupbys': ['date:day', 'product']},
             'group_by': []}
         </field>
     </record>
@@ -155,14 +155,14 @@
         <field name="view_mode">dashboard</field>
         <field name="domain">
             ['&amp;',
-                ('parent', '=', 'ES'),
-                ('amazon_revenues_line_id_test', '=', False)]
+            ('parent', '=', 'ES'),
+            ('amazon_revenues_line_id_test', '=', False)]
         </field>
         <field name="context">
             {'graph':
-                {'graph_measure': 'probable_income',
-                 'graph_mode': 'line',
-                 'graph_groupbys': ['date:day', 'product']},
+            {'graph_measure': 'probable_income',
+            'graph_mode': 'line',
+            'graph_groupbys': ['date:day', 'product']},
             'group_by': []}
         </field>
     </record>
@@ -173,14 +173,14 @@
         <field name="view_mode">dashboard</field>
         <field name="domain">
             ['&amp;',
-                ('parent', '=', 'UK'),
-                ('amazon_revenues_line_id_test', '=', False)]
+            ('parent', '=', 'UK'),
+            ('amazon_revenues_line_id_test', '=', False)]
         </field>
         <field name="context">
             {'graph':
-                {'graph_measure': 'probable_income',
-                 'graph_mode': 'line',
-                 'graph_groupbys': ['date:day', 'product']},
+            {'graph_measure': 'probable_income',
+            'graph_mode': 'line',
+            'graph_groupbys': ['date:day', 'product']},
             'group_by': []}
         </field>
     </record>

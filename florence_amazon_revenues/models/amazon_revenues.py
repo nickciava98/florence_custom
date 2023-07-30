@@ -1,6 +1,9 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
 from datetime import datetime
+
+from odoo.exceptions import ValidationError
+
+from odoo import models, fields, api, _
+
 
 class AmazonRevenues(models.Model):
     _name = "amazon.revenues"
@@ -13,30 +16,30 @@ class AmazonRevenues(models.Model):
          ("DE", "Amazon DE"),
          ("ES", "Amazon ES"),
          ("UK", "Amazon UK")],
-        copy = False,
-        string = "Marketplace",
-        tracking = True
+        copy=False,
+        string="Marketplace",
+        tracking=True
     )
     product = fields.Many2one(
         "product.template",
-        required = True,
-        tracking = True
+        required=True,
+        tracking=True
     )
     product_updated_price = fields.Float(
-        compute = "_compute_product_updated_price"
+        compute="_compute_product_updated_price"
     )
     start_date = fields.Date(
-        compute = "_compute_start_date"
+        compute="_compute_start_date"
     )
     total_probable_income = fields.Float(
-        compute = "_compute_total_probable_income",
-        store = True,
-        string = "Total Probable Income (Odoo)"
+        compute="_compute_total_probable_income",
+        store=True,
+        string="Total Probable Income (Odoo)"
     )
     total_probable_income_amz = fields.Float(
-        compute = "_compute_total_probable_income_amz",
-        store = True,
-        string = "Total Probable Income (Amazon)"
+        compute="_compute_total_probable_income_amz",
+        store=True,
+        string="Total Probable Income (Amazon)"
     )
     revenues_line = fields.One2many(
         "amazon.revenues.line",
@@ -48,10 +51,10 @@ class AmazonRevenues(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     product_updated_sku_cost = fields.Float(
-        compute = "_compute_product_updated_sku_cost"
+        compute="_compute_product_updated_sku_cost"
     )
     chart_start = fields.Date()
     chart_end = fields.Date()
@@ -68,13 +71,13 @@ class AmazonRevenues(models.Model):
          ("month", "Monthly Revenues")]
     )
     last_amazon_fees = fields.Float(
-        compute = "_compute_last_amazon_fees"
+        compute="_compute_last_amazon_fees"
     )
     last_ads_total_cost = fields.Float(
-        compute = "_compute_last_ads_total_cost"
+        compute="_compute_last_ads_total_cost"
     )
     last_pcs_sold = fields.Float(
-        compute = "_compute_last_pcs_sold"
+        compute="_compute_last_pcs_sold"
     )
 
     @api.depends("revenues_line")

@@ -1,5 +1,6 @@
-from odoo import models, fields, api
 import calendar
+
+from odoo import models, fields, api
 
 
 class UtilsMonths(models.Model):
@@ -9,8 +10,8 @@ class UtilsMonths(models.Model):
 
     name = fields.Many2one(
         "utils.utils",
-        ondelete = "cascade",
-        string = "Profit Ref."
+        ondelete="cascade",
+        string="Profit Ref."
     )
     month = fields.Selection(
         [("01", "January"),
@@ -25,37 +26,37 @@ class UtilsMonths(models.Model):
          ("10", "October"),
          ("11", "November"),
          ("12", "December")],
-        string = "Month (i)",
-        copy = True
+        string="Month (i)",
+        copy=True
     )
     taxes = fields.Float(
-        default = 0.0,
-        string = "Taxes (ii)"
+        default=0.0,
+        string="Taxes (ii)"
     )
     inventory = fields.Float(
-        compute = "_compute_inventory",
-        string = "Product Real Cost (iii)"
+        compute="_compute_inventory",
+        string="Product Real Cost (iii)"
     )
     inventory_value = fields.Float(
-        compute = "_compute_inventory_value",
-        string = "Inventory Value (iv)"
+        compute="_compute_inventory_value",
+        string="Inventory Value (iv)"
     )
     div4a_value = fields.Float(
-        compute = "_compute_div4a_value",
-        string = "DIV4A Value (v)"
+        compute="_compute_div4a_value",
+        string="DIV4A Value (v)"
     )
     monthly_total = fields.Float(
-        compute = "_compute_monthly_total",
-        string = "Monthly Total (vi)"
+        compute="_compute_monthly_total",
+        string="Monthly Total (vi)"
     )
     util = fields.Float(
-        compute = "_compute_util",
-        string = "Profit (vii)"
+        compute="_compute_util",
+        string="Profit (vii)"
     )
     currency_id = fields.Many2one(
         "res.currency",
-        related = "name.currency_id",
-        store = True
+        related="name.currency_id",
+        store=True
     )
 
     @api.depends("month")
@@ -70,7 +71,7 @@ class UtilsMonths(models.Model):
                     ("date", ">=", str(line.name.name) + "-" + str(line.month) + "-" + "01"),
                     ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
                 ]
-                florence_fp_id = self.env["florence.financial.plan"].search(domain, order = "date desc", limit = 1)
+                florence_fp_id = self.env["florence.financial.plan"].search(domain, order="date desc", limit=1)
 
                 if florence_fp_id:
                     line.monthly_total = florence_fp_id.monthly_total
@@ -116,7 +117,7 @@ class UtilsMonths(models.Model):
                     ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
                 ]
                 line.inventory_value = self.env["florence.balance.sheet"].search(
-                    domain, order = "create_date desc", limit = 1
+                    domain, order="create_date desc", limit=1
                 ).inventory_value
 
     @api.depends("month")
@@ -132,7 +133,7 @@ class UtilsMonths(models.Model):
                     ("date", "<=", str(line.name.name) + "-" + str(line.month) + "-" + str(last_day))
                 ]
                 fp_lines = self.env["florence.financial.plan"].search(
-                    domain, order = "create_date desc", limit = 1
+                    domain, order="create_date desc", limit=1
                 ).div4a
 
                 for fp_line in fp_lines:

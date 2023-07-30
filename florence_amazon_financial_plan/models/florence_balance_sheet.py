@@ -1,6 +1,6 @@
-from odoo import models, fields, api
 import datetime
 
+from odoo import models, fields, api
 
 
 class FlorenceBalanceSheet(models.Model):
@@ -35,59 +35,59 @@ class FlorenceBalanceSheet(models.Model):
         return balance_sheet_inventory_lines
 
     name = fields.Char(
-        copy = False
+        copy=False
     )
     date = fields.Date(
-        default = datetime.datetime.now()
+        default=datetime.datetime.now()
     )
     products_cash = fields.Float(
-        default = _default_products_cash,
-        readonly = True,
-        copy = False,
-        string = "Products Cash (i)"
+        default=_default_products_cash,
+        readonly=True,
+        copy=False,
+        string="Products Cash (i)"
     )
     inventory_value = fields.Float(
-        compute = "_compute_inventory_value",
-        store = True,
-        string = "Inventory Value (ii)"
+        compute="_compute_inventory_value",
+        store=True,
+        string="Inventory Value (ii)"
     )
     amazon_products_cash = fields.Float(
-        compute = "_compute_amazon_products_cash",
-        string = "Amazon Products Cash (iii)"
+        compute="_compute_amazon_products_cash",
+        string="Amazon Products Cash (iii)"
     )
     other_value = fields.Float(
-        compute = "_compute_other_value",
-        string = "Other Values (iv)"
+        compute="_compute_other_value",
+        string="Other Values (iv)"
     )
     balance_sheet_lines = fields.One2many(
         "florence.balance.sheet.line",
         "name",
-        copy = True
+        copy=True
     )
     notebook_invisible = fields.Boolean(
-        default = False
+        default=False
     )
     balance_sheet_more_lines = fields.One2many(
         "florence.balance.sheet.more",
         "name",
-        copy = True
+        copy=True
     )
     balance_sheet_inventory_lines = fields.One2many(
         "florence.balance.sheet.inventory",
         "name",
-        default = _default_balance_sheet_inventory_lines
+        default=_default_balance_sheet_inventory_lines
     )
     balance_sheet_inventory_more_lines = fields.One2many(
         "florence.balance.sheet.inventory.more",
         "name",
-        copy = True
+        copy=True
     )
     currency_id = fields.Many2one(
         "res.currency",
-        default = lambda self: self.env.ref("base.main_company").currency_id
+        default=lambda self: self.env.ref("base.main_company").currency_id
     )
     total = fields.Float(
-        compute = "_compute_total"
+        compute="_compute_total"
     )
 
     @api.depends("balance_sheet_inventory_lines", "balance_sheet_inventory_more_lines")

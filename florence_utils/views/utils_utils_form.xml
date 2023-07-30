@@ -90,21 +90,29 @@
 
                             <div>
                                 <i>
-                                    (i): Month of the Year <br/>
-                                    (ii): Taxes value computed by the Accountant <br/>
-                                    (iii): Sum of Estimated Values computed by Forecasting in that specific month <br/>
-                                    (iv): Inventory Value from Balance Sheet in that specific month <br/>
-                                    (v): Sum of values from FP Florence DIV4A in that specific month <br/>
-                                    (vi): Computed from Monthly Total of FP - Florence in that specific month <br/>
+                                    (i): Month of the Year
+                                    <br/>
+                                    (ii): Taxes value computed by the Accountant
+                                    <br/>
+                                    (iii): Sum of Estimated Values computed by Forecasting in that specific month
+                                    <br/>
+                                    (iv): Inventory Value from Balance Sheet in that specific month
+                                    <br/>
+                                    (v): Sum of values from FP Florence DIV4A in that specific month
+                                    <br/>
+                                    (vi): Computed from Monthly Total of FP - Florence in that specific month
+                                    <br/>
                                     (vii): Sum of FP - Florence Surplus in that specific month
                                 </i>
                             </div>
                         </page>
 
                         <page name="days" string="Days">
-                            <button name="update_days_action" type="object" string="Update Days" class="btn btn-primary"/>
+                            <button name="update_days_action" type="object" string="Update Days"
+                                    class="btn btn-primary"/>
 
-                            <field name="day_ids" widget="one2many" view_mode="tree,form" readonly="True" force_save="True">
+                            <field name="day_ids" widget="one2many" view_mode="tree,form" readonly="True"
+                                   force_save="True">
                                 <tree default_order="date desc" limit="366">
                                     <field name="name" invisible="True"/>
                                     <field name="currency_id" invisible="True"/>
@@ -135,11 +143,13 @@
                                                     <field name="date" readonly="True" nolabel="1"/>
                                                 </td>
                                                 <td class="text-right">
-                                                    <field name="probable_income_amz" widget="monetary" readonly="True" nolabel="1"
+                                                    <field name="probable_income_amz" widget="monetary" readonly="True"
+                                                           nolabel="1"
                                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                                 </td>
                                                 <td class="text-right">
-                                                    <field name="monthly_total_per_day" widget="monetary" readonly="True" nolabel="1"
+                                                    <field name="monthly_total_per_day" widget="monetary"
+                                                           readonly="True" nolabel="1"
                                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                                 </td>
                                                 <td class="text-right">
@@ -154,9 +164,13 @@
 
                             <div>
                                 <i>
-                                    (i): Date of the Day <br/>
-                                    (ii): Sum of Probable Income (Amazon) of all products present in Amazon Revenues app in that specific day <br/>
-                                    (iii): Monthly Total for the month divided by the number of days in the month <br/>
+                                    (i): Date of the Day
+                                    <br/>
+                                    (ii): Sum of Probable Income (Amazon) of all products present in Amazon Revenues app
+                                    in that specific day
+                                    <br/>
+                                    (iii): Monthly Total for the month divided by the number of days in the month
+                                    <br/>
                                     (iv): Probable Income (Amazon) - Monthly Total Per Day
                                 </i>
                             </div>

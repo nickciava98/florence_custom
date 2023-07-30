@@ -1,6 +1,7 @@
-from odoo import models, fields, api, exceptions, _
-from odoo.exceptions import ValidationError
 from datetime import datetime
+
+from odoo import models, fields, api, exceptions, _
+
 
 class AmazonStatistics(models.Model):
     _name = "amazon.statistics"
@@ -13,14 +14,14 @@ class AmazonStatistics(models.Model):
          ("DE", "Amazon DE"),
          ("ES", "Amazon ES"),
          ("UK", "Amazon UK")],
-        copy = False,
-        string = "Marketplace",
-        tracking = True
+        copy=False,
+        string="Marketplace",
+        tracking=True
     )
     product = fields.Many2one(
         "product.template",
-        required = True,
-        tracking = True
+        required=True,
+        tracking=True
     )
     statistics_lines = fields.One2many(
         "amazon.statistics.line",
@@ -31,12 +32,12 @@ class AmazonStatistics(models.Model):
         "name_test"
     )
     start_date = fields.Date(
-        compute = "_compute_start_date"
+        compute="_compute_start_date"
     )
     average = fields.Float(
-        compute = "_compute_average",
-        store = True,
-        group_operator = "avg"
+        compute="_compute_average",
+        store=True,
+        group_operator="avg"
     )
     avg_stars = fields.Selection(
         [("0", "Zero Stars"),
@@ -45,12 +46,12 @@ class AmazonStatistics(models.Model):
          ("3", "Three Stars"),
          ("4", "Four Stars"),
          ("5", "Five Stars")],
-        compute = "_compute_avg_stars",
-        store = True
+        compute="_compute_avg_stars",
+        store=True
     )
     average_test = fields.Float(
-        compute = "_compute_average_test",
-        store = True
+        compute="_compute_average_test",
+        store=True
     )
     avg_stars_test = fields.Selection(
         [("0", "Zero Stars"),
@@ -59,9 +60,9 @@ class AmazonStatistics(models.Model):
          ("3", "Three Stars"),
          ("4", "Four Stars"),
          ("5", "Five Stars")],
-        compute = "_compute_avg_stars_test",
-        store = True,
-        group_operator = "avg"
+        compute="_compute_avg_stars_test",
+        store=True,
+        group_operator="avg"
     )
     date_from = fields.Date()
     date_to = fields.Date()
@@ -118,8 +119,8 @@ class AmazonStatistics(models.Model):
                     and line.date_from and line.date_to:
                 for statistics_line in line.statistics_lines:
                     if statistics_line.date \
-                        and statistics_line.date >= line.date_from \
-                        and statistics_line.date <= line.date_to:
+                            and statistics_line.date >= line.date_from \
+                            and statistics_line.date <= line.date_to:
                         statistics_lines.append(statistics_line)
 
                 if len(statistics_lines) > 0:
@@ -132,11 +133,11 @@ class AmazonStatistics(models.Model):
             statistics_lines = []
 
             if len(line.statistics_lines_test) > 0 \
-                and line.date_from_test and line.date_to_test:
+                    and line.date_from_test and line.date_to_test:
                 for statistics_line in line.statistics_lines_test:
                     if statistics_line.date \
-                        and statistics_line.date >= line.date_from_test \
-                        and statistics_line.date <= line.date_to_test:
+                            and statistics_line.date >= line.date_from_test \
+                            and statistics_line.date <= line.date_to_test:
                         statistics_lines.append(statistics_line)
 
                 if len(statistics_lines) > 0:

@@ -16,7 +16,7 @@
                     <label for="is_decommissioned" string="Is Decommissioned"/>
                 </div>
             </xpath>
-            
+
             <xpath expr="//field[@name='property_stock_inventory']" position="after">
                 <field name="location_ids" widget="many2many_tags"
                        attrs="{'invisible':[('locations_count','=',0)]}"/>

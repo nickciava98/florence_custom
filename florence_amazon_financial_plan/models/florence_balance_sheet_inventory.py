@@ -22,10 +22,10 @@ class FlorenceBalanceSheetInventory(models.Model):
     value = fields.Float()
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     sale_ok = fields.Boolean(
-        string = "Can Be Sold"
+        string="Can Be Sold"
     )
     can_be_used = fields.Boolean()
 
@@ -38,7 +38,7 @@ class FlorenceBalanceSheetInventory(models.Model):
         for line in self:
             if line.product_id:
                 cost = .0
-                bills = self.env["account.move"].search([("move_type", "=", "in_invoice")], order = "name desc")
+                bills = self.env["account.move"].search([("move_type", "=", "in_invoice")], order="name desc")
 
                 for bill in bills:
                     for invoice_line in bill.invoice_line_ids:
@@ -68,10 +68,10 @@ class FlorenceBalanceSheetInventoryMore(models.Model):
     value = fields.Float()
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     sale_ok = fields.Boolean(
-        string = "Can Be Sold"
+        string="Can Be Sold"
     )
     can_be_used = fields.Boolean()
 
@@ -84,7 +84,7 @@ class FlorenceBalanceSheetInventoryMore(models.Model):
         for line in self:
             if line.product_id:
                 cost = .0
-                bills = self.env["account.move"].search([("move_type", "=", "in_invoice")], order = "name desc")
+                bills = self.env["account.move"].search([("move_type", "=", "in_invoice")], order="name desc")
 
                 for bill in bills:
                     for invoice_line in bill.invoice_line_ids:

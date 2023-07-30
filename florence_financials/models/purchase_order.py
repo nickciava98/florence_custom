@@ -1,12 +1,13 @@
-from odoo import models, fields, api
 from odoo.exceptions import UserError
+
+from odoo import models, fields, api
 
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     related_invoice = fields.Char(
-        compute = "_compute_related_invoice"
+        compute="_compute_related_invoice"
     )
 
     @api.depends("invoice_ids")

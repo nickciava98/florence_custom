@@ -3,10 +3,11 @@
         <xpath expr="//t/t[@t-set='address']" position="replace">
             <t t-set="address">
                 <div t-field="doc.partner_id" t-if="false"
-                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
                 <p t-if="doc.partner_id.vat">
                     <t t-if="false">
-                        <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/>
+                        <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
+                        <span t-field="doc.partner_id.vat"/>
                     </t>
                 </p>
 
@@ -14,15 +15,18 @@
                     <span t-field="doc.partner_id.name"/>
 
                     <t t-if="doc.partner_id.street">
-                        <br/><span t-field="doc.partner_id.street"/>
+                        <br/>
+                        <span t-field="doc.partner_id.street"/>
                     </t>
 
                     <t t-if="doc.partner_id.street2">
-                        <br/><span t-field="doc.partner_id.street2"/>
+                        <br/>
+                        <span t-field="doc.partner_id.street2"/>
                     </t>
 
                     <t t-if="doc.partner_id.city">
-                        <br/><span t-field="doc.partner_id.city"/>
+                        <br/>
+                        <span t-field="doc.partner_id.city"/>
                     </t>
 
                     <t t-if="doc.partner_id.state_id">
@@ -38,7 +42,8 @@
                     </t>
 
                     <t t-if="doc.partner_id.vat">
-                        <br/><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
+                        <br/>
+                        <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
                         <span t-field="doc.partner_id.vat"/>
                     </t>
                 </div>
@@ -55,15 +60,18 @@
                             <span t-field="doc.partner_invoice_id.name"/>
 
                             <t t-if="doc.partner_invoice_id.street">
-                                <br/><span t-field="doc.partner_invoice_id.street"/>
+                                <br/>
+                                <span t-field="doc.partner_invoice_id.street"/>
                             </t>
 
                             <t t-if="doc.partner_invoice_id.street2">
-                                <br/><span t-field="doc.partner_invoice_id.street2"/>
+                                <br/>
+                                <span t-field="doc.partner_invoice_id.street2"/>
                             </t>
 
                             <t t-if="doc.partner_invoice_id.city">
-                                <br/><span t-field="doc.partner_invoice_id.city"/>
+                                <br/>
+                                <span t-field="doc.partner_invoice_id.city"/>
                             </t>
 
                             <t t-if="doc.partner_invoice_id.state_id">
@@ -79,7 +87,8 @@
                             </t>
 
                             <t t-if="doc.partner_invoice_id.vat">
-                                <br/><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
+                                <br/>
+                                <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
                                 <span t-field="doc.partner_invoice_id.vat"/>
                             </t>
                         </div>
@@ -92,15 +101,18 @@
                             <span t-field="doc.partner_shipping_id.name"/>
 
                             <t t-if="doc.partner_shipping_id.street">
-                                <br/><span t-field="doc.partner_shipping_id.street"/>
+                                <br/>
+                                <span t-field="doc.partner_shipping_id.street"/>
                             </t>
 
                             <t t-if="doc.partner_shipping_id.street2">
-                                <br/><span t-field="doc.partner_shipping_id.street2"/>
+                                <br/>
+                                <span t-field="doc.partner_shipping_id.street2"/>
                             </t>
 
                             <t t-if="doc.partner_shipping_id.city">
-                                <br/><span t-field="doc.partner_shipping_id.city"/>
+                                <br/>
+                                <span t-field="doc.partner_shipping_id.city"/>
                             </t>
 
                             <t t-if="doc.partner_shipping_id.state_id">
@@ -116,7 +128,8 @@
                             </t>
 
                             <t t-if="doc.partner_shipping_id.vat">
-                                <br/><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
+                                <br/>
+                                <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
                                 <span t-field="doc.partner_shipping_id.vat"/>
                             </t>
                         </div>
@@ -152,7 +165,8 @@
                         <th name="th_description" class="text-left">Description</th>
                         <th name="th_quantity" class="text-right">Quantity</th>
                         <th name="th_priceunit" class="text-right">Unit Price</th>
-                        <th name="th_discount" t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                        <th name="th_discount" t-if="display_discount" class="text-right"
+                            groups="product.group_discount_per_so_line">
                             <span>Disc.%</span>
                         </th>
                         <th name="th_taxes" class="text-right">Taxes</th>
@@ -170,13 +184,17 @@
                 <tbody class="sale_tbody">
                     <t t-set="current_subtotal" t-value="0"/>
                     <t t-foreach="doc.order_line" t-as="line">
-                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
-                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                           groups="account.group_show_line_subtotals_tax_excluded"/>
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                           groups="account.group_show_line_subtotals_tax_included"/>
 
                         <t t-if="line.product_id.default_code != 'Free Sample'">
                             <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                                 <t t-if="not line.display_type">
-                                    <td name="td_name"><span t-field="line.name"/></td>
+                                    <td name="td_name">
+                                        <span t-field="line.name"/>
+                                    </td>
                                     <td name="td_quantity" class="text-right">
                                         <span t-esc="'%.0f'%(line.product_uom_qty)"/>
                                         <span t-field="line.product_uom"/>
@@ -247,12 +265,16 @@
 
                     <t t-foreach="doc.order_line" t-as="line">
 
-                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
-                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                           groups="account.group_show_line_subtotals_tax_excluded"/>
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                           groups="account.group_show_line_subtotals_tax_included"/>
 
                         <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                             <t t-if="not line.display_type">
-                                <td name="td_name"><span t-field="line.name"/></td>
+                                <td name="td_name">
+                                    <span t-field="line.name"/>
+                                </td>
                                 <td name="td_quantity" class="text-right">
                                     <span t-esc="'%.0f'%(line.product_uom_qty)"/>
                                     <span t-field="line.product_uom"/>
@@ -260,7 +282,8 @@
                                 <td name="td_priceunit" class="text-right">
                                     <span t-esc="'%.2f'%(line.price_unit)"/>
                                 </td>
-                                <td t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                                <td t-if="display_discount" class="text-right"
+                                    groups="product.group_discount_per_so_line">
                                     <span t-esc="'%.2f'%(line.discount)"/>
                                 </td>
                                 <td name="td_taxes" class="text-right">
@@ -289,7 +312,8 @@
                             <tr class="is-subtotal text-right">
                                 <td name="td_section_subtotal" colspan="99">
                                     <strong class="mr16">Subtotal</strong>
-                                    <span t-esc="current_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                    <span t-esc="current_subtotal"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
                                 </td>
                             </tr>
                         </t>
@@ -305,10 +329,14 @@
                         <t t-if="amount_by_group[5] == 1 and doc.amount_untaxed == amount_by_group[2]">
                             <td name="td_amount_by_group_label_3">
                                 <span t-esc="amount_by_group[0]"/>
-                                <span>&amp;nbsp;<span>on</span>&amp;nbsp;<t t-esc="amount_by_group[2]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/></span>
+                                <span>&amp;nbsp;<span>on</span>&amp;nbsp;
+                                    <t t-esc="amount_by_group[2]"
+                                       t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                </span>
                             </td>
                             <td name="td_amount_by_group_3" class="text-right">
-                                <span t-esc="amount_by_group[1]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                <span t-esc="amount_by_group[1]"
+                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
                             </td>
                         </t>
                         <t t-else="">

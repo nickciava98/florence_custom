@@ -1,5 +1,6 @@
-from odoo import models, fields, api
 import datetime
+
+from odoo import models, fields
 
 
 class AmazonFinancialPlanLine(models.Model):
@@ -9,29 +10,29 @@ class AmazonFinancialPlanLine(models.Model):
 
     name = fields.Many2one(
         "amazon.financial.plan",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     date = fields.Date(
-        default = datetime.datetime.now()
+        default=datetime.datetime.now()
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     product_id = fields.Many2one(
         "product.template"
     )
     value = fields.Float(
-        digits = (12, 4)
+        digits=(12, 4)
     )
     value_used = fields.Boolean()
     total_used = fields.Float(
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator="avg",
+        digits=(12, 4)
     )
     total_to_use = fields.Float(
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator="avg",
+        digits=(12, 4)
     )
 
     def _compute_currency_id(self):

@@ -7,14 +7,14 @@ class SaleOrder(models.Model):
     amazon_mktp_ids = fields.Many2many(
         "amazon.marketplace",
         "amz_mktp_sale_order_rel",
-        compute = "_compute_amazon_marketplaces",
-        store = True,
-        string = "Amazon Marketplaces"
+        compute="_compute_amazon_marketplaces",
+        store=True,
+        string="Amazon Marketplaces"
     )
     amazon_locations = fields.Char(
-        compute = "_compute_amazon_marketplaces",
-        store = True,
-        string = "Amazon Locations"
+        compute="_compute_amazon_marketplaces",
+        store=True,
+        string="Amazon Locations"
     )
 
     @api.depends("warehouse_id")

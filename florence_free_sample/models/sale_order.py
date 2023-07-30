@@ -1,32 +1,34 @@
 from datetime import timedelta
+
 from odoo import models, fields, api
+
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     is_free_sample = fields.Boolean(
-        related = "sale_order_template_id.is_free_sample",
-        store = True
+        related="sale_order_template_id.is_free_sample",
+        store=True
     )
     amount_untaxed_free_sample = fields.Monetary(
-        compute = "_compute_amount_untaxed_free_sample"
+        compute="_compute_amount_untaxed_free_sample"
     )
     amount_tax_free_sample = fields.Monetary(
-        compute = "_compute_amount_tax_free_sample"
+        compute="_compute_amount_tax_free_sample"
     )
     free_sample_total = fields.Monetary(
-        compute = "_compute_free_sample_total"
+        compute="_compute_free_sample_total"
     )
     add_free_sample_rule = fields.Boolean(
-        compute = "_compute_add_free_sample_rule"
+        compute="_compute_add_free_sample_rule"
     )
     amount_subtotal = fields.Float(
-        compute = "_compute_amount_subtotal",
-        string = "Subtotal",
-        digits = (12, 4)
+        compute="_compute_amount_subtotal",
+        string="Subtotal",
+        digits=(12, 4)
     )
     amount_discount = fields.Monetary(
-        compute = "_compute_amount_discount"
+        compute="_compute_amount_discount"
     )
 
     @api.depends("order_line.price_total")
@@ -86,7 +88,7 @@ class SaleOrder(models.Model):
             if line.is_free_sample:
                 line.add_free_sample_rule = True
 
-                if not self.env["product.product"].search([('default_code','ilike','free sample')]):
+                if not self.env["product.product"].search([('default_code', 'ilike', 'free sample')]):
                     self.env["product.product"].sudo().create(
                         {
                             "name": "Free Sample",
@@ -100,7 +102,7 @@ class SaleOrder(models.Model):
                             "invoice_policy": "order"
                         })
 
-                free_sample = self.env["product.product"].search([('default_code','ilike','free sample')])
+                free_sample = self.env["product.product"].search([('default_code', 'ilike', 'free sample')])
                 free_sample_present = False
 
                 for order_line in line.order_line:

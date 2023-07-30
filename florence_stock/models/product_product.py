@@ -1,38 +1,39 @@
-from odoo import models, fields, api
 from odoo.osv import expression
+
+from odoo import models, fields, api
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
     display_value = fields.Char(
-        compute = "_compute_display_value",
-        store = True
+        compute="_compute_display_value",
+        store=True
     )
     is_decommissioned = fields.Boolean(
-        default = False
+        default=False
     )
     can_be_used = fields.Boolean(
-        default = True
+        default=True
     )
     location_ids = fields.Many2many(
         "stock.location",
-        string = "Locations",
-        compute = "_compute_location_ids",
-        store = True
+        string="Locations",
+        compute="_compute_location_ids",
+        store=True
     )
     locations_count = fields.Float(
-        compute = "_compute_locations_count",
-        store = True
+        compute="_compute_locations_count",
+        store=True
     )
     locations = fields.Char(
-        compute = "_compute_locations",
-        store = True,
-        string = "Locations String"
+        compute="_compute_locations",
+        store=True,
+        string="Locations String"
     )
     qty_available = fields.Float(
-        store = True,
-        digits = (12, 4)
+        store=True,
+        digits=(12, 4)
     )
 
     @api.depends("name", "product_template_attribute_value_ids")
@@ -82,8 +83,8 @@ class ProductProduct(models.Model):
                     line.locations = ", ".join(location_names)
 
     @api.model
-    def _name_search(self, name, args = None, operator = "ilike", limit = 100, name_get_uid = None):
+    def _name_search(self, name, args=None, operator="ilike", limit=100, name_get_uid=None):
         args = args or []
         domain = ["|", ("name", operator, name), ("display_value", operator, name)] if name else []
 
-        return self._search(expression.AND([domain, args]), limit = limit, access_rights_uid = name_get_uid)
+        return self._search(expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid)

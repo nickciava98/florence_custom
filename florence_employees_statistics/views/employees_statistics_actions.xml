@@ -35,8 +35,8 @@
         <field name="view_mode">graph</field>
         <field name="context">
             {'graph_measure': 'value',
-             'graph_mode': 'line',
-             'graph_groupbys': ['benchmark']}
+            'graph_mode': 'line',
+            'graph_groupbys': ['benchmark']}
         </field>
     </record>
 

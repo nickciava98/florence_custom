@@ -1,8 +1,8 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
-import datetime
 import calendar
+import datetime
 import math
+
+from odoo import models, fields, api, _
 
 
 class FlorenceFinancialPlan(models.Model):
@@ -11,207 +11,207 @@ class FlorenceFinancialPlan(models.Model):
     _description = "Florence Financial Plan"
 
     name = fields.Char(
-        copy = False
+        copy=False
     )
     date = fields.Date(
-        default = datetime.datetime.now(),
-        required = True,
-        string = "Original Date"
+        default=datetime.datetime.now(),
+        required=True,
+        string="Original Date"
     )
     date_str = fields.Char(
-        compute = "_compute_date_str",
-        store = True,
-        string = "Date"
+        compute="_compute_date_str",
+        store=True,
+        string="Date"
     )
     gi = fields.Float(
-        string = "G.I.",
-        compute = "_compute_gi"
+        string="G.I.",
+        compute="_compute_gi"
     )
     vat = fields.Float(
-        compute = "_compute_vat",
-        string = "VAT"
+        compute="_compute_vat",
+        string="VAT"
     )
     cgi = fields.Float(
-        string = "C.G.I.",
-        compute = "_compute_cgi"
+        string="C.G.I.",
+        compute="_compute_cgi"
     )
     perc = fields.Float(
-        string = "10% C.G.I.",
-        compute = "_compute_perc"
+        string="10% C.G.I.",
+        compute="_compute_perc"
     )
     monthly_total = fields.Float(
-        compute = "_compute_monthly_total"
+        compute="_compute_monthly_total"
     )
     approved_total = fields.Float(
-        compute = "_compute_approved_total"
+        compute="_compute_approved_total"
     )
     disbursment = fields.Float(
-        compute = "_compute_disbursment"
+        compute="_compute_disbursment"
     )
     deductible_total = fields.Float(
-        compute = "_compute_deductible_total"
+        compute="_compute_deductible_total"
     )
     taxable = fields.Float(
-        compute = "_compute_taxable"
+        compute="_compute_taxable"
     )
     taxes = fields.Float(
-        compute = "_compute_taxes"
+        compute="_compute_taxes"
     )
     surplus = fields.Float(
-        compute = "_compute_surplus"
+        compute="_compute_surplus"
     )
     pending = fields.Float(
-        copy = True
+        copy=True
     )
 
     basics = fields.One2many(
         "florence.financial.plan.line",
         "basics_id",
-        copy = True
+        copy=True
     )
     basics_condition = fields.Char(
-        string = "Basics - Condition",
-        copy = True
+        string="Basics - Condition",
+        copy=True
     )
     emergencies = fields.One2many(
         "florence.financial.plan.line",
         "emergencies_id",
-        copy = True
+        copy=True
     )
     emergencies_condition = fields.Char(
-        string = "Emergencies - Condition",
-        copy = True
+        string="Emergencies - Condition",
+        copy=True
     )
     div1 = fields.One2many(
         "florence.financial.plan.line",
         "div1_id",
-        copy = True
+        copy=True
     )
     div1_condition = fields.Char(
-        string = "DIV1 - Condition",
-        copy = True
+        string="DIV1 - Condition",
+        copy=True
     )
     div2 = fields.One2many(
         "florence.financial.plan.line",
         "div2_id",
-        copy = True
+        copy=True
     )
     div2_condition = fields.Char(
-        string = "DIV2 - Condition",
-        copy = True
+        string="DIV2 - Condition",
+        copy=True
     )
     div3 = fields.One2many(
         "florence.financial.plan.line",
         "div3_id",
-        copy = True
+        copy=True
     )
     div3_condition = fields.Char(
-        string = "DIV3 - Condition",
-        copy = True
+        string="DIV3 - Condition",
+        copy=True
     )
     div4 = fields.One2many(
         "florence.financial.plan.line",
         "div4_id",
-        copy = True
+        copy=True
     )
     div4_condition = fields.Char(
-        string = "DIV4 - Condition",
-        copy = True
+        string="DIV4 - Condition",
+        copy=True
     )
     div4a = fields.One2many(
         "florence.financial.plan.line",
         "div4a_id",
-        copy = True
+        copy=True
     )
     div4a_condition = fields.Char(
-        string = "DIV4A - Condition",
-        copy = True
+        string="DIV4A - Condition",
+        copy=True
     )
     div5 = fields.One2many(
         "florence.financial.plan.line",
         "div5_id",
-        copy = True
+        copy=True
     )
     div5_condition = fields.Char(
-        string = "DIV5 - Condition",
-        copy = True
+        string="DIV5 - Condition",
+        copy=True
     )
     div6 = fields.One2many(
         "florence.financial.plan.line",
         "div6_id",
-        copy = True
+        copy=True
     )
     div6_condition = fields.Char(
-        string = "DIV6 - Condition",
-        copy = True
+        string="DIV6 - Condition",
+        copy=True
     )
     div7 = fields.One2many(
         "florence.financial.plan.line",
         "div7_id",
-        copy = True
+        copy=True
     )
     div7_condition = fields.Char(
-        string = "DIV7 - Condition",
-        copy = True
+        string="DIV7 - Condition",
+        copy=True
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     amz_total_it = fields.Float(
-        default = .0
+        default=.0
     )
     amz_vat_it = fields.Float(
-        default = .0
+        default=.0
     )
     amz_net_it = fields.Float(
-        compute = "_compute_amz_net_it",
-        store = True,
-        string = "Amazon IT Net Income"
+        compute="_compute_amz_net_it",
+        store=True,
+        string="Amazon IT Net Income"
     )
     amz_total_fr = fields.Float(
-        default = .0
+        default=.0
     )
     amz_vat_fr = fields.Float(
-        default = .0
+        default=.0
     )
     amz_net_fr = fields.Float(
-        compute = "_compute_amz_net_fr",
-        store = True,
-        string = "Amazon FR Net Income"
+        compute="_compute_amz_net_fr",
+        store=True,
+        string="Amazon FR Net Income"
     )
     amz_total_de = fields.Float(
-        default = .0
+        default=.0
     )
     amz_vat_de = fields.Float(
-        default = .0
+        default=.0
     )
     amz_net_de = fields.Float(
-        compute = "_compute_amz_net_de",
-        store = True,
-        string = "Amazon DE Net Income"
+        compute="_compute_amz_net_de",
+        store=True,
+        string="Amazon DE Net Income"
     )
     amz_total_es = fields.Float(
-        default = .0
+        default=.0
     )
     amz_vat_es = fields.Float(
-        default = .0
+        default=.0
     )
     amz_net_es = fields.Float(
-        compute = "_compute_amz_net_es",
-        store = True,
-        string = "Amazon ES Net Income"
+        compute="_compute_amz_net_es",
+        store=True,
+        string="Amazon ES Net Income"
     )
     amz_total_uk = fields.Float(
-        default = .0
+        default=.0
     )
     amz_vat_uk = fields.Float(
-        default = .0
+        default=.0
     )
     amz_net_uk = fields.Float(
-        compute = "_compute_amz_net_uk",
-        store = True,
-        string = "Amazon UK Net Income"
+        compute="_compute_amz_net_uk",
+        store=True,
+        string="Amazon UK Net Income"
     )
 
     @api.depends("div1", "div2", "div3", "div4", "div4a", "div5", "div6", "div7", "basics", "emergencies")
@@ -386,7 +386,8 @@ class FlorenceFinancialPlan(models.Model):
 
         return super(FlorenceFinancialPlan, self).write(vals)
 
-    def create_write_pie_object(self, basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus, perc, method):
+    def create_write_pie_object(self, basics, emergencies, div1, div2, div3, div4, div5, div6, div7, date, surplus,
+                                perc, method):
         production_cost = 0.0
         remuneration_cost = 0.0
         running_cost = 0.0
@@ -530,7 +531,8 @@ class FlorenceFinancialPlan(models.Model):
             ["&", ("date", "=", date), ("name", "=", "Profit")]
         )
         year = str(datetime.datetime.strptime(date, "%Y-%m-%d").year) if isinstance(date, str) else date.strftime("%Y")
-        month = str(datetime.datetime.strptime(date, "%Y-%m-%d").month) if isinstance(date, str) else date.strftime("%m")
+        month = str(datetime.datetime.strptime(date, "%Y-%m-%d").month) if isinstance(date, str) else date.strftime(
+            "%m")
         last_day = str(calendar.monthrange(int(year), int(month))[1])
         domain = ["&", ("date", ">=", year + "-" + month + "-01"), ("date", "<=", year + "-" + month + "-" + last_day)]
         new_surplus = 0.0
@@ -582,9 +584,9 @@ class FlorenceFinancialPlanPie(models.Model):
     name = fields.Char()
     date = fields.Date()
     cost = fields.Float(
-        default = .0,
-        group_operator = "avg"
+        default=.0,
+        group_operator="avg"
     )
     percentage = fields.Float(
-        default = .0
+        default=.0
     )

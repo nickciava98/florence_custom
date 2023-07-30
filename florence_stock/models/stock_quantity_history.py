@@ -1,5 +1,6 @@
-from odoo import models, fields, api, _
 from odoo.osv import expression
+
+from odoo import models, fields, _
 
 
 class StockQuantityHistory(models.TransientModel):
@@ -7,8 +8,8 @@ class StockQuantityHistory(models.TransientModel):
 
     location_ids = fields.Many2many(
         "stock.location",
-        string = "Locations",
-        required = True
+        string="Locations",
+        required=True
     )
 
     def open_at_date(self):
@@ -43,7 +44,7 @@ class StockQuantityHistory(models.TransientModel):
             'name': _('Products'),
             'res_model': 'product.product',
             'domain': domain,
-            'context': dict(self.env.context, to_date = self.inventory_datetime)
+            'context': dict(self.env.context, to_date=self.inventory_datetime)
         }
 
         return action

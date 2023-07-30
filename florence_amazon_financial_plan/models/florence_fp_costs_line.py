@@ -8,32 +8,32 @@ class FlorenceFpCostsLine(models.Model):
 
     name = fields.Many2one(
         "florence.fp.costs",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     date = fields.Date(
-        related = "name.date",
-        store = True
+        related="name.date",
+        store=True
     )
     component = fields.Many2one(
         "product.product"
     )
     cost = fields.Float(
-        digits = (12, 4)
+        digits=(12, 4)
     )
     vendor = fields.Many2one(
         "res.partner",
-        related = "bill.partner_id",
-        store = True
+        related="bill.partner_id",
+        store=True
     )
     bill = fields.Many2one(
         "account.move"
     )
     bill_date = fields.Date(
-        related = "bill.invoice_date",
-        store = True
+        related="bill.invoice_date",
+        store=True
     )
     currency_id = fields.Many2one(
         "res.currency",
-        related = "name.currency_id",
-        store = True
+        related="name.currency_id",
+        store=True
     )

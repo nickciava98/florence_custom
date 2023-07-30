@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from datetime import datetime
+
 
 class ManufacturingCostsLine(models.Model):
     _name = "manufacturing.costs.line"
@@ -7,7 +7,7 @@ class ManufacturingCostsLine(models.Model):
 
     manufacturing_costs_line_id = fields.Many2one(
         "manufacturing.costs",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     product = fields.Many2one(
         "product.product"
@@ -19,33 +19,33 @@ class ManufacturingCostsLine(models.Model):
     date = fields.Date()
     manufacturer = fields.Char()
     pcs_invoiced = fields.Float(
-        digits = (12, 4)
+        digits=(12, 4)
     )
     price_invoiced = fields.Float(
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator="avg",
+        digits=(12, 4)
     )
     price_packaging = fields.Float(
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator="avg",
+        digits=(12, 4)
     )
     price_total = fields.Float(
-        compute = "_compute_price_total",
-        store = True,
-        group_operator = "avg",
-        digits = (12, 4)
+        compute="_compute_price_total",
+        store=True,
+        group_operator="avg",
+        digits=(12, 4)
     )
     price_public = fields.Float(
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator="avg",
+        digits=(12, 4)
     )
     other_costs = fields.Float(
-        group_operator = "avg",
-        digits = (12, 4)
+        group_operator="avg",
+        digits=(12, 4)
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
 
     def _compute_currency_id(self):

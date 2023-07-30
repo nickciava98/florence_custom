@@ -5,7 +5,7 @@
 
         <field name="arch" type="xml">
             <pivot string="Statistics Pivot">
-<!--                <field name="parent" type="col"/>-->
+                <!--                <field name="parent" type="col"/>-->
                 <field name="date" type="row"/>
                 <field name="product" type="col"/>
 

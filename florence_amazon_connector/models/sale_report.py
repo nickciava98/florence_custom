@@ -1,6 +1,7 @@
-from odoo import models
-import datetime
 import calendar
+import datetime
+
+from odoo import models
 
 
 class SaleReport(models.Model):

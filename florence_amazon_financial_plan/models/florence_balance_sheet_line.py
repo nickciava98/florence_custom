@@ -1,5 +1,6 @@
-from odoo import models, fields, api
 import calendar
+
+from odoo import models, fields, api
 
 
 class FlorenceBalanceSheetLine(models.Model):
@@ -19,12 +20,12 @@ class FlorenceBalanceSheetLine(models.Model):
     )
     quantity = fields.Float()
     price_unit = fields.Float(
-        compute = "_compute_price_unit",
-        digits = (12, 4)
+        compute="_compute_price_unit",
+        digits=(12, 4)
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
 
     def _compute_currency_id(self):
@@ -45,6 +46,6 @@ class FlorenceBalanceSheetLine(models.Model):
                 date_to = year + "-" + month + "-" + last_day
                 fp_cost_id = self.env["florence.fp.costs"].search(
                     ["&", "&", ("name", "=", line.product_id.id), ("date", ">=", date_from), ("date", "<=", date_to)],
-                    limit = 1
+                    limit=1
                 )
                 line.price_unit = fp_cost_id.total

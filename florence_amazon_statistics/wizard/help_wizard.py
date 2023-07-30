@@ -11,16 +11,16 @@ class HelpWizard(models.TransientModel):
          ("2", "I due tab Statistics e Statistics Test"),
          ("3", "Funzionamento del data entry"),
          ("4", "Liste e grafici con e senza filtraggio")],
-        default = "0"
+        default="0"
     )
     guide = fields.Text(
-        compute = "_compute_guide"
+        compute="_compute_guide"
     )
     info_and_contacts = fields.Text(
-        default = "For more info and questions send a mail to: "
-                  "<a href='mailto:niccolo@florenceorganics.com'>niccolo@florenceorganics.com</a> "
-                  "or call/SMS to: <a href='tel:+393317438243'>(+39) 331 743 8243</a> "
-                  "or WhatsApp to: <a href='https://wa.me/393317438243'>Niccolò Ciavarella</a>"
+        default="For more info and questions send a mail to: "
+                "<a href='mailto:niccolo@florenceorganics.com'>niccolo@florenceorganics.com</a> "
+                "or call/SMS to: <a href='tel:+393317438243'>(+39) 331 743 8243</a> "
+                "or WhatsApp to: <a href='https://wa.me/393317438243'>Niccolò Ciavarella</a>"
     )
 
     @api.depends("state")

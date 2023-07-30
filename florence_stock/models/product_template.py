@@ -5,29 +5,29 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     is_decommissioned = fields.Boolean(
-        default = False
+        default=False
     )
     can_be_used = fields.Boolean(
-        default = True
+        default=True
     )
     location_ids = fields.Many2many(
         "stock.location",
-        string = "Locations",
-        compute = "_compute_location_ids",
-        store = True
+        string="Locations",
+        compute="_compute_location_ids",
+        store=True
     )
     locations_count = fields.Float(
-        compute = "_compute_locations_count",
-        store = True
+        compute="_compute_locations_count",
+        store=True
     )
     locations = fields.Char(
-        compute = "_compute_locations",
-        store = True,
-        string = "Locations String"
+        compute="_compute_locations",
+        store=True,
+        string="Locations String"
     )
     qty_available = fields.Float(
-        store = True,
-        digits = (12, 4)
+        store=True,
+        digits=(12, 4)
     )
 
     def _compute_location_ids(self):
@@ -35,7 +35,7 @@ class ProductTemplate(models.Model):
             line.location_ids = False
 
             stock_quant_ids = self.env["stock.quant"].search(
-                    [("product_id", "=", line.id)]
+                [("product_id", "=", line.id)]
             )
 
             if len(stock_quant_ids) > 0:
@@ -61,7 +61,7 @@ class ProductTemplate(models.Model):
 
                 for location in line.location_ids:
                     if location != line.property_stock_production \
-                        and location != line.property_stock_inventory:
+                            and location != line.property_stock_inventory:
                         location_names.append(location.location_id.name + "/" + location.name)
 
                 if len(location_names) > 0:

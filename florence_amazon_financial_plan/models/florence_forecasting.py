@@ -1,6 +1,7 @@
-from odoo import models, fields, api
-import datetime
 import calendar
+import datetime
+
+from odoo import models, fields, api
 
 
 class FlorenceForecasting(models.Model):
@@ -10,31 +11,31 @@ class FlorenceForecasting(models.Model):
 
     name = fields.Many2one(
         "product.product",
-        string = "Product"
+        string="Product"
     )
     date = fields.Date(
-        default = datetime.datetime.now()
+        default=datetime.datetime.now()
     )
     avg_qty_sold = fields.Float(
-        digits = (11, 2)
+        digits=(11, 2)
     )
     threshold = fields.Float(
-        default = 2.0
+        default=2.0
     )
     est_value = fields.Float(
-        digits = (11, 2),
-        compute = "_compute_est_value",
-        store = True,
-        string = "Est. Value"
+        digits=(11, 2),
+        compute="_compute_est_value",
+        store=True,
+        string="Est. Value"
     )
     line_ids = fields.One2many(
         "florence.forecasting.line",
         "name",
-        string = "Components"
+        string="Components"
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
 
     def _compute_currency_id(self):
@@ -61,7 +62,7 @@ class FlorenceForecasting(models.Model):
         if self.name:
             self.line_ids = [(5, 0, 0)]
             bom_id = self.env["mrp.bom"].search(
-                [("product_id", "=", self.name.id)], limit = 1
+                [("product_id", "=", self.name.id)], limit=1
             )
             name_est_value = .0
             year = self.date.strftime("%Y")
@@ -72,7 +73,7 @@ class FlorenceForecasting(models.Model):
                 ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))
             ]
 
-            for bill in self.env["account.move"].search(domain, order = "name desc"):
+            for bill in self.env["account.move"].search(domain, order="name desc"):
                 for invoice_line in bill.invoice_line_ids:
                     if invoice_line.product_id.id == self.name.id:
                         name_est_value = invoice_line.price_unit
@@ -92,7 +93,7 @@ class FlorenceForecasting(models.Model):
                     "avg_qty_sold": self.avg_qty_sold,
                     "months_autonomy": months_autonomy,
                     "est_value": name_est_value
-                        if months_autonomy < self.threshold else .0,
+                    if months_autonomy < self.threshold else .0,
                     "currency_id": self.currency_id.id
                 }
             )]
@@ -142,7 +143,7 @@ class FlorenceForecasting(models.Model):
             for forecast in forecasts:
                 forecast_id = self.env["florence.forecasting"].sudo().create({
                     "name": forecast.name.id,
-                    "date": datetime.datetime.now().replace(day = 1),
+                    "date": datetime.datetime.now().replace(day=1),
                     "avg_qty_sold": forecast.avg_qty_sold,
                     "threshold": forecast.threshold
                 })
@@ -156,27 +157,27 @@ class FlorenceForecastingLine(models.Model):
 
     name = fields.Many2one(
         "florence.forecasting",
-        ondelete = "cascade"
+        ondelete="cascade"
     )
     component = fields.Many2one(
         "product.product"
     )
     available_qty = fields.Float(
-        digits = (11, 2)
+        digits=(11, 2)
     )
     avg_qty_sold = fields.Float(
-        digits = (11, 2)
+        digits=(11, 2)
     )
     months_autonomy = fields.Float(
-        digits = (11, 2)
+        digits=(11, 2)
     )
     est_value = fields.Float(
-        digits = (11, 2),
-        string = "Est. Value"
+        digits=(11, 2),
+        string="Est. Value"
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
 
     def _compute_currency_id(self):

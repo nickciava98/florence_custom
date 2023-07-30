@@ -12,13 +12,13 @@
 
                 <group>
                     <filter string="Product" name="group_by_super_product"
-                        context="{'group_by': 'super_product'}"/>
+                            context="{'group_by': 'super_product'}"/>
                     <filter string="Product Variant" name="group_by_name"
-                        context="{'group_by': 'name'}"/>
+                            context="{'group_by': 'name'}"/>
                     <filter string="Year" name="group_by_year"
-                        context="{'group_by': 'year'}"/>
+                            context="{'group_by': 'year'}"/>
                     <filter string="Month" name="group_by_month"
-                        context="{'group_by': 'month'}"/>
+                            context="{'group_by': 'month'}"/>
                 </group>
             </search>
         </field>

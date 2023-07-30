@@ -1,6 +1,8 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
 import datetime
+
+from odoo.exceptions import ValidationError
+
+from odoo import models, fields, api, _
 
 
 class AmazonFinancialPlan(models.Model):
@@ -9,63 +11,63 @@ class AmazonFinancialPlan(models.Model):
     _description = "Amazon Financial Plan"
 
     name = fields.Char(
-        copy = False
+        copy=False
     )
     date = fields.Date(
-        default = datetime.datetime.now(),
-        required = True
+        default=datetime.datetime.now(),
+        required=True
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute = "_compute_currency_id"
+        compute="_compute_currency_id"
     )
     total_value = fields.Float(
-        compute = "_compute_total_value",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_total_value",
+        store=True,
+        digits=(12, 4)
     )
     total_used = fields.Float(
-        compute = "_compute_total_used",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_total_used",
+        store=True,
+        digits=(12, 4)
     )
     total_to_use = fields.Float(
-        compute = "_compute_total_to_use",
-        store = True,
-        digits = (12, 4)
+        compute="_compute_total_to_use",
+        store=True,
+        digits=(12, 4)
     )
     amazon_financial_plan_values = fields.One2many(
         "amazon.financial.plan.values",
         "name",
-        readonly = True
+        readonly=True
     )
     updated_fp_values = fields.Boolean(
-        default = False
+        default=False
     )
     amazon_current_fp_values = fields.One2many(
         "amazon.financial.plan.values",
         "current_name",
-        readonly = True
+        readonly=True
     )
     amazon_financial_plan_more_values = fields.One2many(
         "amazon.financial.plan.more.values",
         "name",
-        readonly = True
+        readonly=True
     )
     amazon_current_fp_more_values = fields.One2many(
         "amazon.financial.plan.more.values",
         "current_name",
-        readonly = True
+        readonly=True
     )
     amazon_financial_plan_lines = fields.One2many(
         "amazon.financial.plan.line",
         "name",
-        copy = True
+        copy=True
     )
     amazon_financial_plan_more_lines = fields.One2many(
         "amazon.financial.plan.more",
         "name",
-        copy = True
+        copy=True
     )
 
     @api.onchange("date")

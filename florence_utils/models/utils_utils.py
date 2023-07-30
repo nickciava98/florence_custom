@@ -1,5 +1,4 @@
 from odoo import models, fields, api
-import calendar
 
 
 class UtilsUtils(models.Model):
@@ -8,30 +7,30 @@ class UtilsUtils(models.Model):
     _description = "Profit"
 
     name = fields.Char(
-        copy = False,
-        string = "Year"
+        copy=False,
+        string="Year"
     )
     month_ids = fields.One2many(
         "utils.months",
         "name",
-        copy = True,
-        string = "Months"
+        copy=True,
+        string="Months"
     )
     day_ids = fields.One2many(
         "utils.days",
         "name",
-        copy = False,
-        string = "Days"
+        copy=False,
+        string="Days"
     )
     total_util = fields.Float(
-        digits = (11, 2),
-        compute = "_compute_total_util",
-        string = "Total Profit",
-        store = True
+        digits=(11, 2),
+        compute="_compute_total_util",
+        string="Total Profit",
+        store=True
     )
     currency_id = fields.Many2one(
         "res.currency",
-        default = lambda self: self.env.ref("base.main_company").currency_id
+        default=lambda self: self.env.ref("base.main_company").currency_id
     )
 
     @api.depends("month_ids", "day_ids")

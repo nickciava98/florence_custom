@@ -5,7 +5,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     related_invoice = fields.Char(
-        compute = "_compute_related_invoice"
+        compute="_compute_related_invoice"
     )
 
     def _compute_related_invoice(self):
