@@ -107,5 +107,6 @@
 
     <menuitem id="amazon_archive_menu" name="Amazon Archive" sequence="98"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              action="amazon_archive_open_action" groups="florence_amazon_revenues.group_admin"/>
+              action="amazon_archive_open_action" groups="base.group_no_one"/>
+<!--              groups="florence_amazon_revenues.group_admin"/>-->
 </odoo>
