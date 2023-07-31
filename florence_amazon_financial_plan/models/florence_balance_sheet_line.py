@@ -40,9 +40,8 @@ class FlorenceBalanceSheetLine(models.Model):
             if line.product_id and line.name.date:
                 year = str(line.name.date.year)
                 month = str(line.name.date.month)
-                day = str(line.name.date.day)
                 last_day = str(calendar.monthrange(int(year), int(month))[1])
-                date_from = year + "-" + month + "-" + day
+                date_from = year + "-" + month + "-01"
                 date_to = year + "-" + month + "-" + last_day
                 fp_cost_id = self.env["florence.fp.costs"].search(
                     ["&", "&", ("name", "=", line.product_id.id), ("date", ">=", date_from), ("date", "<=", date_to)],
