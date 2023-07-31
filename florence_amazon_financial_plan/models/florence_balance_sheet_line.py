@@ -37,7 +37,7 @@ class FlorenceBalanceSheetLine(models.Model):
         for line in self:
             line.price_unit = .0
 
-            if line.product_id:
+            if line.product_id and line.name.date:
                 year = str(line.name.date.year)
                 month = str(line.name.date.month)
                 day = str(line.name.date.day)

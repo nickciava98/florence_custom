@@ -26,7 +26,7 @@
               action="amazon_uk_action"/>
 
     <menuitem name="Reporting" id="amazon_revenues_reporting_menu"
-              parent="amazon_revenues_base_menu" sequence="10"
+              parent="amazon_revenues_base_menu" sequence="100"
               groups="group_admin"/>
     <menuitem name="Revenues Statistics" id="amazon_revenues_statistics_menu"
               parent="amazon_revenues_reporting_menu" sequence="1"

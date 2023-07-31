@@ -1,0 +1,111 @@
+<odoo>
+    <record id="amazon_archive_view_tree" model="ir.ui.view">
+        <field name="name">Amazon Archive</field>
+        <field name="model">amazon.archive</field>
+
+        <field name="arch" type="xml">
+            <tree editable="top" edit="false" delete="false" expand="True">
+                <field name="amazon_order_id" optional="hide"/>
+                <field name="merchant_order_id" optional="hide"/>
+                <field name="shipment_id" optional="hide"/>
+                <field name="shipment_item_id" optional="hide"/>
+                <field name="amazon_order_item_id" optional="hide"/>
+                <field name="purchase_date" invisible="True"/>
+                <field name="purchase_datetime"/>
+                <field name="payments_date" invisible="True"/>
+                <field name="payments_datetime" optional="hide"/>
+                <field name="shipment_date" invisible="True"/>
+                <field name="shipment_datetime" optional="hide"/>
+                <field name="reporting_date" invisible="True"/>
+                <field name="reporting_datetime" optional="hide"/>
+                <field name="buyer_email" optional="hide"/>
+                <field name="buyer_name"/>
+                <field name="buyer_phone_number" optional="hide"/>
+                <field name="merchant_sku"/>
+                <field name="product_id"/>
+                <field name="title" optional="hide"/>
+                <field name="dispatched_quantity"/>
+                <field name="currency" optional="hide"/>
+                <field name="currency_id"/>
+                <field name="item_price"/>
+                <field name="item_tax"/>
+                <field name="delivery_price"/>
+                <field name="delivery_tax"/>
+                <field name="gift_wrap_price"/>
+                <field name="gift_wrapping_tax"/>
+                <field name="delivery_service_level" optional="hide"/>
+                <field name="recipient_name" optional="hide"/>
+                <field name="delivery_address_one" optional="hide"/>
+                <field name="delivery_address_two" optional="hide"/>
+                <field name="delivery_address_three" optional="hide"/>
+                <field name="delivery_city_town" optional="hide"/>
+                <field name="delivery_county" optional="hide"/>
+                <field name="delivery_postcode" optional="hide"/>
+                <field name="delivery_country_code" optional="hide"/>
+                <field name="delivery_phone_number" optional="hide"/>
+                <field name="billing_address_one" optional="hide"/>
+                <field name="billing_address_two" optional="hide"/>
+                <field name="billing_address_three" optional="hide"/>
+                <field name="billing_city_town" optional="hide"/>
+                <field name="billing_county" optional="hide"/>
+                <field name="bill_postal_code" optional="hide"/>
+                <field name="bill_country" optional="hide"/>
+                <field name="item_promo_discount" optional="hide"/>
+                <field name="shipment_promo_discount" optional="hide"/>
+                <field name="carrier"/>
+                <field name="tracking_number" optional="hide"/>
+                <field name="estimated_arrival_date" invisible="True"/>
+                <field name="estimated_arrival_datetime" optional="hide"/>
+                <field name="fc" optional="hide"/>
+                <field name="fulfilment_channel" optional="hide"/>
+                <field name="sales_channel"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="amazon_archive_open_view_form" model="ir.ui.view">
+        <field name="name">Amazon Archive Open</field>
+        <field name="model">amazon.archive.open</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <label for="date_from" string="Date Range"/>
+                        <div class="o_row">
+                            <field name="date_from" required="True" widget="daterange"
+                                   options="{'related_end_date': 'date_to'}"/>
+                            <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                            <field name="date_to" required="True" widget="daterange"
+                                   options="{'related_start_date': 'date_from'}"/>
+                        </div>
+
+                        <div class="o_row">
+                            <i class="text-warning">
+                                <strong>
+                                    Attention! A large date range will make loading and accessing data slower!
+                                </strong>
+                            </i>
+                        </div>
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button name="confirm_action" type="object" class="btn btn-primary" string="Confirm"/>
+                    <button name="cancel_action" special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="amazon_archive_open_action" model="ir.actions.act_window">
+        <field name="name">Amazon Archive Open</field>
+        <field name="res_model">amazon.archive.open</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="amazon_archive_menu" name="Amazon Archive" sequence="98"
+              parent="florence_amazon_revenues.amazon_revenues_base_menu"
+              action="amazon_archive_open_action" groups="florence_amazon_revenues.group_admin"/>
+</odoo>

@@ -1,7 +1,7 @@
 <odoo>
     <menuitem name="FP - Amazon" id="amazon_financial_plan_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9" groups="florence_amazon_revenues.group_admin"
+              sequence="99" groups="florence_amazon_revenues.group_admin"
               action="amazon_financial_plan_action"/>
     <!--    <menuitem name="FPs" id="amazon_fps_menu"-->
     <!--              parent="amazon_financial_plan_menu" sequence="1"-->
@@ -11,7 +11,7 @@
     <!--              action="amazon_financial_plan_totals_action"/>-->
     <menuitem name="FP - Florence" id="florence_financial_plan_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9" groups="florence_amazon_revenues.group_admin"
+              sequence="99" groups="florence_amazon_revenues.group_admin"
               action="florence_financial_plan_action"/>
     <menuitem name="FPs" id="florence_fps_menu"
               parent="florence_financial_plan_menu" sequence="1"
@@ -25,7 +25,7 @@
 
     <menuitem name="FP - Costs" id="florence_fp_costs_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9" groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_data_entry"/>
+              sequence="99" groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_data_entry"/>
     <menuitem name="FPs" id="florence_fps_costs_menu"
               parent="florence_fp_costs_menu" sequence="1" action="florence_fp_costs_action"/>
     <menuitem name="FP - Costs Update" id="fp_costs_update_menu"
@@ -34,23 +34,23 @@
 
     <menuitem name="FP - Costs" id="florence_fp_costs_accountant_menu"
               parent="florence_amazon_statistics.amazon_statistics_base_menu"
-              sequence="9"
+              sequence="99"
               groups="florence_amazon_revenues.group_accountant"
               action="florence_fp_costs_action"/>
 
     <menuitem name="Balance Sheet" id="florence_balance_sheet_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9"
+              sequence="99"
               groups="florence_amazon_revenues.group_admin"
               action="florence_balance_sheet_action"/>
     <menuitem name="Balance Sheet" id="florence_balance_sheet_accountant_menu"
               parent="florence_amazon_statistics.amazon_statistics_base_menu"
-              sequence="9"
+              sequence="99"
               groups="florence_amazon_revenues.group_admin,florence_amazon_revenues.group_accountant"
               action="florence_balance_sheet_action"/>
 
     <menuitem name="Forecasting" id="forecasting_menu"
               parent="florence_amazon_revenues.amazon_revenues_base_menu"
-              sequence="9" groups="florence_amazon_revenues.group_admin"
+              sequence="99" groups="florence_amazon_revenues.group_admin"
               action="forecasting_action"/>
 </odoo>

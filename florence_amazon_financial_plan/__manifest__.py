@@ -5,7 +5,7 @@
     'license': 'OPL-1',
     'author': "Niccolò Ciavarella",
     'category': 'sales',
-    'version': '14.1.1',
+    'version': '14.1.2',
     'website': "https://www.nciavarella.me",
     'depends': [
         'base',
@@ -35,6 +35,7 @@
         'views/florence_forecasting_views.xml',
         'views/amazon_financial_plan_actions.xml',
         'views/amazon_financial_plan_menus.xml',
+        'views/amazon_archive_views.xml',
         'wizard/fp_costs_update_form.xml',
         'wizard/export_xlsx_views.xml',
         'data/server_action.xml'
