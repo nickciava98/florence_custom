@@ -48,7 +48,7 @@ class FpCostsUpdate(models.TransientModel):
                     bill_id = 0
                     cost = .0
 
-                    for bill in self.env["account.move"].search(domain, order="name desc"):
+                    for bill in self.env["account.move"].search(domain, order="id desc"):
                         for invoice_line in bill.invoice_line_ids:
                             if invoice_line.product_id.id == fp_cost_line.component.id:
                                 bill_id = bill.id

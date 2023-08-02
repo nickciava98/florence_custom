@@ -9,12 +9,7 @@ class FlorenceBalanceSheet(models.Model):
     _description = "Florence Balance Sheet"
 
     def _default_products_cash(self):
-        products_cash = .0
-
-        for fp in self.env["amazon.financial.plan"].search([]):
-            products_cash += fp.total_to_use
-
-        return products_cash
+        return sum([fp.total_to_use for fp in self.env["amazon.financial.plan"].search([])])
 
     def _default_balance_sheet_inventory_lines(self):
         balance_sheet_inventory_lines = [(5, 0, 0)]
@@ -95,16 +90,15 @@ class FlorenceBalanceSheet(models.Model):
         for line in self:
             line.inventory_value = .0
 
-            if len(line.balance_sheet_inventory_lines) > 0:
+            if line.balance_sheet_inventory_lines:
                 for bs_inv_line in line.balance_sheet_inventory_lines:
                     line.inventory_value += bs_inv_line.value
 
-            if len(line.balance_sheet_inventory_more_lines) > 0:
+            if line.balance_sheet_inventory_more_lines:
                 for bs_inv_line in line.balance_sheet_inventory_more_lines:
                     line.inventory_value += bs_inv_line.value
 
-    @api.depends("products_cash", "inventory_value",
-                 "amazon_products_cash", "other_value")
+    @api.depends("products_cash", "inventory_value", "amazon_products_cash", "other_value")
     def _compute_total(self):
         for line in self:
             line.total = sum([line.products_cash, line.inventory_value, line.amazon_products_cash, line.other_value])
@@ -112,20 +106,17 @@ class FlorenceBalanceSheet(models.Model):
     @api.depends("balance_sheet_more_lines")
     def _compute_other_value(self):
         for line in self:
-            line.other_value = .0
-
-            if len(line.balance_sheet_more_lines) > 0:
-                for balance_sheet_more_line in line.balance_sheet_more_lines:
-                    line.other_value += balance_sheet_more_line.value
+            line.other_value = sum([
+                balance_sheet_more_line.value for balance_sheet_more_line in line.balance_sheet_more_lines
+            ]) if line.balance_sheet_more_lines else .0
 
     @api.depends("balance_sheet_lines")
     def _compute_amazon_products_cash(self):
         for line in self:
-            line.amazon_products_cash = .0
-
-            if len(line.balance_sheet_lines) > 0:
-                for balance_sheet_line in line.balance_sheet_lines:
-                    line.amazon_products_cash += balance_sheet_line.price_unit * balance_sheet_line.quantity
+            line.amazon_products_cash = sum([
+                balance_sheet_line.price_unit * balance_sheet_line.quantity
+                for balance_sheet_line in line.balance_sheet_lines
+            ]) if line.balance_sheet_lines else .0
 
     def show_hide_notebook_action(self):
         self.notebook_invisible = not self.notebook_invisible

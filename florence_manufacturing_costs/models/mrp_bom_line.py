@@ -25,16 +25,19 @@ class MrpBomLine(models.Model):
         for line in self:
             line.bill = False
             line.cost = 0.0
+            bills = self.env["account.move"].search(
+                [("move_type", "=", "in_invoice")], order="id desc"
+            )
 
-            if line.product_id:
-                for bill in self.env["account.move"].search(
-                        [("move_type", "=", "in_invoice")], order="name desc"):
-                    for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id.id == line.product_id.id:
-                            line.bill = bill
-                            line.cost = invoice_line.price_unit * line.product_qty
-                            break
-                    if line.bill and line.cost > 0.0:
+            if line.product_id and bills:
+                for bill in bills:
+                    invoice_line = bill.invoice_line_ids.filtered(
+                        lambda inv_line: inv_line.product_id.id == line.product_id.id
+                    )
+
+                    if invoice_line:
+                        line.bill = bill
+                        line.cost = invoice_line[0].price_unit * line.product_qty
                         break
 
     def _compute_currency_id(self):

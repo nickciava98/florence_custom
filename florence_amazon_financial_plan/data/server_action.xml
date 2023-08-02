@@ -5,5 +5,6 @@
         <field name="binding_model_id" ref="florence_amazon_financial_plan.model_florence_financial_plan"/>
         <field name="state">code</field>
         <field name="code">action = records.export_xlsx_action()</field>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
     </record>
 </odoo>

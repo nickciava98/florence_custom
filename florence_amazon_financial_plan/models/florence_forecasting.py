@@ -1,5 +1,6 @@
 import calendar
 import datetime
+import math
 
 from odoo import models, fields, api
 
@@ -35,26 +36,18 @@ class FlorenceForecasting(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        default=lambda self: self.env.ref("base.main_company").currency_id
     )
-
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref("base.main_company").currency_id
 
     @api.depends("line_ids")
     def _compute_est_value(self):
         for line in self:
-            line.est_value = .0
-
-            if len(line.line_ids) > 0:
-                for f_line in line.line_ids:
-                    line.est_value += f_line.est_value
+            line.est_value = sum([f_line.est_value for f_line in line.line_ids]) if line.line_ids else .0
 
     @api.onchange("avg_qty_sold")
     def _onchange_avg_qty_sold(self):
         for line in self:
-            if len(line.line_ids) > 0:
+            if line.line_ids:
                 for f_line in line.line_ids:
                     f_line.avg_qty_sold = line.avg_qty_sold
 
@@ -67,20 +60,49 @@ class FlorenceForecasting(models.Model):
             name_est_value = .0
             year = self.date.strftime("%Y")
             month = self.date.strftime("%m")
-            domain = [
-                "&",
-                ("move_type", "=", "in_invoice"),
-                ("invoice_date", "<=", year + "-" + month + "-" + str(calendar.monthrange(int(year), int(month))[1]))
-            ]
+            last_day = str(calendar.monthrange(int(year), int(month))[1])
 
-            for bill in self.env["account.move"].search(domain, order="name desc"):
-                for invoice_line in bill.invoice_line_ids:
-                    if invoice_line.product_id.id == self.name.id:
-                        name_est_value = invoice_line.price_unit
+            purchase_ids = self.env["purchase.order"].search(
+                [("date_order", "<=", "%s-%s-%s" % (year, month, last_day))],
+                order="id desc"
+            )
+
+            if self.name and purchase_ids:
+                for purchase_id in purchase_ids:
+                    order_line = purchase_id.order_line.filtered(
+                        lambda ol: ol.product_id.id == self.name.id
+                    )
+
+                    if order_line:
+                        if purchase_id.invoice_ids:
+                            for invoice_id in purchase_id.invoice_ids:
+                                invoice_line = invoice_id.invoice_line_ids.filtered(
+                                    lambda inv_line: inv_line.product_id.id == self.name.id
+                                )
+
+                                if invoice_line:
+                                    name_est_value = invoice_line[0].price_unit
+                                    break
+                        else:
+                            name_est_value = order_line[0].price_unit
+
                         break
 
-                if name_est_value != 0:
-                    break
+                if math.isclose(name_est_value, .0):
+                    bills = self.env["account.move"].search(
+                        ["&", ("move_type", "=", "in_invoice"),
+                         ("invoice_date", "<=", "%s-%s-%s" % (year, month, last_day))], order="id desc"
+                    )
+
+                    if bills:
+                        for bill in bills:
+                            invoice_line = bill.invoice_line_ids.filtered(
+                                lambda inv_line: inv_line.product_id.id == self.name.id
+                            )
+
+                            if invoice_line:
+                                name_est_value = invoice_line[0].price_unit
+                                break
 
             name_est_value *= self.name.qty_available
             months_autonomy = self.name.qty_available / self.avg_qty_sold \
@@ -177,9 +199,6 @@ class FlorenceForecastingLine(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        related="name.currency_id",
+        store=True
     )
-
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref("base.main_company").currency_id

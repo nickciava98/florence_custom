@@ -1,4 +1,7 @@
+import math
+
 from odoo import models, fields, api
+import calendar
 
 
 class FlorenceBalanceSheetInventory(models.Model):
@@ -22,33 +25,61 @@ class FlorenceBalanceSheetInventory(models.Model):
     value = fields.Float()
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        related="name.currency_id",
+        store=True
     )
     sale_ok = fields.Boolean(
         string="Can Be Sold"
     )
     can_be_used = fields.Boolean()
 
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref('base.main_company').currency_id
-
     @api.onchange("available_quantity")
     def _onchange_available_quantity(self):
         for line in self:
-            if line.product_id:
-                cost = .0
-                bills = self.env["account.move"].search([("move_type", "=", "in_invoice")], order="name desc")
+            if line.name.date:
+                year = str(line.name.date.year)
+                month = str(line.name.date.month)
+                last_day = str(calendar.monthrange(int(year), int(month))[1])
+                purchase_ids = self.env["purchase.order"].search(
+                    [("date_order", "<=", "%s-%s-%s" % (year, month, last_day))], order="id desc"
+                )
 
-                for bill in bills:
-                    for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id == line.product_id:
-                            cost = invoice_line.price_unit
+                if line.product_id and purchase_ids:
+                    for purchase_id in purchase_ids:
+                        order_line = purchase_id.order_line.filtered(
+                            lambda ol: ol.product_id.id == line.product_id.id
+                        )
+
+                        if order_line:
+                            if purchase_id.invoice_ids:
+                                for invoice_id in purchase_id.invoice_ids:
+                                    invoice_line = invoice_id.invoice_line_ids.filtered(
+                                        lambda inv_line: inv_line.product_id.id == line.product_id.id
+                                    )
+
+                                    if invoice_line:
+                                        line.value = invoice_line[0].price_unit * line.available_quantity
+                                        break
+                            else:
+                                line.value = order_line[0].price_unit * line.available_quantity
+
                             break
-                    if cost > 0:
-                        break
-                if cost > 0:
-                    line.value = cost * line.available_quantity
+
+                    if math.isclose(line.value, .0):
+                        bills = self.env["account.move"].search(
+                            ["&", ("move_type", "=", "in_invoice"),
+                             ("invoice_date", "<=", "%s-%s-%s" % (year, month, last_day))], order="id desc"
+                        )
+
+                        if bills:
+                            for bill in bills:
+                                invoice_line = bill.invoice_line_ids.filtered(
+                                    lambda inv_line: inv_line.product_id.id == line.product_id.id
+                                )
+
+                                if invoice_line:
+                                    line.value = invoice_line[0].price_unit * line.available_quantity
+                                    break
 
 
 class FlorenceBalanceSheetInventoryMore(models.Model):
@@ -68,30 +99,58 @@ class FlorenceBalanceSheetInventoryMore(models.Model):
     value = fields.Float()
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        related="name.currency_id",
+        store=True
     )
     sale_ok = fields.Boolean(
         string="Can Be Sold"
     )
     can_be_used = fields.Boolean()
 
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref('base.main_company').currency_id
-
     @api.onchange("available_quantity")
     def _onchange_available_quantity(self):
         for line in self:
-            if line.product_id:
-                cost = .0
-                bills = self.env["account.move"].search([("move_type", "=", "in_invoice")], order="name desc")
+            if line.name.date:
+                year = str(line.name.date.year)
+                month = str(line.name.date.month)
+                last_day = str(calendar.monthrange(int(year), int(month))[1])
+                purchase_ids = self.env["purchase.order"].search(
+                    [("date_order", "<=", "%s-%s-%s" % (year, month, last_day))], order="id desc"
+                )
 
-                for bill in bills:
-                    for invoice_line in bill.invoice_line_ids:
-                        if invoice_line.product_id == line.product_id:
-                            cost = invoice_line.price_unit
+                if line.product_id and purchase_ids:
+                    for purchase_id in purchase_ids:
+                        order_line = purchase_id.order_line.filtered(
+                            lambda ol: ol.product_id.id == line.product_id.id
+                        )
+
+                        if order_line:
+                            if purchase_id.invoice_ids:
+                                for invoice_id in purchase_id.invoice_ids:
+                                    invoice_line = invoice_id.invoice_line_ids.filtered(
+                                        lambda inv_line: inv_line.product_id.id == line.product_id.id
+                                    )
+
+                                    if invoice_line:
+                                        line.value = invoice_line[0].price_unit * line.available_quantity
+                                        break
+                            else:
+                                line.value = order_line[0].price_unit * line.available_quantity
+
                             break
-                    if cost > 0:
-                        break
-                if cost > 0:
-                    line.value = cost * line.available_quantity
+
+                    if math.isclose(line.value, .0):
+                        bills = self.env["account.move"].search(
+                            ["&", ("move_type", "=", "in_invoice"),
+                             ("invoice_date", "<=", "%s-%s-%s" % (year, month, last_day))], order="id desc"
+                        )
+
+                        if bills:
+                            for bill in bills:
+                                invoice_line = bill.invoice_line_ids.filtered(
+                                    lambda inv_line: inv_line.product_id.id == line.product_id.id
+                                )
+
+                                if invoice_line:
+                                    line.value = invoice_line[0].price_unit * line.available_quantity
+                                    break
