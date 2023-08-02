@@ -91,14 +91,14 @@ class FlorenceFpCosts(models.Model):
                     if line.product_id and purchase_ids:
                         for purchase_id in purchase_ids:
                             order_line = purchase_id.order_line.filtered(
-                                lambda ol: ol.product_id.id == line.product_id.id
+                                lambda ol: ol.product_id.id == bom_line.product_id.id
                             )
 
                             if order_line:
                                 if purchase_id.invoice_ids:
                                     for invoice_id in purchase_id.invoice_ids:
                                         invoice_line = invoice_id.invoice_line_ids.filtered(
-                                            lambda inv_line: inv_line.product_id.id == line.product_id.id
+                                            lambda inv_line: inv_line.product_id.id == bom_line.product_id.id
                                         )
 
                                         if invoice_line:
@@ -119,7 +119,7 @@ class FlorenceFpCosts(models.Model):
                             if bills:
                                 for bill in bills:
                                     invoice_line = bill.invoice_line_ids.filtered(
-                                        lambda inv_line: inv_line.product_id.id == line.product_id.id
+                                        lambda inv_line: inv_line.product_id.id == bom_line.product_id.id
                                     )
 
                                     if invoice_line:
