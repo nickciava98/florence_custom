@@ -88,7 +88,7 @@ class FlorenceFpCosts(models.Model):
                         [("date_order", "<=", "%s-%s-%s" % (year, month, last_day))], order="id desc"
                     )
 
-                    if line.product_id and purchase_ids:
+                    if bom_line.product_id and purchase_ids:
                         for purchase_id in purchase_ids:
                             order_line = purchase_id.order_line.filtered(
                                 lambda ol: ol.product_id.id == bom_line.product_id.id
