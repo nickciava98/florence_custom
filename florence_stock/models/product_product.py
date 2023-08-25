@@ -35,6 +35,11 @@ class ProductProduct(models.Model):
         store=True,
         digits=(12, 4)
     )
+    is_finished_product = fields.Boolean(
+        related="product_tmpl_id.is_finished_product",
+        store=True,
+        string="Finished Product?"
+    )
 
     @api.depends("name", "product_template_attribute_value_ids")
     def _compute_display_value(self):

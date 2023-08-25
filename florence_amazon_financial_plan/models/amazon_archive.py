@@ -1,6 +1,7 @@
 import datetime
 
 from odoo import models, fields, api
+from odoo.osv import expression
 
 
 class AmazonArchive(models.Model):
@@ -255,8 +256,34 @@ class AmazonArchiveOpen(models.TransientModel):
     date_to = fields.Date(
         string="To"
     )
+    sales_channel = fields.Selection(
+        [("Amazon.it", "Amazon IT"),
+         ("Amazon.fr", "Amazon FR"),
+         ("Amazon.de", "Amazon DE"),
+         ("Amazon.es", "Amazon ES"),
+         ("Amazon.co.uk", "Amazon UK"),
+         ("Amazon.pl", "Amazon PL"),
+         ("Amazon.se", "Amazon SE")],
+        string="Sales Channel"
+    )
+    product_id = fields.Many2one(
+        "product.product",
+        domain="['&', '&', ('active', '=', True), ('sale_ok', '=', True), ('is_finished_product', '=', True)]",
+        string="Product"
+    )
 
     def confirm_action(self):
+        domain = [
+            "&", ("purchase_datetime", ">=", self.date_from.strftime("%Y-%m-%d") + " 00:00:00"),
+            ("purchase_datetime", "<=", self.date_to.strftime("%Y-%m-%d") + " 23:59:59")
+        ]
+
+        if self.sales_channel:
+            domain = expression.AND([domain, [("sales_channel", "=", self.sales_channel)]])
+
+        if self.product_id:
+            domain = expression.AND([domain, [("product_id", "=", self.product_id.id)]])
+
         return {
             "name": "Amazon Archive",
             "type": "ir.actions.act_window",
@@ -264,10 +291,7 @@ class AmazonArchiveOpen(models.TransientModel):
             "view_mode": "tree,form",
             "view_type": "form",
             "view_id": False,
-            "domain": [
-                "&", ("purchase_datetime", ">=", self.date_from.strftime("%Y-%m-%d") + " 00:00:00"),
-                ("purchase_datetime", "<=", self.date_to.strftime("%Y-%m-%d") + " 23:59:59")
-            ],
+            "domain": domain,
             "context": {
                 "group_by": ["sales_channel", "buyer_name", "purchase_date:day", "product_id"]
             },

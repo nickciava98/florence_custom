@@ -29,6 +29,10 @@ class ProductTemplate(models.Model):
         store=True,
         digits=(12, 4)
     )
+    is_finished_product = fields.Boolean(
+        default=False,
+        string="Finished Product?"
+    )
 
     def _compute_location_ids(self):
         for line in self:
