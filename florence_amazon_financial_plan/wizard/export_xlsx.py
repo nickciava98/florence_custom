@@ -189,11 +189,11 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         for location in locations:
             inv_lines = self.balance_sheet_id.balance_sheet_inventory_lines.filtered(
                 lambda inv_line: inv_line.location_id and inv_line.location_id.display_name == location
-            )
-            location_value = str(locale.currency(
+            ).sorted(key=lambda inv_line: inv_line.product_id.display_name)
+            location_value = "%s €" % str(locale.currency(
                 sum([inv_line.value for inv_line in inv_lines]), grouping=True, symbol=False
-            )) + " €"
-            location_header = location + " [ " + location_value + " ]"
+            ))
+            location_header = "%s [ %s ]" % (location, location_value)
 
             inventory_values.merge_range(index, 0, index, 6, location_header, locations_formats[location])
 
@@ -236,11 +236,11 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         for location in locations:
             inv_lines = self.balance_sheet_id.balance_sheet_inventory_more_lines.filtered(
                 lambda inv_line: inv_line.location_id and inv_line.location_id.display_name == location
-            )
-            location_value = str(locale.currency(
+            ).sorted(key=lambda inv_line: inv_line.product_id.display_name)
+            location_value = "%s €" % str(locale.currency(
                 sum([inv_line.value for inv_line in inv_lines]), grouping=True, symbol=False
-            )) + " €"
-            location_header = location + " [ " + location_value + " ]"
+            ))
+            location_header = "%s [ %s ]" % (location, location_value)
 
             external_inventory_values.merge_range(index, 0, index, 6, location_header, text_center_italic)
 
@@ -270,9 +270,9 @@ class ExportXlsxBalanceSheet(models.TransientModel):
 
         month = self.balance_sheet_id.date.strftime("%b").capitalize()
         year = self.balance_sheet_id.date.strftime("%y")
-        name = "Balance Sheet - " + month + " " + year + ".xlsx"
+        name = "Balance Sheet - %s %s.xlsx" % (month, year)
 
-        self.sudo().write({
+        self.write({
             "xlsx_file_name": name,
             "xlsx_file": file_base64
         })
@@ -538,7 +538,7 @@ class ExportXlsxFlorenceFinancialPlan(models.TransientModel):
         years = [fp.date.strftime("%y") for fp in self.florence_fp_ids]
         years = list(dict.fromkeys(years))
         year = "/".join(years)
-        name = "Amazon VAT - " + month + " " + year + ".xlsx"
+        name = "Amazon VAT - %s %s.xlsx" % (month, year)
 
         self.sudo().write({
             "xlsx_file_name": name,
