@@ -1,5 +1,5 @@
 import calendar
-from datetime import datetime
+import datetime
 
 from odoo.exceptions import ValidationError
 
@@ -23,19 +23,19 @@ class ManufacturingCosts(models.Model):
         store=True
     )
     month = fields.Selection(
-        [("1", "January"),
-         ("2", "February"),
-         ("3", "March"),
-         ("4", "April"),
-         ("5", "May"),
-         ("6", "June"),
-         ("7", "July"),
-         ("8", "August"),
-         ("9", "September"),
+        [("01", "January"),
+         ("02", "February"),
+         ("03", "March"),
+         ("04", "April"),
+         ("05", "May"),
+         ("06", "June"),
+         ("07", "July"),
+         ("08", "August"),
+         ("09", "September"),
          ("10", "October"),
          ("11", "November"),
          ("12", "December")],
-        default=str(datetime.now().month),
+        default=datetime.datetime.now().strftime("%m"),
         required=True,
         tracking=True
     )
@@ -43,7 +43,7 @@ class ManufacturingCosts(models.Model):
         required=True,
         size=4,
         tracking=True,
-        default=str(datetime.now().year)
+        default=datetime.datetime.now().strftime("%Y")
     )
     start_date = fields.Date(
         compute="_compute_start_date",

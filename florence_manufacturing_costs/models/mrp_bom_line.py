@@ -1,3 +1,5 @@
+import math
+
 from odoo import models, fields, api
 
 
@@ -6,18 +8,22 @@ class MrpBomLine(models.Model):
 
     cost = fields.Float(
         compute="_compute_bill",
+        store=True,
         digits=(12, 4)
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        related="bill.currency_id",
+        store=True
     )
     bill = fields.Many2one(
         "account.move",
-        compute="_compute_bill"
+        compute="_compute_bill",
+        store=True
     )
     bill_date = fields.Date(
-        related="bill.invoice_date"
+        related="bill.invoice_date",
+        store=True
     )
 
     @api.depends("product_id", "product_qty")
@@ -25,21 +31,39 @@ class MrpBomLine(models.Model):
         for line in self:
             line.bill = False
             line.cost = 0.0
-            bills = self.env["account.move"].search(
-                [("move_type", "=", "in_invoice")], order="id desc"
-            )
+            purchase_ids = self.env["purchase.order"].search([], order="id desc")
 
-            if line.product_id and bills:
-                for bill in bills:
-                    invoice_line = bill.invoice_line_ids.filtered(
-                        lambda inv_line: inv_line.product_id.id == line.product_id.id
+            if line.product_id:
+                for purchase_id in purchase_ids:
+                    order_line = purchase_id.order_line.filtered(
+                        lambda ol: ol.product_id.id == line.product_id.id
                     )
 
-                    if invoice_line:
-                        line.bill = bill
-                        line.cost = invoice_line[0].price_unit * line.product_qty
-                        break
+                    if order_line and purchase_id.invoice_ids:
+                        for invoice_id in purchase_id.invoice_ids:
+                            invoice_line = invoice_id.invoice_line_ids.filtered(
+                                lambda inv_line: inv_line.product_id.id == line.product_id.id
+                            )
 
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref('base.main_company').currency_id
+                            if invoice_line:
+                                line.value = invoice_line[0].price_unit * line.product_qty
+                                break
+                    else:
+                        line.value = order_line[0].price_unit * line.product_qty
+
+                    break
+
+                if math.isclose(line.value, .0):
+                    bill_ids = self.env["account.move"].search(
+                        [("move_type", "=", "in_invoice")], order="id desc"
+                    )
+
+                    if bill_ids:
+                        for bill_id in bill_ids:
+                            invoice_line = bill_id.invoice_line_ids.filtered(
+                                lambda inv_line: inv_line.product_id.id == line.product_id.id
+                            )
+
+                            if invoice_line:
+                                line.value = invoice_line[0].price_unit * line.product_qty
+                                break

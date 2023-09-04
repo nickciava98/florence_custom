@@ -37,20 +37,19 @@ class StockQuant(models.Model):
                         lambda ol: ol.product_id.id == line.product_id.id
                     )
 
-                    if order_line:
-                        if purchase_id.invoice_ids:
-                            for invoice_id in purchase_id.invoice_ids:
-                                invoice_line = invoice_id.invoice_line_ids.filtered(
-                                    lambda inv_line: inv_line.product_id.id == line.product_id.id
-                                )
+                    if order_line and purchase_id.invoice_ids:
+                        for invoice_id in purchase_id.invoice_ids:
+                            invoice_line = invoice_id.invoice_line_ids.filtered(
+                                lambda inv_line: inv_line.product_id.id == line.product_id.id
+                            )
 
-                                if invoice_line:
-                                    line.value = invoice_line[0].price_unit * line.available_quantity
-                                    break
-                        else:
-                            line.value = order_line[0].price_unit * line.available_quantity
+                            if invoice_line:
+                                line.value = invoice_line[0].price_unit * line.available_quantity
+                                break
+                    else:
+                        line.value = order_line[0].price_unit * line.available_quantity
 
-                        break
+                    break
 
                 if math.isclose(line.value, .0):
                     bill_ids = self.env["account.move"].search(
