@@ -222,14 +222,15 @@ class AmazonArchive(models.Model):
     @api.depends("merchant_sku", "delivery_country_code")
     def _compute_product_id(self):
         for line in self:
-            sku_ids = self.env["product.sku"].search([("name", "ilike", line.merchant_sku)], order="id asc")
+            sku_ids = self.env["product.sku"].search(
+                [("name", "ilike", line.merchant_sku)], order="id asc"
+            )
 
             if sku_ids:
-                line.product_id = sku_ids[0].product_id
-
-                for sku_id in sku_ids[1:]:
-                    if line.delivery_country_code and line.delivery_country_code in sku_id.product_id.display_name:
-                        line.product_id = sku_id.product_id
+                sku_id = sku_ids[1:].filtered(
+                    lambda s: line.delivery_country_code and line.delivery_country_code in s.product_id.display_name
+                )
+                line.product_id = sku_id[0].product_id if sku_id else sku_ids[0].product_id
 
     @api.depends("currency")
     def _compute_currency_id(self):
