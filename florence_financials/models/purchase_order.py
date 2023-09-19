@@ -9,25 +9,60 @@ class PurchaseOrder(models.Model):
     related_invoice = fields.Char(
         compute="_compute_related_invoice"
     )
+    parent_po_id = fields.Many2one(
+        "purchase.order",
+        ondelete="restrict",
+        string="Parent PO"
+    )
+    packaging_po_ids = fields.One2many(
+        "purchase.order",
+        "parent_po_id",
+        string="Packaging POs"
+    )
+    packaging_po_count = fields.Integer(
+        compute="_compute_packaging_po_count"
+    )
+
+    @api.depends("packaging_po_ids")
+    def _compute_packaging_po_count(self):
+        for po in self:
+            po.packaging_po_count = len(po.packaging_po_ids)
+
+    def view_packaging_po_action(self):
+        action = self.env["ir.actions.act_window"]._for_xml_id("purchase.purchase_rfq")
+
+        if len(self.packaging_po_ids) == 1:
+            action["res_id"] = self.packaging_po_ids[0].id
+        else:
+            action["domain"] = [("id", "in", self.packaging_po_ids.ids)]
+
+        return action
+
+    def create_po_packaging_action(self):
+        order_line = self.order_line.filtered(lambda ol: ol.product_id.bom_ids).ids
+
+        if not order_line:
+            raise UserError("No Products found with associated Boms!")
+
+        return {
+            "name": "Create PO for Packaging",
+            "type": "ir.actions.act_window",
+            "res_model": "create.po.packaging",
+            "view_mode": "form",
+            "context": {
+                "default_order_line_ids": order_line
+            },
+            "target": "new"
+        }
 
     @api.depends("invoice_ids")
     def _compute_related_invoice(self):
         for line in self:
-            line.related_invoice = ""
-
-            if len(line.invoice_ids) > 0:
-                invoice_numbers = []
-
-                for invoice in line.invoice_ids:
-                    invoice_numbers.append(invoice.name)
-
-                line.related_invoice = ", ".join(invoice_numbers)
+            invoice_numbers = [invoice.name for invoice in line.invoice_ids] if line.invoice_ids else False
+            line.related_invoice = ", ".join(invoice_numbers) if invoice_numbers else False
 
     def open_link_bill_wizard_action(self):
-        po_ids = []
-
-        for po in self:
-            po_ids.append(po.id)
+        po_ids = [po.id for po in self]
 
         if len(po_ids) == 1:
             return {
@@ -37,7 +72,7 @@ class PurchaseOrder(models.Model):
                 "view_mode": "form",
                 "view_type": "form",
                 "context": {
-                    "default_purchase_id": self.id
+                    "default_purchase_id": po_ids[0]
                 },
                 "views": [(False, "form")],
                 "target": "new"

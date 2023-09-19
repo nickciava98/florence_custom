@@ -5,6 +5,23 @@
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
 
         <field name="arch" type="xml">
+            <xpath expr="//header/button[last()]" position="after">
+                <button name="create_po_packaging_action" type="object" string="Create PO for Packaging"
+                        attrs="{'invisible':[('state', 'in', ('draft','sent','to approve'))]}"/>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="view_packaging_po_action" type="object" class="oe_stat_button" icon="fa-credit-card"
+                        attrs="{'invisible':['|', ('packaging_po_count', '=', 0), ('state', 'in', ('draft','sent','to approve'))]}">
+                    <field name="packaging_po_count" widget="statinfo" string="Packaging PO"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="parent_po_id" readonly="True" force_save="True"
+                       attrs="{'invisible': [('parent_po_id', '=', False)]}"/>
+            </xpath>
+
             <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
                 <page name="related_bills" string="Related Bills">
                     <field name="invoice_ids" widget="one2many" options="{'no_open':True}">

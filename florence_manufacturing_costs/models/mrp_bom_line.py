@@ -47,6 +47,7 @@ class MrpBomLine(models.Model):
                                 )
 
                                 if invoice_line:
+                                    line.bill = invoice_id
                                     line.cost = invoice_line[0].price_unit * line.product_qty
                                     break
                         else:
@@ -66,5 +67,6 @@ class MrpBomLine(models.Model):
                             )
 
                             if invoice_line:
+                                line.bill = bill_id
                                 line.cost = invoice_line[0].price_unit * line.product_qty
                                 break
