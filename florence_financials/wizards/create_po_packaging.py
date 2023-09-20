@@ -22,13 +22,13 @@ class CreatePoPackaging(models.TransientModel):
                 for bom_line_id in bom_id.bom_line_ids.filtered(lambda bom_line: bom_line.bill):
                     po_id = self.env["purchase.order"].create({
                         "partner_id": bom_line_id.bill.partner_id.id,
-                        "partner_ref": f"{order_line_id.product_qty} pz {bom_line_id.product_id.display_name}",
+                        "partner_ref": f"{int(order_line_id.product_qty)} pz {bom_line_id.product_id.display_name}",
                         "parent_po_id": order_line_id.order_id.id,
                         "order_line": [(
                             0, 0, {
                                 "product_id": bom_line_id.product_id.id,
                                 "name": bom_line_id.product_id.display_name,
-                                "product_uom_qty": order_line_id.product_qty,
+                                "product_qty": order_line_id.product_qty,
                                 "product_uom": bom_line_id.product_id.uom_po_id.id,
                                 "price_unit": bom_line_id.bill.invoice_line_ids.filtered(
                                     lambda inv_line_id: inv_line_id.product_id.id == bom_line_id.product_id.id
