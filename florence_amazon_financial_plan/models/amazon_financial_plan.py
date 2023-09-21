@@ -19,7 +19,7 @@ class AmazonFinancialPlan(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        default=lambda self: self.env.ref("base.main_company").currency_id
     )
     total_value = fields.Float(
         compute="_compute_total_value",
@@ -82,15 +82,11 @@ class AmazonFinancialPlan(models.Model):
             ### UPDATE AMZ FP VALUES ###
 
             line.amazon_financial_plan_values = [(5, 0, 0)]
-            products = []
-
-            for fp_line in self.env["amazon.financial.plan.line"].search([]):
-                products.append(
-                    (fp_line.product_id.id,
-                     fp_line.value if fp_line.value_used else 0,
-                     fp_line.value if not fp_line.value_used else 0)
-                )
-
+            products = [(
+                fp_line.product_id.id,
+                fp_line.value if fp_line.value_used else 0,
+                fp_line.value if not fp_line.value_used else 0
+            ) for fp_line in self.env["amazon.financial.plan.line"].search([])]
             products_grouped = []
             totals_used = []
             totals_to_use = []
@@ -112,16 +108,14 @@ class AmazonFinancialPlan(models.Model):
                 totals_to_use.append(total_to_use)
 
             for product in products_grouped:
-                self.write({
-                    'amazon_financial_plan_values': [(
-                        0, 0, {
-                            'name': line.id,
-                            'product_id': product,
-                            'total_used': totals_used[products_grouped.index(product)],
-                            'total_to_use': totals_to_use[products_grouped.index(product)]
-                        }
-                    )]
-                })
+                line.amazon_financial_plan_values = [(
+                    0, 0, {
+                        "name": line.id,
+                        "product_id": product,
+                        "total_used": totals_used[products_grouped.index(product)],
+                        "total_to_use": totals_to_use[products_grouped.index(product)]
+                    }
+                )]
 
             ### UPDATE AMZ CURRENT FP VALUES ###
 
@@ -141,29 +135,23 @@ class AmazonFinancialPlan(models.Model):
                     totals_to_use.append(fp_line.value)
 
             for product in products:
-                self.write({
-                    'amazon_current_fp_values': [(
-                        0, 0, {
-                            'current_name': line.id,
-                            'product_id': product,
-                            'total_used': totals_used[products.index(product)],
-                            'total_to_use': totals_to_use[products.index(product)]
-                        }
-                    )]
-                })
+                line.amazon_current_fp_values = [(
+                    0, 0, {
+                        'current_name': line.id,
+                        'product_id': product,
+                        'total_used': totals_used[products.index(product)],
+                        'total_to_use': totals_to_use[products.index(product)]
+                    }
+                )]
 
             ### UPDATE AMZ FP MORE VALUES (VENDORS) ###
 
             line.amazon_financial_plan_more_values = [(5, 0, 0)]
-            vendors = []
-
-            for fp_line in self.env["amazon.financial.plan.more"].search([]):
-                vendors.append(
-                    (fp_line.vendor.id,
-                     fp_line.value if fp_line.value_used else 0,
-                     fp_line.value if not fp_line.value_used else 0)
-                )
-
+            vendors = [(
+                fp_line.vendor.id,
+                fp_line.value if fp_line.value_used else 0,
+                fp_line.value if not fp_line.value_used else 0
+            ) for fp_line in self.env["amazon.financial.plan.more"].search([])]
             vendors_grouped = []
             totals_used = []
             totals_to_use = []
@@ -185,16 +173,14 @@ class AmazonFinancialPlan(models.Model):
                 totals_to_use.append(total_to_use)
 
             for vendor in vendors_grouped:
-                self.write({
-                    "amazon_financial_plan_more_values": [(
-                        0, 0, {
-                            'name': line.id,
-                            'vendor': vendor,
-                            'total_used': totals_used[vendors_grouped.index(vendor)],
-                            'total_to_use': totals_to_use[vendors_grouped.index(vendor)]
-                        }
-                    )]
-                })
+                line.amazon_financial_plan_more_values = [(
+                    0, 0, {
+                        'name': line.id,
+                        'vendor': vendor,
+                        'total_used': totals_used[vendors_grouped.index(vendor)],
+                        'total_to_use': totals_to_use[vendors_grouped.index(vendor)]
+                    }
+                )]
 
             ### UPDATE AMZ CURRENT FP MORE VALUES (VENDORS) ###
 
@@ -214,46 +200,37 @@ class AmazonFinancialPlan(models.Model):
                     totals_to_use.append(fp_line.value)
 
             for vendor in vendors:
-                self.write({
-                    'amazon_current_fp_more_values': [(
-                        0, 0, {
-                            'current_name': line.id,
-                            'vendor': vendor,
-                            'total_used': totals_used[vendors.index(vendor)],
-                            'total_to_use': totals_to_use[vendors.index(vendor)]
-                        }
-                    )]
-                })
+                line.amazon_current_fp_more_values = [(
+                    0, 0, {
+                        'current_name': line.id,
+                        'vendor': vendor,
+                        'total_used': totals_used[vendors.index(vendor)],
+                        'total_to_use': totals_to_use[vendors.index(vendor)]
+                    }
+                )]
 
-    @api.depends("amazon_financial_plan_lines")
+    @api.depends("amazon_financial_plan_lines", "amazon_financial_plan_lines.value")
     def _compute_total_value(self):
         for line in self:
-            line.total_value = 0
+            line.total_value = sum([
+                fp.value for fp in line.amazon_financial_plan_lines
+            ]) if line.amazon_financial_plan_lines else .0
 
-            for fp in line.amazon_financial_plan_lines:
-                line.total_value += fp.value
-
-    @api.depends("amazon_financial_plan_lines")
+    @api.depends("amazon_financial_plan_lines", "amazon_financial_plan_lines.value",
+                 "amazon_financial_plan_lines.value_used")
     def _compute_total_used(self):
         for line in self:
-            line.total_used = 0
+            line.total_used = sum([
+                fp.value for fp in line.amazon_financial_plan_lines.filtered(lambda f: f.value_used)
+            ]) if line.amazon_financial_plan_lines.filtered(lambda f: f.value_used) else .0
 
-            for fp in line.amazon_financial_plan_lines:
-                if fp.value_used:
-                    line.total_used += fp.value
-
-    @api.depends("amazon_financial_plan_lines")
+    @api.depends("amazon_financial_plan_lines", "amazon_financial_plan_lines.value",
+                 "amazon_financial_plan_lines.value_used")
     def _compute_total_to_use(self):
         for line in self:
-            line.total_to_use = 0
-
-            for fp in line.amazon_financial_plan_lines:
-                if not fp.value_used:
-                    line.total_to_use += fp.value
-
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref('base.main_company').currency_id
+            line.total_to_use = sum([
+                fp.value for fp in line.amazon_financial_plan_lines.filtered(lambda f: not f.value_used)
+            ]) if line.amazon_financial_plan_lines.filtered(lambda f: not f.value_used) else .0
 
     @api.constrains("name")
     def _constrains_name(self):

@@ -83,92 +83,75 @@ class AmazonRevenues(models.Model):
     @api.depends("revenues_line")
     def _compute_last_amazon_fees(self):
         for line in self:
-            line.last_amazon_fees = 0
-
-            if len(line.revenues_line) > 0:
-                line.last_amazon_fees = line.revenues_line[-1].amazon_fees
+            line.last_amazon_fees = line.revenues_line[-1].amazon_fees if line.revenues_line else .0
 
     @api.depends("revenues_line")
     def _compute_last_ads_total_cost(self):
         for line in self:
-            line.last_ads_total_cost = 0
-
-            if len(line.revenues_line) > 0:
-                line.last_ads_total_cost = line.revenues_line[-1].ads_total_cost
+            line.last_ads_total_cost = line.revenues_line[-1].ads_total_cost if line.revenues_line else .0
 
     @api.depends("revenues_line")
     def _compute_last_pcs_sold(self):
         for line in self:
-            line.last_pcs_sold = 0
-
-            if len(line.revenues_line) > 0:
-                line.last_pcs_sold = line.revenues_line[-1].pcs_sold
+            line.last_pcs_sold = line.revenues_line[-1].pcs_sold if line.revenues_line else .0
 
     @api.onchange("name")
     def _onchange_name(self):
         for line in self:
-            if len(line.revenues_line) > 0:
+            if line.revenues_line:
                 for revenues_line in line.revenues_line:
                     revenues_line.parent = line.name
-            if len(line.revenues_line_test) > 0:
+
+            if line.revenues_line_test:
                 for revenues_line_test in line.revenues_line_test:
                     revenues_line_test.parent = line.name
 
     @api.onchange("product")
     def _onchange_product(self):
         for line in self:
-            if len(line.revenues_line) > 0:
+            if line.revenues_line:
                 for revenues_line in line.revenues_line:
                     revenues_line.product = line.product
-            if len(line.revenues_line_test) > 0:
+
+            if line.revenues_line_test:
                 for revenues_line_test in line.revenues_line_test:
                     revenues_line_test.product = line.product
 
     @api.depends("product")
     def _compute_product_updated_sku_cost(self):
         for line in self:
-            line.product_updated_sku_cost = 0
-
-            for fp_cost in self.env["florence.fp.costs"].search([]):
-                if fp_cost.name.product_tmpl_id == line.product:
-                    line.product_updated_sku_cost = fp_cost.total
-                    break
+            fp_cost = self.env["florence.fp.costs"].search([]).filtered(
+                lambda f: f.name.product_tmpl_id.id == line.product.id
+            )
+            line.product_updated_sku_cost = fp_cost[0].total if fp_cost else .0
 
     def _compute_start_date(self):
         for line in self:
             line.start_date = datetime.now()
 
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref('base.main_company').currency_id
-
     @api.depends("product")
     def _compute_product_updated_price(self):
         for line in self:
-            line.product_updated_price = 0
-
-            if line.product.list_price:
-                line.product_updated_price = line.product.list_price
-            else:
-                line.product_updated_price = line.product.lst_price
+            line.product_updated_price = line.product.list_price \
+                if line.product.list_price > .0 else line.product.lst_price
 
     @api.depends("revenues_line")
     def _compute_total_probable_income(self):
         for line in self:
-            line.total_probable_income = 0
-
-            for revenues_line in line.revenues_line:
-                if revenues_line.probable_income:
-                    line.total_probable_income += revenues_line.probable_income
+            line.total_probable_income = sum([
+                revenues_line.probable_income for revenues_line in line.revenues_line.filtered(
+                    lambda r: r.probable_income
+                )
+            ])
 
     @api.depends("revenues_line")
     def _compute_total_probable_income_amz(self):
         for line in self:
-            line.total_probable_income_amz = 0
-
-            for revenues_line in line.revenues_line:
-                if revenues_line.probable_income_amz:
-                    line.total_probable_income_amz += revenues_line.probable_income_amz
+            line.total_probable_income_amz = sum([
+                revenues_line.probable_income_amz for revenues_line in line.revenues_line.filtered(
+                    lambda r: r.probable_income_amz
+                )
+            ])
 
     def dashboard_view_action(self):
         if self.group_by == "day":

@@ -36,19 +36,9 @@ class ProductTemplate(models.Model):
 
     def _compute_location_ids(self):
         for line in self:
-            line.location_ids = False
-
-            stock_quant_ids = self.env["stock.quant"].search(
-                [("product_id", "=", line.id)]
-            )
-
-            if len(stock_quant_ids) > 0:
-                locations = []
-
-                for stock_quant in stock_quant_ids:
-                    locations.append(stock_quant.location_id.id)
-
-                line.location_ids = [(6, 0, locations)]
+            stock_quant_ids = self.env["stock.quant"].search([("product_id", "=", line.id)])
+            locations = [stock_quant.location_id.id for stock_quant in stock_quant_ids] if stock_quant_ids else []
+            line.location_ids = [(6, 0, locations)] if locations else False
 
     @api.depends("location_ids")
     def _compute_locations_count(self):
@@ -60,13 +50,13 @@ class ProductTemplate(models.Model):
         for line in self:
             line.locations = ""
 
-            if len(line.location_ids) > 0:
-                location_names = []
+            if line.location_ids:
+                location_names = [
+                    f"{location.location_id.name}/{location.name}"
+                    for location in line.location_ids.filtered(
+                        lambda l: l != line.property_stock_production and l != line.property_stock_inventory
+                    )
+                ]
 
-                for location in line.location_ids:
-                    if location != line.property_stock_production \
-                            and location != line.property_stock_inventory:
-                        location_names.append(location.location_id.name + "/" + location.name)
-
-                if len(location_names) > 0:
+                if location_names:
                     line.locations = ", ".join(location_names)

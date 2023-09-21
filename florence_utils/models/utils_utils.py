@@ -54,9 +54,9 @@ class UtilsUtils(models.Model):
         days_total = [revenue.date for revenue in revenues]
         days_total = list(dict.fromkeys(days_total))
 
-        if len(days_total) > 0:
+        if days_total:
             for day in filter(lambda d: d not in days_present, days_total):
-                self.env["utils.days"].sudo().create({
+                self.env["utils.days"].create({
                     "name": self.id,
                     "date": day
                 })

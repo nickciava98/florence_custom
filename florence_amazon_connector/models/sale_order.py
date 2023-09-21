@@ -23,16 +23,8 @@ class SaleOrder(models.Model):
             line.amazon_mktp_ids = False
             line.amazon_locations = "Standard Order"
 
-            if line.warehouse_id:
-                if line.warehouse_id.lot_stock_id:
-                    if len(line.warehouse_id.lot_stock_id.amazon_mktp_ids) > 0:
-                        mktp_ids = []
-                        mktps = []
-
-                        for mktp in line.warehouse_id.lot_stock_id.amazon_mktp_ids:
-                            mktp_ids.append(mktp.id)
-                            mktps.append(mktp.domain)
-
-                        if len(mktp_ids) > 0 and len(mktps) > 0:
-                            line.amazon_mktp_ids = [(6, 0, mktp_ids)]
-                            line.amazon_locations = ", ".join(mktps)
+            if line.warehouse_id and line.warehouse_id.lot_stock_id and line.warehouse_id.lot_stock_id.amazon_mktp_ids:
+                mktp_ids = [mktp.id for mktp in line.warehouse_id.lot_stock_id.amazon_mktp_ids]
+                mktps = [mktp.domain for mktp in line.warehouse_id.lot_stock_id.amazon_mktp_ids]
+                line.amazon_mktp_ids = [(6, 0, mktp_ids)] if mktp_ids else False
+                line.amazon_locations = ", ".join(mktps) if mktps else False

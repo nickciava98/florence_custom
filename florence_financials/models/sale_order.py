@@ -10,15 +10,8 @@ class SaleOrder(models.Model):
 
     def _compute_related_invoice(self):
         for line in self:
-            line.related_invoice = ""
-
-            if len(line.invoice_ids) > 0:
-                invoice_numbers = []
-
-                for invoice in line.invoice_ids:
-                    invoice_numbers.append(invoice.name)
-
-                line.related_invoice = ", ".join(invoice_numbers)
+            line.related_invoice = ", ".join([invoice.name for invoice in line.invoice_ids]) \
+                if line.invoice_ids else False
 
     @api.onchange("sale_order_template_id")
     def _onchange_sale_order_template_id(self):

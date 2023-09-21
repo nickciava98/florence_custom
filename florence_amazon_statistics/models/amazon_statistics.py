@@ -92,20 +92,22 @@ class AmazonStatistics(models.Model):
     @api.onchange("name")
     def _onchange_name(self):
         for line in self:
-            if len(line.statistics_lines) > 0:
+            if line.statistics_lines:
                 for statistics_line in line.statistics_lines:
                     statistics_line.parent = line.name
-            if len(line.statistics_lines_test) > 0:
+
+            if line.statistics_lines_test:
                 for statistics_line_test in line.statistics_lines_test:
                     statistics_line_test.parent = line.name
 
     @api.onchange("product")
     def _onchange_product(self):
         for line in self:
-            if len(line.statistics_lines) > 0:
+            if line.statistics_lines:
                 for statistics_line in line.statistics_lines:
                     statistics_line.product = line.product
-            if len(line.statistics_lines_test) > 0:
+
+            if line.statistics_lines_test:
                 for statistics_line_test in line.statistics_lines_test:
                     statistics_line_test.product = line.product
 
@@ -113,34 +115,30 @@ class AmazonStatistics(models.Model):
     def _compute_average(self):
         for line in self:
             line.average = 0
-            statistics_lines = []
 
-            if len(line.statistics_lines) > 0 \
-                    and line.date_from and line.date_to:
-                for statistics_line in line.statistics_lines:
-                    if statistics_line.date \
-                            and statistics_line.date >= line.date_from \
-                            and statistics_line.date <= line.date_to:
-                        statistics_lines.append(statistics_line)
+            if line.statistics_lines and line.date_from and line.date_to:
+                statistics_lines = [
+                    statistics_line for statistics_line in line.statistics_lines.filtered(
+                        lambda sl: sl.date and sl.date >= line.date_from and sl.date <= line.date_to
+                    )
+                ]
 
-                if len(statistics_lines) > 0:
+                if statistics_lines:
                     line.average = statistics_lines[-1].main_stat
 
     @api.depends("statistics_lines_test", "date_from_test", "date_to_test")
     def _compute_average_test(self):
         for line in self:
             line.average_test = 0
-            statistics_lines = []
 
-            if len(line.statistics_lines_test) > 0 \
-                    and line.date_from_test and line.date_to_test:
-                for statistics_line in line.statistics_lines_test:
-                    if statistics_line.date \
-                            and statistics_line.date >= line.date_from_test \
-                            and statistics_line.date <= line.date_to_test:
-                        statistics_lines.append(statistics_line)
+            if line.statistics_lines_test and line.date_from_test and line.date_to_test:
+                statistics_lines = [
+                    statistics_line for statistics_line in line.statistics_lines.filtered(
+                        lambda sl: sl.date and sl.date >= line.date_from_test and sl.date <= line.date_to_test
+                    )
+                ]
 
-                if len(statistics_lines) > 0:
+                if statistics_lines:
                     line.average_test = statistics_lines[-1].main_stat
 
     def _compute_start_date(self):

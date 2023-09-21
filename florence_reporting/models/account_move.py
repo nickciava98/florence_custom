@@ -9,18 +9,12 @@ class AccountMove(models.Model):
     )
 
     def _compute_document_type(self):
-        types = []
-        orders = []
-
-        for line in self.invoice_line_ids:
-            if line.sale_line_ids.order_id.document_type \
-                    and line.sale_line_ids.order_id \
-                    and line.sale_line_ids.order_id not in orders:
-                orders.append(line.sale_line_ids.order_id)
-                types.append(line.sale_line_ids.order_id.document_type)
-
-        if len(types) > 0:
-            self.document_type = ",".join(types)
-
-        else:
-            self.document_type = False
+        for line in self:
+            inv_line_ids = line.invoice_line_ids.filtered(
+                lambda l: l.sale_line_ids and l.sale_line_ids.order_id and l.sale_line_ids.order_id.document_type
+            )
+            line.document_type = ", ".join(
+                list(dict.fromkeys([
+                    inv_line.sale_line_ids.order_id.document_type for inv_line in inv_line_ids
+                ]))
+            ) if inv_line_ids else False

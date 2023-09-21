@@ -85,18 +85,21 @@ class FlorenceBalanceSheet(models.Model):
         compute="_compute_total"
     )
 
-    @api.depends("balance_sheet_inventory_lines", "balance_sheet_inventory_more_lines")
+    @api.depends("balance_sheet_inventory_lines", "balance_sheet_inventory_lines.value",
+                 "balance_sheet_inventory_more_lines", "balance_sheet_inventory_more_lines.value")
     def _compute_inventory_value(self):
         for line in self:
             line.inventory_value = .0
 
             if line.balance_sheet_inventory_lines:
-                for bs_inv_line in line.balance_sheet_inventory_lines:
-                    line.inventory_value += bs_inv_line.value
+                line.inventory_value += sum([
+                    bs_inv_line.value for bs_inv_line in line.balance_sheet_inventory_lines
+                ])
 
             if line.balance_sheet_inventory_more_lines:
-                for bs_inv_line in line.balance_sheet_inventory_more_lines:
-                    line.inventory_value += bs_inv_line.value
+                line.inventory_value += sum([
+                    bs_inv_line.value for bs_inv_line in line.balance_sheet_inventory_more_lines
+                ])
 
     @api.depends("products_cash", "inventory_value", "amazon_products_cash", "other_value")
     def _compute_total(self):

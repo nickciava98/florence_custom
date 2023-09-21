@@ -24,12 +24,9 @@ class AmazonFinancialPlanValues(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        related="name.currency_id",
+        store=True
     )
-
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref('base.main_company').currency_id
 
 
 class AmazonFinancialPlanMoreValues(models.Model):
@@ -56,9 +53,6 @@ class AmazonFinancialPlanMoreValues(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        related="name.currency_id",
+        store=True
     )
-
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref('base.main_company').currency_id

@@ -75,7 +75,8 @@ class AmazonRevenuesLine(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        related="amazon_revenues_line_id.currency_id",
+        store=True
     )
 
     @api.depends("pcs_sold", "date", "product")
@@ -118,12 +119,7 @@ class AmazonRevenuesLine(models.Model):
     @api.depends("parent")
     def _compute_mktp(self):
         for line in self:
-            line.mktp = ""
-
-            if line.parent == "IT" or line.parent == "FR" or line.parent == "DE" or line.parent == "ES":
-                line.mktp = "EU"
-            else:
-                line.mktp = "UK"
+            line.mktp = "EU" if line.parent in ("IT", "FR", "DE", "ES") else "UK"
 
     @api.depends("date")
     def _compute_week(self):
@@ -140,14 +136,8 @@ class AmazonRevenuesLine(models.Model):
     @api.depends("probable_income", "sku_cost")
     def _compute_probable_income_amz(self):
         for line in self:
-            line.probable_income_amz = 0
-
-            if line.probable_income and line.sku_cost:
-                line.probable_income_amz = line.probable_income + line.pcs_sold * line.sku_cost
-
-    def _compute_currency_id(self):
-        for line in self:
-            line.currency_id = self.env.ref('base.main_company').currency_id
+            line.probable_income_amz = line.probable_income + line.pcs_sold * line.sku_cost \
+                if line.probable_income and line.sku_cost else .0
 
     @api.depends("price_unit")
     def _compute_taxes(self):
@@ -156,7 +146,7 @@ class AmazonRevenuesLine(models.Model):
 
             if line.parent == "IT":
                 line.taxes = line.price_unit * 0.180327868852459
-            elif line.parent == "FR" or line.parent == "UK":
+            elif line.parent in ("FR", "UK"):
                 line.taxes = line.price_unit * 0.166666666666667
             elif line.parent == "DE":
                 line.taxes = line.price_unit * 0.159663865546218
@@ -171,10 +161,7 @@ class AmazonRevenuesLine(models.Model):
     @api.depends("ads_total_cost", "pcs_sold")
     def _compute_ads_cost_per_unit(self):
         for line in self:
-            line.ads_cost_per_unit = 0
-
-            if line.pcs_sold != 0:
-                line.ads_cost_per_unit = line.ads_total_cost / line.pcs_sold
+            line.ads_cost_per_unit = line.ads_total_cost / line.pcs_sold if line.pcs_sold != 0 else .0
 
     @api.depends("gross_revenues", "ads_cost_per_unit")
     def _compute_earned_per_pc(self):

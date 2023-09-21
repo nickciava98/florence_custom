@@ -41,7 +41,7 @@ class UtilsDays(models.Model):
             )
             line.probable_income_amz = sum([
                 revenue.probable_income_amz for revenue in revenues
-            ]) if line.date and len(revenues) > 0 else .0
+            ]) if line.date and revenues else .0
 
     @api.depends("name", "date")
     def _compute_monthly_total_per_day(self):
@@ -49,7 +49,7 @@ class UtilsDays(models.Model):
             line.monthly_total_per_day = line.name.month_ids.filtered(
                 lambda month: month.month == str(line.date.strftime("%m"))
             ).monthly_total / int(calendar.monthrange(int(line.name.name), int(line.date.strftime("%m")))[1]) \
-                if len(line.name.month_ids) > 0 else .0
+                if line.name.month_ids else .0
 
     @api.depends("probable_income_amz", "monthly_total_per_day")
     def _compute_util(self):
