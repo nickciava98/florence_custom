@@ -51,7 +51,7 @@ class AmazonRevenues(models.Model):
     )
     currency_id = fields.Many2one(
         "res.currency",
-        compute="_compute_currency_id"
+        default=lambda self: self.env.ref("base.main_company").currency_id
     )
     product_updated_sku_cost = fields.Float(
         compute="_compute_product_updated_sku_cost"
