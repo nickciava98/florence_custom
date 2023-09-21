@@ -6,8 +6,8 @@ class AccountMoveLine(models.Model):
 
     discount = fields.Float(
         string="Discount (%)",
-        digits=(16, 20),
-        default=0.0
+        digits=(12, 4),
+        default=.0
     )
     total_price = fields.Float(
         compute="_compute_total_price",
@@ -18,9 +18,7 @@ class AccountMoveLine(models.Model):
     @api.depends("price_unit", "tax_ids", "quantity")
     def _compute_total_price(self):
         for line in self:
-            total_tax = 0
-
-            for tax in line.tax_ids:
-                total_tax += line.price_unit * line.quantity * tax.amount / 100
-
+            total_tax = sum([
+                line.price_unit * line.quantity * tax.amount / 100 for tax in line.tax_ids
+            ]) if line.tax_ids else .0
             line.total_price = (line.price_unit * line.quantity) + total_tax

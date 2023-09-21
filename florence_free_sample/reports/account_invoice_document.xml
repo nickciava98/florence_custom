@@ -197,19 +197,19 @@
                                     <td class="text-right">
                                         <t t-if="line.discount == 100">
                                             <span class="text-nowrap" t-esc="line.price_subtotal - line.price_subtotal"
-                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
                                                   groups="account.group_show_line_subtotals_tax_excluded"/>
                                             <span class="text-nowrap" t-esc="line.price_total - line.price_subtotal"
-                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
                                                   groups="account.group_show_line_subtotals_tax_included"/>
                                         </t>
 
                                         <t t-else="">
                                             <span class="text-nowrap" t-esc="line.price_subtotal"
-                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
                                                   groups="account.group_show_line_subtotals_tax_excluded"/>
                                             <span class="text-nowrap" t-esc="line.price_total"
-                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
                                                   groups="account.group_show_line_subtotals_tax_included"/>
                                         </t>
                                     </td>
@@ -234,7 +234,7 @@
                                 <td colspan="99">
                                     <strong class="mr16">Subtotal</strong>
                                     <span t-esc="current_subtotal"
-                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                          t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                                 </td>
                             </tr>
                         </t>
@@ -276,7 +276,7 @@
                                 </td>
                                 <td class="text-right">
                                     <span class="text-nowrap" t-field="line.total_price"
-                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                          t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                                 </td>
                             </t>
                             <t t-if="line.display_type == 'line_section'">
@@ -298,7 +298,7 @@
                                 <td colspan="99">
                                     <strong class="mr16">Subtotal</strong>
                                     <span t-esc="current_subtotal"
-                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                          t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                                 </td>
                             </tr>
                         </t>
@@ -326,7 +326,7 @@
                     </td>
                     <td class="text-right">
                         <span t-field="o.amount_subtotal"
-                              t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                              t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                     </td>
                 </tr>
             </t>

@@ -6,8 +6,8 @@ class SaleOrderLine(models.Model):
 
     discount = fields.Float(
         string="Discount (%)",
-        digits=(16, 20),
-        default=0.0
+        digits=(12, 4),
+        default=.0
     )
     price_total = fields.Float(
         compute="_compute_price_total",
@@ -18,9 +18,7 @@ class SaleOrderLine(models.Model):
     @api.depends("price_unit", "product_uom_qty", "tax_id")
     def _compute_price_total(self):
         for line in self:
-            tax_amount = 0.0
-
-            for tax in line.tax_id:
-                tax_amount += line.price_unit * line.product_uom_qty * tax.amount / 100
-
+            tax_amount = sum([
+                line.price_unit * line.product_uom_qty * tax.amount / 100 for tax in line.tax_id
+            ]) if line.tax_id else .0
             line.price_total = (line.price_unit * line.product_uom_qty) + tax_amount

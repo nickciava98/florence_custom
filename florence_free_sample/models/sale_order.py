@@ -1,3 +1,4 @@
+import math
 from datetime import timedelta
 
 from odoo import models, fields, api
@@ -11,120 +12,113 @@ class SaleOrder(models.Model):
         store=True
     )
     amount_untaxed_free_sample = fields.Monetary(
-        compute="_compute_amount_untaxed_free_sample"
+        compute="_compute_amount_untaxed_free_sample",
+        store=True
     )
     amount_tax_free_sample = fields.Monetary(
-        compute="_compute_amount_tax_free_sample"
+        compute="_compute_amount_tax_free_sample",
+        store=True
     )
     free_sample_total = fields.Monetary(
-        compute="_compute_free_sample_total"
+        compute="_compute_free_sample_total",
+        store=True
     )
     add_free_sample_rule = fields.Boolean(
-        compute="_compute_add_free_sample_rule"
+        compute="_compute_add_free_sample_rule",
+        store=True
     )
     amount_subtotal = fields.Float(
         compute="_compute_amount_subtotal",
+        store=True,
         string="Subtotal",
         digits=(12, 4)
     )
     amount_discount = fields.Monetary(
-        compute="_compute_amount_discount"
+        compute="_compute_amount_discount",
+        store=True
     )
 
-    @api.depends("order_line.price_total")
+    @api.depends("order_line", "order_line.product_uom_qty", "order_line.price_unit", "order_line.discount")
     def _compute_amount_discount(self):
         for order in self:
-            amount_discount = 0.0
+            order.amount_discount = sum([
+                line.product_uom_qty * line.price_unit * line.discount / 100 for line in order.order_line
+            ])
 
-            for line in order.order_line:
-                amount_discount += (line.product_uom_qty * line.price_unit * line.discount) / 100
-
-            order.update({
-                "amount_discount": amount_discount
-            })
-
-    @api.depends("order_line")
+    @api.depends("order_line", "order_line.price_total")
     def _compute_amount_subtotal(self):
         for line in self:
-            line.amount_subtotal = 0
+            line.amount_subtotal = sum([
+                order_line.price_total for order_line in line.order_line
+            ])
 
-            for order_line in line.order_line:
-                line.amount_subtotal += order_line.price_total
-
-    @api.depends("is_free_sample", "order_line")
+    @api.depends("is_free_sample", "order_line", "order_line.price_subtotal")
     def _compute_amount_untaxed_free_sample(self):
         for line in self:
-            line.amount_untaxed_free_sample = 0
+            line.amount_untaxed_free_sample = sum([
+                order_line.price_subtotal for order_line in line.order_line.filtered(
+                    lambda ol: ol.price_subtotal > 0 or math.isclose(ol.price_subtotal, .0)
+                )
+            ]) if line.is_free_sample else .0
 
-            if line.is_free_sample:
-                for order_line in line.order_line:
-                    if order_line.price_subtotal >= 0:
-                        line.amount_untaxed_free_sample += order_line.price_subtotal
-
-    @api.depends("is_free_sample", "order_line")
+    @api.depends("is_free_sample", "order_line", "order_line.price_reduce_taxinc", "order_line.price_unit",
+                 "order_line.discount", "order_line.product_uom_qty")
     def _compute_amount_tax_free_sample(self):
         for line in self:
-            line.amount_tax_free_sample = 0
-
-            if line.is_free_sample:
-                for order_line in line.order_line:
-                    if order_line.price_reduce_taxinc >= 0:
-                        line.amount_tax_free_sample += \
-                            (order_line.price_reduce_taxinc
-                             - order_line.price_unit * (1 - order_line.discount / 100)) * order_line.product_uom_qty
+            line.amount_tax_free_sample = sum([
+                (order_line.price_reduce_taxinc - order_line.price_unit * (1 - order_line.discount / 100))
+                * order_line.product_uom_qty
+                for order_line in line.order_line.filtered(
+                    lambda ol: ol.price_reduce_taxinc > 0 or math.isclose(ol.price_reduce_taxinc, .0)
+                )
+            ])
 
     @api.depends("is_free_sample", "amount_untaxed_free_sample", "amount_tax_free_sample")
     def _compute_free_sample_total(self):
         for line in self:
-            line.free_sample_total = 0
-
-            if line.is_free_sample:
-                line.free_sample_total = \
-                    -(line.amount_untaxed_free_sample + line.amount_tax_free_sample)
+            line.free_sample_total = -(line.amount_untaxed_free_sample + line.amount_tax_free_sample) \
+                if line.is_free_sample else .0
 
     @api.depends("is_free_sample", "order_line", "free_sample_total")
     def _compute_add_free_sample_rule(self):
         for line in self:
             if line.is_free_sample:
                 line.add_free_sample_rule = True
+                free_sample_product_id = self.env["product.product"].search(
+                    [("default_code", "ilike", "Free Sample")], limit=1
+                )
 
-                if not self.env["product.product"].search([('default_code', 'ilike', 'free sample')]):
-                    self.env["product.product"].sudo().create(
-                        {
-                            "name": "Free Sample",
-                            "type": "consu",
-                            "default_code": "Free Sample",
-                            "categ_id": self.env.ref('product.product_category_all').id,
-                            "uom_id": self.env.ref('uom.product_uom_unit').id,
-                            "uom_po_id": self.env.ref('uom.product_uom_unit').id,
-                            "product_variant_ids": False,
-                            "taxes_id": False,
-                            "invoice_policy": "order"
-                        })
+                if not free_sample_product_id:
+                    free_sample_product_id = self.env["product.product"].create({
+                        "name": "Free Sample",
+                        "type": "consu",
+                        "default_code": "Free Sample",
+                        "categ_id": self.env.ref("product.product_category_all").id,
+                        "uom_id": self.env.ref("uom.product_uom_unit").id,
+                        "uom_po_id": self.env.ref("uom.product_uom_unit").id,
+                        "product_variant_ids": False,
+                        "taxes_id": False,
+                        "invoice_policy": "order"
+                    })
 
-                free_sample = self.env["product.product"].search([('default_code', 'ilike', 'free sample')])
-                free_sample_present = False
-
-                for order_line in line.order_line:
-                    if order_line.product_id.name == free_sample.name:
-                        free_sample_present = True
-                        break
+                free_sample_present = True if line.order_line.filtered(
+                    lambda ol: ol.product_id.id == free_sample_product_id.id
+                ) else False
 
                 if not free_sample_present:
-                    self.write({
-                        'order_line': [
-                            (0, 0, {
-                                'order_id': line.order_line.order_id.id,
-                                'product_id': free_sample.id,
-                                'name': free_sample.name,
-                                'product_uom_qty': 1,
-                                'product_uom': self.env.ref('uom.product_uom_unit').id,
-                                'price_unit': line.free_sample_total if line.free_sample_total < 0 else -line.amount_total,
-                                'customer_lead': 0.0,
-                                'discount': 0,
-                                'company_id': line.order_line.order_id.company_id.id,
-                            })
-                        ]})
+                    price_unit = -line.amount_untaxed_free_sample \
+                        if line.amount_untaxed_free_sample > .0 else -line.amount_untaxed
+                    line.order_line = [(0, 0, {
+                        "product_id": free_sample_product_id.id,
+                        "name": free_sample_product_id.name,
+                        "product_uom_qty": 1.,
+                        "product_uom": free_sample_product_id.uom_id.id,
+                        "price_unit": price_unit,
+                        "tax_id": line.order_line[0].tax_id.ids,
+                        "customer_lead": .0,
+                        "discount": .0,
+                        "company_id": line.company_id.id,
+                    })]
 
             else:
                 line.add_free_sample_rule = False
