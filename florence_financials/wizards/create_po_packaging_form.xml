@@ -9,6 +9,9 @@
                     <field name="order_line_ids" widget="one2many">
                         <tree editable="bottom">
                             <field name="product_id"/>
+                            <field name="bom_item_ids"/>
+                            <button name="select_bom_items_action" type="object" string="Select BoM Items"
+                                    icon="fa-edit" context="{'wizard_id': parent.id}"/>
                         </tree>
                     </field>
                 </sheet>
@@ -16,6 +19,31 @@
                 <footer>
                     <button name="confirm_action" type="object" class="btn btn-primary" string="Confirm"/>
                     <button name="cancel_action" special="cancel" string="Discard"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="create_po_packaging_items_view_form" model="ir.ui.view">
+        <field name="name">Select BoM Items</field>
+        <field name="model">create.po.packaging.items</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="order_line_id" invisible="True"/>
+
+                    <field name="item_ids" widget="one2many">
+                        <tree editable="bottom">
+                            <field name="company_id" invisible="True"/>
+                            <field name="product_id" required="True"/>
+                        </tree>
+                    </field>
+                </sheet>
+
+                <footer>
+                    <button name="confirm_action" type="object" class="btn btn-primary" string="Confirm"/>
+                    <button name="cancel_action" type="object" string="Discard"/>
                 </footer>
             </form>
         </field>

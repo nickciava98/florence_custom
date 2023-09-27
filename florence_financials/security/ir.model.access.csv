@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_link_bill,access_link_bill,model_link_bill,base.group_user,1,1,1,1
 access_create_po_packaging,access_create_po_packaging,model_create_po_packaging,base.group_user,1,1,1,1
+access_create_po_packaging_items,access_create_po_packaging_items,model_create_po_packaging_items,base.group_user,1,1,1,1

@@ -6,6 +6,11 @@ from odoo import models, fields, api
 class MrpBomLine(models.Model):
     _inherit = "mrp.bom.line"
 
+    vendor_id = fields.Many2one(
+        "res.partner",
+        compute="_compute_bill",
+        store=True
+    )
     cost = fields.Float(
         compute="_compute_bill",
         store=True,
@@ -29,6 +34,7 @@ class MrpBomLine(models.Model):
     @api.depends("product_id", "product_qty")
     def _compute_bill(self):
         for line in self:
+            line.vendor_id = False
             line.bill = False
             line.cost = .0
             purchase_ids = self.env["purchase.order"].search([], order="id desc")
@@ -47,10 +53,12 @@ class MrpBomLine(models.Model):
                                 )
 
                                 if invoice_line:
+                                    line.vendor_id = invoice_id.partner_id
                                     line.bill = invoice_id
                                     line.cost = invoice_line[0].price_unit * line.product_qty
                                     break
                         else:
+                            line.vendor_id = purchase_id.partner_id
                             line.cost = order_line[0].price_unit * line.product_qty
 
                     break
@@ -67,6 +75,7 @@ class MrpBomLine(models.Model):
                             )
 
                             if invoice_line:
+                                line.vendor_id = bill_id.partner_id
                                 line.bill = bill_id
                                 line.cost = invoice_line[0].price_unit * line.product_qty
                                 break

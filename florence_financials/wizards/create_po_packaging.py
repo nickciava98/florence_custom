@@ -19,9 +19,12 @@ class CreatePoPackaging(models.TransientModel):
 
         for order_line_id in self.order_line_ids:
             for bom_id in order_line_id.product_id.bom_ids.filtered(lambda bom: bom.bom_line_ids):
-                for bom_line_id in bom_id.bom_line_ids.filtered(lambda bom_line: bom_line.bill):
+                bom_line_ids = bom_id.bom_line_ids.filtered(
+                    lambda bom_line: bom_line.product_id.id in order_line_id.bom_item_ids.ids
+                )
+                for bom_line_id in bom_line_ids:
                     po_id = self.env["purchase.order"].create({
-                        "partner_id": bom_line_id.bill.partner_id.id,
+                        "partner_id": bom_line_id.vendor_id.id,
                         "partner_ref": f"{int(order_line_id.product_qty)} pz {bom_line_id.product_id.display_name}",
                         "parent_po_id": order_line_id.order_id.id,
                         "order_line": [(
@@ -30,9 +33,7 @@ class CreatePoPackaging(models.TransientModel):
                                 "name": bom_line_id.product_id.display_name,
                                 "product_qty": order_line_id.product_qty,
                                 "product_uom": bom_line_id.product_id.uom_po_id.id,
-                                "price_unit": bom_line_id.bill.invoice_line_ids.filtered(
-                                    lambda inv_line_id: inv_line_id.product_id.id == bom_line_id.product_id.id
-                                )[0].price_unit,
+                                "price_unit": bom_line_id.cost,
                                 "taxes_id": [(6, 0, [self.env.ref("l10n_uk.PT0").id])],
                                 "company_id": self.env.company.id
                             }
@@ -41,13 +42,53 @@ class CreatePoPackaging(models.TransientModel):
 
                     po_ids.append(po_id.id)
 
-        action = self.env["ir.actions.act_window"]._for_xml_id("purchase.purchase_rfq")
+        for order_line_id in self.order_line_ids:
+            order_line_id.write({"bom_item_ids": False})
 
-        if len(po_ids) == 1:
-            action["res_id"] = po_ids[0]
-        elif len(po_ids) > 1:
-            action["domain"] = [("id", "in", po_ids)]
-        else:
+        if not po_ids:
             raise exceptions.UserError("No PO has been created!")
 
+        action = self.env["ir.actions.act_window"]._for_xml_id("purchase.purchase_rfq")
+        action["domain"] = [("id", "in", po_ids)]
+
         return action
+
+
+class CreatePoPackagingItems(models.TransientModel):
+    _name = "create.po.packaging.items"
+    _description = "Create PO for Packaging - Items"
+
+    order_line_id = fields.Many2one(
+        "purchase.order.line",
+        string="Order Line"
+    )
+    item_ids = fields.Many2many(
+        "mrp.bom.line",
+        "bom_line_create_po_packaging_items_rel",
+        string="Items"
+    )
+
+    def confirm_action(self):
+        if self.item_ids:
+            self.order_line_id.write({
+                "bom_item_ids": self.item_ids.product_id.ids
+            })
+
+        return {
+            "name": "Create PO for Packaging",
+            "type": "ir.actions.act_window",
+            "res_model": "create.po.packaging",
+            "view_mode": "form",
+            "res_id": self.env.context.get("wizard_id"),
+            "target": "new"
+        }
+
+    def cancel_action(self):
+        return {
+            "name": "Create PO for Packaging",
+            "type": "ir.actions.act_window",
+            "res_model": "create.po.packaging",
+            "view_mode": "form",
+            "res_id": self.env.context.get("wizard_id"),
+            "target": "new"
+        }

@@ -81,3 +81,31 @@ class PurchaseOrder(models.Model):
         raise UserError(
             "You can only link bill to one Purchase Order!"
         )
+
+
+class PurchaseOrderLine(models.Model):
+    _inherit = "purchase.order.line"
+
+    bom_item_ids = fields.Many2many(
+        "product.product",
+        "product_product_purchase_order_line_rel",
+        string="BoM Items"
+    )
+
+    def select_bom_items_action(self):
+        bom_id = self.product_id.bom_ids[0] if self.product_id.bom_ids else False
+        default_item_ids = self.bom_item_ids.ids \
+            if self.bom_item_ids else bom_id.bom_line_ids.ids \
+            if bom_id and bom_id.bom_line_ids else False
+
+        return {
+            "name": "Select BoM Items",
+            "type": "ir.actions.act_window",
+            "res_model": "create.po.packaging.items",
+            "view_mode": "form",
+            "context": {
+                "default_order_line_id": self.id,
+                "default_item_ids": default_item_ids
+            },
+            "target": "new"
+        }
