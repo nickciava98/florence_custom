@@ -23,7 +23,7 @@
                             </i>
                         </div>
 
-                        <field name="currency_id" required="True"/>
+                        <field name="currency_id" required="True" options="{'no_create': True}"/>
                     </group>
 
                     <notebook>
