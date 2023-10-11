@@ -22,6 +22,14 @@ class UtilsUtils(models.Model):
         copy=False,
         string="Days"
     )
+    date_start = fields.Date()
+    date_end = fields.Date()
+    day_filtered_ids = fields.One2many(
+        "utils.days",
+        "name_filtered",
+        copy=False,
+        string="Days Filtered"
+    )
     total_util = fields.Float(
         digits=(11, 2),
         compute="_compute_total_util",
@@ -60,3 +68,12 @@ class UtilsUtils(models.Model):
                     "name": self.id,
                     "date": day
                 })
+
+    def filter_by_date_action(self):
+        self.day_filtered_ids = [(5, 0, 0)]
+
+        for day_id in self.day_ids.filtered(lambda d: d.date >= self.date_start and d.date <= self.date_end):
+            self.day_filtered_ids = [(0, 0, {
+                "name_filtered": self.id,
+                "date": day_id.date
+            })]

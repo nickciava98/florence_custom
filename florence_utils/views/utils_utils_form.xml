@@ -175,6 +175,91 @@
                                 </i>
                             </div>
                         </page>
+
+                        <page name="filter_date" string="Filter by date" attrs="{'invisible': [('day_ids', '=', [])]}">
+                            <label for="date_start" string="Filter by date"/>
+                            <div style="width: 100%;">
+                                <div style="width: 80%; float: left;">
+                                    <div class="o_row">
+                                        <field name="date_start" widget="daterange"
+                                               options="{'related_end_date': 'date_end'}"/>
+                                        <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                                        <field name="date_end" widget="daterange"
+                                               options="{'related_start_date': 'date_start'}"/>
+                                    </div>
+                                </div>
+
+                                <div style="width: 10%; float: right;">
+                                    <button name="filter_by_date_action" type="object"
+                                            class="btn btn-primary oe_edit_only" string="Apply"
+                                            attrs="{'invisible': ['&amp;', ('date_start', '=', False), ('date_end', '=', False)]}"/>
+                                </div>
+                            </div>
+
+                            <field name="day_filtered_ids" widget="one2many" view_mode="tree,form" readonly="True"
+                                   force_save="True">
+                                <tree default_order="date desc" limit="366">
+                                    <field name="name" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                    <field name="date"/>
+                                    <field name="probable_income_amz" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="monthly_total_per_day" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="util" widget="monetary" sum="Profit (iv)"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </tree>
+
+                                <form>
+                                    <field name="name" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+
+                                    <table class="table table-bordered w-100">
+                                        <thead>
+                                            <th class="text-left">Date</th>
+                                            <th class="text-right">Probable Income Amz</th>
+                                            <th class="text-right">Monthly Total Per Day</th>
+                                            <th class="text-right">Util</th>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left">
+                                                    <field name="date" readonly="True" nolabel="1"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="probable_income_amz" widget="monetary" readonly="True"
+                                                           nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="monthly_total_per_day" widget="monetary"
+                                                           readonly="True" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <field name="util" widget="monetary" readonly="True" nolabel="1"
+                                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </field>
+
+                            <div>
+                                <i>
+                                    (i): Date of the Day
+                                    <br/>
+                                    (ii): Sum of Probable Income (Amazon) of all products present in Amazon Revenues app
+                                    in that specific day
+                                    <br/>
+                                    (iii): Monthly Total for the month divided by the number of days in the month
+                                    <br/>
+                                    (iv): Probable Income (Amazon) - Monthly Total Per Day
+                                </i>
+                            </div>
+                        </page>
                     </notebook>
                 </sheet>
 
