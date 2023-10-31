@@ -36,7 +36,7 @@ class FlorenceFinancialPlan(models.Model):
         compute="_compute_cgi"
     )
     perc = fields.Float(
-        string="10% C.G.I.",
+        string="10% Shares",
         compute="_compute_perc"
     )
     monthly_total = fields.Float(
