@@ -27,7 +27,7 @@
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="cgi" widget="monetary" string="C.G.I. (iii)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                    <field name="perc" string="10% C.G.I. (iv)"/>
+                                    <field name="perc" string="10% Shares (iv)"/>
                                     <field name="disbursment" widget="monetary" string="Disbursment (v)"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                     <field name="deductible_total" widget="monetary" string="Deductible Total (vi)"
