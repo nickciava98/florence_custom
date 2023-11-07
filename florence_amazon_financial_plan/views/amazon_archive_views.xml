@@ -18,7 +18,7 @@
                 <field name="shipment_datetime" optional="hide"/>
                 <field name="reporting_date" invisible="True"/>
                 <field name="reporting_datetime" optional="hide"/>
-                <field name="buyer_email" optional="hide"/>
+                <field name="buyer_email"/>
                 <field name="buyer_name"/>
                 <field name="buyer_phone_number" optional="hide"/>
                 <field name="merchant_sku"/>
@@ -31,17 +31,17 @@
                 <field name="item_tax"/>
                 <field name="delivery_price"/>
                 <field name="delivery_tax"/>
-                <field name="gift_wrap_price"/>
-                <field name="gift_wrapping_tax"/>
+                <field name="gift_wrap_price" optional="hide"/>
+                <field name="gift_wrapping_tax" optional="hide"/>
                 <field name="delivery_service_level" optional="hide"/>
                 <field name="recipient_name" optional="hide"/>
-                <field name="delivery_address_one" optional="hide"/>
-                <field name="delivery_address_two" optional="hide"/>
-                <field name="delivery_address_three" optional="hide"/>
-                <field name="delivery_city_town" optional="hide"/>
-                <field name="delivery_county" optional="hide"/>
-                <field name="delivery_postcode" optional="hide"/>
-                <field name="delivery_country_code" optional="hide"/>
+                <field name="delivery_address_one"/>
+                <field name="delivery_address_two"/>
+                <field name="delivery_address_three"/>
+                <field name="delivery_city_town"/>
+                <field name="delivery_county"/>
+                <field name="delivery_postcode"/>
+                <field name="delivery_country_code"/>
                 <field name="delivery_phone_number" optional="hide"/>
                 <field name="billing_address_one" optional="hide"/>
                 <field name="billing_address_two" optional="hide"/>
@@ -52,7 +52,7 @@
                 <field name="bill_country" optional="hide"/>
                 <field name="item_promo_discount" optional="hide"/>
                 <field name="shipment_promo_discount" optional="hide"/>
-                <field name="carrier"/>
+                <field name="carrier" optional="hide"/>
                 <field name="tracking_number" optional="hide"/>
                 <field name="estimated_arrival_date" invisible="True"/>
                 <field name="estimated_arrival_datetime" optional="hide"/>
