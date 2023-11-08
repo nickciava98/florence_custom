@@ -275,19 +275,25 @@ class AmazonArchiveOpen(models.TransientModel):
     )
 
     def confirm_action(self):
+        name = f"{self.date_from.strftime('%d/%m/%Y')} - {self.date_to.strftime('%d/%m/%Y')}"
         domain = [
             "&", ("purchase_datetime", ">=", self.date_from.strftime("%Y-%m-%d") + " 00:00:00"),
             ("purchase_datetime", "<=", self.date_to.strftime("%Y-%m-%d") + " 23:59:59")
         ]
 
-        if self.sales_channel:
-            domain = expression.AND([domain, [("sales_channel", "=", self.sales_channel)]])
-
         if self.product_id:
+            name += f" [{self.product_id.display_name}]"
             domain = expression.AND([domain, [("product_id", "=", self.product_id.id)]])
 
+        if self.sales_channel:
+            sales_channel = str(dict(
+                self._fields["sales_channel"]._description_selection(self.env)
+            ).get(self.sales_channel))
+            name += f" ({sales_channel})"
+            domain = expression.AND([domain, [("sales_channel", "=", self.sales_channel)]])
+
         return {
-            "name": "Amazon Archive",
+            "name": name,
             "type": "ir.actions.act_window",
             "res_model": "amazon.archive",
             "view_mode": "tree,form",
