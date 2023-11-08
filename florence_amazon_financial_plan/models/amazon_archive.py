@@ -87,7 +87,8 @@ class AmazonArchive(models.Model):
     currency = fields.Char(
         string="Currency Name"
     )
-    currency_id = fields.Char(
+    currency_id = fields.Many2one(
+        "res.currency",
         compute="_compute_currency_id",
         store=True,
         string="Currency"

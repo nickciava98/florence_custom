@@ -18,7 +18,7 @@
                 <field name="shipment_datetime" optional="hide"/>
                 <field name="reporting_date" invisible="True"/>
                 <field name="reporting_datetime" optional="hide"/>
-                <field name="buyer_email"/>
+                <field name="buyer_email" optional="hide"/>
                 <field name="buyer_name"/>
                 <field name="buyer_phone_number" optional="hide"/>
                 <field name="merchant_sku"/>
