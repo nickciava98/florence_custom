@@ -147,7 +147,8 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         inventory_values.write(0, 6, "Value", header_format_right)
 
         locations = [
-            inv_line.location_id.display_name for inv_line in self.balance_sheet_id.balance_sheet_inventory_lines
+            inv_line.location_id.display_name.replace
+            for inv_line in self.balance_sheet_id.balance_sheet_inventory_lines
         ]
         locations = sorted(list(dict.fromkeys(locations)))
         locations_formats = {
@@ -193,7 +194,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
             location_value = "%s €" % str(locale.currency(
                 sum([inv_line.value for inv_line in inv_lines]), grouping=True, symbol=False
             ))
-            location_header = "%s [ %s ]" % (location, location_value)
+            location_header = "%s [ %s ]" % (location.replace(" €€", ""), location_value)
 
             inventory_values.merge_range(index, 0, index, 6, location_header, locations_formats[location])
 
@@ -240,7 +241,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
             location_value = "%s €" % str(locale.currency(
                 sum([inv_line.value for inv_line in inv_lines]), grouping=True, symbol=False
             ))
-            location_header = "%s [ %s ]" % (location, location_value)
+            location_header = "%s [ %s ]" % (location.replace(" €€", ""), location_value)
 
             external_inventory_values.merge_range(index, 0, index, 6, location_header, text_center_italic)
 
