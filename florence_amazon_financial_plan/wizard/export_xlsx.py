@@ -147,7 +147,7 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         inventory_values.write(0, 6, "Value", header_format_right)
 
         locations = [
-            inv_line.location_id.display_name.replace
+            inv_line.location_id.display_name
             for inv_line in self.balance_sheet_id.balance_sheet_inventory_lines
         ]
         locations = sorted(list(dict.fromkeys(locations)))
@@ -196,7 +196,9 @@ class ExportXlsxBalanceSheet(models.TransientModel):
             ))
             location_header = "%s [ %s ]" % (location.replace(" €€", ""), location_value)
 
-            inventory_values.merge_range(index, 0, index, 6, location_header, locations_formats[location])
+            inventory_values.merge_range(
+                index, 0, index, 6, location_header, locations_formats[location.replace(" €€", "")]
+            )
 
             index += 1
 
@@ -229,7 +231,8 @@ class ExportXlsxBalanceSheet(models.TransientModel):
         external_inventory_values.write(0, 6, "Value", header_format_right)
 
         locations = [
-            inv_line.location_id.display_name for inv_line in self.balance_sheet_id.balance_sheet_inventory_more_lines
+            inv_line.location_id.display_name
+            for inv_line in self.balance_sheet_id.balance_sheet_inventory_more_lines
         ]
         locations = sorted(list(dict.fromkeys(locations)))
         index = 1
