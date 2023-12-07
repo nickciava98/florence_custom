@@ -10,7 +10,8 @@
     'depends': [
         'base',
         'stock',
-        'stock_account'
+        'stock_account',
+        'purchase_stock'
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -24,7 +25,9 @@
         'views/product_sku_form.xml',
         'views/product_sku_tree.xml',
         'views/stock_actions.xml',
-        'views/stock_move_tree.xml'
+        'views/stock_move_tree.xml',
+        'views/stock_picking_form.xml',
+        'views/purchase_order_form.xml'
     ],
     'application': False,
     'installable': True,
