@@ -1,0 +1,44 @@
+<odoo>
+    <menuitem id="amazon_archive_menu" name="Amazon Archive" sequence="98"
+              parent="amazon_revenues_base_menu"
+              action="florence_amazon_financial_plan.amazon_archive_open_action"/>
+
+    <record id="florence_amazon_revenues.amazon_archive_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[
+            (5, 0),
+            (4, ref('group_admin'))
+        ]"/>
+    </record>
+
+    <menuitem name="FP - Amazon" id="amazon_financial_plan_menu"
+              parent="florence_amazon_revenues.amazon_revenues_base_menu"
+              sequence="99" groups="florence_amazon_revenues.group_admin"
+              action="florence_amazon_financial_plan.amazon_financial_plan_action"/>
+    <menuitem name="FP - Florence" id="florence_financial_plan_menu"
+              parent="florence_amazon_revenues.amazon_revenues_base_menu"
+              sequence="99" groups="florence_amazon_revenues.group_admin"
+              action="florence_amazon_financial_plan.florence_financial_plan_action"/>
+    <menuitem name="FPs" id="florence_fps_menu"
+              parent="florence_financial_plan_menu" sequence="1"
+              action="florence_amazon_financial_plan.florence_financial_plan_action"/>
+    <menuitem name="FPs Pie Chart" id="florence_fps_pie_chart_menu"
+              parent="florence_financial_plan_menu"
+              sequence="2" action="florence_amazon_financial_plan.florence_fp_piechart_action"/>
+    <menuitem name="FPs Chart" id="florence_fps_chart_menu"
+              parent="florence_financial_plan_menu"
+              sequence="3" action="florence_amazon_financial_plan.florence_fp_chart_action"/>
+
+    <menuitem name="FP - Costs" id="florence_fp_costs_menu"
+              parent="florence_amazon_revenues.amazon_revenues_base_menu"
+              sequence="99"/>
+    <menuitem name="FPs" id="florence_fps_costs_menu"
+              parent="florence_fp_costs_menu" sequence="1" action="florence_amazon_financial_plan.florence_fp_costs_action"/>
+    <menuitem name="FP - Costs Update" id="fp_costs_update_menu"
+              parent="florence_fp_costs_menu" sequence="2"
+              action="florence_amazon_financial_plan.florence_fp_costs_update_action"/>
+
+    <menuitem name="Forecasting" id="forecasting_menu"
+              parent="florence_amazon_revenues.amazon_revenues_base_menu"
+              sequence="99" groups="florence_amazon_revenues.group_admin"
+              action="florence_amazon_financial_plan.forecasting_action"/>
+</odoo>

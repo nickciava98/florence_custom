@@ -8,12 +8,12 @@ class StockPicking(models.Model):
         "account.move",
         "stock_picking_account_move_rel",
         domain="[('move_type', 'in', ('in_invoice', 'in_refund', 'in_receipt'))]",
-        string="Vendor Bills"
+        string="Bills"
     )
     purchase_order_ids = fields.Many2many(
         "purchase.order",
         "stock_picking_purchase_order_rel",
-        string="Purchase Orders"
+        string="Purchases"
     )
 
 

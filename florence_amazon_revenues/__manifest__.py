@@ -27,6 +27,7 @@
         'views/amazon_revenues_tree.xml',
         'views/amazon_revenues_line_graph.xml',
         'views/amazon_revenues_line_dashboard.xml',
+        'views/amazon_financial_plan_menus.xml',
         'wizard/help_wizard.xml',
         'wizard/date_interval_form.xml'
     ],

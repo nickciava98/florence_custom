@@ -1,13 +1,25 @@
 <odoo>
     <menuitem name="Amazon" id="amazon_revenues_base_menu"
-              action="amazon_revenues_action"
-              groups="group_data_entry" sequence="6"
+              action="amazon_revenues_action" sequence="6"
               web_icon="florence_amazon_revenues,static/description/app_icon.png"/>
-    <menuitem name="Summary" id="amazon_revenues_summary_menu"
+    <menuitem name="Summary" id="amazon_revenues_summary_menu" groups="group_data_entry,group_accountant"
               parent="amazon_revenues_base_menu" sequence="1"
               action="amazon_revenues_action"/>
 
+    <menuitem name="FP - Costs" id="florence_fp_costs_accountant_menu"
+              parent="amazon_revenues_base_menu"
+              sequence="99"
+              groups="group_accountant,group_admin"
+              action="florence_amazon_financial_plan.florence_fp_costs_action"/>
+
+    <menuitem name="Balance Sheet" id="florence_balance_sheet_menu"
+              parent="amazon_revenues_base_menu"
+              sequence="99"
+              groups="group_accountant,group_admin"
+              action="florence_amazon_financial_plan.florence_balance_sheet_action"/>
+
     <menuitem name="Marketplaces" id="amazon_revenues_marketplaces_menu"
+              groups="group_data_entry,group_accountant,group_admin"
               parent="amazon_revenues_base_menu" sequence="2"/>
     <menuitem name="Amazon IT" id="amazon_revenues_amazon_it_menu"
               parent="amazon_revenues_marketplaces_menu" sequence="1"
@@ -52,9 +64,12 @@
               action="graph_action"/>
 
     <record id="florence_amazon_revenues.amazon_revenues_base_menu" model="ir.ui.menu">
-        <field name="groups_id"
-               eval="[(6,0,[ref('florence_amazon_revenues.group_admin'),
-                            ref('florence_amazon_revenues.group_data_entry')]
-                     )]"/>
+        <field name="groups_id" eval="[
+            (5, 0),
+            (4, ref('florence_amazon_revenues.group_admin')),
+            (4, ref('florence_amazon_revenues.group_data_entry')),
+            (4, ref('florence_amazon_revenues.group_accountant')),
+            (4, ref('florence_amazon_revenues.group_users'))
+        ]"/>
     </record>
 </odoo>
