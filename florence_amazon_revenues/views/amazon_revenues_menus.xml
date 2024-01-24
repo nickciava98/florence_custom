@@ -39,7 +39,7 @@
 
     <menuitem name="Reporting" id="amazon_revenues_reporting_menu"
               parent="amazon_revenues_base_menu" sequence="100"
-              groups="group_admin"/>
+              groups="group_admin,group_accountant"/>
     <menuitem name="Revenues Statistics" id="amazon_revenues_statistics_menu"
               parent="amazon_revenues_reporting_menu" sequence="1"
               action="amazon_revenues_statistics_action"/>
