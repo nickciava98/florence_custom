@@ -11,17 +11,19 @@ class FpCostsUpdate(models.TransientModel):
     _name = "florence.fp.costs.update"
     _description = "FP Costs Update"
 
-    def update_action(self, auto=None):
-        if int(datetime.datetime.now().month) == 1:
-            year = str(datetime.datetime.now().year - 1)
-            prev_month = "12"
-        else:
-            year = str(datetime.datetime.now().year)
-            prev_month = str(int(datetime.datetime.now().month) - 1)
+    def update_action(self, **kwargs):
+        now = datetime.datetime.now()
+        auto = kwargs.get("auto", None)
+        current_month = kwargs.get("current_month", now.month)
+        prev_month = kwargs.get("prev_mont", now.month - 1)
+        year = now.year
 
-        last_day = str(calendar.monthrange(int(year), int(prev_month))[1])
-        current_month = str(datetime.datetime.now().month)
-        last_curr_day = str(calendar.monthrange(int(year), int(current_month))[1])
+        if current_month == 1:
+            year = now.year - 1
+            prev_month = 12
+
+        last_day = calendar.monthrange(year, prev_month)[1]
+        last_curr_day = calendar.monthrange(year, current_month)[1]
         updates = 0
         florence_fp_costs_ids = self.env["florence.fp.costs"].search(
             [("date", ">=", f"{year}-{prev_month}-01"),
