@@ -107,9 +107,5 @@ class FpCostsUpdate(models.TransientModel):
         if updates == 0 and not auto:
             raise exceptions.ValidationError("No records found to update FP Cost!")
 
-        return self.env["ir.actions.act_window"]._for_xml_id(
-            "florence_amazon_financial_plan.florence_fp_costs_update_action"
-        )
-
     def auto_update_action(self):
         self.update_action(auto=True)
