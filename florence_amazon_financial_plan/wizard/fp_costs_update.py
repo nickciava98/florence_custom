@@ -1,33 +1,58 @@
 import calendar
 import datetime
-import math
 
-from odoo.exceptions import ValidationError
-
-from odoo import models
+from odoo import models, fields, exceptions
 
 
 class FpCostsUpdate(models.TransientModel):
     _name = "florence.fp.costs.update"
     _description = "FP Costs Update"
 
-    def update_action(self, **kwargs):
+    def _get_default_fields(self):
         now = datetime.datetime.now()
-        auto = kwargs.get("auto", None)
-        current_month = kwargs.get("current_month", now.month)
-        prev_month = kwargs.get("prev_mont", now.month - 1)
+        current_month = now.month
+        prev_month = now.month - 1
         year = now.year
 
         if current_month == 1:
             year = now.year - 1
             prev_month = 12
 
+        return {
+            "current_month": current_month,
+            "previous_month": prev_month,
+            "year": year
+        }
+
+    current_month = fields.Integer(
+        default=lambda self: self._get_default_fields()["current_month"],
+        string="Current Month"
+    )
+    previous_month = fields.Integer(
+        default=lambda self: self._get_default_fields()["previous_month"],
+        string="Previous Month"
+    )
+    year = fields.Integer(
+        default=lambda self: self._get_default_fields()["year"],
+        string="Year"
+    )
+
+    def update_action(self, auto=False):
+        current_month = self.current_month
+        prev_month = self.previous_month
+        year = self.year
+        prev_year = self.year
+
+        if current_month == 1:
+            prev_year = self.year - 1
+            prev_month = 12
+
         last_day = calendar.monthrange(year, prev_month)[1]
         last_curr_day = calendar.monthrange(year, current_month)[1]
         updates = 0
         florence_fp_costs_ids = self.env["florence.fp.costs"].search(
-            [("date", ">=", f"{year}-{prev_month}-01"),
-             ("date", "<=", f"{year}-{prev_month}-{last_day}")]
+            [("date", ">=", f"{prev_year}-{prev_month}-01"),
+             ("date", "<=", f"{prev_year}-{prev_month}-{last_day}")]
         )
         florence_fp_costs_curr_month_ids = self.env["florence.fp.costs"].search(
             [("date", ">=", f"{year}-{current_month}-01"),
@@ -76,11 +101,15 @@ class FpCostsUpdate(models.TransientModel):
 
                 updates += 1
 
-        elif auto is None:
-            raise ValidationError("No records found to update FP Cost!")
+        elif not auto:
+            raise exceptions.ValidationError("No records found to update FP Cost!")
 
-        if updates == 0 and auto is None:
-            raise ValidationError("No records found to update FP Cost!")
+        if updates == 0 and not auto:
+            raise exceptions.ValidationError("No records found to update FP Cost!")
+
+        return self.env["ir.actions.act_window"]._for_xml_id(
+            "florence_amazon_financial_plan.florence_fp_costs_update_action"
+        )
 
     def auto_update_action(self):
-        self.update_action(auto="auto")
+        self.update_action(auto=True)

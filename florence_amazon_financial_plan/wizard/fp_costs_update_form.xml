@@ -12,17 +12,27 @@
                         </h1>
                     </div>
 
+                    <group col="3" colspan="3" groups="base.group_no_one">
+                        <group col="1" colspan="1">
+                            <field name="current_month"/>
+                        </group>
+
+                        <group col="1" colspan="1">
+                            <field name="previous_month"/>
+                        </group>
+
+                        <group col="1" colspan="1">
+                            <field name="year"/>
+                        </group>
+                    </group>
+
                     <group>
-                        <p>
-                            This wizard will create a duplicate of all FPs created in the previous month.
-                            <br/>
-                            <strong>Please refresh the page after the update and check the values!</strong>
-                        </p>
+                        <p>This wizard will create a duplicate of all FPs created in the previous month.</p>
                     </group>
 
                     <footer>
-                        <button name="update_action" string="Update" type="object"/>
-                        <button name="cancel_action" string="Cancel" type="object" special="cancel"/>
+                        <button name="update_action" class="btn btn-primary" string="Update" type="object"/>
+                        <button string="Discard" type="object" special="cancel"/>
                     </footer>
                 </sheet>
             </form>
