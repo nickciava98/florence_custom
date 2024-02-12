@@ -7,7 +7,9 @@
     'author': "LevelPrime",
     'website': "https://levelprime.com",
     'depends': [
-        'base','account', 'web', 'sale', 'purchase','l10n_it_delivery_note'
+        'base',
+        'account',
+        'web'
     ],
     'data': [
         "views/external_layout_template.xml",
